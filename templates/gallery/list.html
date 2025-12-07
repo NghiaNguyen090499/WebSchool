@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans "Gallery" %} - EduSchool{% endblock %}
+
+{% block content %}
+<div class="bg-neutral min-h-screen py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="text-center mb-16 animate-fadeInUp">
+            <span class="inline-block px-4 py-2 bg-accent/20 text-primary-700 dark:text-primary-400 rounded-full text-sm font-semibold mb-4">
+                {% trans "Moments" %}
+            </span>
+            <h1 class="section-title font-display text-gray-900 dark:text-white mb-6">{% trans "Photo Gallery" %}</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {% trans "Explore beautiful moments from our school life" %}
+            </p>
+        </div>
+        
+        <!-- Albums Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for album in albums %}
+            <a href="{{ album.get_absolute_url }}" class="group relative overflow-hidden rounded-3xl shadow-premium hover:shadow-premium-lg transition-all duration-300 hover:-translate-y-2 animate-fadeInUp">
+                <div class="aspect-square overflow-hidden bg-gradient-to-br from-primary-400 to-primary-600">
+                    {% if album.cover_image %}
+                    <img src="{{ album.cover_image.url }}" alt="{{ album.name }}" class="w-full h-full object-cover image-hover">
+                    {% else %}
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="fas fa-images text-6xl text-white/30"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <h3 class="font-display font-bold text-xl mb-2">{{ album.name }}</h3>
+                        {% if album.description %}
+                        <p class="text-sm text-white/90 line-clamp-2 mb-3">{{ album.description }}</p>
+                        {% endif %}
+                        <div class="flex items-center text-sm">
+                            <i class="fas fa-images mr-2"></i>
+                            <span>{{ album.photos.count }} {% trans "photos" %}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg">
+                    <div class="flex items-center text-primary-600 font-bold text-sm">
+                        <i class="fas fa-images mr-2"></i>
+                        <span>{{ album.photos.count }}</span>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <div class="col-span-4 text-center py-20">
+                <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-images text-4xl text-gray-400"></i>
+                </div>
+                <p class="text-xl text-gray-500 dark:text-gray-400">{% trans "No gallery albums available" %}</p>
+                <p class="text-gray-400 dark:text-gray-500 mt-2">{% trans "Albums will appear here once they are added" %}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans "News" %} - EduSchool{% endblock %}
+
+{% block content %}
+<div class="bg-neutral min-h-screen py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="text-center mb-16 animate-fadeInUp">
+            <span class="inline-block px-4 py-2 bg-accent/20 text-primary-700 dark:text-primary-400 rounded-full text-sm font-semibold mb-4">
+                {% trans "Stay Informed" %}
+            </span>
+            <h1 class="section-title font-display text-gray-900 dark:text-white mb-6">{% trans "News & Announcements" %}</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {% trans "Stay updated with the latest news, events, and announcements from our school" %}
+            </p>
+        </div>
+        
+        <!-- Category Filter -->
+        <div class="mb-12 flex flex-wrap gap-3 justify-center animate-fadeInUp">
+            <a href="{% url 'news:list' %}" 
+               class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 {% if not selected_category %}bg-primary-600 text-white shadow-premium hover:scale-105{% else %}bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 shadow-md hover:shadow-lg{% endif %}">
+                {% trans "All" %}
+            </a>
+            {% for category in categories %}
+            <a href="?category={{ category.slug }}" 
+               class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 {% if selected_category == category %}bg-primary-600 text-white shadow-premium hover:scale-105{% else %}bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 shadow-md hover:shadow-lg{% endif %}">
+                {{ category.name }}
+            </a>
+            {% endfor %}
+        </div>
+        
+        <!-- News Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for news in page_obj %}
+            <a href="{{ news.get_absolute_url }}" class="card hover-lift overflow-hidden p-0 group animate-fadeInUp">
+                <div class="relative h-64 overflow-hidden">
+                    {% if news.thumbnail %}
+                    <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}" class="w-full h-full object-cover image-hover">
+                    {% else %}
+                    <div class="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+                        <i class="fas fa-newspaper text-6xl text-white/30"></i>
+                    </div>
+                    {% endif %}
+                    <div class="absolute top-4 left-4">
+                        {% if news.category %}
+                        <span class="px-4 py-2 bg-white/90 backdrop-blur-sm text-primary-600 rounded-xl text-sm font-semibold shadow-lg">
+                            {{ news.category.name }}
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">{{ news.title }}</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 line-clamp-3 leading-relaxed">{{ news.excerpt|default:news.content|truncatewords:20 }}</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="far fa-calendar-alt mr-2 text-primary-500"></i>
+                        <span>{{ news.created_at|date:"F d, Y" }}</span>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <div class="col-span-3 text-center py-20">
+                <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-newspaper text-4xl text-gray-400"></i>
+                </div>
+                <p class="text-xl text-gray-500 dark:text-gray-400">{% trans "No news articles found" %}</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <div class="mt-16 flex justify-center animate-fadeInUp">
+            <nav class="flex items-center space-x-2">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="px-5 py-3 bg-white dark:bg-gray-800 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-700 dark:text-gray-300 font-semibold transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
+                    <i class="fas fa-chevron-left mr-2"></i>{% trans "Previous" %}
+                </a>
+                {% endif %}
+                
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <span class="px-5 py-3 bg-primary-600 text-white rounded-xl font-bold shadow-premium">{{ num }}</span>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}" class="px-5 py-3 bg-white dark:bg-gray-800 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-700 dark:text-gray-300 font-semibold transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
+                        {{ num }}
+                    </a>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="px-5 py-3 bg-white dark:bg-gray-800 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-700 dark:text-gray-300 font-semibold transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
+                    {% trans "Next" %}<i class="fas fa-chevron-right ml-2"></i>
+                </a>
+                {% endif %}
+            </nav>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

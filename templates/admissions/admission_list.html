@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}Tuyển sinh {{ page_subtitle }} - MIS Đa Trí Tuệ{% endblock %}
+
+{% block content %}
+<!-- Hero Banner -->
+<section
+    class="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-red-900 via-red-800 to-red-900">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\" 60\" height=\"60\" viewBox=\"0 0 60
+            60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg
+            fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36
+            34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6
+            4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+    </div>
+
+    <!-- Decorative blobs -->
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-red-500/20 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <div
+            class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-sm font-medium mb-6">
+            <i class="fas fa-calendar-check mr-2 text-red-300"></i>
+            Năm học 2025-2026
+        </div>
+        <h1
+            class="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white tracking-tight leading-tight mb-6">
+            Tuyển sinh<br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-200 via-white to-red-200">MIS Đa Trí
+                Tuệ</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-white/80 font-light max-w-3xl mx-auto mb-8">
+            Mở cửa tương lai cho con bạn với nền giáo dục chất lượng cao
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="#levels"
+                class="group px-8 py-4 bg-white text-red-700 text-lg font-bold rounded-full transition-all hover:scale-105 shadow-lg shadow-white/20">
+                Xem các cấp học <i class="fas fa-arrow-down ml-2 group-hover:translate-y-1 transition-transform"></i>
+            </a>
+            <a href="{% url 'contact:contact' %}"
+                class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white text-lg font-bold rounded-full hover:bg-white/20 transition-all">
+                <i class="fas fa-phone-alt mr-2"></i> Tư vấn ngay
+            </a>
+        </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="w-8 h-12 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
+            <div class="w-1 h-3 bg-white/50 rounded-full"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Key Benefits -->
+<section class="py-16 bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-center group">
+                <div
+                    class="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-award text-2xl text-red-600 dark:text-red-400"></i>
+                </div>
+                <h3 class="font-bold text-neutral-900 dark:text-white mb-1">Chất lượng cao</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Đội ngũ giáo viên giỏi</p>
+            </div>
+            <div class="text-center group">
+                <div
+                    class="w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-globe text-2xl text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <h3 class="font-bold text-neutral-900 dark:text-white mb-1">Song ngữ</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Anh - Việt từ nhỏ</p>
+            </div>
+            <div class="text-center group">
+                <div
+                    class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-robot text-2xl text-green-600 dark:text-green-400"></i>
+                </div>
+                <h3 class="font-bold text-neutral-900 dark:text-white mb-1">STEAM & Robotics</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Giáo dục hiện đại</p>
+            </div>
+            <div class="text-center group">
+                <div
+                    class="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-heart text-2xl text-purple-600 dark:text-purple-400"></i>
+                </div>
+                <h3 class="font-bold text-neutral-900 dark:text-white mb-1">Môi trường an toàn</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Yêu thương & hạnh phúc</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Admission Levels -->
+<section id="levels" class="py-24 bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span
+                class="inline-block px-4 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full text-sm font-bold tracking-wide uppercase mb-4">
+                Các cấp học
+            </span>
+            <h2 class="text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-white mb-6">
+                Chọn cấp học phù hợp
+            </h2>
+            <p class="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                MIS cung cấp chương trình giáo dục toàn diện từ Mầm non đến Trung học phổ thông
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {% for admission in admissions %}
+            <a href="{{ admission.get_absolute_url }}"
+                class="group relative bg-white dark:bg-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700">
+                <!-- Card Header with gradient -->
+                <div
+                    class="h-48 bg-gradient-to-br from-{{ admission.color }}-500 via-{{ admission.color }}-600 to-{{ admission.color }}-700 relative overflow-hidden">
+                    {% if admission.image %}
+                    <img src="{{ admission.image.url }}" alt="{{ admission.title }}"
+                        class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-110 transition-transform duration-700">
+                    {% endif %}
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i
+                            class="{{ admission.icon }} text-6xl text-white/80 drop-shadow-lg transform group-hover:scale-110 transition-transform duration-500"></i>
+                    </div>
+                    {% if admission.is_featured %}
+                    <div class="absolute top-4 right-4">
+                        <span class="px-3 py-1 bg-yellow-400 text-yellow-900 text-xs font-bold rounded-full">
+                            <i class="fas fa-star mr-1"></i> Nổi bật
+                        </span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Card Body -->
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span
+                            class="text-sm font-bold text-{{ admission.color }}-600 dark:text-{{ admission.color }}-400 uppercase tracking-wide">
+                            {{ admission.school_year }}
+                        </span>
+                        {% if admission.age_range %}
+                        <span
+                            class="text-xs text-neutral-500 bg-neutral-100 dark:bg-neutral-700 px-2 py-1 rounded-full">
+                            {{ admission.age_range }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    <h3
+                        class="text-xl font-display font-bold mb-3 text-neutral-900 dark:text-white group-hover:text-{{ admission.color }}-600 dark:group-hover:text-{{ admission.color }}-400 transition-colors">
+                        {{ admission.get_level_display }}
+                    </h3>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-4 line-clamp-2">
+                        {{ admission.subtitle|default:admission.description|truncatewords:15 }}
+                    </p>
+                    <div
+                        class="flex items-center text-{{ admission.color }}-600 dark:text-{{ admission.color }}-400 font-bold text-sm">
+                        Xem chi tiết <i
+                            class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </div>
+
+                <!-- Bottom accent -->
+                <div
+                    class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-{{ admission.color }}-500 to-{{ admission.color }}-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300">
+                </div>
+            </a>
+            {% empty %}
+            <!-- Default cards when no data -->
+            <a href="{% url 'admissions:detail' level='mam_non' %}"
+                class="group relative bg-white dark:bg-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div
+                    class="h-48 bg-gradient-to-br from-pink-500 via-pink-600 to-pink-700 flex items-center justify-center">
+                    <i class="fas fa-baby text-6xl text-white/80"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-sm font-bold text-pink-600 uppercase tracking-wide">2025-2026</span>
+                    <h3 class="text-xl font-display font-bold my-3 text-neutral-900 dark:text-white">Mầm non - Tiền tiểu
+                        học</h3>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-4">Độ tuổi: 2-5 tuổi</p>
+                    <div class="flex items-center text-pink-600 font-bold text-sm">
+                        Xem chi tiết <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </a>
+
+            <a href="{% url 'admissions:detail' level='tieu_hoc' %}"
+                class="group relative bg-white dark:bg-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div
+                    class="h-48 bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 flex items-center justify-center">
+                    <i class="fas fa-child text-6xl text-white/80"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-sm font-bold text-blue-600 uppercase tracking-wide">2025-2026</span>
+                    <h3 class="text-xl font-display font-bold my-3 text-neutral-900 dark:text-white">Tiểu học</h3>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-4">Lớp 1 - Lớp 5</p>
+                    <div class="flex items-center text-blue-600 font-bold text-sm">
+                        Xem chi tiết <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </a>
+
+            <a href="{% url 'admissions:detail' level='thcs' %}"
+                class="group relative bg-white dark:bg-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div
+                    class="h-48 bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center">
+                    <i class="fas fa-user-graduate text-6xl text-white/80"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-sm font-bold text-green-600 uppercase tracking-wide">2025-2026</span>
+                    <h3 class="text-xl font-display font-bold my-3 text-neutral-900 dark:text-white">Trung học cơ sở
+                    </h3>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-4">Lớp 6 - Lớp 9</p>
+                    <div class="flex items-center text-green-600 font-bold text-sm">
+                        Xem chi tiết <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </a>
+
+            <a href="{% url 'admissions:detail' level='thpt' %}"
+                class="group relative bg-white dark:bg-neutral-800 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div
+                    class="h-48 bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-6xl text-white/80"></i>
+                </div>
+                <div class="p-6">
+                    <span class="text-sm font-bold text-purple-600 uppercase tracking-wide">2025-2026</span>
+                    <h3 class="text-xl font-display font-bold my-3 text-neutral-900 dark:text-white">Trung học phổ thông
+                    </h3>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-4">Lớp 10 - Lớp 12</p>
+                    <div class="flex items-center text-purple-600 font-bold text-sm">
+                        Xem chi tiết <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose MIS -->
+<section class="py-24 bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <span
+                    class="inline-block px-4 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full text-sm font-bold tracking-wide uppercase">
+                    Tại sao chọn MIS?
+                </span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-neutral-900 dark:text-white leading-tight">
+                    8 điểm mạnh<br />
+                    <span class="text-red-600 dark:text-red-400">khác biệt vượt trội</span>
+                </h2>
+                <div class="space-y-4">
+                    <div
+                        class="flex items-start space-x-4 p-4 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors">
+                        <div
+                            class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-neutral-900 dark:text-white">Giáo dục Đa trí tuệ</h4>
+                            <p class="text-neutral-600 dark:text-neutral-400 text-sm">Phát triển toàn diện 8 loại trí
+                                tuệ theo Howard Gardner</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-start space-x-4 p-4 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors">
+                        <div
+                            class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-neutral-900 dark:text-white">Chương trình STEAM hiện đại</h4>
+                            <p class="text-neutral-600 dark:text-neutral-400 text-sm">Tích hợp Khoa học - Công nghệ - Kỹ
+                                thuật - Nghệ thuật - Toán học</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-start space-x-4 p-4 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors">
+                        <div
+                            class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-neutral-900 dark:text-white">Đội ngũ giáo viên chất lượng</h4>
+                            <p class="text-neutral-600 dark:text-neutral-400 text-sm">100% giáo viên có trình độ Đại học
+                                trở lên, nhiều thạc sĩ</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-start space-x-4 p-4 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors">
+                        <div
+                            class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-neutral-900 dark:text-white">Cơ sở vật chất hiện đại</h4>
+                            <p class="text-neutral-600 dark:text-neutral-400 text-sm">Phòng học thông minh, phòng Lab,
+                                sân chơi đạt chuẩn</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'about:mission' %}"
+                    class="inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-colors shadow-lg hover:shadow-xl">
+                    Tìm hiểu thêm <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <div class="relative">
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800" alt="MIS Campus"
+                        class="w-full h-auto">
+                    <div class="absolute inset-0 bg-gradient-to-t from-red-900/60 to-transparent"></div>
+                    <div class="absolute bottom-8 left-8 right-8">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg">
+                                <span class="text-2xl font-bold text-red-600">28+</span>
+                            </div>
+                            <div class="text-white">
+                                <p class="text-2xl font-bold">Năm kinh nghiệm</p>
+                                <p class="text-white/80">Đào tạo học sinh xuất sắc</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Decorative elements -->
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-red-400/30 rounded-full blur-2xl -z-10"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-400/30 rounded-full blur-2xl -z-10"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-24 bg-gradient-to-r from-red-600 via-red-700 to-red-800 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\" 60\" height=\"60\" viewBox=\"0 0 60
+            60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg
+            fill=\"%23ffffff\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36
+            34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6
+            4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+    </div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <h2 class="text-3xl md:text-5xl font-display font-bold text-white mb-6">
+            Sẵn sàng cho hành trình học tập?
+        </h2>
+        <p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
+            Liên hệ ngay với chúng tôi để được tư vấn chi tiết về chương trình phù hợp cho con bạn
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="tel:02460278666"
+                class="px-8 py-4 bg-white text-red-700 text-lg font-bold rounded-full transition-all hover:scale-105 shadow-lg">
+                <i class="fas fa-phone-alt mr-2"></i> 024 60 278 666
+            </a>
+            <a href="{% url 'contact:contact' %}"
+                class="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white text-lg font-bold rounded-full hover:bg-white/20 transition-all">
+                Đăng ký tư vấn miễn phí
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

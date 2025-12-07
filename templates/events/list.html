@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans "Events" %} - EduSchool{% endblock %}
+
+{% block content %}
+<div class="bg-neutral min-h-screen py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="text-center mb-16 animate-fadeInUp">
+            <span class="inline-block px-4 py-2 bg-accent/20 text-primary-700 dark:text-primary-400 rounded-full text-sm font-semibold mb-4">
+                {% trans "School Life" %}
+            </span>
+            <h1 class="section-title font-display text-gray-900 dark:text-white mb-6">{% trans "School Events" %}</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {% trans "Join us for exciting events and activities throughout the year" %}
+            </p>
+        </div>
+        
+        <!-- Upcoming Events -->
+        {% if upcoming_events %}
+        <section class="mb-20 animate-fadeInUp">
+            <div class="flex items-center mb-8">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-2">{% trans "Upcoming Events" %}</h2>
+                    <p class="text-gray-600 dark:text-gray-400">{% trans "Don't miss these exciting upcoming events" %}</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for event in upcoming_events %}
+                <div class="card hover-lift overflow-hidden p-0 group">
+                    {% if event.image %}
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full h-full object-cover image-hover">
+                        <div class="absolute top-4 right-4">
+                            <div class="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg">
+                                <div class="text-primary-600 font-bold text-sm">{{ event.date|date:"M d" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="h-64 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i class="fas fa-calendar-alt text-6xl text-white/30"></i>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <div class="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg">
+                                <div class="text-primary-600 font-bold text-sm">{{ event.date|date:"M d" }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="p-8">
+                        <div class="flex items-center text-primary-600 dark:text-primary-400 font-semibold mb-4 text-sm">
+                            <i class="far fa-calendar-alt mr-2"></i>
+                            <span>{{ event.date|date:"F d, Y" }}</span>
+                            {% if event.time %}
+                            <span class="ml-4"><i class="far fa-clock mr-1"></i>{{ event.time|time:"g:i A" }}</span>
+                            {% endif %}
+                        </div>
+                        <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">{{ event.title }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 leading-relaxed">{{ event.description }}</p>
+                        <div class="flex items-center text-sm text-gray-500 mb-6">
+                            <i class="fas fa-map-marker-alt mr-2 text-primary-500"></i>
+                            <span>{{ event.location }}</span>
+                        </div>
+                        <a href="{{ event.get_absolute_url }}" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200">
+                            {% trans "Learn More" %} <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        
+        <!-- Past Events -->
+        {% if past_events %}
+        <section class="animate-fadeInUp">
+            <div class="flex items-center mb-8">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-2">{% trans "Past Events" %}</h2>
+                    <p class="text-gray-600 dark:text-gray-400">{% trans "Relive our memorable past events" %}</p>
+                </div>
+            </div>
+            <div class="space-y-6">
+                {% for event in past_events %}
+                <div class="card hover-lift overflow-hidden p-0">
+                    <div class="flex flex-col md:flex-row gap-6">
+                        {% if event.image %}
+                        <div class="w-full md:w-64 h-64 flex-shrink-0 relative overflow-hidden rounded-2xl">
+                            <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full h-full object-cover image-hover">
+                        </div>
+                        {% else %}
+                        <div class="w-full md:w-64 h-64 flex-shrink-0 bg-gradient-to-br from-gray-400 to-gray-600 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-calendar-alt text-6xl text-white/30"></i>
+                        </div>
+                        {% endif %}
+                        <div class="flex-1 p-6 md:p-8">
+                            <div class="flex items-center text-primary-600 dark:text-primary-400 font-semibold mb-3 text-sm">
+                                <i class="far fa-calendar-alt mr-2"></i>
+                                <span>{{ event.date|date:"F d, Y" }}</span>
+                            </div>
+                            <h3 class="text-2xl font-display font-bold mb-3 text-gray-900 dark:text-white">{{ event.title }}</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">{{ event.description|truncatewords:30 }}</p>
+                            <div class="flex items-center text-sm text-gray-500 mb-6">
+                                <i class="fas fa-map-marker-alt mr-2 text-primary-500"></i>
+                                <span>{{ event.location }}</span>
+                            </div>
+                            <a href="{{ event.get_absolute_url }}" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200">
+                                {% trans "View Details" %} <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        
+        {% if not upcoming_events and not past_events %}
+        <div class="text-center py-20">
+            <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-calendar-alt text-4xl text-gray-400"></i>
+            </div>
+            <p class="text-xl text-gray-500 dark:text-gray-400 mb-2">{% trans "No events available" %}</p>
+            <p class="text-gray-400 dark:text-gray-500">{% trans "Events will appear here once they are added" %}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

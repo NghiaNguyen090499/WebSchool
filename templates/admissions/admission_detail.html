@@ -1,0 +1,416 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{{ admission.title }} - Tuyển sinh MIS{% endblock %}
+
+{% block content %}
+<!-- Hero Banner -->
+<section
+    class="relative min-h-[45vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-{{ admission.color|default:'red' }}-900 via-{{ admission.color|default:'red' }}-800 to-{{ admission.color|default:'red' }}-900">
+    {% if admission.banner_image %}
+    <div class="absolute inset-0">
+        <img src="{{ admission.banner_image.url }}" alt="{{ admission.title }}"
+            class="w-full h-full object-cover opacity-30">
+    </div>
+    {% endif %}
+
+    <!-- Decorative elements -->
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+    <div
+        class="absolute -bottom-40 -left-40 w-96 h-96 bg-{{ admission.color|default:'red' }}-500/20 rounded-full blur-3xl">
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center z-10">
+        <!-- Breadcrumb -->
+        <nav class="flex justify-center mb-6" aria-label="Breadcrumb">
+            <ol class="flex items-center space-x-2 text-white/70 text-sm">
+                <li><a href="{% url 'core:home' %}" class="hover:text-white">Trang chủ</a></li>
+                <li><i class="fas fa-chevron-right text-xs"></i></li>
+                <li><a href="{% url 'admissions:list' %}" class="hover:text-white">Tuyển sinh</a></li>
+                <li><i class="fas fa-chevron-right text-xs"></i></li>
+                <li class="text-white font-medium">{{ admission.get_level_display }}</li>
+            </ol>
+        </nav>
+
+        <div
+            class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-sm font-medium mb-6">
+            <i class="{{ admission.icon }} mr-2"></i>
+            Năm học {{ admission.school_year }}
+        </div>
+
+        <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight leading-tight mb-4">
+            {{ admission.title }}
+        </h1>
+
+        {% if admission.subtitle %}
+        <p class="text-xl text-white/80 font-light max-w-2xl mx-auto mb-6">
+            {{ admission.subtitle }}
+        </p>
+        {% endif %}
+
+        {% if admission.age_range %}
+        <div class="inline-flex items-center px-4 py-2 bg-white/20 rounded-full text-white text-sm">
+            <i class="fas fa-child mr-2"></i> Độ tuổi: {{ admission.age_range }}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="py-16 bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <!-- Main Content Column -->
+            <div class="lg:col-span-2 space-y-12">
+
+                <!-- Tabs Navigation -->
+                <div x-data="{ activeTab: 'intro' }" class="space-y-8">
+                    <div class="flex flex-wrap gap-2 border-b border-neutral-200 dark:border-neutral-700 pb-4">
+                        <button @click="activeTab = 'intro'"
+                            :class="activeTab === 'intro' ? 'bg-{{ admission.color|default:'red' }}-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'"
+                            class="px-5 py-2.5 rounded-full font-semibold text-sm transition-all">
+                            <i class="fas fa-info-circle mr-2"></i>Giới thiệu
+                        </button>
+                        <button @click="activeTab = 'requirements'"
+                            :class="activeTab === 'requirements' ? 'bg-{{ admission.color|default:'red' }}-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'"
+                            class="px-5 py-2.5 rounded-full font-semibold text-sm transition-all">
+                            <i class="fas fa-clipboard-check mr-2"></i>Điều kiện
+                        </button>
+                        <button @click="activeTab = 'tuition'"
+                            :class="activeTab === 'tuition' ? 'bg-{{ admission.color|default:'red' }}-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'"
+                            class="px-5 py-2.5 rounded-full font-semibold text-sm transition-all">
+                            <i class="fas fa-money-bill-wave mr-2"></i>Học phí
+                        </button>
+                        <button @click="activeTab = 'process'"
+                            :class="activeTab === 'process' ? 'bg-{{ admission.color|default:'red' }}-600 text-white' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'"
+                            class="px-5 py-2.5 rounded-full font-semibold text-sm transition-all">
+                            <i class="fas fa-tasks mr-2"></i>Quy trình
+                        </button>
+                    </div>
+
+                    <!-- Tab: Giới thiệu -->
+                    <div x-show="activeTab === 'intro'" x-transition
+                        class="prose prose-lg dark:prose-invert max-w-none">
+                        <div class="text-neutral-700 dark:text-neutral-300 leading-relaxed whitespace-pre-line">
+                            {{ admission.description|linebreaks }}
+                        </div>
+
+                        {% if highlights %}
+                        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {% for highlight in highlights %}
+                            <div
+                                class="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-5 border border-neutral-100 dark:border-neutral-700">
+                                <div class="flex items-start space-x-4">
+                                    <div
+                                        class="w-10 h-10 bg-{{ admission.color|default:'red' }}-100 dark:bg-{{ admission.color|default:'red' }}-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <i
+                                            class="{{ highlight.icon }} text-{{ admission.color|default:'red' }}-600 dark:text-{{ admission.color|default:'red' }}-400"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-neutral-900 dark:text-white mb-1">{{ highlight.title
+                                            }}</h4>
+                                        <p class="text-sm text-neutral-600 dark:text-neutral-400">{{
+                                            highlight.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        {% if admission.curriculum %}
+                        <div class="mt-8">
+                            <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                                <i class="fas fa-book-open text-{{ admission.color|default:'red' }}-600 mr-2"></i>Chương
+                                trình học
+                            </h3>
+                            <div class="text-neutral-700 dark:text-neutral-300 whitespace-pre-line">
+                                {{ admission.curriculum|linebreaks }}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Tab: Điều kiện -->
+                    <div x-show="activeTab === 'requirements'" x-transition
+                        class="prose prose-lg dark:prose-invert max-w-none">
+                        <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                            <i class="fas fa-clipboard-list text-{{ admission.color|default:'red' }}-600 mr-2"></i>Điều
+                            kiện tuyển sinh
+                        </h3>
+                        <div
+                            class="bg-neutral-50 dark:bg-neutral-800/50 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                            <div class="text-neutral-700 dark:text-neutral-300 whitespace-pre-line">
+                                {{ admission.requirements|linebreaks }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Học phí -->
+                    <div x-show="activeTab === 'tuition'" x-transition
+                        class="prose prose-lg dark:prose-invert max-w-none">
+                        <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                            <i class="fas fa-coins text-{{ admission.color|default:'red' }}-600 mr-2"></i>Thông tin học
+                            phí
+                        </h3>
+                        <div
+                            class="bg-gradient-to-br from-{{ admission.color|default:'red' }}-50 to-{{ admission.color|default:'red' }}-100/50 dark:from-{{ admission.color|default:'red' }}-900/20 dark:to-{{ admission.color|default:'red' }}-800/20 rounded-2xl p-6 border border-{{ admission.color|default:'red' }}-200 dark:border-{{ admission.color|default:'red' }}-800">
+                            <div class="text-neutral-700 dark:text-neutral-300 whitespace-pre-line">
+                                {{ admission.tuition_info|linebreaks }}
+                            </div>
+                        </div>
+
+                        {% if admission.benefits %}
+                        <div class="mt-8">
+                            <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                                <i class="fas fa-gift text-yellow-500 mr-2"></i>Ưu đãi & Học bổng
+                            </h3>
+                            <div
+                                class="bg-yellow-50 dark:bg-yellow-900/20 rounded-2xl p-6 border border-yellow-200 dark:border-yellow-800">
+                                <div class="text-neutral-700 dark:text-neutral-300 whitespace-pre-line">
+                                    {{ admission.benefits|linebreaks }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Tab: Quy trình -->
+                    <div x-show="activeTab === 'process'" x-transition
+                        class="prose prose-lg dark:prose-invert max-w-none">
+                        <h3 class="text-2xl font-bold text-neutral-900 dark:text-white mb-4">
+                            <i class="fas fa-route text-{{ admission.color|default:'red' }}-600 mr-2"></i>Quy trình đăng
+                            ký
+                        </h3>
+                        <div class="text-neutral-700 dark:text-neutral-300 whitespace-pre-line">
+                            {{ admission.process|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Registration Form Card -->
+                <div
+                    class="bg-white dark:bg-neutral-800 rounded-2xl shadow-lg border border-neutral-100 dark:border-neutral-700 overflow-hidden sticky top-24">
+                    <div
+                        class="bg-gradient-to-r from-{{ admission.color|default:'red' }}-600 to-{{ admission.color|default:'red' }}-700 p-6 text-white">
+                        <h3 class="text-xl font-bold mb-2">
+                            <i class="fas fa-pen mr-2"></i>Đăng ký tuyển sinh
+                        </h3>
+                        <p class="text-white/80 text-sm">Điền thông tin để được tư vấn và đăng ký</p>
+                    </div>
+
+                    <form id="admissionForm" class="p-6 space-y-4"
+                        x-data="{ submitted: false, loading: false, message: '' }" @submit.prevent="
+                              loading = true;
+                              fetch('{% url 'admissions:submit' %}', {
+                                  method: 'POST',
+                                  body: new FormData($el),
+                              })
+                              .then(res => res.json())
+                              .then(data => {
+                                  loading = false;
+                                  if (data.success) {
+                                      submitted = true;
+                                      message = data.message;
+                                      $el.reset();
+                                  } else {
+                                      alert(data.message);
+                                  }
+                              })
+                              .catch(err => {
+                                  loading = false;
+                                  alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                              });
+                          ">
+                        {% csrf_token %}
+                        <input type="hidden" name="level" value="{{ admission.level }}">
+
+                        <!-- Success Message -->
+                        <div x-show="submitted" x-transition
+                            class="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+                            <div
+                                class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-check text-green-600 text-xl"></i>
+                            </div>
+                            <p class="text-green-800 font-medium" x-text="message"></p>
+                            <button type="button" @click="submitted = false"
+                                class="mt-3 text-sm text-green-600 hover:underline">
+                                Đăng ký thêm
+                            </button>
+                        </div>
+
+                        <div x-show="!submitted" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                                    Họ tên phụ huynh *
+                                </label>
+                                <input type="text" name="parent_name" required
+                                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-600 focus:border-{{ admission.color|default:'red' }}-500 focus:ring-2 focus:ring-{{ admission.color|default:'red' }}-500/20 transition-all text-neutral-800 dark:text-white dark:bg-neutral-700"
+                                    placeholder="Nguyễn Văn A">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                                    Số điện thoại *
+                                </label>
+                                <input type="tel" name="parent_phone" required
+                                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-600 focus:border-{{ admission.color|default:'red' }}-500 focus:ring-2 focus:ring-{{ admission.color|default:'red' }}-500/20 transition-all text-neutral-800 dark:text-white dark:bg-neutral-700"
+                                    placeholder="0912 345 678">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                                    Email
+                                </label>
+                                <input type="email" name="parent_email"
+                                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-600 focus:border-{{ admission.color|default:'red' }}-500 focus:ring-2 focus:ring-{{ admission.color|default:'red' }}-500/20 transition-all text-neutral-800 dark:text-white dark:bg-neutral-700"
+                                    placeholder="email@example.com">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                                    Họ tên học sinh *
+                                </label>
+                                <input type="text" name="student_name" required
+                                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-600 focus:border-{{ admission.color|default:'red' }}-500 focus:ring-2 focus:ring-{{ admission.color|default:'red' }}-500/20 transition-all text-neutral-800 dark:text-white dark:bg-neutral-700"
+                                    placeholder="Nguyễn Văn B">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label
+                                        class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                                        Ngày sinh *
+                                    </label>
+                                    <input type="date" name="student_dob" required
+                                        class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-600 focus:border-{{ admission.color|default:'red' }}-500 focus:ring-2 focus:ring-{{ admission.color|default:'red' }}-500/20 transition-all text-neutral-800 dark:text-white dark:bg-neutral-700">
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                                        Giới tính *
+                                    </label>
+                                    <select name="student_gender" required
+                                        class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-600 focus:border-{{ admission.color|default:'red' }}-500 focus:ring-2 focus:ring-{{ admission.color|default:'red' }}-500/20 transition-all text-neutral-800 dark:text-white dark:bg-neutral-700">
+                                        <option value="">Chọn</option>
+                                        <option value="male">Nam</option>
+                                        <option value="female">Nữ</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                                    Địa chỉ *
+                                </label>
+                                <textarea name="address" required rows="2"
+                                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-600 focus:border-{{ admission.color|default:'red' }}-500 focus:ring-2 focus:ring-{{ admission.color|default:'red' }}-500/20 transition-all text-neutral-800 dark:text-white dark:bg-neutral-700 resize-none"
+                                    placeholder="Số nhà, đường, phường/xã"></textarea>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                                    Ghi chú
+                                </label>
+                                <textarea name="note" rows="2"
+                                    class="w-full px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-600 focus:border-{{ admission.color|default:'red' }}-500 focus:ring-2 focus:ring-{{ admission.color|default:'red' }}-500/20 transition-all text-neutral-800 dark:text-white dark:bg-neutral-700 resize-none"
+                                    placeholder="Thông tin bổ sung (nếu có)"></textarea>
+                            </div>
+
+                            <button type="submit" :disabled="loading"
+                                class="w-full py-3 bg-gradient-to-r from-{{ admission.color|default:'red' }}-600 to-{{ admission.color|default:'red' }}-700 hover:from-{{ admission.color|default:'red' }}-700 hover:to-{{ admission.color|default:'red' }}-800 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] shadow-lg shadow-{{ admission.color|default:'red' }}-600/30 flex items-center justify-center space-x-2 disabled:opacity-70">
+                                <i x-show="loading" class="fas fa-spinner fa-spin"></i>
+                                <i x-show="!loading" class="fas fa-paper-plane"></i>
+                                <span x-text="loading ? 'Đang gửi...' : 'Gửi đăng ký'"></span>
+                            </button>
+
+                            <p class="text-xs text-neutral-500 text-center">
+                                <i class="fas fa-shield-alt mr-1 text-green-500"></i>
+                                Thông tin của bạn được bảo mật
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div
+                    class="bg-neutral-50 dark:bg-neutral-800/50 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                    <h3 class="font-bold text-neutral-900 dark:text-white mb-4">
+                        <i class="fas fa-headset text-{{ admission.color|default:'red' }}-600 mr-2"></i>Liên hệ tư vấn
+                    </h3>
+                    <div class="space-y-3 text-sm">
+                        <a href="tel:02460278666"
+                            class="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-{{ admission.color|default:'red' }}-600 transition-colors">
+                            <i class="fas fa-phone-alt mr-3 text-{{ admission.color|default:'red' }}-500"></i>
+                            024 60 278 666
+                        </a>
+                        <a href="mailto:c123mis@hanoiedu.vn"
+                            class="flex items-center text-neutral-600 dark:text-neutral-400 hover:text-{{ admission.color|default:'red' }}-600 transition-colors">
+                            <i class="fas fa-envelope mr-3 text-{{ admission.color|default:'red' }}-500"></i>
+                            c123mis@hanoiedu.vn
+                        </a>
+                        <div class="flex items-start text-neutral-600 dark:text-neutral-400">
+                            <i class="fas fa-map-marker-alt mr-3 text-{{ admission.color|default:'red' }}-500 mt-1"></i>
+                            <span>37 Hoàng Quán Chi, Dịch Vọng, Cầu Giấy, Hà Nội</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deadline -->
+                {% if admission.deadline %}
+                <div
+                    class="bg-yellow-50 dark:bg-yellow-900/20 rounded-2xl p-6 border border-yellow-200 dark:border-yellow-800">
+                    <div class="flex items-center space-x-3">
+                        <div
+                            class="w-12 h-12 bg-yellow-100 dark:bg-yellow-800 rounded-full flex items-center justify-center">
+                            <i class="fas fa-clock text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-yellow-600 dark:text-yellow-400 uppercase font-bold">Hạn đăng ký</p>
+                            <p class="text-lg font-bold text-yellow-800 dark:text-yellow-200">
+                                {{ admission.deadline|date:"d/m/Y" }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Other Levels -->
+{% if other_admissions %}
+<section class="py-16 bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-display font-bold text-neutral-900 dark:text-white mb-8">
+            Các cấp học khác
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {% for other in other_admissions %}
+            <a href="{{ other.get_absolute_url }}"
+                class="group flex items-center p-4 bg-white dark:bg-neutral-800 rounded-2xl shadow-md hover:shadow-lg transition-all border border-neutral-100 dark:border-neutral-700">
+                <div
+                    class="w-14 h-14 bg-gradient-to-br from-{{ other.color|default:'red' }}-500 to-{{ other.color|default:'red' }}-600 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                    <i class="{{ other.icon }} text-2xl text-white"></i>
+                </div>
+                <div>
+                    <h3
+                        class="font-bold text-neutral-900 dark:text-white group-hover:text-{{ other.color|default:'red' }}-600 transition-colors">
+                        {{ other.get_level_display }}
+                    </h3>
+                    <p class="text-sm text-neutral-500">{{ other.school_year }}</p>
+                </div>
+                <i
+                    class="fas fa-arrow-right ml-auto text-neutral-400 group-hover:text-{{ other.color|default:'red' }}-600 group-hover:translate-x-1 transition-all"></i>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{{ event.title }} - EduSchool{% endblock %}
+
+{% block content %}
+<article class="py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Back Button -->
+        <a href="{% url 'events:list' %}" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:underline mb-6">
+            <i class="fas fa-arrow-left mr-2"></i> {% trans "Back to Events" %}
+        </a>
+        
+        <!-- Header -->
+        <header class="mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">{{ event.title }}</h1>
+            <div class="flex flex-wrap gap-4 text-gray-600 dark:text-gray-400">
+                <div class="flex items-center">
+                    <i class="far fa-calendar-alt mr-2 text-primary-600 dark:text-primary-400"></i>
+                    <span>{{ event.date|date:"F d, Y" }}</span>
+                </div>
+                {% if event.time %}
+                <div class="flex items-center">
+                    <i class="far fa-clock mr-2 text-primary-600 dark:text-primary-400"></i>
+                    <span>{{ event.time|time:"g:i A" }}</span>
+                </div>
+                {% endif %}
+                <div class="flex items-center">
+                    <i class="fas fa-map-marker-alt mr-2 text-primary-600 dark:text-primary-400"></i>
+                    <span>{{ event.location }}</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Featured Image -->
+        {% if event.image %}
+        <div class="mb-8">
+            <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full rounded-xl shadow-lg">
+        </div>
+        {% endif %}
+        
+        <!-- Content -->
+        <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
+            {{ event.description|linebreaks }}
+        </div>
+        
+        <!-- Related Events -->
+        {% if related_events %}
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-bold mb-6">{% trans "Other Events" %}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {% for related in related_events %}
+                <a href="{{ related.get_absolute_url }}" class="block bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                    {% if related.image %}
+                    <img src="{{ related.image.url }}" alt="{{ related.title }}" class="w-full h-32 object-cover">
+                    {% endif %}
+                    <div class="p-4">
+                        <div class="text-sm text-primary-600 dark:text-primary-400 mb-2">{{ related.date|date:"M d, Y" }}</div>
+                        <h3 class="font-semibold line-clamp-2">{{ related.title }}</h3>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</article>
+{% endblock %}
+
+
+

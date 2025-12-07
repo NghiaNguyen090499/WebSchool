@@ -1,0 +1,403 @@
+{% load i18n static %}
+<nav x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)"
+    :class="{ 'bg-white/95 dark:bg-neutral-900/95 backdrop-blur-lg shadow-lg': scrolled, 'bg-white dark:bg-neutral-900': !scrolled }"
+    class="fixed w-full top-0 z-50 transition-all duration-300 border-b"
+    :class="{ 'border-neutral-200/50 dark:border-neutral-700/50': scrolled, 'border-transparent': !scrolled }">
+
+    <!-- Top Bar với thông tin liên hệ -->
+    <div class="bg-gradient-to-r from-red-600 via-red-600 to-red-700 text-white py-2 text-sm hidden md:block">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-6">
+                    <span class="flex items-center">
+                        <i class="fas fa-phone-alt mr-2 text-red-200"></i>
+                        <span class="font-medium">Hotline: 024 60 278 666</span>
+                    </span>
+                    <span class="flex items-center">
+                        <i class="fas fa-envelope mr-2 text-red-200"></i>
+                        <span>c123mis@hanoiedu.vn</span>
+                    </span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span id="current-date" class="mr-4 text-red-100"></span>
+                    <a href="#"
+                        class="w-7 h-7 bg-white/15 hover:bg-white/25 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110">
+                        <i class="fab fa-facebook-f text-xs"></i>
+                    </a>
+                    <a href="#"
+                        class="w-7 h-7 bg-white/15 hover:bg-white/25 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110">
+                        <i class="fab fa-youtube text-xs"></i>
+                    </a>
+                    <a href="#"
+                        class="w-7 h-7 bg-white/15 hover:bg-white/25 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110">
+                        <i class="fab fa-tiktok text-xs"></i>
+                    </a>
+                    <button
+                        class="w-7 h-7 bg-white/15 hover:bg-white/25 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110">
+                        <i class="fas fa-search text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16 lg:h-18">
+            <!-- Logo -->
+            <div class="flex-shrink-0 min-w-0">
+                <a href="{% url 'core:home' %}" class="flex items-center space-x-2 lg:space-x-3 group">
+                    <div class="flex items-center space-x-2 lg:space-x-3">
+                        <!-- Logo Icon -->
+                        <div
+                            class="w-10 h-10 lg:w-11 lg:h-11 bg-gradient-to-br from-red-500 via-red-600 to-red-700 rounded-xl flex items-center justify-center shadow-lg shadow-red-500/25 flex-shrink-0 group-hover:shadow-red-500/40 transition-all duration-300 group-hover:scale-105">
+                            <span class="text-white font-bold text-sm lg:text-base tracking-tight">MIS</span>
+                        </div>
+                        <!-- Logo Text -->
+                        <div class="flex flex-col min-w-0">
+                            <!-- Full text - chỉ hiển thị trên màn hình xl trở lên -->
+                            <span
+                                class="hidden xl:block text-sm font-display font-bold text-neutral-900 dark:text-white leading-tight">
+                                TRƯỜNG TIỂU HỌC, THCS & THPT <span class="text-red-600">ĐA TRÍ TUỆ</span>
+                            </span>
+                            <!-- Short text - hiển thị trên màn hình lg -->
+                            <span
+                                class="hidden lg:block xl:hidden text-sm font-display font-bold text-neutral-900 dark:text-white leading-tight">
+                                <span class="text-red-600">MIS</span> - Đa Trí Tuệ
+                            </span>
+                            <!-- Subtitle -->
+                            <span
+                                class="hidden lg:block text-[10px] text-neutral-500 dark:text-neutral-400 tracking-wide">Multiple
+                                Intelligences School</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center">
+                <!-- GIỚI THIỆU -->
+                <div x-data="{ open: false }" class="relative" @mouseenter="open = true" @mouseleave="open = false">
+                    <button
+                        class="px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-semibold text-neutral-700 dark:text-neutral-300 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 flex items-center uppercase whitespace-nowrap">
+                        GIỚI THIỆU
+                        <i class="fas fa-chevron-down ml-1 text-[8px] xl:text-[9px] transition-transform duration-200"
+                            :class="{'rotate-180': open}"></i>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 translate-y-2"
+                        class="absolute top-full left-0 mt-1 w-56 xl:w-64 bg-white dark:bg-neutral-800 rounded-xl shadow-xl shadow-neutral-200/50 dark:shadow-neutral-900/50 border border-neutral-100 dark:border-neutral-700 py-2 overflow-hidden z-50">
+                        <a href="{% url 'about:mission' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-info-circle mr-2.5 text-red-500/70 w-4 text-center"></i>Giới thiệu chung về
+                            MIS
+                        </a>
+                        <a href="{% url 'about:vision' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-eye mr-2.5 text-red-500/70 w-4 text-center"></i>Hệ thống giáo dục MIS
+                        </a>
+                        <a href="{% url 'about:principal' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-user-tie mr-2.5 text-red-500/70 w-4 text-center"></i>Thông điệp Tổng Giám
+                            đốc
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CHƯƠNG TRÌNH HỌC -->
+                <div x-data="{ open: false }" class="relative" @mouseenter="open = true" @mouseleave="open = false">
+                    <button
+                        class="px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-semibold text-neutral-700 dark:text-neutral-300 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 flex items-center uppercase whitespace-nowrap">
+                        <span class="hidden xl:inline">CHƯƠNG TRÌNH</span>
+                        <span class="xl:hidden">CT HỌC</span>
+                        <i class="fas fa-chevron-down ml-1 text-[8px] xl:text-[9px] transition-transform duration-200"
+                            :class="{'rotate-180': open}"></i>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 translate-y-2"
+                        class="absolute top-full left-0 mt-1 w-52 xl:w-60 bg-white dark:bg-neutral-800 rounded-xl shadow-xl shadow-neutral-200/50 dark:shadow-neutral-900/50 border border-neutral-100 dark:border-neutral-700 py-2 overflow-hidden z-50">
+                        <a href="#"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-baby mr-2.5 text-red-500/70 w-4 text-center"></i>Mầm non – Tiền tiểu học
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-child mr-2.5 text-red-500/70 w-4 text-center"></i>Tiểu học
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-user-graduate mr-2.5 text-red-500/70 w-4 text-center"></i>Trung học cơ sở
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-graduation-cap mr-2.5 text-red-500/70 w-4 text-center"></i>Trung học phổ
+                            thông
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TIN TỨC -->
+                <a href="{% url 'news:list' %}"
+                    class="px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-semibold text-neutral-700 dark:text-neutral-300 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 uppercase whitespace-nowrap">
+                    TIN TỨC
+                </a>
+
+                <!-- TUYỂN SINH -->
+                <div x-data="{ open: false }" class="relative" @mouseenter="open = true" @mouseleave="open = false">
+                    <a href="{% url 'admissions:list' %}"
+                        class="px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-semibold text-neutral-700 dark:text-neutral-300 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 flex items-center uppercase whitespace-nowrap">
+                        TUYỂN SINH
+                        <i class="fas fa-chevron-down ml-1 text-[8px] xl:text-[9px] transition-transform duration-200"
+                            :class="{'rotate-180': open}"></i>
+                    </a>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 translate-y-2"
+                        class="absolute top-full left-0 mt-1 w-52 xl:w-60 bg-white dark:bg-neutral-800 rounded-xl shadow-xl shadow-neutral-200/50 dark:shadow-neutral-900/50 border border-neutral-100 dark:border-neutral-700 py-2 overflow-hidden z-50">
+                        <a href="{% url 'admissions:list' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors border-b border-neutral-100 dark:border-neutral-700">
+                            <i class="fas fa-list-ul mr-2.5 text-red-500/70 w-4 text-center"></i>Tổng quan tuyển sinh
+                        </a>
+                        <a href="{% url 'admissions:detail' level='mam_non' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-baby-carriage mr-2.5 text-pink-500/70 w-4 text-center"></i>Mầm non – Tiền
+                            Tiểu học
+                        </a>
+                        <a href="{% url 'admissions:detail' level='tieu_hoc' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-child mr-2.5 text-blue-500/70 w-4 text-center"></i>Tiểu học
+                        </a>
+                        <a href="{% url 'admissions:detail' level='thcs' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-user-graduate mr-2.5 text-green-500/70 w-4 text-center"></i>Trung học cơ sở
+                        </a>
+                        <a href="{% url 'admissions:detail' level='thpt' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-graduation-cap mr-2.5 text-purple-500/70 w-4 text-center"></i>Trung học phổ
+                            thông
+                        </a>
+                    </div>
+                </div>
+
+                <!-- NHỊP SỐNG HỌC ĐƯỜNG -->
+                <div x-data="{ open: false }" class="relative" @mouseenter="open = true" @mouseleave="open = false">
+                    <button
+                        class="px-2.5 xl:px-3 py-2 text-xs xl:text-[13px] font-semibold text-neutral-700 dark:text-neutral-300 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 flex items-center uppercase whitespace-nowrap">
+                        <span class="hidden xl:inline">NHỊP SỐNG</span>
+                        <span class="xl:hidden">HỌC ĐƯỜNG</span>
+                        <i class="fas fa-chevron-down ml-1 text-[8px] xl:text-[9px] transition-transform duration-200"
+                            :class="{'rotate-180': open}"></i>
+                    </button>
+                    <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 translate-y-2"
+                        class="absolute top-full right-0 mt-1 w-48 xl:w-56 bg-white dark:bg-neutral-800 rounded-xl shadow-xl shadow-neutral-200/50 dark:shadow-neutral-900/50 border border-neutral-100 dark:border-neutral-700 py-2 overflow-hidden z-50">
+                        <a href="{% url 'events:list' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-calendar-alt mr-2.5 text-red-500/70 w-4 text-center"></i>Sự kiện
+                        </a>
+                        <a href="{% url 'gallery:list' %}"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-images mr-2.5 text-red-500/70 w-4 text-center"></i>Thư viện ảnh
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 py-2.5 text-xs xl:text-sm text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                            <i class="fas fa-running mr-2.5 text-red-500/70 w-4 text-center"></i>Hoạt động ngoại khóa
+                        </a>
+                    </div>
+                </div>
+
+                <!-- LIÊN HỆ Button -->
+                <a href="{% url 'contact:contact' %}"
+                    class="ml-2 xl:ml-3 px-3 xl:px-4 py-1.5 xl:py-2 text-xs xl:text-[13px] font-semibold text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-full shadow-md shadow-red-500/25 hover:shadow-red-500/40 transition-all duration-300 transform hover:-translate-y-0.5 uppercase">
+                    LIÊN HỆ
+                </a>
+            </div>
+
+            <!-- Right Side Actions -->
+            <div class="flex items-center space-x-1 lg:space-x-2">
+                <!-- Language Switcher -->
+                <form action="{% url 'set_language' %}" method="post" class="hidden md:block">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                    <select name="language" onchange="this.form.submit()"
+                        class="text-xs font-medium border-none bg-transparent text-neutral-600 dark:text-neutral-400 focus:ring-0 cursor-pointer hover:text-red-600 dark:hover:text-red-400 transition-colors pr-6">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% for lang_code, lang_name in LANGUAGES %}
+                        <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                            {{ lang_code|upper }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </form>
+
+                <!-- Dark Mode Toggle -->
+                <button @click="darkMode = !darkMode"
+                    class="p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200">
+                    <i class="fas fa-moon dark:hidden text-sm"></i>
+                    <i class="fas fa-sun hidden dark:inline text-sm"></i>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen"
+                    class="lg:hidden p-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+                    <i class="fas fa-bars text-lg" x-show="!mobileMenuOpen"></i>
+                    <i class="fas fa-times text-lg" x-show="mobileMenuOpen"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-2"
+        class="lg:hidden bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800 shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto">
+        <div class="px-4 py-4 space-y-1">
+            <a href="{% url 'core:home' %}"
+                class="block px-4 py-3 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 rounded-xl transition-colors">
+                <i class="fas fa-home mr-3 text-red-500 w-5 text-center"></i>Trang chủ
+            </a>
+
+            <!-- Giới thiệu Section -->
+            <div class="space-y-1 pl-4 border-l-2 border-red-200 dark:border-red-800 ml-4 my-3">
+                <div class="px-4 py-2 text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Giới
+                    thiệu</div>
+                <a href="{% url 'about:mission' %}"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-info-circle mr-2 text-red-400/70 w-4"></i>Giới thiệu chung về MIS
+                </a>
+                <a href="{% url 'about:vision' %}"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-eye mr-2 text-red-400/70 w-4"></i>Hệ thống giáo dục MIS
+                </a>
+                <a href="{% url 'about:principal' %}"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-user-tie mr-2 text-red-400/70 w-4"></i>Thông điệp Tổng Giám đốc
+                </a>
+            </div>
+
+            <!-- Chương trình học Section -->
+            <div class="space-y-1 pl-4 border-l-2 border-red-200 dark:border-red-800 ml-4 my-3">
+                <div class="px-4 py-2 text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Chương
+                    trình học</div>
+                <a href="#"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-baby mr-2 text-red-400/70 w-4"></i>Mầm non – Tiền tiểu học
+                </a>
+                <a href="#"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-child mr-2 text-red-400/70 w-4"></i>Tiểu học
+                </a>
+                <a href="#"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-user-graduate mr-2 text-red-400/70 w-4"></i>Trung học cơ sở
+                </a>
+                <a href="#"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-graduation-cap mr-2 text-red-400/70 w-4"></i>Trung học phổ thông
+                </a>
+            </div>
+
+            <a href="{% url 'news:list' %}"
+                class="block px-4 py-3 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 rounded-xl transition-colors">
+                <i class="fas fa-newspaper mr-3 text-red-500 w-5 text-center"></i>Tin tức
+            </a>
+
+            <!-- Tuyển sinh Section -->
+            <div class="space-y-1 pl-4 border-l-2 border-red-200 dark:border-red-800 ml-4 my-3">
+                <div class="px-4 py-2 text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Tuyển
+                    sinh</div>
+                <a href="{% url 'admissions:detail' level='mam_non' %}"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-baby-carriage mr-2 text-pink-400/70 w-4"></i>Mầm non – Tiền Tiểu học
+                </a>
+                <a href="{% url 'admissions:detail' level='tieu_hoc' %}"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-child mr-2 text-blue-400/70 w-4"></i>Tiểu học
+                </a>
+                <a href="{% url 'admissions:detail' level='thcs' %}"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-user-graduate mr-2 text-green-400/70 w-4"></i>Trung học cơ sở
+                </a>
+                <a href="{% url 'admissions:detail' level='thpt' %}"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-graduation-cap mr-2 text-purple-400/70 w-4"></i>Trung học phổ thông
+                </a>
+            </div>
+
+            <!-- Nhịp sống học đường Section -->
+            <div class="space-y-1 pl-4 border-l-2 border-red-200 dark:border-red-800 ml-4 my-3">
+                <div class="px-4 py-2 text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Nhịp
+                    sống học đường</div>
+                <a href="{% url 'events:list' %}"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-calendar-alt mr-2 text-red-400/70 w-4"></i>Sự kiện
+                </a>
+                <a href="{% url 'gallery:list' %}"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-images mr-2 text-red-400/70 w-4"></i>Thư viện ảnh
+                </a>
+                <a href="#"
+                    class="block px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-running mr-2 text-red-400/70 w-4"></i>Hoạt động ngoại khóa
+                </a>
+            </div>
+
+            <a href="{% url 'contact:contact' %}"
+                class="block px-4 py-3 text-base font-medium text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-xl transition-all shadow-md shadow-red-500/25 text-center mt-4">
+                <i class="fas fa-envelope mr-2"></i>Liên hệ với chúng tôi
+            </a>
+
+            <!-- Mobile Language Switcher -->
+            <form action="{% url 'set_language' %}" method="post" class="px-4 pt-4">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <select name="language" onchange="this.form.submit()"
+                    class="w-full text-sm border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all duration-200">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% for lang_code, lang_name in LANGUAGES %}
+                    <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ lang_name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<script>
+    // Hiển thị ngày tháng tiếng Việt
+    document.addEventListener('DOMContentLoaded', function () {
+        const dateElement = document.getElementById('current-date');
+        if (dateElement) {
+            const now = new Date();
+            const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+            const months = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+            const dayName = days[now.getDay()];
+            const monthName = months[now.getMonth()];
+            const day = now.getDate();
+            const year = now.getFullYear();
+            dateElement.textContent = `${dayName}, ${day} ${monthName}, ${year}`;
+        }
+    });
+</script>
