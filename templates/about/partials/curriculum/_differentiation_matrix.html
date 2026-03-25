@@ -1,0 +1,59 @@
+{% comment %}
+Differentiation Matrix
+Inputs:
+- matrix_title
+- traditional_label (default Trường truyền thống)
+- international_label (default Trường quốc tế)
+- row_1_* ... row_4_*
+{% endcomment %}
+<section id="differentiation" class="curriculum-section curriculum-section--neutral">
+    <div class="container">
+        {% if matrix_title %}<h2 class="curriculum-h2">{{ matrix_title }}</h2>{% endif %}
+        <div class="curriculum-table-wrap">
+            <table class="curriculum-table">
+                <thead>
+                    <tr>
+                        <th>Tiêu chí</th>
+                        <th>MIS</th>
+                        <th>{{ traditional_label|default:'Trường truyền thống' }}</th>
+                        <th>{{ international_label|default:'Trường quốc tế' }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if row_1_label %}
+                    <tr>
+                        <td>{{ row_1_label }}</td>
+                        <td>{{ row_1_mis }}</td>
+                        <td>{{ row_1_traditional }}</td>
+                        <td>{{ row_1_international }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if row_2_label %}
+                    <tr>
+                        <td>{{ row_2_label }}</td>
+                        <td>{{ row_2_mis }}</td>
+                        <td>{{ row_2_traditional }}</td>
+                        <td>{{ row_2_international }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if row_3_label %}
+                    <tr>
+                        <td>{{ row_3_label }}</td>
+                        <td>{{ row_3_mis }}</td>
+                        <td>{{ row_3_traditional }}</td>
+                        <td>{{ row_3_international }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if row_4_label %}
+                    <tr>
+                        <td>{{ row_4_label }}</td>
+                        <td>{{ row_4_mis }}</td>
+                        <td>{{ row_4_traditional }}</td>
+                        <td>{{ row_4_international }}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

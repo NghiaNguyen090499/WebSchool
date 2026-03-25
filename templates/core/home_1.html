@@ -1,0 +1,2317 @@
+{% extends 'base.html' %}
+{% load i18n static media_tags %}
+
+{% block title %}Trang chủ - MIS Đa Trí Tuệ{% endblock %}
+{% block meta_description %}Hệ thống Giáo dục Đa Trí Tuệ MIS - Giáo dục con tim, kiến tạo giá trị sống. Tuyển sinh K12, chương trình STEAM, ngoại ngữ và hoạt động học đường.{% endblock %}
+
+
+{% block content %}
+{% get_media page="home.html" block="hero_video" file_type="video" limit=1 as hero_videos %}
+{% with hero_video=hero_videos.0 %}
+<!-- Hero Slider -->
+<section x-data="heroSlider()" x-init="init()"
+    @mouseenter="pauseAutoPlay(true)" @mouseleave="resumeAutoPlay(true)"
+    @focusin="pauseAutoPlay(true)" @focusout="resumeAutoPlay(true)"
+    class="relative min-h-screen flex items-center justify-center overflow-hidden bg-neutral-900">
+    <!-- Slides Container -->
+    <div class="absolute inset-0">
+        <!-- Slide 1: Welcome -->
+        <div x-show="currentSlide === 0" x-transition:enter="transition ease-out duration-700"
+            x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95" class="absolute inset-0">
+            {% if hero_video and hero_video.file %}
+            <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline{% if hero_video.poster %} poster="{{ hero_video.poster.url }}"{% endif %}>
+                <source src="{{ hero_video.file.url }}" type="video/mp4">
+            </video>
+            {% else %}
+            <div class="absolute inset-0 bg-[url('{% static 'images/hero/slide1.jpg' %}')] bg-cover bg-center"></div>
+            {% endif %}
+            <div class="absolute inset-0 hero-gradient-overlay"></div>
+        </div>
+
+        <!-- Slide 2: Admissions -->
+        <div x-show="currentSlide === 1" x-transition:enter="transition ease-out duration-700"
+            x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95" class="absolute inset-0">
+            <div class="absolute inset-0 bg-[url('{% static 'images/hero/slide2.jpg' %}')] bg-cover bg-center"></div>
+            <div class="absolute inset-0 hero-gradient-overlay"></div>
+        </div>
+
+        <!-- Slide 3: STEAM Program -->
+        <div x-show="currentSlide === 2" x-transition:enter="transition ease-out duration-700"
+            x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95" class="absolute inset-0">
+            <div class="absolute inset-0 bg-[url('{% static 'images/hero/slide3.jpg' %}')] bg-cover bg-center"></div>
+            <div class="absolute inset-0 hero-gradient-overlay"></div>
+        </div>
+
+        <!-- Slide 4: Activities -->
+        <div x-show="currentSlide === 3" x-transition:enter="transition ease-out duration-700"
+            x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95" class="absolute inset-0">
+            <div class="absolute inset-0 bg-[url('{% static 'images/hero/slide4.jpg' %}')] bg-cover bg-center"></div>
+            <div class="absolute inset-0 hero-gradient-overlay"></div>
+        </div>
+    </div>
+
+    <!-- Dotted Pattern Overlay for Premium Feel -->
+    <div class="pattern-dots"></div>
+
+    <!-- Animated background blobs -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-[40rem] h-[40rem] bg-red-500/20 rounded-full blur-3xl animate-blob">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-white/5 rounded-full blur-3xl animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-40 -left-40 w-[40rem] h-[40rem] bg-red-600/20 rounded-full blur-3xl animate-blob animation-delay-4000">
+        </div>
+    </div>
+
+    <!-- Slide Content -->
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40 text-center z-10">
+        <!-- Slide 1 Content -->
+        <div x-show="currentSlide === 0" x-transition:enter="transition ease-out duration-500 delay-200"
+            x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 translate-y-0"
+            class="space-y-8">
+            <div
+                class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-sm font-medium">
+                <span class="w-2 h-2 rounded-full bg-accent-400 mr-2 animate-pulse"></span>
+                Hệ thống Giáo dục Đa Trí Tuệ MIS
+            </div>
+
+            <!-- Core Slogan -->
+            <div class="mb-4">
+                <p class="text-xl md:text-2xl lg:text-3xl font-light text-white/95 tracking-wide">
+                    <span class="text-red-400">Giáo dục con tim</span> – <span class="text-amber-400">Kiến tạo giá trị
+                        sống</span>
+                </p>
+            </div>
+
+            <h1 class="hero-title">
+                Khác biệt là điểm khởi đầu<br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-white to-red-400">của vĩ
+                    đại</span>
+            </h1>
+            <p class="text-white/90 max-w-2xl mx-auto text-base md:text-lg mt-4 leading-relaxed">
+                Khác biệt tạo nên bản sắc. Khai phá khác biệt, chính là trao cho mỗi đứa trẻ cơ hội trở thành phiên bản
+                tốt nhất của chính mình.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+                <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg group">
+                    Đăng ký tư vấn <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="{% url 'about:academics' %}" class="btn btn-ghost-invert btn-lg">
+                    Xem chương trình học
+                </a>
+            </div>
+        </div>
+
+        <!-- Slide 2 Content -->
+        <div x-show="currentSlide === 1" x-transition:enter="transition ease-out duration-500 delay-200"
+            x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 translate-y-0"
+            class="space-y-8">
+            <div
+                class="inline-flex items-center px-4 py-2 rounded-full bg-accent-500/20 backdrop-blur-md border border-accent-400/30 text-white text-sm font-medium">
+                <i class="fas fa-calendar-check mr-2 text-accent-400"></i>
+                Đang mở đăng ký
+            </div>
+
+            <!-- Core Slogan -->
+            <p class="text-lg md:text-xl font-light text-white/80 tracking-wide">
+                <span class="text-red-400">Giáo dục con tim</span> – <span class="text-amber-400">Kiến tạo giá trị
+                    sống</span>
+            </p>
+
+            <h2 class="hero-title">
+                Tuyển sinh<br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-red-500">2025 -
+                    2026</span>
+            </h2>
+            <p class="hero-lead max-w-3xl mx-auto">
+                Mầm non • Tiểu học • THCS • THPT
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+                <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg group">
+                    Đăng ký tư vấn <i class="fas fa-pen ml-2"></i>
+                </a>
+                <a href="{% url 'admissions:list' %}" class="btn btn-ghost-invert btn-lg">
+                    Xem thông tin tuyển sinh
+                </a>
+            </div>
+        </div>
+
+        <!-- Slide 3 Content -->
+        <div x-show="currentSlide === 2" x-transition:enter="transition ease-out duration-500 delay-200"
+            x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 translate-y-0"
+            class="space-y-8">
+            <div
+                class="inline-flex items-center px-4 py-2 rounded-full bg-accent-500/20 backdrop-blur-md border border-accent-400/30 text-white text-sm font-medium">
+                <i class="fas fa-rocket mr-2 text-accent-400"></i>
+                Chương trình đặc biệt
+            </div>
+
+            <!-- Core Slogan -->
+            <p class="text-lg md:text-xl font-light text-white/80 tracking-wide">
+                <span class="text-red-400">Giáo dục con tim</span> – <span class="text-amber-400">Kiến tạo giá trị
+                    sống</span>
+            </p>
+
+            <h2 class="hero-title">
+                Chương trình vượt trội<br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-white to-red-400">STEAM &
+                    Robotics</span>
+            </h2>
+            <p class="hero-lead max-w-3xl mx-auto">
+                Phát triển tư duy sáng tạo và kỹ năng công nghệ cho thế hệ tương lai
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+                <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg group">
+                    Đăng ký tư vấn <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="{% url 'about:steam' %}" class="btn btn-ghost-invert btn-lg">
+                    Khám phá STEAM
+                </a>
+            </div>
+        </div>
+
+        <!-- Slide 4 Content -->
+        <div x-show="currentSlide === 3" x-transition:enter="transition ease-out duration-500 delay-200"
+            x-transition:enter-start="opacity-0 translate-y-8" x-transition:enter-end="opacity-100 translate-y-0"
+            class="space-y-8">
+            <div
+                class="inline-flex items-center px-4 py-2 rounded-full bg-accent-500/20 backdrop-blur-md border border-accent-400/30 text-white text-sm font-medium">
+                <i class="fas fa-users mr-2 text-accent-400"></i>
+                Hoạt động học đường
+            </div>
+
+            <!-- Core Slogan -->
+            <p class="text-lg md:text-xl font-light text-white/80 tracking-wide">
+                <span class="text-red-400">Giáo dục con tim</span> – <span class="text-amber-400">Kiến tạo giá trị
+                    sống</span>
+            </p>
+
+            <h2 class="hero-title">
+                Nhịp sống<br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-red-500">Học đường
+                    MIS</span>
+            </h2>
+            <p class="hero-lead max-w-3xl mx-auto">
+                Thể thao • Nghệ thuật • Câu lạc bộ • Hoạt động ngoại khóa
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+                <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg group">
+                    Đặt lịch tham quan <i class="fas fa-calendar-check ml-2"></i>
+                </a>
+                <a href="{% url 'events:list' %}" class="btn btn-ghost-invert btn-lg">
+                    Xem hoạt động
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button @click="prevSlide()" type="button" aria-label="Slide trước"
+        class="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all hover:scale-110 border border-white/20">
+        <i class="fas fa-chevron-left text-lg"></i>
+    </button>
+    <button @click="nextSlide()" type="button" aria-label="Slide sau"
+        class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 lg:w-14 lg:h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all hover:scale-110 border border-white/20">
+        <i class="fas fa-chevron-right text-lg"></i>
+    </button>
+
+    <!-- Navigation Dots + Pause -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-3">
+        <template x-for="(slide, index) in slides" :key="index">
+            <button @click="goToSlide(index)" type="button"
+                :aria-label="'Chuyển đến slide ' + (index + 1)"
+                :aria-current="currentSlide === index ? 'true' : 'false'"
+                :class="currentSlide === index ? 'w-8 bg-red-500' : 'w-3 bg-white/40 hover:bg-white/60'"
+                class="h-3 rounded-full transition-all duration-300"></button>
+        </template>
+        <button @click="togglePause()" type="button"
+            :aria-pressed="isPaused ? 'true' : 'false'"
+            :aria-label="isPaused ? 'Bật tự động chuyển slide' : 'Tạm dừng tự động chuyển slide'"
+            class="ml-2 w-9 h-9 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all hover:scale-110 border border-white/20">
+            <i class="fas" :class="isPaused ? 'fa-play' : 'fa-pause'"></i>
+        </button>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-24 left-1/2 transform -translate-x-1/2 animate-bounce hidden lg:block">
+        <div class="w-8 h-12 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
+            <div class="w-1 h-3 bg-white/50 rounded-full"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function heroSlider() {
+        return {
+            currentSlide: 0,
+            slides: [0, 1, 2, 3],
+            interval: null,
+            isPaused: false,
+            isInteracting: false,
+            prefersReducedMotion: { matches: false },
+
+            init() {
+                if (window.matchMedia) {
+                    this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+                    if (this.prefersReducedMotion.matches) {
+                        this.isPaused = true;
+                    } else {
+                        this.startAutoPlay();
+                    }
+                    const onChange = (event) => {
+                        if (event.matches) {
+                            this.isPaused = true;
+                            this.stopAutoPlay();
+                        } else {
+                            this.isPaused = false;
+                            this.startAutoPlay();
+                        }
+                    };
+                    if (this.prefersReducedMotion.addEventListener) {
+                        this.prefersReducedMotion.addEventListener('change', onChange);
+                    } else if (this.prefersReducedMotion.addListener) {
+                        this.prefersReducedMotion.addListener(onChange);
+                    }
+                } else {
+                    this.startAutoPlay();
+                }
+            },
+
+            shouldAutoPlay() {
+                return !this.isPaused && !this.isInteracting && !this.prefersReducedMotion.matches;
+            },
+
+            startAutoPlay() {
+                if (!this.shouldAutoPlay()) return;
+                this.stopAutoPlay();
+                this.interval = setInterval(() => {
+                    this.nextSlide();
+                }, 5000);
+            },
+
+            stopAutoPlay() {
+                if (this.interval) {
+                    clearInterval(this.interval);
+                    this.interval = null;
+                }
+            },
+
+            pauseAutoPlay(isInteraction = false) {
+                if (isInteraction) {
+                    this.isInteracting = true;
+                }
+                this.stopAutoPlay();
+            },
+
+            resumeAutoPlay(isInteraction = false) {
+                if (isInteraction) {
+                    this.isInteracting = false;
+                }
+                if (this.shouldAutoPlay()) {
+                    this.startAutoPlay();
+                }
+            },
+
+            togglePause() {
+                this.isPaused = !this.isPaused;
+                if (this.shouldAutoPlay()) {
+                    this.startAutoPlay();
+                } else {
+                    this.stopAutoPlay();
+                }
+            },
+
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+            },
+
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+            },
+
+            goToSlide(index) {
+                this.currentSlide = index;
+                if (this.shouldAutoPlay()) {
+                    this.stopAutoPlay();
+                    this.startAutoPlay();
+                }
+            }
+        }
+    }
+</script>
+{% endwith %}
+
+<!-- Founder's Message Section -->
+<section x-data="{ showModal: false }"
+    class="section bg-gradient-to-br from-blue-50 via-blue-100/50 to-white dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <!-- Founder's Photo - Circular -->
+            <div class="flex justify-center lg:justify-start">
+                <div class="relative">
+                    <div
+                        class="w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-2xl ring-4 ring-white dark:ring-neutral-800">
+                        <img src="{% static 'images/founder/founder-photo.jpg' %}" alt="Ông Hoàng Văn Lược"
+                            class="w-full h-full object-cover object-top">
+                    </div>
+                    <!-- Decorative circles -->
+                    <div class="absolute -top-4 -right-4 w-8 h-8 bg-blue-200 dark:bg-blue-800 rounded-full opacity-60">
+                    </div>
+                    <div
+                        class="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-300 dark:bg-blue-700 rounded-full opacity-40">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Founder's Message Quote -->
+            <div class="space-y-6">
+                <div>
+                    <span
+                        class="inline-block px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-semibold mb-6">
+                        THÔNG ĐIỆP NGƯỜI SÁNG LẬP
+                    </span>
+                </div>
+
+                <blockquote
+                    class="text-2xl md:text-3xl lg:text-4xl font-semibold text-neutral-900 dark:text-white leading-tight mb-6">
+                    "Khác biệt tạo nên bản sắc. Khai phá khác biệt, chính là trao cho mỗi đứa trẻ cơ hội trở thành phiên
+                    bản tốt nhất của chính mình."
+                </blockquote>
+
+                <div class="pt-4">
+                    <p class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                        Ông. Hoàng Văn Lược
+                    </p>
+                    <p class="text-base text-neutral-600 dark:text-neutral-400">
+                        Tổng Giám đốc Điều hành<br />
+                        Hệ thống Giáo dục Đa Trí Tuệ MIS
+                    </p>
+                </div>
+
+                <div class="pt-6">
+                    <button @click="showModal = true"
+                        class="btn btn-primary btn-md">
+                        Xem đầy đủ
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Full Message -->
+    <div x-show="showModal" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.away="showModal = false"
+        @keydown.escape.window="showModal = false"
+        class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+        style="display: none;">
+
+        <div x-show="showModal" x-transition:enter="transition ease-out duration-300 delay-100"
+            x-transition:enter-start="opacity-0 scale-95 -translate-y-4"
+            x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+            x-transition:leave-end="opacity-0 scale-95 -translate-y-4" @click.stop
+            class="w-full max-w-4xl bg-white dark:bg-neutral-800 rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+
+            <!-- Modal Header -->
+            <div class="bg-gradient-to-r from-red-600 to-red-700 p-6 text-white">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="type-h3 font-semibold mb-2">THÔNG ĐIỆP NGƯỜI SÁNG LẬP</h3>
+                        <p class="text-white/90">Ông. Hoàng Văn Lược - Tổng Giám đốc Điều hành</p>
+                    </div>
+                    <button @click="showModal = false"
+                        class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="flex-1 overflow-y-auto p-8">
+                <div class="space-y-6 text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                    <p class="text-lg font-semibold">
+                        Ba mẹ và các con học sinh thân mến,
+                    </p>
+
+                    <p>
+                        Trong thời đại số hóa và toàn cầu hóa, giáo dục không chỉ là truyền đạt kiến thức mà còn là khơi
+                        dậy tiềm năng, đam mê và cá tính riêng biệt của mỗi học sinh.
+                    </p>
+
+                    <blockquote
+                        class="border-l-4 border-red-500 pl-6 italic text-red-600 dark:text-red-400 my-6 text-lg">
+                        "Khác biệt tạo nên bản sắc. Khai phá khác biệt, chính là trao cho mỗi đứa trẻ cơ hội trở thành
+                        phiên bản tốt nhất của chính mình."
+                    </blockquote>
+
+                    <p>
+                        Tại MIS, chúng tôi tin rằng mỗi học sinh là một "hạt giống độc đáo". Chúng tôi tạo ra môi trường
+                        nơi sự khác biệt được tôn trọng, sáng tạo được khuyến khích, và lòng nhân ái cùng tinh thần toàn
+                        cầu được nuôi dưỡng mỗi ngày.
+                    </p>
+
+                    <p>
+                        MIS là tiên phong trong đổi mới giáo dục tại Việt Nam với tư duy "Glocal" - tư duy toàn cầu, bản
+                        sắc địa phương, chuẩn bị cho những cá nhân có thể tư duy độc lập, yêu thương, kết nối và đứng
+                        vững trước mọi thay đổi.
+                    </p>
+
+                    <p>
+                        Chúng tôi dạy học sinh không chỉ để giỏi mà còn để dẫn dắt cuộc sống của chính mình và tạo ra
+                        giá trị cho cộng đồng.
+                    </p>
+
+                    <p>
+                        MIS cam kết với "Giáo dục vì con người", hỗ trợ học sinh xuất sắc về học thuật, phát triển nhân
+                        cách và kiên cường cho một tương lai bền vững, hạnh phúc.
+                    </p>
+
+                    <div class="pt-6 border-t border-neutral-200 dark:border-neutral-700 mt-8">
+                        <p class="text-xl font-semibold text-red-600 dark:text-red-400 mb-4">
+                            Hãy đồng hành cùng chúng tôi, để khác biệt là điểm khởi đầu của vĩ đại!
+                        </p>
+                        <p class="text-lg font-semibold">
+                            Trân trọng!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-neutral-50 dark:bg-neutral-900 p-6 border-t border-neutral-200 dark:border-neutral-700">
+                <button @click="showModal = false"
+                    class="btn btn-primary btn-md w-full">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Outstanding Achievements Section -->
+<section class="section relative overflow-hidden bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900">
+    <!-- Decorative Background -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+            class="absolute top-0 left-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2">
+        </div>
+        <div
+            class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2">
+        </div>
+        <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.05)_1px,transparent_0)] [background-size:40px_40px]">
+        </div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <span
+                class="inline-block px-4 py-2 bg-red-600/20 text-red-400 rounded-full text-sm font-semibold uppercase tracking-wider mb-4">
+                Giải thưởng & chứng nhận
+            </span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                Thành tựu & chỉ số đầu ra
+            </h2>
+            <p class="text-lg text-neutral-400 max-w-3xl mx-auto">
+                Các chứng nhận chính thức và chỉ số đầu ra tiêu biểu theo hồ sơ MIS.
+            </p>
+        </div>
+
+        {% get_media page="home.html" block="achievements" file_type="image" limit=6 as achievement_media %}
+        {% if achievement_media %}
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+            {% for media in achievement_media %}
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-3">
+                <div class="aspect-square rounded-xl overflow-hidden bg-white/10">
+                    {% if media.file_webp %}
+                    <picture>
+                        <source srcset="{{ media.file_webp.url }}" type="image/webp">
+                        {% if media.file_jpeg %}
+                        <img src="{{ media.file_jpeg.url }}" alt="{{ media.alt_text }}" class="w-full h-full object-contain" loading="lazy">
+                        {% elif media.file %}
+                        <img src="{{ media.file.url }}" alt="{{ media.alt_text }}" class="w-full h-full object-contain" loading="lazy">
+                        {% endif %}
+                    </picture>
+                    {% elif media.file_jpeg %}
+                    <img src="{{ media.file_jpeg.url }}" alt="{{ media.alt_text }}" class="w-full h-full object-contain" loading="lazy">
+                    {% elif media.file %}
+                    <img src="{{ media.file.url }}" alt="{{ media.alt_text }}" class="w-full h-full object-contain" loading="lazy">
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Output Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 mb-16">
+            <div
+                class="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-red-500/50 transition-all duration-300 hover:scale-105">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity">
+                </div>
+                <div class="relative">
+                    <div class="text-3xl md:text-4xl font-bold text-white mb-2">50%+</div>
+                    <p class="text-neutral-400 text-sm">K12 đạt IELTS 5.0-7.5+</p>
+                </div>
+            </div>
+            <div
+                class="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-amber-500/50 transition-all duration-300 hover:scale-105">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-amber-600/20 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity">
+                </div>
+                <div class="relative">
+                    <div class="text-3xl md:text-4xl font-bold text-white mb-2">50%+</div>
+                    <p class="text-neutral-400 text-sm">K12 đạt HSK 3-6</p>
+                </div>
+            </div>
+            <div
+                class="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-red-500/50 transition-all duration-300 hover:scale-105">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-red-600/20 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity">
+                </div>
+                <div class="relative">
+                    <div class="text-3xl md:text-4xl font-bold text-white mb-2">98%</div>
+                    <p class="text-neutral-400 text-sm">Đỗ đại học hàng đầu VN</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Award Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+                class="group bg-gradient-to-br from-red-600/10 to-red-900/10 backdrop-blur-sm rounded-3xl p-8 border border-red-500/20 hover:border-red-500/50 transition-all duration-300">
+                <div
+                    class="w-16 h-16 bg-red-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-award text-3xl text-red-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Top 10 Thương hiệu tiêu biểu Châu Á - Thái Bình Dương</h3>
+                <p class="text-neutral-400 mb-4">Vinh danh 2025 tại chương trình Thương hiệu tiêu biểu Châu Á - Thái Bình Dương.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-red-600/20 text-red-400 rounded-full text-xs font-medium">2025</span>
+                </div>
+            </div>
+
+            <div
+                class="group bg-gradient-to-br from-amber-600/10 to-amber-900/10 backdrop-blur-sm rounded-3xl p-8 border border-amber-500/20 hover:border-amber-500/50 transition-all duration-300">
+                <div
+                    class="w-16 h-16 bg-amber-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-globe text-3xl text-amber-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Top 50 Thương hiệu nổi tiếng ASEAN</h3>
+                <p class="text-neutral-400 mb-4">Vinh danh 2025 tại chương trình Thương hiệu nổi tiếng ASEAN.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-amber-600/20 text-amber-400 rounded-full text-xs font-medium">2025</span>
+                </div>
+            </div>
+
+            <div
+                class="group bg-gradient-to-br from-red-600/10 to-red-900/10 backdrop-blur-sm rounded-3xl p-8 border border-red-500/20 hover:border-red-500/50 transition-all duration-300">
+                <div
+                    class="w-16 h-16 bg-red-600/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-medal text-3xl text-red-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Sản phẩm & Dịch vụ Chất lượng Vàng Việt Nam</h3>
+                <p class="text-neutral-400 mb-4">Vinh danh 2025 tại chương trình Chất lượng Vàng Việt Nam.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-red-600/20 text-red-400 rounded-full text-xs font-medium">2025</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="{% url 'news:list' %}"
+                class="btn btn-primary btn-lg">
+                <span>Xem tin thành tựu</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+{% comment %}
+<!-- Smart Facilities Section - TEMPORARILY HIDDEN -->
+<section
+    class="section relative overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-red-50/30 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
+    <!-- Decorative Elements -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div class="absolute -top-20 -right-20 w-[400px] h-[400px] bg-red-400/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-red-300/10 rounded-full blur-3xl"></div>
+        <svg class="absolute top-20 right-20 w-64 h-64 text-red-200/30 dark:text-red-800/20" viewBox="0 0 200 200"
+            fill="currentColor">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-dasharray="8 8" />
+            <circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" stroke-width="2" />
+        </svg>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <span
+                class="inline-block px-4 py-2 bg-red-600/10 text-red-700 dark:text-red-400 rounded-full text-sm font-semibold uppercase tracking-wider mb-4">
+                Smart Campus
+            </span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-white mb-6">
+                Cơ sở vật chất <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-500">Thông minh</span>
+            </h2>
+            <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+                Hạ tầng giáo dục hiện đại, tích hợp công nghệ AI và năng lượng xanh, tạo môi trường học tập tối ưu cho
+                thế hệ tương lai
+            </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <!-- Smart Classroom -->
+            <div
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-500/25 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-chalkboard-teacher text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">100% Phòng học Thông minh</h3>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+                    Trang bị bảng tương tác, hệ thống âm thanh hiện đại và kết nối IoT cho trải nghiệm học tập số hóa
+                </p>
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Bảng tương tác 4K</span>
+                </div>
+            </div>
+
+            <!-- AR-VR Lab -->
+            <div
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-red-400 to-rose-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-400/25 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-vr-cardboard text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Phòng Lab AR-VR</h3>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+                    Công nghệ thực tế ảo và thực tế tăng cường giúp học sinh trải nghiệm kiến thức một cách sống động
+                </p>
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Immersive Learning</span>
+                </div>
+            </div>
+
+            <!-- AI Speaking Lab -->
+            <div
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-rose-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-rose-500/25 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-microphone-alt text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">i-Correct AI Speaking Lab</h3>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+                    Hệ thống AI hỗ trợ luyện phát âm và giao tiếp tiếng Anh, phản hồi tức thì và cá nhân hóa
+                </p>
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+                    <i class="fas fa-check-circle"></i>
+                    <span>AI-Powered Feedback</span>
+                </div>
+            </div>
+
+            <!-- STEAM Lab -->
+            <div
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-600/25 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-cogs text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">STEAM & Robotics Lab</h3>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+                    Phòng thực hành STEAM tiêu chuẩn quốc tế với robot, drone, máy in 3D và các thiết bị lập trình
+                </p>
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Hands-on Learning</span>
+                </div>
+            </div>
+
+            <!-- Solar Energy -->
+            <div
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-rose-400 to-red-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-rose-400/25 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-solar-panel text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Năng lượng Mặt trời</h3>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+                    Hệ thống điện mặt trời đáp ứng 50% nhu cầu năng lượng, cam kết phát triển bền vững và xanh
+                </p>
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Green Campus</span>
+                </div>
+            </div>
+
+            <!-- Pandora Farm -->
+            <div
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-red-500 to-rose-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-500/25 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-seedling text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Pandora Landscape Farm</h3>
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+                    Trang trại khoa học công nghệ 6ha - không gian trải nghiệm thực tế về nông nghiệp và sinh thái
+                </p>
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+                    <i class="fas fa-check-circle"></i>
+                    <span>6 Hecta trải nghiệm</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campus Highlight Banner -->
+        <div class="relative bg-gradient-to-r from-red-600 to-red-700 rounded-3xl overflow-hidden">
+            <div
+                class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22%23fff%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M0%200h40v40H0z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')]">
+            </div>
+            <div class="relative p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
+                        Campus xanh đối diện Công viên Cầu Giấy
+                    </h3>
+                    <p class="text-red-100 text-lg">
+                        Vị trí đắc địa, không gian thoáng đãng, an toàn và thân thiện với môi trường
+                    </p>
+                </div>
+                <a href="{% url 'contact:contact' %}"
+                    class="btn btn-light btn-lg whitespace-nowrap">
+                    <span>Đặt lịch tham quan</span>
+                    <i class="fas fa-calendar-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endcomment %}
+
+<!-- Educational Philosophy Section - Nord Anglia Inspired -->
+<section x-data="learningCarousel()" x-init="init()" class="learning-experience-section">
+    <!-- Decorative Corner Element -->
+    <div class="decorative-corner hidden lg:block">
+        <svg viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="90" cy="90" r="70" fill="#fecdd3" opacity="0.9" />
+            <circle cx="120" cy="40" r="20" fill="#ef4444" opacity="0.8" />
+            <circle cx="50" cy="130" r="12" fill="#f87171" opacity="0.6" />
+            <circle cx="140" cy="120" r="8" fill="#b91c1c" opacity="0.5" />
+            <!-- Microscope/Telescope illustration -->
+            <g transform="translate(55, 45)">
+                <rect x="20" y="60" width="30" height="8" rx="2" fill="#b91c1c" />
+                <rect x="28" y="40" width="14" height="25" rx="2" fill="#b91c1c" />
+                <circle cx="35" cy="30" r="18" stroke="#b91c1c" stroke-width="4" fill="none" />
+                <line x1="35" y1="12" x2="35" y2="0" stroke="#b91c1c" stroke-width="3" />
+                <circle cx="35" cy="30" r="8" fill="#fda4af" opacity="0.5" />
+            </g>
+        </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Header with Navigation -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8">
+            <div class="section-header">
+                <h2 class="section-title-learning">
+                    GIÁO DỤC KHAI PHÓNG 4.0<br />
+                    <span class="text-xl md:text-2xl font-normal normal-case tracking-normal">Thiết kế cho tương
+                        lai</span>
+                </h2>
+                <p class="section-description mt-4">
+                    Với tầm nhìn toàn cầu và đội ngũ giáo viên đẳng cấp thế giới, học sinh
+                    <a href="{% url 'admissions:list' %}">Mầm non</a> và
+                    <a href="{% url 'admissions:list' %}">Phổ thông</a>
+                    tại MIS được trải nghiệm hành trình giáo dục không nơi nào sánh bằng.
+                </p>
+            </div>
+            <!-- Navigation Controls -->
+            <div class="learning-nav-controls flex-shrink-0">
+                <button @click="prevSlide()" class="learning-nav-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button @click="nextSlide()" class="learning-nav-btn nav-next">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Cards Container -->
+        <div class="learning-cards-wrapper">
+            <div class="learning-cards-container" x-ref="cardsContainer">
+                <!-- Card 1: Học Làm Người -->
+                <div class="learning-card">
+                    <h3 class="learning-card-title">Học Làm Người</h3>
+                    <p class="learning-card-description">
+                        Nuôi dưỡng nhân cách, tình yêu đất nước và giá trị bản thân. Giáo dục con tim thông qua Năng lực
+                        Cảm xúc Xã hội (GRACE).
+                    </p>
+                    <a href="{% url 'about:academics' %}" class="learning-card-link">
+                        <i class="fas fa-plus"></i> Tìm hiểu thêm
+                    </a>
+                </div>
+
+                <!-- Card 2: Vững Vàng Tri Thức -->
+                <div class="learning-card">
+                    <h3 class="learning-card-title">Vững Vàng Tri Thức</h3>
+                    <p class="learning-card-description">
+                        Giảng dạy chuyên sâu Văn hóa, Công nghệ, Ngoại ngữ, Toán tư duy. Phát triển năng lực AI, IoT,
+                        Big Data.
+                    </p>
+                    <a href="{% url 'about:academics' %}" class="learning-card-link">
+                        <i class="fas fa-plus"></i> Tìm hiểu thêm
+                    </a>
+                </div>
+
+                <!-- Card 3: Kỹ Năng Thế Kỷ 21 -->
+                <div class="learning-card">
+                    <h3 class="learning-card-title">Kỹ Năng Thế Kỷ 21</h3>
+                    <p class="learning-card-description">
+                        Năng lực 5Cs: Giao tiếp, Tư duy phản biện, Hợp tác, Sáng tạo và Tư duy máy tính. Học tập hợp tác
+                        và trải nghiệm sáng tạo.
+                    </p>
+                    <a href="{% url 'about:middle' %}" class="learning-card-link">
+                        <i class="fas fa-plus"></i> Tìm hiểu thêm
+                    </a>
+                </div>
+
+                <!-- Card 4: Chăm Sóc Sức Khỏe -->
+                <div class="learning-card">
+                    <h3 class="learning-card-title">Chăm Sóc Sức Khỏe</h3>
+                    <p class="learning-card-description">
+                        Lồng ghép EQ, rèn luyện thân thể, nuôi dưỡng cảm xúc lành mạnh. Hướng tới học sinh hạnh phúc.
+                    </p>
+                    <a href="{% url 'about:preschool' %}" class="learning-card-link">
+                        <i class="fas fa-plus"></i> Tìm hiểu thêm
+                    </a>
+                </div>
+
+                <!-- Card 5: Học Gắn Với Hành -->
+                <div class="learning-card">
+                    <h3 class="learning-card-title">Học Gắn Với Hành</h3>
+                    <p class="learning-card-description">
+                        Kết nối kiến thức và đời sống thông qua trải nghiệm. Hoạt động thực hành, hướng nghiệp và khởi
+                        nghiệp.
+                    </p>
+                    <a href="{% url 'about:high' %}" class="learning-card-link">
+                        <i class="fas fa-plus"></i> Tìm hiểu thêm
+                    </a>
+                </div>
+
+                <!-- Card 6: Năng lực Công Nghệ - AI -->
+                <div class="learning-card">
+                    <h3 class="learning-card-title">Công Nghệ & AI</h3>
+                    <p class="learning-card-description">
+                        Đào tạo ứng dụng công nghệ và AI trong dạy học, đánh giá và quản lý giáo dục. Liên tục cập nhật
+                        và nâng cao.
+                    </p>
+                    <a href="{% url 'about:steam' %}" class="learning-card-link">
+                        <i class="fas fa-plus"></i> Tìm hiểu thêm
+                    </a>
+                </div>
+
+                <!-- Card 7: Trường Học Thông Minh -->
+                <div class="learning-card">
+                    <h3 class="learning-card-title">Trường Học Xanh</h3>
+                    <p class="learning-card-description">
+                        Cơ sở vật chất xanh – công nghệ cao. Năng lượng tái tạo vì một tương lai bền vững.
+                    </p>
+                    <a href="{% url 'about:academics' %}" class="learning-card-link">
+                        <i class="fas fa-plus"></i> Tìm hiểu thêm
+                    </a>
+                </div>
+
+                <!-- Card 8: Cộng Đồng Kết Nối -->
+                <div class="learning-card">
+                    <h3 class="learning-card-title">Cộng Đồng Kết Nối</h3>
+                    <p class="learning-card-description">
+                        Gắn kết Nhà trường – Phụ huynh – Học sinh. Văn hóa học đường nhân văn: "Đa Trí Tuệ - Một Nhân
+                        Cách".
+                    </p>
+                    <a href="{% url 'about:academics' %}" class="learning-card-link">
+                        <i class="fas fa-plus"></i> Tìm hiểu thêm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to top button -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="learning-scroll-top" title="Lên đầu trang">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+</section>
+
+<script>
+    function learningCarousel() {
+        return {
+            scrollAmount: 300,
+            isDragging: false,
+            startX: 0,
+            scrollLeft: 0,
+            velocity: 0,
+            lastX: 0,
+            lastTime: 0,
+            momentumId: null,
+
+            init() {
+                const container = this.$refs.cardsContainer;
+
+                // Mouse events
+                container.addEventListener('mousedown', (e) => this.startDrag(e));
+                container.addEventListener('mousemove', (e) => this.drag(e));
+                container.addEventListener('mouseup', () => this.endDrag());
+                container.addEventListener('mouseleave', () => this.endDrag());
+
+                // Touch events
+                container.addEventListener('touchstart', (e) => this.startDrag(e), { passive: true });
+                container.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
+                container.addEventListener('touchend', () => this.endDrag());
+
+                // Prevent default drag behavior
+                container.addEventListener('dragstart', (e) => e.preventDefault());
+
+                // Update cursor style
+                container.style.cursor = 'grab';
+            },
+
+            startDrag(e) {
+                const container = this.$refs.cardsContainer;
+                this.isDragging = true;
+                this.startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+                this.scrollLeft = container.scrollLeft;
+                this.lastX = this.startX;
+                this.lastTime = Date.now();
+                this.velocity = 0;
+
+                // Cancel any ongoing momentum
+                if (this.momentumId) {
+                    cancelAnimationFrame(this.momentumId);
+                    this.momentumId = null;
+                }
+
+                container.style.cursor = 'grabbing';
+                container.style.scrollBehavior = 'auto';
+                container.classList.add('dragging');
+            },
+
+            drag(e) {
+                if (!this.isDragging) return;
+
+                const container = this.$refs.cardsContainer;
+                const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+                const currentTime = Date.now();
+
+                // Calculate velocity for momentum
+                const deltaTime = currentTime - this.lastTime;
+                if (deltaTime > 0) {
+                    this.velocity = (this.lastX - currentX) / deltaTime;
+                }
+
+                this.lastX = currentX;
+                this.lastTime = currentTime;
+
+                // Calculate scroll distance
+                const walk = (currentX - this.startX) * 1.5; // Multiplier for sensitivity
+                container.scrollLeft = this.scrollLeft - walk;
+
+                // Prevent page scroll on touch devices
+                if (e.type === 'touchmove' && Math.abs(walk) > 10) {
+                    e.preventDefault();
+                }
+            },
+
+            endDrag() {
+                if (!this.isDragging) return;
+
+                const container = this.$refs.cardsContainer;
+                this.isDragging = false;
+                container.style.cursor = 'grab';
+                container.style.scrollBehavior = 'smooth';
+                container.classList.remove('dragging');
+
+                // Apply momentum scrolling
+                if (Math.abs(this.velocity) > 0.1) {
+                    this.applyMomentum();
+                }
+            },
+
+            applyMomentum() {
+                const container = this.$refs.cardsContainer;
+                const friction = 0.95;
+
+                const step = () => {
+                    if (Math.abs(this.velocity) < 0.01) {
+                        this.momentumId = null;
+                        return;
+                    }
+
+                    container.scrollLeft += this.velocity * 16; // 16ms frame
+                    this.velocity *= friction;
+
+                    this.momentumId = requestAnimationFrame(step);
+                };
+
+                this.momentumId = requestAnimationFrame(step);
+            },
+
+            nextSlide() {
+                const container = this.$refs.cardsContainer;
+                const cardWidth = container.querySelector('.learning-card')?.offsetWidth || 280;
+                container.scrollBy({ left: cardWidth + 16, behavior: 'smooth' });
+            },
+
+            prevSlide() {
+                const container = this.$refs.cardsContainer;
+                const cardWidth = container.querySelector('.learning-card')?.offsetWidth || 280;
+                container.scrollBy({ left: -(cardWidth + 16), behavior: 'smooth' });
+            }
+        }
+    }
+</script>
+
+<!-- Core Values - Redesigned -->
+<section class="section bg-white dark:bg-neutral-950 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div
+            class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b-2 border-primary-600 dark:border-primary-500 pb-4">
+            <div>
+                <h2
+                    class="type-h2 font-display font-semibold text-primary-600 dark:text-primary-500 uppercase tracking-tighter leading-none mb-2">
+                    Giá trị cốt lõi
+                </h2>
+                <div class="h-1 w-24 bg-primary-600 dark:bg-primary-500 mt-2"></div>
+            </div>
+
+            <!-- School Logo/Badge Area -->
+            <div class="mt-6 md:mt-0 flex items-center gap-3">
+                <div class="flex flex-col items-end">
+                    <span
+                        class="text-2xl font-semibold text-primary-600 dark:text-primary-500 tracking-wider">MIS</span>
+                    <div class="grid grid-cols-2 gap-0.5">
+                        <div
+                            class="w-6 h-6 border border-primary-600 flex items-center justify-center text-primary-600">
+                            <i class="fas fa-running text-xs"></i>
+                        </div>
+                        <div
+                            class="w-6 h-6 border border-primary-600 flex items-center justify-center text-primary-600 bg-primary-50">
+                            <i class="fas fa-sun text-xs"></i>
+                        </div>
+                        <div
+                            class="w-6 h-6 border border-primary-600 flex items-center justify-center text-primary-600">
+                            <i class="fas fa-heart text-xs"></i>
+                        </div>
+                        <div
+                            class="w-6 h-6 border border-primary-600 flex items-center justify-center text-primary-600 bg-primary-50">
+                            <i class="fas fa-book text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
+            <!-- Left Column: GRACE -->
+            <div>
+                <h3
+                    class="type-h3 font-semibold text-neutral-800 dark:text-neutral-200 uppercase mb-8 pb-4 border-b border-neutral-200 dark:border-neutral-800">
+                    GRACE
+                </h3>
+
+                <div class="space-y-3">
+                    <!-- G -->
+                    <div class="flex items-center group">
+                        <span
+                            class="text-4xl font-semibold text-primary-600 dark:text-primary-500 w-8 mr-1 shrink-0 group-hover:scale-110 transition-transform duration-300">G</span>
+                        <div class="text-xl md:text-2xl font-semibold text-neutral-700 dark:text-neutral-300">
+                            - ratitude | <span class="text-primary-700 dark:text-primary-400">Biết ơn</span>
+                        </div>
+                    </div>
+
+                    <!-- R -->
+                    <div class="flex items-center group">
+                        <span
+                            class="text-4xl font-semibold text-primary-600 dark:text-primary-500 w-8 mr-1 shrink-0 group-hover:scale-110 transition-transform duration-300">R</span>
+                        <div class="text-xl md:text-2xl font-semibold text-neutral-700 dark:text-neutral-300">
+                            - espect | <span class="text-primary-700 dark:text-primary-400">Tôn trọng</span>
+                        </div>
+                    </div>
+
+                    <!-- A -->
+                    <div class="flex items-center group">
+                        <span
+                            class="text-4xl font-semibold text-primary-600 dark:text-primary-500 w-8 mr-1 shrink-0 group-hover:scale-110 transition-transform duration-300">A</span>
+                        <div class="text-xl md:text-2xl font-semibold text-neutral-700 dark:text-neutral-300">
+                            - ccountability | <span class="text-primary-700 dark:text-primary-400">Trách nhiệm</span>
+                        </div>
+                    </div>
+
+                    <!-- C -->
+                    <div class="flex items-center group">
+                        <span
+                            class="text-4xl font-semibold text-primary-600 dark:text-primary-500 w-8 mr-1 shrink-0 group-hover:scale-110 transition-transform duration-300">C</span>
+                        <div class="text-xl md:text-2xl font-semibold text-neutral-700 dark:text-neutral-300">
+                            - ourage | <span class="text-primary-700 dark:text-primary-400">Can đảm</span>
+                        </div>
+                    </div>
+
+                    <!-- E -->
+                    <div class="flex items-center group">
+                        <span
+                            class="text-4xl font-semibold text-primary-600 dark:text-primary-500 w-8 mr-1 shrink-0 group-hover:scale-110 transition-transform duration-300">E</span>
+                        <div class="text-xl md:text-2xl font-semibold text-neutral-700 dark:text-neutral-300">
+                            - ngagement | <span class="text-primary-700 dark:text-primary-400">Dấn thân & Nối kết</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-1 w-24 bg-neutral-200 dark:bg-neutral-800 mt-8"></div>
+            </div>
+
+            <!-- Right Column: Social Responsibility -->
+            <div>
+                <h3
+                    class="type-h3 font-semibold text-neutral-800 dark:text-neutral-200 uppercase mb-8 pb-4 border-b border-neutral-200 dark:border-neutral-800">
+                    Trách nhiệm xã hội
+                </h3>
+
+                <div class="prose dark:prose-invert text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
+                    <p class="mb-6">
+                        Quỹ thiện nguyện MIS trong hơn 10 năm hoạt động không ngừng lan tỏa giá trị yêu thương qua các
+                        dự án cộng đồng thiết thực như xây trường, mở đường, sửa sang cơ sở vật chất cho các trường
+                        học vùng khó khăn.
+                    </p>
+
+                    <p>
+                        Không chỉ dừng lại ở đó, Quỹ còn trao tặng học bổng, trang thiết bị học tập, giúp các em vững
+                        bước đến trường và nuôi dưỡng ước mơ hướng tới cuộc sống tốt đẹp hơn.
+                    </p>
+                </div>
+
+                <div class="h-1 w-full bg-neutral-200 dark:bg-neutral-800 mt-8"></div>
+            </div>
+        </div>
+
+        <!-- Bottom Image Section -->
+        <div class="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl group">
+            <img src="/media/gallery/photos/mis_ho_tro_xay_truong.jpg" alt="Dự án trách nhiệm xã hội MIS tại Háng Phừ Loa"
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+            <!-- Text Overlay -->
+            <div class="absolute bottom-8 left-8 md:bottom-12 md:left-12 text-white max-w-lg">
+                <h4 class="type-body font-semibold uppercase mb-2 text-white/90 leading-snug">MIS hỗ trợ xây mới</h4>
+                <h3 class="type-h3 font-semibold mb-1">Trường Mầm non Háng Phừ Loa</h3>
+                <p class="text-lg text-white/80 font-medium">Mồ Dề - Mù Cang Chải - Yên Bái</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Education Pillars Section -->
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
+            <div>
+                <h2 class="type-h2 font-display font-semibold text-primary-600 dark:text-primary-500 uppercase tracking-tighter leading-none mb-2">
+                    Trụ cột giáo dục
+                </h2>
+                <p class="mt-2 text-neutral-600 dark:text-neutral-300 max-w-2xl">
+                    Sáu trụ cột định hình nền tảng học thuật, kỹ năng và nhân cách.
+                </p>
+            </div>
+            <a href="{% url 'core:pillars' %}"
+                class="mt-4 md:mt-0 text-sm font-semibold text-red-600 hover:text-red-700">
+                Xem chi tiết <i class="fas fa-arrow-right ml-2 text-xs"></i>
+            </a>
+        </div>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {% for pillar in pillars %}
+            <article class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200/60 dark:border-neutral-700 p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="w-10 h-10 rounded-xl bg-red-600/10 text-red-600 flex items-center justify-center">
+                        <i class="{{ pillar.icon }}"></i>
+                    </span>
+                    <h3 class="text-lg font-bold text-neutral-900 dark:text-white">{{ pillar.title }}</h3>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-300">{{ pillar.short_description }}</p>
+            </article>
+            {% empty %}
+            <div class="col-span-full bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200/60 dark:border-neutral-700 p-8 text-center">
+                <p class="text-neutral-600 dark:text-neutral-300">Chưa có dữ liệu trụ cột giáo dục.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="section bg-white dark:bg-neutral-950 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+            class="grid grid-cols-1 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] gap-10 md:gap-12 lg:gap-20 items-center">
+            <div class="space-y-5 md:space-y-6">
+                <span class="badge badge-accent eyebrow">
+                    Về chúng tôi
+                </span>
+                <h2
+                    class="type-h2 font-display font-semibold text-primary-600 dark:text-primary-500 uppercase tracking-tighter leading-none mb-2">
+                    Nuôi dưỡng Trí tuệ,
+                    <span class="block mt-1 sm:mt-2 text-primary-600 dark:text-primary-400">Kiến tạo Tương lai</span>
+                </h2>
+                <div class="space-y-4">
+                    <p class="lead">
+                        Trường Đa Trí Tuệ MIS là một cơ sở giáo dục uy tín, tận tâm trong việc nuôi dưỡng thế hệ trẻ và
+                        chuẩn bị cho học sinh thành công toàn cầu. Với cơ sở vật chất hiện đại và chương trình giảng dạy
+                        đẳng cấp quốc tế, chúng tôi mang đến môi trường giúp học sinh phát triển toàn diện về học thuật,
+                        xã hội và cá nhân.
+                    </p>
+                    <p class="lead">
+                        Đội ngũ giáo viên giàu kinh nghiệm của chúng tôi cam kết mang đến sự xuất sắc trong giáo dục,
+                        đồng thời phát triển khả năng sáng tạo, tư duy phản biện và nhân cách cho học sinh.
+                    </p>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 pt-2">
+                    <a href="{% url 'about:academics' %}" class="btn btn-primary btn-md">
+                        Tìm hiểu thêm <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <div
+                        class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500 dark:text-neutral-400">
+                        <span>01</span>
+                        <span class="h-px w-10 bg-neutral-300 dark:bg-neutral-700"></span>
+                        <span>08</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-black/5 bg-white">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200" alt="Học sinh MIS trong lớp học hiện đại"
+                        class="w-full h-[360px] md:h-[460px] object-cover">
+                </div>
+                <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400">
+                    Môi trường học tập hiện đại giúp học sinh phát triển toàn diện.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Exceptional Learning Experiences Section (Nord Anglia Style) -->
+<section class="section bg-white dark:bg-neutral-950" x-data="{ activeModal: null }" @keydown.escape.window="activeModal = null">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="text-center mb-16">
+            {% if training_program_group %}
+            <h2 class="section-title uppercase mb-6">
+                {% if training_program_group.eyebrow %}{{ training_program_group.eyebrow }}{% else %}CHƯƠNG TRÌNH VƯỢT TRỘI{% endif %} <br />
+                <span class="type-h3 font-light normal-case text-primary-600 dark:text-primary-400">
+                    {% if training_program_group.title %}{{ training_program_group.title }}{% else %}CÁC HỆ ĐÀO TẠO CHUYÊN SÂU{% endif %}
+                </span>
+            </h2>
+            <p class="section-subtitle max-w-4xl mx-auto">
+                {% if training_program_group.description %}
+                {{ training_program_group.description }}
+                {% elif training_program_group.subtitle %}
+                {{ training_program_group.subtitle }}
+                {% else %}
+                MIS mang đến 4 hệ đào tạo chuyên biệt dành riêng cho học sinh được thiết kế bởi các đối tác giáo dục có tiếng và uy tín tại Việt Nam. Chương trình học của các hệ đều tích hợp giữa Chương trình phổ thông Quốc gia với Công nghệ 4.0, Ngoại ngữ Anh - Trung và tư duy Toán học vượt trội.
+                {% endif %}
+            </p>
+            {% else %}
+            <h2 class="section-title uppercase mb-6">
+                CHƯƠNG TRÌNH VƯỢT TRỘI <br />
+                <span class="type-h3 font-light normal-case text-primary-600 dark:text-primary-400">CÁC HỆ ĐÀO TẠO CHUYÊN SÂU</span>
+            </h2>
+            <p class="section-subtitle max-w-4xl mx-auto">
+                MIS mang đến 4 hệ đào tạo chuyên biệt dành riêng cho học sinh được thiết kế bởi các đối tác giáo dục có tiếng và uy tín tại Việt Nam. Chương trình học của các hệ đều tích hợp giữa Chương trình phổ thông Quốc gia với Công nghệ 4.0, Ngoại ngữ Anh - Trung và tư duy Toán học vượt trội.
+            </p>
+            {% endif %}
+        </div>
+
+        <!-- Cards Grid -->
+        {% if training_programs %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for program in training_programs %}
+            <div class="group bg-white dark:bg-neutral-800 rounded-2xl shadow-lg overflow-hidden">
+                <div class="relative">
+                    {% if program.image %}
+                    <img src="{{ program.image.url }}" alt="{{ program.name }}" class="w-full h-52 object-cover" loading="lazy">
+                    {% else %}
+                    <div class="w-full h-52 bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+                        <span class="text-white/30 text-5xl font-bold">{{ program.short_name|slice:":3" }}</span>
+                    </div>
+                    {% endif %}
+                    {% if program.grade_levels %}
+                    <span class="absolute bottom-3 left-3 bg-white/95 text-primary-600 text-xs font-semibold px-3 py-1 rounded-full shadow">
+                        {{ program.grade_levels }}
+                    </span>
+                    {% endif %}
+                </div>
+                <div class="p-6">
+                    <h3 class="type-h4 font-semibold text-neutral-900 dark:text-white">{{ program.short_name }}</h3>
+                    <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">{{ program.tagline }}</p>
+                    <button type="button" @click="activeModal = '{{ program.slug }}'"
+                        class="btn btn-primary btn-sm w-full mt-5">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Xem chi tiết</span>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    {% if training_programs %}
+    <!-- Modal -->
+    <div x-show="activeModal" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+        style="display: none;">
+        <div @click.away="activeModal = null" x-show="activeModal"
+            x-transition:enter="transition ease-out duration-300 delay-100"
+            x-transition:enter-start="opacity-0 translate-y-4 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-4 scale-95"
+            class="bg-white dark:bg-neutral-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col relative text-neutral-800 dark:text-neutral-200">
+            <button type="button" @click="activeModal = null"
+                class="absolute top-4 right-4 z-10 w-10 h-10 bg-neutral-100 dark:bg-neutral-700 rounded-full flex items-center justify-center hover:bg-red-100 hover:text-red-600 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="overflow-y-auto p-8 lg:p-10">
+                {% for program in training_programs %}
+                <div x-show="activeModal === '{{ program.slug }}'">
+                    <span class="inline-block px-4 py-1 bg-primary-50 text-primary-600 rounded-full text-sm font-semibold mb-4">{{ program.short_name }}</span>
+                    <h3 class="type-h3 font-semibold mb-4 text-primary-600">{{ program.name }}</h3>
+                    {% if program.tagline %}
+                    <p class="text-lg italic mb-6 text-neutral-600 dark:text-neutral-400">{{ program.tagline }}</p>
+                    {% endif %}
+                    <div class="space-y-6">
+                        <div class="bg-neutral-50 dark:bg-neutral-900/50 p-6 rounded-xl border-l-4 border-primary-500">
+                            <h4 class="type-body font-semibold mb-3">Giới thiệu chương trình</h4>
+                            <div class="prose max-w-none text-neutral-700 dark:text-neutral-300">{{ program.description|linebreaks }}</div>
+                        </div>
+                        {% if program.highlights %}
+                        <div class="bg-neutral-50 dark:bg-neutral-900/50 p-6 rounded-xl border-l-4 border-primary-500">
+                            <h4 class="type-body font-semibold mb-3">Điểm nổi bật</h4>
+                            <ul class="space-y-2">
+                                {% for highlight in program.get_highlights_list %}
+                                <li class="flex items-start"><i class="fas fa-check text-primary-500 mt-1 mr-3"></i><span>{{ highlight }}</span></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% if program.curriculum %}
+                        <div class="bg-neutral-50 dark:bg-neutral-900/50 p-6 rounded-xl border-l-4 border-primary-500">
+                            <h4 class="type-body font-semibold mb-3">Chương trình theo cấp học</h4>
+                            <div class="prose max-w-none text-neutral-700 dark:text-neutral-300">{{ program.curriculum|linebreaks }}</div>
+                        </div>
+                        {% endif %}
+                        {% if program.achievements %}
+                        <div class="bg-neutral-50 dark:bg-neutral-900/50 p-6 rounded-xl border-l-4 border-primary-500">
+                            <h4 class="type-body font-semibold mb-3">Thành tích nổi bật</h4>
+                            <ul class="space-y-2">
+                                {% for achievement in program.get_achievements_list %}
+                                <li class="flex items-start"><i class="fas fa-star text-primary-500 mt-1 mr-3"></i><span>{{ achievement }}</span></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% if program.commitments %}
+                        <div class="bg-neutral-50 dark:bg-neutral-900/50 p-6 rounded-xl border-l-4 border-primary-500">
+                            <h4 class="type-body font-semibold mb-3">Cam kết</h4>
+                            <ul class="space-y-2">
+                                {% for commitment in program.get_commitments_list %}
+                                <li class="flex items-start"><i class="fas fa-star text-primary-500 mt-1 mr-3"></i><span>{{ commitment }}</span></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% if program.partner_name or program.partner_description or program.partner_logo %}
+                        <div class="bg-primary-50 dark:bg-primary-900/20 p-6 rounded-xl">
+                            <div class="flex items-center gap-4 mb-4">
+                                {% if program.partner_logo %}
+                                <div class="w-16 h-16 bg-white rounded-lg shadow-sm p-2 flex items-center justify-center flex-shrink-0">
+                                    <img src="{{ program.partner_logo.url }}" alt="{{ program.partner_name }}" class="max-w-full max-h-full object-contain">
+                                </div>
+                                {% endif %}
+                                <div>
+                                    <h4 class="type-body font-semibold leading-snug text-primary-800 dark:text-primary-300">
+                                        <i class="fas fa-handshake mr-2"></i>Đối tác đào tạo uy tín
+                                    </h4>
+                                    {% if program.partner_name %}<p class="font-semibold text-lg">{{ program.partner_name }}</p>{% endif %}
+                                </div>
+                            </div>
+                            {% if program.partner_description %}
+                            <p class="text-neutral-700 dark:text-neutral-300">{{ program.partner_description }}</p>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</section>
+
+<!-- Parent Testimonials - Nord Anglia Style -->
+<section class="relative overflow-hidden dark:bg-neutral-900"
+    style="background: linear-gradient(135deg, #fff5f5 0%, #ffe4e6 50%, #fecdd3 100%);" x-data="{ 
+        active: 0, 
+        slides: 3, 
+        interval: null, 
+        modalOpen: false, 
+        modalIndex: 0, 
+        start() { this.stop(); this.interval = setInterval(() => this.next(), 6000); }, 
+        stop() { if (this.interval) { clearInterval(this.interval); this.interval = null; } }, 
+        next(reset = false) { this.active = (this.active + 1) % this.slides; if (reset) { this.start(); } }, 
+        prev() { this.active = (this.active - 1 + this.slides) % this.slides; this.start(); }, 
+        go(index) { this.active = index; this.start(); }, 
+        openModal(index) { this.modalIndex = index; this.modalOpen = true; this.stop(); }, 
+        closeModal() { this.modalOpen = false; this.start(); } 
+    }" x-init="start()" @mouseenter="stop()" @mouseleave="start()">
+
+    <!-- Decorative Background Elements -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+        <div class="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-red-200/30 blur-3xl"></div>
+        <div class="absolute -bottom-28 left-10 w-[360px] h-[360px] rounded-full bg-pink-300/30 blur-2xl"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.5),transparent_60%)]">
+        </div>
+        <!-- Plus Pattern -->
+        <svg class="absolute right-20 top-20 w-32 h-32 text-red-400/15" viewBox="0 0 100 100" fill="currentColor">
+            <text x="0" y="20" font-size="14">+ + + +</text>
+            <text x="10" y="40" font-size="14">+ + + +</text>
+            <text x="0" y="60" font-size="14">+ + + +</text>
+            <text x="10" y="80" font-size="14">+ + + +</text>
+        </svg>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+            class="grid grid-cols-1 lg:grid-cols-[minmax(0,0.38fr)_minmax(0,0.62fr)] gap-6 lg:gap-10 items-center py-12 lg:py-0 lg:h-[500px]">
+
+            <!-- Left: Parent Photo with Decorative Elements -->
+            <div class="relative flex justify-center lg:justify-start h-full">
+                <div class="relative w-full max-w-[320px] h-[380px] my-auto">
+                    <!-- Large Background Circle -->
+                    <div
+                        class="absolute -left-4 top-8 w-[280px] h-[280px] md:w-[300px] md:h-[300px] rounded-full bg-[#D7F3F6] dark:bg-neutral-800">
+                    </div>
+
+                    <!-- Small Decorative Circle -->
+                    <div class="absolute left-6 top-4 w-8 h-8 rounded-full bg-white/90 shadow-sm" aria-hidden="true">
+                    </div>
+
+                    <!-- Hearts/Love Icon Box -->
+                    <div class="absolute left-2 top-20 w-14 h-16 rounded-xl bg-white/90 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-md flex items-center justify-center"
+                        aria-hidden="true">
+                        <svg class="w-10 h-10 text-[#0A2540]/80 dark:text-neutral-200" viewBox="0 0 64 64" fill="none">
+                            <path
+                                d="M32 56C32 56 8 40 8 24C8 16 14 10 22 10C26 10 30 12 32 16C34 12 38 10 42 10C50 10 56 16 56 24C56 40 32 56 32 56Z"
+                                stroke="currentColor" stroke-width="2" fill="none" />
+                            <path d="M20 28L28 36L44 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+
+                    <!-- Growth Chart SVG -->
+                    <svg class="absolute right-0 top-10 w-[180px] h-[100px] text-[#0A2540]/30 dark:text-white/30"
+                        viewBox="0 0 220 120" fill="none" aria-hidden="true">
+                        <g stroke="currentColor" stroke-width="1">
+                            <line x1="0" y1="20" x2="220" y2="20"></line>
+                            <line x1="0" y1="40" x2="220" y2="40"></line>
+                            <line x1="0" y1="60" x2="220" y2="60"></line>
+                            <line x1="0" y1="80" x2="220" y2="80"></line>
+                            <line x1="0" y1="100" x2="220" y2="100"></line>
+                        </g>
+                        <polyline points="10,90 60,70 100,82 140,52 200,38" stroke="#0A2540" stroke-width="2"
+                            fill="none"></polyline>
+                        <circle cx="60" cy="70" r="4" fill="#F59E0B"></circle>
+                        <circle cx="100" cy="82" r="4" fill="#60A5FA"></circle>
+                        <circle cx="140" cy="52" r="4" fill="#22C55E"></circle>
+                        <circle cx="200" cy="38" r="4" fill="#F97316"></circle>
+                    </svg>
+
+                    <!-- Dot Grid Pattern -->
+                    <svg class="absolute left-10 bottom-6 w-24 h-16 text-white/70 dark:text-white/20"
+                        viewBox="0 0 120 80" fill="none" aria-hidden="true">
+                        <defs>
+                            <pattern id="testimonialDotGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                <circle cx="2" cy="2" r="2" fill="currentColor"></circle>
+                            </pattern>
+                        </defs>
+                        <rect width="120" height="80" fill="url(#testimonialDotGrid)"></rect>
+                    </svg>
+
+                    <!-- Plus signs -->
+                    <span class="absolute left-24 top-6 text-[#0A2540]/35 dark:text-white/30 text-lg"
+                        aria-hidden="true">+</span>
+                    <span class="absolute right-20 top-8 text-[#0A2540]/30 dark:text-white/20 text-sm"
+                        aria-hidden="true">+</span>
+                    <span class="absolute right-8 bottom-20 text-[#0A2540]/30 dark:text-white/20 text-sm"
+                        aria-hidden="true">+</span>
+
+                    <!-- Parent Photo - Carousel -->
+                    <div
+                        class="absolute z-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:left-6 top-1/2 -translate-y-1/2 w-[170px] md:w-[190px] lg:w-[210px] h-[240px] md:h-[270px] lg:h-[300px]">
+                        <img x-show="active === 0" x-transition:enter="transition ease-out duration-700"
+                            x-transition:enter-start="opacity-0 translate-x-6"
+                            x-transition:enter-end="opacity-100 translate-x-0"
+                            x-transition:leave="transition ease-in duration-600"
+                            x-transition:leave-start="opacity-100 translate-x-0"
+                            x-transition:leave-end="opacity-0 -translate-x-6"
+                            src="{% static 'images/testimonials/phhs-duc-minh.png' %}" alt="PHHS Đức Minh"
+                            class="will-change-transform transform-gpu block w-full h-full object-cover rounded-[999px] shadow-2xl ring-4 ring-white/60"
+                            loading="lazy">
+                    </div>
+
+                    <div
+                        class="absolute z-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:left-6 top-1/2 -translate-y-1/2 w-[170px] md:w-[190px] lg:w-[210px] h-[240px] md:h-[270px] lg:h-[300px]">
+                        <img x-show="active === 1" style="display: none;"
+                            x-transition:enter="transition ease-out duration-700"
+                            x-transition:enter-start="opacity-0 translate-x-6"
+                            x-transition:enter-end="opacity-100 translate-x-0"
+                            x-transition:leave="transition ease-in duration-600"
+                            x-transition:leave-start="opacity-100 translate-x-0"
+                            x-transition:leave-end="opacity-0 -translate-x-6"
+                            src="{% static 'images/testimonials/phhs-my-cam.png' %}" alt="PHHS Lương Mỹ Cầm"
+                            class="will-change-transform transform-gpu block w-full h-full object-cover rounded-[999px] shadow-2xl ring-4 ring-white/60"
+                            loading="lazy">
+                    </div>
+
+                    <div
+                        class="absolute z-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:left-6 top-1/2 -translate-y-1/2 w-[170px] md:w-[190px] lg:w-[210px] h-[240px] md:h-[270px] lg:h-[300px]">
+                        <img x-show="active === 2" style="display: none;"
+                            x-transition:enter="transition ease-out duration-700"
+                            x-transition:enter-start="opacity-0 translate-x-6"
+                            x-transition:enter-end="opacity-100 translate-x-0"
+                            x-transition:leave="transition ease-in duration-600"
+                            x-transition:leave-start="opacity-100 translate-x-0"
+                            x-transition:leave-end="opacity-0 -translate-x-6"
+                            src="{% static 'images/testimonials/phhs-y-lang.png' %}" alt="PHHS Nguyễn Ngọc Y Lăng"
+                            class="will-change-transform transform-gpu block w-full h-full object-cover rounded-[999px] shadow-2xl ring-4 ring-white/60"
+                            loading="lazy">
+                    </div>
+</div>
+            </div>
+
+            <!-- Right: Content -->
+            <div class="space-y-5 max-w-lg">
+                <!-- Testimonial Content Carousel -->
+                <div class="relative min-h-[240px]">
+                    <!-- Slide 0: PHHS Đức Minh -->
+                    <div x-show="active === 0" x-transition:enter="transition ease-out duration-700"
+                        x-transition:enter-start="opacity-0 translate-x-6"
+                        x-transition:enter-end="opacity-100 translate-x-0"
+                        x-transition:leave="transition ease-in duration-600"
+                        x-transition:leave-start="opacity-100 translate-x-0"
+                        x-transition:leave-end="opacity-0 -translate-x-6"
+                        class="space-y-4 will-change-transform transform-gpu">
+                        <p
+                            class="text-xs uppercase tracking-wider text-[#0A2540]/60 dark:text-neutral-400 font-semibold">
+                            PHHS Đức Minh - 2S2</p>
+                        <h2
+                            class="text-2xl md:text-3xl lg:text-[2.375rem] font-semibold leading-tight text-[#0B2238] dark:text-white">
+                            Phụ huynh chia sẻ về hành trình học tập
+                        </h2>
+                        <p class="text-base md:text-lg text-[#0B2238]/80 dark:text-neutral-300 leading-relaxed">
+                            Tôi tiếp xúc với các bạn học sinh ở trường MIS ở các cấp học thì tôi thấy rằng nổi bật lên
+                            là có sự tự tin. Các bạn được thể hiện năng lực, cá tính của mình, cũng như dám nói lên
+                            tiếng nói, ý kiến của các bạn ý.
+                        </p>
+                    </div>
+
+                    <!-- Slide 1: PHHS Lương Mỹ Cầm -->
+                    <div x-show="active === 1" style="display: none;"
+                        x-transition:enter="transition ease-out duration-700"
+                        x-transition:enter-start="opacity-0 translate-x-6"
+                        x-transition:enter-end="opacity-100 translate-x-0"
+                        x-transition:leave="transition ease-in duration-600"
+                        x-transition:leave-start="opacity-100 translate-x-0"
+                        x-transition:leave-end="opacity-0 -translate-x-6"
+                        class="space-y-4 will-change-transform transform-gpu">
+                        <p
+                            class="text-xs uppercase tracking-wider text-[#0A2540]/60 dark:text-neutral-400 font-semibold">
+                            PHHS Lương Mỹ Cầm - 12A5</p>
+                        <h2
+                            class="text-2xl md:text-3xl lg:text-[2.375rem] font-semibold leading-tight text-[#0B2238] dark:text-white">
+                            Học bằng cả trí tuệ và cảm xúc
+                        </h2>
+                        <p class="text-base md:text-lg text-[#0B2238]/80 dark:text-neutral-300 leading-relaxed">
+                            Hành trình con đi cùng với nhà trường thế là 03 năm, thì mình thấy quyết định của mình đưa
+                            ra rất là đúng đắn. Con được học bằng cả trí tuệ và cảm xúc, phát triển không chỉ kiến thức
+                            mà còn về nhân cách.
+                        </p>
+                        <p class="text-sm text-[#0B2238]/60 dark:text-neutral-400 italic">Học sinh giỏi tiếng Trung cấp
+                            TP & HSK6 năm lớp 11</p>
+                    </div>
+
+                    <!-- Slide 2: PHHS Nguyễn Ngọc Y Lăng -->
+                    <div x-show="active === 2" style="display: none;"
+                        x-transition:enter="transition ease-out duration-700"
+                        x-transition:enter-start="opacity-0 translate-x-6"
+                        x-transition:enter-end="opacity-100 translate-x-0"
+                        x-transition:leave="transition ease-in duration-600"
+                        x-transition:leave-start="opacity-100 translate-x-0"
+                        x-transition:leave-end="opacity-0 -translate-x-6"
+                        class="space-y-4 will-change-transform transform-gpu">
+                        <p
+                            class="text-xs uppercase tracking-wider text-[#0A2540]/60 dark:text-neutral-400 font-semibold">
+                            PHHS Nguyễn Ngọc Y Lăng | Khoá 2022-2025</p>
+                        <h2
+                            class="text-2xl md:text-3xl lg:text-[2.375rem] font-semibold leading-tight text-[#0B2238] dark:text-white">
+                            Con thay đổi hoàn toàn
+                        </h2>
+                        <p class="text-base md:text-lg text-[#0B2238]/80 dark:text-neutral-300 leading-relaxed">
+                            Cháu em từng rất sợ Toán và không hứng thú đi học. Nhưng khi vào đây một thời gian, con thay
+                            đổi hoàn toàn, hứng thú hơn và được trân trọng bởi các tài năng riêng.
+                        </p>
+                        <p class="text-sm text-[#0B2238]/60 dark:text-neutral-400 italic">HSK5 - Học bổng toàn phần ĐH
+                            Ngôn ngữ Bắc Kinh</p>
+                    </div>
+
+                    <!-- CTA Button & Navigation -->
+                <div class="flex flex-wrap items-center gap-4">
+                    <button @click="openModal(active)"
+                        class="btn btn-primary btn-md">
+                        <i class="fas fa-play-circle mr-2"></i> Xem video chia sẻ
+                    </button>
+
+                    <!-- Navigation Arrows -->
+                    <div class="flex items-center gap-2">
+                        <button @click="prev()" type="button"
+                            class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-[#0A2540] flex items-center justify-center transition-colors border border-[#0A2540]/20"
+                            aria-label="Xem lời chia sẻ trước">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button @click="next(true)" type="button"
+                            class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-[#0A2540] flex items-center justify-center transition-colors border border-[#0A2540]/20"
+                            aria-label="Xem lời chia sẻ tiếp theo">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dots Indicator -->
+                <div class="flex items-center gap-2 pt-2">
+                    <template x-for="index in slides" :key="index">
+                        <button @click="go(index - 1)"
+                            :class="active === (index - 1) ? 'w-8 bg-[#0A2540]' : 'w-3 bg-[#0A2540]/30 hover:bg-[#0A2540]/50'"
+                            class="h-3 rounded-full transition-all duration-300"></button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Video -->
+    <div x-show="modalOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @keydown.escape.window="closeModal()"
+        class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+        style="display: none;">
+        <div @click.self="closeModal()" class="absolute inset-0"></div>
+        <div class="relative w-full max-w-5xl bg-white dark:bg-neutral-900 rounded-3xl shadow-2xl overflow-hidden">
+            <button @click="closeModal()"
+                class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 flex items-center justify-center">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <template x-if="modalOpen && modalIndex === 0">
+                <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+                    <div class="bg-neutral-900">
+                        <div class="aspect-video">
+                            <iframe class="w-full h-full"
+                                src="https://drive.google.com/file/d/1iGOvHXWkl40oZ27F1efMvJoILZVt8LYe/preview"
+                                title="Video testimonial PHHS Đức Minh" allow="autoplay; encrypted-media"
+                                allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-4">
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-neutral-400">PHHS Đức Minh - 2S2</p>
+                            <h3 class="text-2xl font-semibold text-neutral-900 dark:text-white">Nổi bật là sự tự tin
+                            </h3>
+                        </div>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                            Tôi tiếp xúc với các bạn học sinh ở trường MIS ở các cấp học thì tôi thấy rằng nổi bật
+                            lên là có sự tự tin. Các bạn rất tự tin, các bạn được thể hiện năng lực, cá tính của
+                            mình, cũng như dám nói lên tiếng nói, ý kiến của các bạn ý. Vì vậy nếu quý vị phụ huynh
+                            đang đi tìm môi trường đủ tốt, đủ an toàn, đủ để cho các con của chúng ta có thể thể
+                            hiện bản thân mình, bồi đắp sự tự tin và nuôi dưỡng tình yêu thương thì đây là môi
+                            trường rất là thích hợp.
+                        </p>
+                    </div>
+                </div>
+            </template>
+
+            <template x-if="modalOpen && modalIndex === 1">
+                <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+                    <div class="bg-neutral-900">
+                        <div class="aspect-video">
+                            <iframe class="w-full h-full"
+                                src="https://drive.google.com/file/d/1hmRtxqseOGkH1Ao_LAKmAC_cgv575Gqw/preview"
+                                title="Video testimonial PHHS Lương Mỹ Cầm" allow="autoplay; encrypted-media"
+                                allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-4">
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-neutral-400">PHHS Lương Mỹ Cầm - 12A5</p>
+                            <h3 class="text-2xl font-semibold text-neutral-900 dark:text-white">Học bằng cả trí tuệ và
+                                cảm xúc</h3>
+                        </div>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                            Hành trình con đi cùng với nhà trường thế là 03 năm, thì mình thấy quyết định của mình
+                            đưa ra rất là đúng đắn. Bởi vì con đến đây thì con được học bằng cả trí tuệ và cảm xúc.
+                            Và con cũng được phát triển không chỉ về kiến thức, mà được phát triển cả về nhân cách.
+                        </p>
+                        <p class="text-xs text-neutral-400">Học sinh giỏi tiếng Trung cấp Thành phố & HSK6 năm lớp 11
+                        </p>
+                    </div>
+                </div>
+            </template>
+
+            <template x-if="modalOpen && modalIndex === 2">
+                <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+                    <div class="bg-neutral-900">
+                        <div class="aspect-video">
+                            <iframe class="w-full h-full"
+                                src="https://drive.google.com/file/d/15EpTXJidE-PNZ8d6ZXWfXhutyzZcvFaW/preview"
+                                title="Video testimonial PHHS Nguyễn Ngọc Y Lăng" allow="autoplay; encrypted-media"
+                                allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-4">
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-neutral-400">PHHS Nguyễn Ngọc Y Lăng | Khoá
+                                2022-2025</p>
+                            <h3 class="text-2xl font-semibold text-neutral-900 dark:text-white">Con thay đổi hoàn toàn
+                            </h3>
+                        </div>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                            Cháu em từng rất sợ Toán và không hứng thú đi học. Nhưng khi vào đây một thời gian,
+                            con thay đổi hoàn toàn, hứng thú hơn và được trân trọng bởi các tài năng riêng.
+                            Từ một người rất sợ Toán, bây giờ con có thành tích gần như đứng đầu lớp.
+                        </p>
+                        <p class="text-xs text-neutral-400">HSK5 - Học bổng toàn phần ĐH Ngôn ngữ Bắc Kinh</p>
+                    </div>
+                </div>
+            </template>
+
+            
+        </div>
+    </div>
+</section>
+<!-- Student Spotlight - Dark Theme with Horizontal Scroll -->
+<section class="py-20 lg:py-28 relative overflow-hidden"
+    style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+    <!-- Decorative Elements -->
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-500/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div class="space-y-4 max-w-2xl">
+                <span
+                    class="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-sm text-primary-300 rounded-full text-sm font-semibold border border-white/20">
+                    <i class="fas fa-star mr-2"></i>Gương mặt MISers
+                </span>
+                <h2 class="text-3xl lg:text-4xl font-bold text-white">
+                    Học sinh nổi bật
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-pink-400">của
+                        MIS</span>
+                </h2>
+                <p class="text-lg text-white/70">Tôn vinh hành trình nỗ lực và thành tích xuất sắc của học sinh MIS.</p>
+            </div>
+            <!-- View All Link -->
+            <a href="{% url 'core:student_spotlight' %}"
+                class="btn btn-ghost-invert btn-sm group">
+                <span>Xem tất cả</span>
+                <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+
+        {% if student_spotlights %}
+        <!-- Horizontal Scroll Container -->
+        <div class="relative" x-data="{ scrollContainer: null }" x-init="scrollContainer = $refs.scrollCards">
+            <!-- Navigation Arrows -->
+            <button @click="scrollContainer.scrollBy({left: -340, behavior: 'smooth'})"
+                class="hidden lg:flex absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 items-center justify-center text-white hover:bg-white/20 transition-colors">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button @click="scrollContainer.scrollBy({left: 340, behavior: 'smooth'})"
+                class="hidden lg:flex absolute -right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 items-center justify-center text-white hover:bg-white/20 transition-colors">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Cards Container -->
+            <div x-ref="scrollCards" class="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide"
+                style="-webkit-overflow-scrolling: touch;">
+                {% for spotlight in student_spotlights %}
+                <div class="flex-shrink-0 w-[300px] lg:w-[320px] snap-start">
+                    <div
+                        class="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300 hover:border-white/20 hover:shadow-2xl hover:shadow-primary-500/10">
+                        <!-- Image -->
+                        <div class="relative h-[220px] overflow-hidden">
+                            <img src="{{ spotlight.photo.url }}" alt="{{ spotlight.student_name }}"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <!-- Category -->
+                            <span
+                                class="absolute top-3 left-3 px-2.5 py-1 bg-primary-500 text-white text-xs font-semibold rounded-lg">{{spotlight.get_category_display
+                                }}</span>
+                            <!-- Student Info -->
+                            <div class="absolute bottom-3 left-3 right-3">
+                                <h3 class="text-lg font-bold text-white truncate">{{ spotlight.student_name }}</h3>
+                                <p class="text-white/70 text-sm">{{ spotlight.student_class }}</p>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                        <div class="p-5">
+                            <h4 class="font-semibold text-white mb-2 line-clamp-2">{{ spotlight.title }}</h4>
+                            <p class="text-white/60 text-sm line-clamp-2 mb-4">{{ spotlight.achievement }}</p>
+                            <!-- Tags -->
+                            {% if spotlight.tags %}
+                            <div class="flex flex-wrap gap-1.5">
+                                {% for tag in spotlight.get_tags_list|slice:":3" %}
+                                <span class="px-2 py-0.5 bg-white/10 text-white/70 text-xs rounded-full">{{ tag
+                                    }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Scroll Indicator (Mobile) -->
+            <div class="flex justify-center gap-1.5 mt-4 lg:hidden">
+                <span class="text-white/40 text-sm"><i class="fas fa-hand-point-left mr-1"></i>Vuốt để xem thêm</span>
+            </div>
+        </div>
+        {% else %}
+        <!-- Fallback -->
+        <div class="text-center py-16">
+            <div class="w-20 h-20 mx-auto bg-white/10 rounded-full flex items-center justify-center mb-6">
+                <i class="fas fa-user-graduate text-3xl text-white/50"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Đang cập nhật...</h3>
+            <p class="text-white/60">Thông tin học sinh nổi bật sẽ được cập nhật sớm.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+<!-- Partner Logos -->
+<section class="section section-slim bg-white relative overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-500/10 rounded-full blur-3xl"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <div class="partner-marquee-frame animate-fadeInUp">
+            <div class="partner-marquee" aria-label="Partner logos">
+                {% if partner_logos %}
+                <div class="partner-marquee-track">
+                    {% for partner in partner_logos %}
+                    <a class="partner-marquee-item" href="{{ partner.url }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{% static partner.logo %}" alt="{{ partner.name }} logo" loading="lazy">
+                    </a>
+                    {% endfor %}
+                    {% for partner in partner_logos %}
+                    <a class="partner-marquee-item" href="{{ partner.url }}" target="_blank" rel="noopener noreferrer"
+                        aria-hidden="true" tabindex="-1">
+                        <img src="{% static partner.logo %}" alt="{{ partner.name }} logo" loading="lazy">
+                    </a>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="partner-marquee-empty">Chưa có logo đối tác.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- News Section -->
+<section class="section bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-900 dark:to-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 lg:mb-16">
+            <div class="mb-6 md:mb-0">
+                <h2 class="section-title mb-4 flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg shadow-red-500/30">
+                        <i class="fas fa-newspaper text-white text-lg"></i>
+                    </div>
+                    Tin tức & Hoạt động
+                </h2>
+                <p class="section-subtitle max-w-2xl">
+                    Theo dõi những hoạt động nổi bật và thông tin mới nhất từ MIS
+                </p>
+            </div>
+            <a href="{% url 'news:list' %}" class="btn btn-outline btn-md group">
+                Xem tất cả tin
+                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+        </div>
+
+        <!-- Tabbed News Section -->
+        <div x-data="{ activeTab: 'all' }" class="mb-12">
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap gap-2 mb-8 justify-center">
+                <button @click="activeTab = 'all'"
+                    :class="{ 'btn-primary': activeTab === 'all', 'btn-outline': activeTab !== 'all' }"
+                    class="btn btn-sm">
+                    <i class="fas fa-newspaper mr-2"></i>Tin mới
+                </button>
+                <button @click="activeTab = 'tieu_hoc'"
+                    :class="{ 'btn-primary': activeTab === 'tieu_hoc', 'btn-outline': activeTab !== 'tieu_hoc' }"
+                    class="btn btn-sm">
+                    <i class="fas fa-child mr-2"></i>Tiểu học
+                </button>
+                <button @click="activeTab = 'thcs'"
+                    :class="{ 'btn-primary': activeTab === 'thcs', 'btn-outline': activeTab !== 'thcs' }"
+                    class="btn btn-sm">
+                    <i class="fas fa-user-graduate mr-2"></i>THCS
+                </button>
+                <button @click="activeTab = 'thpt'"
+                    :class="{ 'btn-primary': activeTab === 'thpt', 'btn-outline': activeTab !== 'thpt' }"
+                    class="btn btn-sm">
+                    <i class="fas fa-graduation-cap mr-2"></i>THPT
+                </button>
+                <a href="{% url 'admissions:list' %}" class="btn btn-sm btn-outline">
+                    <i class="fas fa-file-signature mr-2"></i>Tuyển sinh
+                </a>
+            </div>
+
+            <!-- Tab Content: All News -->
+            <div x-show="activeTab === 'all'" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <!-- News Grid - Bento Box Style -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                    <!-- Featured News - Large Card -->
+                    {% if featured_news %}
+                    <div class="lg:col-span-2" x-data="{ inView: false }" x-intersect="inView = true" x-show="true"
+                        x-transition:enter="transition ease-out duration-700"
+                        x-transition:enter-start="opacity-0 translate-y-8"
+                        x-transition:enter-end="opacity-100 translate-y-0">
+                        <a href="{{ featured_news.get_absolute_url }}"
+                            class="group block h-full relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                            <div class="relative h-full min-h-[500px] lg:min-h-[600px]">
+                                {% if featured_news.thumbnail %}
+                                <img src="{{ featured_news.thumbnail.url }}" alt="{{ featured_news.title }}"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    loading="lazy">
+                                {% else %}
+                                <div class="w-full h-full bg-gradient-to-br from-red-500 via-red-600 to-red-800">
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <i class="fas fa-newspaper text-white/20 text-9xl"></i>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
+                                </div>
+
+                                <!-- Badge -->
+                                <div class="absolute top-6 left-6 flex flex-wrap items-center gap-3 z-10">
+                                    <span
+                                        class="px-4 py-2 bg-red-600 text-white rounded-full text-sm font-semibold shadow-lg backdrop-blur-sm">
+                                        <i class="fas fa-star mr-1.5"></i> Nổi bật
+                                    </span>
+                                    <span
+                                        class="px-4 py-2 bg-white/20 backdrop-blur-md text-white rounded-full text-sm font-medium border border-white/30 shadow-md">
+                                        {{ featured_news.category.name|default:"Tin tức" }}
+                                    </span>
+                                </div>
+
+                                <!-- Content -->
+                                <div class="absolute bottom-0 left-0 right-0 p-6 lg:p-8 z-10">
+                                    <div class="flex flex-wrap items-center gap-4 text-white/90 text-sm mb-4">
+                                        <span
+                                            class="flex items-center bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
+                                            <i class="far fa-calendar-alt mr-2"></i>
+                                            {{ featured_news.created_at|date:"d/m/Y" }}
+                                        </span>
+                                        <span
+                                            class="flex items-center bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
+                                            <i class="far fa-eye mr-2"></i>
+                                            Đọc ngay
+                                        </span>
+                                    </div>
+                                    <h3
+                                        class="type-h3 font-display font-semibold text-white mb-4 leading-tight group-hover:text-red-300 transition-colors line-clamp-2 drop-shadow-lg">
+                                        {{ featured_news.title }}
+                                    </h3>
+                                    <p
+                                        class="text-white/90 text-base lg:text-lg line-clamp-2 mb-6 max-w-2xl leading-relaxed drop-shadow-md">
+                                        {{ featured_news.excerpt|default:featured_news.content|truncatewords:25 }}
+                                    </p>
+                                    <div
+                                        class="btn btn-ghost-invert btn-sm">
+                                        Đọc chi tiết
+                                        <i
+                                            class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                    <!-- Recent News Cards - Scrollable Container -->
+                    <div class="lg:col-span-1">
+                        <div class="news-scroll-container h-auto lg:h-[600px] overflow-y-auto pr-2 lg:pr-4 -mr-2 lg:-mr-4"
+                            x-data="{ inView: false }" x-intersect="inView = true" x-show="true"
+                            x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 translate-x-6"
+                            x-transition:enter-end="opacity-100 translate-x-0">
+                            <div class="space-y-6 pr-2 lg:pr-0">
+                                {% for news in recent_news %}
+                                <div>
+                                    <a href="{{ news.get_absolute_url }}"
+                                        class="group block w-full bg-white dark:bg-neutral-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 flex flex-col"
+                                        :style="`transition-delay: ${({{ forloop.counter0 }} * 50)}ms`">
+
+                                        <!-- Image -->
+                                        <div class="relative h-48 overflow-hidden flex-shrink-0">
+                                            {% if news.thumbnail %}
+                                            <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}"
+                                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                loading="lazy">
+                                            {% else %}
+                                            <div
+                                                class="w-full h-full bg-gradient-to-br from-neutral-200 to-neutral-300 dark:from-neutral-700 dark:to-neutral-800 flex items-center justify-center">
+                                                <i class="fas fa-image text-muted text-4xl"></i>
+                                            </div>
+                                            {% endif %}
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            </div>
+
+                                            <!-- Category Badge -->
+                                            <div class="absolute top-4 left-4 z-10">
+                                                <span
+                                                    class="px-3 py-1.5 bg-white/95 dark:bg-neutral-800/95 backdrop-blur-sm text-red-600 dark:text-red-400 rounded-lg text-xs font-semibold shadow-md">
+                                                    {{ news.category.name|default:"Tin tức" }}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Content -->
+                                        <div class="p-5 flex flex-col flex-grow">
+                                            <div class="flex items-center text-muted text-xs mb-3 flex-shrink-0">
+                                                <i class="far fa-calendar-alt mr-2 text-red-500"></i>
+                                                <span>{{ news.created_at|date:"d/m/Y" }}</span>
+                                            </div>
+                                            <h4
+                                                class="card-title group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-2 mb-3 leading-tight flex-shrink-0">
+                                                {{ news.title }}
+                                            </h4>
+                                            <p class="text-muted text-sm line-clamp-2 mb-4 leading-relaxed">
+                                                {{ news.excerpt|default:news.content|truncatewords:15 }}
+                                            </p>
+                                            <div
+                                                class="flex items-center text-red-600 dark:text-red-400 font-semibold text-sm group-hover:text-red-700 dark:group-hover:text-red-300 mt-auto flex-shrink-0">
+                                                Đọc tiếp
+                                                <i
+                                                    class="fas fa-arrow-right ml-2 text-xs group-hover:translate-x-1 transition-transform"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {% empty %}
+                                <!-- Empty State -->
+                                <div class="text-center py-16 px-8 bg-neutral-100 dark:bg-neutral-800 rounded-3xl">
+                                    <div
+                                        class="w-20 h-20 bg-neutral-200 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <i class="fas fa-newspaper text-muted text-3xl"></i>
+                                    </div>
+                                    <h3 class="title-sm mb-2">Chưa có
+                                        tin
+                                        tức</h3>
+                                    <p class="text-muted">Hãy quay lại sau để xem những cập
+                                        nhật
+                                        mới nhất
+                                    </p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Grid -->
+            </div> <!-- End Tab Content: All News -->
+
+            <!-- Tab Content: Tiểu học -->
+            <div x-show="activeTab === 'tieu_hoc'" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for news in news_tieu_hoc %}
+                    <a href="{{ news.get_absolute_url }}"
+                        class="group block bg-white dark:bg-neutral-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="h-48 bg-gradient-to-br from-accent-400 to-accent-600 relative">
+                            {% if news.thumbnail %}
+                            <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}"
+                                class="w-full h-full object-cover">
+                            {% else %}
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-child text-white/30 text-6xl"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="p-5">
+                            <div class="text-xs text-muted mb-2">{{ news.created_at|date:"d/m/Y" }}</div>
+                            <h4 class="card-title group-hover:text-accent-600 line-clamp-2">
+                                {{ news.title }}</h4>
+                        </div>
+                    </a>
+                    {% empty %}
+                    <div class="col-span-4 text-center py-16 bg-neutral-100 dark:bg-neutral-800 rounded-2xl">
+                        <i class="fas fa-newspaper text-muted text-4xl mb-4"></i>
+                        <p class="text-muted">Chưa có tin tức Tiểu học</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Tab Content: THCS -->
+            <div x-show="activeTab === 'thcs'" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for news in news_thcs %}
+                    <a href="{{ news.get_absolute_url }}"
+                        class="group block bg-white dark:bg-neutral-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="h-48 bg-gradient-to-br from-accent-400 to-accent-600 relative">
+                            {% if news.thumbnail %}
+                            <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}"
+                                class="w-full h-full object-cover">
+                            {% else %}
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-user-graduate text-white/30 text-6xl"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="p-5">
+                            <div class="text-xs text-muted mb-2">{{ news.created_at|date:"d/m/Y" }}</div>
+                            <h4 class="card-title group-hover:text-accent-600 line-clamp-2">
+                                {{ news.title }}</h4>
+                        </div>
+                    </a>
+                    {% empty %}
+                    <div class="col-span-4 text-center py-16 bg-neutral-100 dark:bg-neutral-800 rounded-2xl">
+                        <i class="fas fa-newspaper text-muted text-4xl mb-4"></i>
+                        <p class="text-muted">Chưa có tin tức THCS</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Tab Content: THPT -->
+            <div x-show="activeTab === 'thpt'" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for news in news_thpt %}
+                    <a href="{{ news.get_absolute_url }}"
+                        class="group block bg-white dark:bg-neutral-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="h-48 bg-gradient-to-br from-accent-400 to-accent-600 relative">
+                            {% if news.thumbnail %}
+                            <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}"
+                                class="w-full h-full object-cover">
+                            {% else %}
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-white/30 text-6xl"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="p-5">
+                            <div class="text-xs text-muted mb-2">{{ news.created_at|date:"d/m/Y" }}</div>
+                            <h4 class="card-title group-hover:text-accent-600 line-clamp-2">
+                                {{ news.title }}</h4>
+                        </div>
+                    </a>
+                    {% empty %}
+                    <div class="col-span-4 text-center py-16 bg-neutral-100 dark:bg-neutral-800 rounded-2xl">
+                        <i class="fas fa-newspaper text-neutral-400 text-4xl mb-4"></i>
+                        <p class="text-muted">Chưa có tin tức THPT</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Tab Content: Tuyển sinh -->
+            <div x-show="activeTab === 'tuyen_sinh'" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for news in news_tuyen_sinh %}
+                    <a href="{{ news.get_absolute_url }}"
+                        class="group block bg-white dark:bg-neutral-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+                        <div class="h-48 bg-gradient-to-br from-red-400 to-red-600 relative">
+                            {% if news.thumbnail %}
+                            <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}"
+                                class="w-full h-full object-cover">
+                            {% else %}
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-file-signature text-white/30 text-6xl"></i>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="p-5">
+                            <div class="text-xs text-muted mb-2">{{ news.created_at|date:"d/m/Y" }}</div>
+                            <h4 class="card-title group-hover:text-red-600 line-clamp-2">
+                                {{ news.title }}</h4>
+                        </div>
+                    </a>
+                    {% empty %}
+                    <div class="col-span-4 text-center py-16 bg-neutral-100 dark:bg-neutral-800 rounded-2xl">
+                        <i class="fas fa-newspaper text-neutral-400 text-4xl mb-4"></i>
+                        <p class="text-muted">Chưa có tin tức Tuyển sinh</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div> <!-- End Tabbed News Section -->
+    </div>
+</section>
+
+
+{% endblock %}
+

@@ -1,0 +1,1107 @@
+{
+  "program_year": "2026-2027",
+  "source_doc": "tmp_mis_program_2026_2027",
+  "approved_at": "2026-02-13",
+  "version": "2026.3",
+  "metadata": {
+    "notes": [
+      "Only values extracted from tmp_mis_program_2026_2027.",
+      "Fields marked NEED_CONFIRM require source confirmation before publishing."
+    ]
+  },
+  "home": {
+    "admissions_year_label": "2026-2027"
+  },
+  "schedule": {
+    "public_year": "2026-2027",
+    "details_status": "NEED_CONFIRM"
+  },
+  "admissions": {
+    "default_school_year": "2026-2027",
+    "policy_status": "NEED_CONFIRM",
+    "official_notice_status": "NEED_CONFIRM",
+    "official_notice_urls": {
+      "mam_non": null,
+      "tieu_hoc": null,
+      "thcs": null,
+      "thpt": null,
+      "policy": null
+    }
+  },
+  "navigation": {
+    "about": [
+      {
+        "key": "mission",
+        "title": "Về chúng tôi",
+        "icon": "fas fa-users",
+        "url_name": "about:mission"
+      },
+      {
+        "key": "vision",
+        "title": "Giá trị cốt lõi",
+        "icon": "fas fa-gem",
+        "url_name": "about:vision"
+      },
+      {
+        "key": "principal",
+        "title": "Lịch sử",
+        "icon": "fas fa-history",
+        "url_name": "about:principal"
+      }
+    ],
+    "specialized_programs": [
+      {
+        "key": "steam",
+        "title": "Hệ STEAM Chuẩn / CLC",
+        "icon": "fas fa-cogs",
+        "url_name": "about:steam"
+      },
+      {
+        "key": "math_tech",
+        "title": "Hệ Tài năng Toán – Công nghệ mới",
+        "icon": "fas fa-calculator",
+        "url_name": "about:overview_math"
+      },
+      {
+        "key": "language",
+        "title": "Hệ Tài năng Ngôn ngữ",
+        "icon": "fas fa-globe",
+        "url_name": "about:overview_english",
+        "sub_items": [
+          {
+            "key": "english_talent",
+            "title": "Tiếng Anh tài năng",
+            "icon": "fas fa-language",
+            "url_name": "about:overview_english"
+          },
+          {
+            "key": "chinese_talent",
+            "title": "Tiếng Trung tài năng",
+            "icon": "fas fa-yen-sign",
+            "url_name": "about:overview_chinese"
+          }
+        ]
+      }
+    ],
+    "program_overview": [
+      {
+        "key": "overview_math",
+        "title": "Chương trình Toán",
+        "icon": "fas fa-calculator",
+        "url_name": "about:overview_math"
+      },
+      {
+        "key": "overview_literature",
+        "title": "Chương trình Ngữ văn",
+        "icon": "fas fa-book",
+        "url_name": "about:overview_literature"
+      },
+      {
+        "key": "overview_english",
+        "title": "Chương trình Tiếng Anh",
+        "icon": "fas fa-language",
+        "url_name": "about:overview_english"
+      },
+      {
+        "key": "overview_chinese",
+        "title": "Chương trình Tiếng Trung",
+        "icon": "fas fa-yen-sign",
+        "url_name": "about:overview_chinese"
+      },
+      {
+        "key": "tnst",
+        "title": "Chương trình Trải nghiệm sáng tạo",
+        "icon": "fas fa-lightbulb",
+        "url_name": "about:tnst"
+      },
+      {
+        "key": "steam",
+        "title": "Chương trình STEAM và Công nghệ mới",
+        "icon": "fas fa-flask",
+        "url_name": "about:steam"
+      },
+      {
+        "key": "robotics",
+        "title": "Chương trình Robotics",
+        "icon": "fas fa-robot",
+        "url_name": "about:robotics"
+      },
+      {
+        "key": "lifeskills",
+        "title": "Chương trình Kỹ năng sống & Giá trị sống",
+        "icon": "fas fa-users",
+        "url_name": "about:lifeskills"
+      }
+    ]
+  },
+  "program_overview_pages": {
+    "media_batch": "2026-2027",
+    "images_status": "NEED_CONFIRM",
+    "entries": {
+      "overview_math": {
+        "slug": "chuong-trinh-tong-quan-mon-toan",
+        "url_name": "about:overview_math",
+        "canonical_url": "https://misvn.edu.vn/chuong-trinh-tong-quan-mon-toan/"
+      },
+      "overview_literature": {
+        "slug": "tong-quan-chuong-trinh-ngu-van-tai-mis",
+        "url_name": "about:overview_literature",
+        "canonical_url": "https://misvn.edu.vn/tong-quan-chuong-trinh-ngu-van-tai-mis/"
+      },
+      "overview_english": {
+        "slug": "tong-quan-chuong-trinh-tieng-anh",
+        "url_name": "about:overview_english",
+        "canonical_url": "https://misvn.edu.vn/tong-quan-chuong-trinh-tieng-anh/"
+      },
+      "overview_chinese": {
+        "slug": "tong-quan-chuong-trinh-tieng-trung-2",
+        "url_name": "about:overview_chinese",
+        "canonical_url": "https://misvn.edu.vn/tong-quan-chuong-trinh-tieng-trung-2/"
+      },
+      "tnst": {
+        "slug": "chuong-trinh-tong-quan-trai-nghiem-sang-tao-tnst",
+        "url_name": "about:tnst",
+        "canonical_url": "https://misvn.edu.vn/chuong-trinh-tong-quan-trai-nghiem-sang-tao-tnst/"
+      },
+      "steam": {
+        "slug": "chuong-trinh-steam-voi-cong-nghe-sang-tao",
+        "url_name": "about:steam",
+        "canonical_url": "https://misvn.edu.vn/chuong-trinh-steam-voi-cong-nghe-sang-tao/"
+      },
+      "lifeskills": {
+        "slug": "chuong-trinh-ky-nang-song-nam-hoc-2026-2027",
+        "url_name": "about:lifeskills",
+        "legacy_slugs": [
+          "chuong-trinh-ky-nang-song-nam-hoc-2022-2023"
+        ],
+        "canonical_url": "https://misvn.edu.vn/chuong-trinh-ky-nang-song-nam-hoc-2026-2027/",
+        "images_status": "NEED_CONFIRM"
+      }
+    }
+  },
+  "blocks": {
+    "overview_english": {
+      "key": "overview_english",
+      "year": "2026-2027",
+      "title": "Chương trình phát triển ngoại ngữ thế hệ mới",
+      "sections": [
+        "Vị thế đa ngôn ngữ vượt trội: đào tạo song hành Tiếng Anh (IELTS) và Tiếng Trung (HSK).",
+        "Cá nhân hóa lộ trình dựa trên Language Profile.",
+        "Khai thác các công cụ AI hỗ trợ học ngoại ngữ (iCorrect, DeepSeek, Doubao) theo từng hoạt động học tập."
+      ],
+      "targets": {
+        "standard": {
+          "ielts": "4.0-6.0+",
+          "hsk": "2-4"
+        },
+        "talent": {
+          "ielts": "6.5-8.0+",
+          "hsk": "4-6"
+        },
+        "talent_thpt": {
+          "ielts": "6.5-8.0+",
+          "hsk": "5-6"
+        }
+      },
+      "tools": [
+        "iCorrect",
+        "DeepSeek",
+        "Doubao"
+      ],
+      "labels": {
+        "ielts": "IELTS",
+        "hsk": "HSK"
+      },
+      "outcomes": [
+        "Hệ Tiếng Anh tài năng: lộ trình chinh phục IELTS 8.0+.",
+        "THCS: IELTS 4.0-6.0+.",
+        "THPT: IELTS 6.5-8.0+."
+      ],
+      "copy": {
+        "hero_subtitle": "Chinh phục tiếng Anh học thuật từ Tiểu học đến THPT với lộ trình chuẩn Cambridge và IELTS.",
+        "pathway_title": "Lộ trình IELTS từ lớp 6",
+        "pathway_description": "Lộ trình IELTS từ lớp 6, gia tăng cơ hội vào đại học.",
+        "integration_description": "Chương trình được cố vấn bởi các chuyên gia học thuật, tích hợp chuẩn Cambridge và lộ trình IELTS từ THCS.",
+        "ai_tool_name": "iCorrect"
+      },
+      "curriculum": {
+        "tieu_hoc": {
+          "textbooks": [
+            "Super Minds",
+            "Phonics",
+            "Cambridge YLE Test",
+            "Cambridge Primary Science",
+            "Cambridge Primary Maths",
+            "Grammar",
+            "MIS Extra Practice"
+          ],
+          "target": "CEFR PreA2 / A2"
+        },
+        "thcs": {
+          "textbooks": [
+            "Global Success",
+            "Speak Now",
+            "Macmillan Science",
+            "Pre-IELTS",
+            "MIS supplementary exercises"
+          ],
+          "target": "CEFR A2+ / B1"
+        },
+        "thpt": {
+          "textbooks": [
+            "Global Success",
+            "Speak Now",
+            "Reading Explorer",
+            "Pre-IELTS",
+            "Complete IELTS",
+            "IELTS Focus Plus",
+            "MIS supplementary exercises"
+          ],
+          "target": "CEFR B1 / C1"
+        }
+      }
+    },
+    "overview_chinese": {
+      "key": "overview_chinese",
+      "year": "2026-2027",
+      "title": "Hệ Tiếng Trung tài năng",
+      "sections": [
+        "Tiếp cận ngôn ngữ tự nhiên qua môi trường mô phỏng thực tế cùng AI.",
+        "Định hướng nghề nghiệp với năng lực Tiếng Trung trong kinh tế số.",
+        "Lộ trình liên thông từ Tiểu học đến THPT."
+      ],
+      "targets": {
+        "standard": {
+          "ielts": "4.0-6.0+",
+          "hsk": "2-4"
+        },
+        "talent": {
+          "ielts": "6.5-8.0+",
+          "hsk": "4-6"
+        },
+        "talent_thpt": {
+          "ielts": "6.5-8.0+",
+          "hsk": "5-6"
+        }
+      },
+      "tools": [
+        "DeepSeek",
+        "Doubao"
+      ],
+      "labels": {
+        "ielts": "IELTS",
+        "hsk": "HSK"
+      },
+      "outcomes": [
+        "THCS: HSK 3-4.",
+        "THPT: HSK 5-6."
+      ],
+      "roadmap": {
+        "primary": {
+          "label": "Tiếng Trung nền tảng",
+          "hsk": "1-2",
+          "exam_note": "Thi HSK 1-2, xây nền vững chắc."
+        },
+        "middle": {
+          "label": "Tiếng Trung học thuật",
+          "hsk": "3-4",
+          "exam_note": "Thi HSK 3-4, tăng tốc kỹ năng."
+        },
+        "high": {
+          "label": "Tiếng Trung nâng cao",
+          "hsk": "5-6",
+          "exam_note": "Ôn tập HSK 5, luyện thi HSK 6."
+        }
+      },
+      "copy": {
+        "hero_subtitle": "Thông thạo ngoại ngữ thứ hai, lộ trình HSK chuẩn quốc tế cho học sinh THPT.",
+        "cta_label": "Xem lộ trình HSK",
+        "roadmap_badge": "Lộ trình HSK",
+        "standards_note": "Nội dung được nghiên cứu theo chuẩn HSK, cập nhật liên tục để phù hợp mục tiêu du học và hội nhập.",
+        "teacher_note": "Đội ngũ giáo viên nhiều năm kinh nghiệm luyện thi HSK."
+      },
+      "curriculum": {
+        "tieu_hoc": {
+          "textbooks": [
+            "YCT Standard Course 1-3",
+            "Thẻ học từ vựng & AI Doubao"
+          ],
+          "target": "YCT 1-3 / Giao tiếp tình huống"
+        },
+        "thcs": {
+          "textbooks": [
+            "HSK Standard Course 1-3 (3.0)",
+            "Tiếng Trung nhập môn",
+            "Tiếng Trung tiêu chuẩn",
+            "Chuyên đề luyện thi"
+          ],
+          "target": "HSK 1-3 (YCT 3-4) / Đọc hiểu & thảo luận"
+        },
+        "thpt": {
+          "textbooks": [
+            "HSK Standard Course 4-6 (3.0)",
+            "Tiếng Trung nhập môn",
+            "Tiếng Trung tổng hợp",
+            "Chuyên đề luyện thi"
+          ],
+          "target": "HSK 4-6 / Học thuật & du học"
+        }
+      }
+    },
+    "future_ai": {
+      "key": "future_ai",
+      "year": "2026-2027",
+      "title": "Công nghệ mới & AI - Làm chủ công cụ, kiến tạo tương lai",
+      "sections": [
+        "Khung Năng lực số (TT 02/2025/TT-BGDĐT).",
+        "Lộ trình đào tạo 3 cấp độ: Tiểu học, THCS, THPT.",
+        "Trụ cột cốt lõi: AI Literacy, Prompt Engineering, Data Science, Đạo đức số."
+      ],
+      "core_pillars": [
+        "AI Literacy",
+        "Prompt Engineering",
+        "Data Science",
+        "Đạo đức số"
+      ],
+      "metadata": {
+        "regulation": "TT 02/2025/TT-BGDĐT",
+        "domains": [
+          "Miền I - Đánh giá dữ liệu",
+          "Miền II - Giao tiếp và Hợp tác số",
+          "Miền III - Sáng tạo nội dung",
+          "Miền IV - An toàn mạng và Đạo đức số",
+          "Miền V - Giải quyết vấn đề kỹ thuật và Sáng tạo công nghệ",
+          "Miền VI - Đánh giá tác động và Đề xuất cải tiến hệ thống AI"
+        ],
+        "roadmap_levels": [
+          {
+            "level": "Tiểu học (Lớp 1-5)",
+            "focus": "Làm quen & khám phá",
+            "compliance": "Miền I, Miền IV, Miền VI"
+          },
+          {
+            "level": "THCS (Lớp 6-9)",
+            "focus": "Hiểu nguyên lý & thực hành",
+            "compliance": "Miền I, Miền II, Miền III, Miền VI"
+          },
+          {
+            "level": "THPT (Lớp 10-12)",
+            "focus": "Định hướng nghề nghiệp",
+            "compliance": "Miền I, Miền V, Miền VI"
+          }
+        ]
+      },
+      "tools": [
+        "Azota",
+        "iCorrect",
+        "VR/AR",
+        "Nexta",
+        "GenAI (ChatGPT, Gemini, DeepSeek)"
+      ],
+      "copy": {
+        "framework_subtitle": "Mô hình triển khai bám sát 6 miền năng lực số theo nguồn chuẩn 2026-2027.",
+        "roadmap_title": "Tiểu học - THCS - THPT",
+        "roadmap_subtitle": "Làm quen, thực hành và định hướng nghề nghiệp theo cấp học.",
+        "core_pillars_title": "AI Literacy, Prompt Engineering, Data Science, Đạo đức số",
+        "core_pillars_subtitle": "4 trụ cột cốt lõi được triển khai xuyên suốt theo chương trình 2026-2027.",
+        "toolchain_subtitle": "Danh mục công cụ tham chiếu trong nội dung 2026-2027: Azota, iCorrect, VR/AR, Nexta và nhóm công cụ GenAI.",
+        "outcomes_title": "Năng lực đầu ra theo định hướng AI Literacy và Data Science"
+      },
+      "outcomes": [
+        "Tư duy kiến tạo vững chắc: Làm chủ Python, tạo Website, Game, ứng dụng, Robot.",
+        "Năng lực khoa học dữ liệu (Data Science): Từ thu thập đến Machine Learning.",
+        "Kỹ năng AI Literacy toàn diện: Sử dụng AI như Co-pilot trong mọi môn học.",
+        "Tư duy phản biện & Đạo đức số: Phát hiện Bias, Deepfake, tin giả.",
+        "Tự học và tự nghiên cứu: Thành thạo Prompt Engineering nâng cao.",
+        "Digital Portfolio: Bộ sưu tập dự án AI tạo lợi thế xét tuyển đại học."
+      ]
+    },
+    "vision_2035": {
+      "key": "vision_2035",
+      "year": "2026-2027",
+      "title": "TẦM NHÌN 2035: KỶ NGUYÊN CỦA NỀN KINH TẾ SÁNG TẠO",
+      "intro": "Chúng ta đang sống trong những năm đầu của cuộc đại địa chấn mang tên AI. Thế giới đang chuyển mình mạnh mẽ từ nền kinh tế tri thức (nơi thông tin là tài sản) sang nền kinh tế sáng tạo (nơi khả năng tái cấu trúc thông tin là sức mạnh).",
+      "highlights": [
+        {
+          "label": "Thực tế thách thức",
+          "content": "Diễn đàn Kinh tế Thế giới (2023) dự báo 85% công việc của năm 2035 hiện vẫn chưa xuất hiện. McKinsey (2022) cũng khẳng định 50% công việc hiện nay sẽ thay đổi bản chất do tự động hóa."
+        },
+        {
+          "label": "Câu hỏi thời đại",
+          "content": "Trong một thế giới mà \"những câu chuyện cũ đang vỡ vụn\", chúng ta phải dạy điều gì để con trẻ không chỉ tồn tại mà còn dẫn dắt được thế giới năm 2050 và xa hơn nữa?"
+        }
+      ],
+      "chapters": [
+        {
+          "key": "I",
+          "title": "TẦM NHÌN 2035: KỶ NGUYÊN CỦA NỀN KINH TẾ SÁNG TẠO",
+          "intro": "Chúng ta đang sống trong những năm đầu của cuộc đại địa chấn mang tên AI. Thế giới đang chuyển mình mạnh mẽ từ nền kinh tế tri thức (nơi thông tin là tài sản) sang nền kinh tế sáng tạo (nơi khả năng tái cấu trúc thông tin là sức mạnh).",
+          "highlights": [
+            {
+              "label": "Thực tế thách thức",
+              "content": "Diễn đàn Kinh tế Thế giới (2023) dự báo 85% công việc của năm 2035 hiện vẫn chưa xuất hiện. McKinsey (2022) cũng khẳng định 50% công việc hiện nay sẽ thay đổi bản chất do tự động hóa."
+            },
+            {
+              "label": "Câu hỏi thời đại",
+              "content": "Trong một thế giới mà \"những câu chuyện cũ đang vỡ vụn\", chúng ta phải dạy điều gì để con trẻ không chỉ tồn tại mà còn dẫn dắt được thế giới năm 2050 và xa hơn nữa?"
+            }
+          ],
+          "metadata": {
+            "source_lines": "12-15"
+          }
+        },
+        {
+          "key": "II",
+          "title": "SỰ CHUYỂN DỊCH ĐỊNH MỆNH: HỌC SINH LÀ \"CEO CỦA TRÍ TUỆ\"",
+          "intro": "Nếu thế hệ trước được định danh bằng khả năng ghi nhớ, thì thế hệ học sinh hôm nay được định danh bằng năng lực tương tác và sáng tạo cùng AI.",
+          "highlights": [
+            {
+              "label": "Học cùng AI",
+              "content": "Vấn đề không phải là \"có dùng AI hay không\" mà là dùng AI sao cho có đạo đức, trách nhiệm và mục tiêu rõ ràng (AI Literacy)."
+            },
+            {
+              "label": "Nhà lãnh đạo trí tuệ",
+              "content": "Khi mỗi học sinh có trong tay \"10 tiến sĩ ảo\" (AI), các bạn không cần thuộc mọi công thức nhưng phải biết tư duy hệ thống và đặt câu hỏi đúng. Học sinh trở thành người điều phối, là nhà lãnh đạo tri thức của chính bộ óc mình."
+            }
+          ],
+          "metadata": {
+            "source_lines": "16-19"
+          }
+        },
+        {
+          "key": "III",
+          "title": "TÁI SINH SỨ MỆNH NGƯỜI THẦY: TỪ NGƯỜI TRUYỀN THỤ ĐẾN \"KIẾN TRÚC SƯ HỌC TẬP\"",
+          "intro": "Trong kỷ nguyên AI, người thầy không cạnh tranh với máy móc về khối lượng tri thức. Sứ mệnh của thầy cô giờ đây là trở thành những \"Kiến trúc sư tri thức – Kỹ sư tâm hồn\".",
+          "highlights": [
+            {
+              "label": "Nhà thiết kế học tập",
+              "content": "Chuyển từ truyền đạt một chiều sang thiết kế không gian học tập, khơi gợi tò mò và năng lực phản biện."
+            },
+            {
+              "label": "Người giữ hồn nhân bản",
+              "content": "Giúp học sinh cân bằng giữa \"hiệu quả máy móc\" và \"trí tuệ cảm xúc\", giữ vững cốt cách văn hóa Việt trong dòng chảy hội nhập toàn cầu."
+            },
+            {
+              "label": "3 Trụ cột năng lực mới của giáo viên",
+              "content": "1. Thiết kế bài giảng bằng công cụ AI. 2. Phân tích dữ liệu để cá nhân hóa giáo dục. 3. Định hình đạo đức và nhân bản trong sử dụng công nghệ."
+            }
+          ],
+          "metadata": {
+            "source_lines": "20-24"
+          }
+        },
+        {
+          "key": "IV",
+          "title": "CHIẾN LƯỢC THÍCH ỨNG TẠI MIS",
+          "intro": "MIS không đứng ngoài cuộc cách mạng này. Chúng tôi tái định nghĩa giáo dục thông qua mô hình: \"Hợp tác – Sáng tạo – Giải quyết vấn đề\".",
+          "highlights": [
+            {
+              "label": "AI là công cụ, không phải mục tiêu",
+              "content": "Đưa AI vào học đường như một trợ lý siêu thông minh để giải phóng sức sáng tạo."
+            },
+            {
+              "label": "Đánh giá năng lực thay vì điểm số",
+              "content": "Ưu tiên đánh giá sáng kiến và khả năng ứng dụng thực tế thay cho việc ghi nhớ máy móc."
+            },
+            {
+              "label": "Hệ sinh thái giáo dục mở",
+              "content": "Kết nối với các nền tảng quốc tế, xây dựng \"AI Classroom\" để mỗi giờ học là một trải nghiệm khai phóng."
+            }
+          ],
+          "metadata": {
+            "source_lines": "25-29"
+          }
+        }
+      ],
+      "metadata": {
+        "source_doc": "tmp_mis_program_2026_2027",
+        "source_lines": "12-29"
+      }
+    },
+    "math": {
+      "key": "math",
+      "year": "2026-2027",
+      "title": "Toán học tích hợp AI & Hệ Toán Tài năng - Công nghệ mới",
+      "sections": [
+        "Toán học tích hợp AI theo lộ trình liên thông Tiểu học - THCS - THPT.",
+        "Hệ Toán Tài năng & Công nghệ mới (AI) là chương trình mũi nhọn.",
+        "Ba trụ cột: Toán học cốt lõi, Tư duy thuật toán - Lập trình - AI, Ứng dụng Toán - STEM."
+      ],
+      "pillars": [
+        {
+          "icon": "fas fa-brain",
+          "title": "Tư duy thuật toán",
+          "description": "Rèn tư duy logic, mô hình hóa và giải quyết vấn đề theo quy trình thuật toán."
+        },
+        {
+          "icon": "fas fa-folder-open",
+          "title": "STEM Portfolio",
+          "description": "Mỗi học kỳ xây dựng sản phẩm học tập tích hợp Toán - Công nghệ làm minh chứng năng lực."
+        },
+        {
+          "icon": "fas fa-chart-line",
+          "title": "AI-Track",
+          "description": "Theo dõi tiến trình cá nhân hóa bằng dữ liệu học tập để tối ưu nhịp độ và mục tiêu."
+        }
+      ],
+      "use_cases": [
+        "Logic số học và tính toán",
+        "Đại số và giải tích",
+        "Dữ liệu, xác suất và thống kê",
+        "Hình học, đo lường và không gian",
+        "Cá nhân hóa lộ trình học"
+      ],
+      "copy": {
+        "program_subtitle": "Nguồn chuẩn 2026-2027: Toán học tích hợp AI và Hệ Toán Tài năng & Công nghệ mới (AI).",
+        "smart_math_title": "Toán học tích hợp AI",
+        "smart_math_subtitle": "Nhấn mạnh tư duy thuật toán, STEM Portfolio và AI-Track xuyên suốt 3 cấp học.",
+        "smart_math_summary": "Nội dung đa tầng: Toán tư duy và nền tảng, Toán nâng cao và chuyên sâu, Toán ứng dụng tích hợp lập trình và AI.",
+        "tools_title": "AI tools và use cases",
+        "tools_subtitle": "Bộ công cụ AI chuyên dụng theo từng phân môn, tối ưu hóa quá trình học tập.",
+        "use_cases_title": "Use cases trong lớp Toán",
+        "toolset_title": "Bộ công cụ AI sử dụng"
+      },
+      "tools": [
+        "DeepSeek Math",
+        "MathAI",
+        "ChatGPT",
+        "Gemini",
+        "GeoGebra AI",
+        "Desmos",
+        "AR/VR",
+        "Excel AI Simulations",
+        "PhET Interactive",
+        "Azota AI",
+        "AI Tutor",
+        "Nexta"
+      ],
+      "outcomes": [
+        "AI-Track theo dõi tiến trình hằng tuần.",
+        "STEM Portfolio cho xét tuyển trong và ngoài nước.",
+        "Định hướng ngành Khoa học dữ liệu, Tài chính, Kỹ thuật, Kinh tế số."
+      ],
+      "articulation": [
+        "Tiểu học (K1-K5): Khơi gợi niềm yêu thích; tư duy logic và thuật toán trực quan qua Scratch.",
+        "THCS (K6-K9): Rèn chứng minh – phân tích – tổng hợp; Python căn bản và thống kê.",
+        "THPT (K10-K12): Chuyên sâu Python nâng cao, AI và Khoa học dữ liệu; HSG quốc gia."
+      ],
+      "needs_confirm": [
+        "Khung đầu ra/liên thông chi tiết theo từng lớp hiện chưa có đủ chi tiết định lượng trong nguồn chuẩn."
+      ],
+      "sample_lesson": {
+        "tieu_hoc": {
+          "duration": "35 phút",
+          "steps": [
+            {
+              "time": "5 phút",
+              "activity": "Khởi động – Đặt vấn đề qua trò chơi",
+              "tool": "Gamification"
+            },
+            {
+              "time": "10 phút",
+              "activity": "Hình thành kiến thức",
+              "tool": "AI mô phỏng trực quan"
+            },
+            {
+              "time": "15 phút",
+              "activity": "Luyện tập cá nhân/nhóm",
+              "tool": "AI Virtual Tutor"
+            },
+            {
+              "time": "5 phút",
+              "activity": "Giao bài & Tổng kết",
+              "tool": "AI sơ đồ tư duy & bài tập cá nhân hóa"
+            }
+          ]
+        },
+        "thcs": {
+          "duration": "40 phút",
+          "steps": [
+            {
+              "time": "5 phút",
+              "activity": "Khởi động – Đặt vấn đề thực tế",
+              "tool": "AI tóm tắt và mô hình hóa"
+            },
+            {
+              "time": "10 phút",
+              "activity": "Hình thành kiến thức",
+              "tool": "AI mô phỏng (khử Gauss, đồ thị động)"
+            },
+            {
+              "time": "15 phút",
+              "activity": "Luyện tập",
+              "tool": "AI Virtual Tutor"
+            },
+            {
+              "time": "5 phút",
+              "activity": "Củng cố & Mở rộng liên môn",
+              "tool": "AI tạo bài toán Vật lý/Kinh tế"
+            },
+            {
+              "time": "5 phút",
+              "activity": "Giao bài",
+              "tool": "AI sơ đồ tư duy & bài tập cá nhân hóa"
+            }
+          ]
+        },
+        "thpt": {
+          "duration": "40 phút",
+          "steps": [
+            {
+              "time": "5 phút",
+              "activity": "Khởi động",
+              "tool": "AI tóm tắt, chuyển sang mô hình toán học"
+            },
+            {
+              "time": "10 phút",
+              "activity": "Hình thành kiến thức",
+              "tool": "AI mô phỏng trực quan"
+            },
+            {
+              "time": "15 phút",
+              "activity": "Luyện tập",
+              "tool": "AI Virtual Tutor"
+            },
+            {
+              "time": "10 phút",
+              "activity": "Giao bài & Tổng kết",
+              "tool": "AI sơ đồ tư duy & bài tập cá nhân hóa"
+            }
+          ]
+        }
+      },
+      "grade_roadmap": {
+        "K1": {
+          "focus": "Số học: Nhận diện số, phép tính phạm vi 100. Hình phẳng đơn giản.",
+          "ai_tools": "Nexta Tablet, Scratch Junior, Gamification",
+          "output": "Làm quen thao tác toán học trên thiết bị số."
+        },
+        "K2": {
+          "focus": "Phép nhân, chia cơ bản. Đo lường: Thời gian, độ dài.",
+          "ai_tools": "Nexta Tablet, AI Voice",
+          "output": "Mô hình hóa toán học vào tình huống thực tế."
+        },
+        "K3": {
+          "focus": "Số 4-5 chữ số. Chu vi, diện tích hình vuông/chữ nhật.",
+          "ai_tools": "Scratch, GeoGebra cơ bản, DeepSeek Math",
+          "output": "Tư duy thuật toán: dùng lập trình giải bài toán logic."
+        },
+        "K4": {
+          "focus": "Phân số, TBC. Góc, đường thẳng, diện tích hình bình hành.",
+          "ai_tools": "ChatGPT, Gemini, GeoGebra AI, PhET Interactive",
+          "output": "CEO bộ óc: biết Prompt AI tìm cách giải đa dạng."
+        },
+        "K5": {
+          "focus": "Số thập phân, tỉ số %. Hình hộp, hình lập phương, hình trụ.",
+          "ai_tools": "Excel AI, Canva AI, Azota AI",
+          "output": "Xử lý dữ liệu thực tế, hoàn thiện Portfolio."
+        },
+        "K6": {
+          "focus": "Tập hợp số tự nhiên, Chia hết, Số nguyên, Phân số & Số thập phân, Hình học phẳng & Đối xứng.",
+          "ai_tools": "DeepSeek Math, Math AI, GeoGebra AI, Scratch",
+          "output": "Thành thạo phép toán cơ bản. Sổ tay toán học & Sơ đồ tư duy."
+        },
+        "K7": {
+          "focus": "Số hữu tỉ, Số thực, Tỉ lệ thức, Đa thức một biến, Tam giác, Hình khối 3D.",
+          "ai_tools": "Excel AI Simulations, Python căn bản",
+          "output": "Làm chủ đa thức & tỉ lệ thức. Infographic ứng dụng thực tế."
+        },
+        "K8": {
+          "focus": "Đa thức đa biến, Hằng đẳng thức, Định lý Thales, PT bậc nhất, Xác suất thực nghiệm.",
+          "ai_tools": "Monte Carlo, Wolfram Alpha, Teachable Machine",
+          "output": "Bài toán kinh tế đời sống qua hàm số. Video minh họa."
+        },
+        "K9": {
+          "focus": "Hệ PT, PT bậc hai, Căn bậc hai/ba, Đường tròn, Thống kê tần số.",
+          "ai_tools": "AI Tutor, Prompt Engineering nâng cao, Python API",
+          "output": "Tối ưu kỳ thi vào 10. Portfolio Toán-AI cá nhân."
+        },
+        "K10": {
+          "focus": "Mệnh đề, Hệ PT 3 ẩn, Vectơ, Ba đường Conic, Đại số tổ hợp.",
+          "ai_tools": "DeepSeek Math khử Gauss, GeoGebra AI Conic",
+          "output": "Tư duy logic chặt chẽ. Sổ tay toán học lớp 10."
+        },
+        "K11": {
+          "focus": "Hàm số lượng giác, Dãy số, Đạo hàm, Xác suất cổ điển.",
+          "ai_tools": "AI mô phỏng dao động, AR/VR bóc tách khối đa diện",
+          "output": "Mô hình hóa toán học. Dự báo lãi suất & tài chính."
+        },
+        "K12": {
+          "focus": "Khảo sát hàm số, Vectơ Oxyz, Tích phân, Xác suất Bayes.",
+          "ai_tools": "Pandas/Python Big Data, AI Tutor ôn thi",
+          "output": "Portfolio AI & KHDL xét tuyển ĐH."
+        }
+      },
+      "talent_pillars": [
+        {
+          "title": "Toán học cốt lõi & Giải quyết vấn đề",
+          "content": "Toán tư duy, Toán mở và Olympiad. Phát hiện và bồi dưỡng mũi nhọn."
+        },
+        {
+          "title": "Tư duy thuật toán – Lập trình – AI",
+          "content": "Từ Scratch đến Python, AI, KHDL. Tư duy mô hình hóa từ Tiểu học."
+        },
+        {
+          "title": "Ứng dụng Toán – STEM & Định hướng nghề",
+          "content": "Học qua dự án, CLB Toán-STEM-AI. Định hướng KHDL, Tài chính, Kỹ thuật."
+        }
+      ]
+    },
+    "literature": {
+      "key": "literature",
+      "year": "2026-2027",
+      "title": "Ngữ văn thế hệ mới: từ cảm thụ đến sáng tạo số",
+      "sections": [
+        "Tư duy phản biện, Ngữ văn ứng dụng, Cộng tác cùng AI.",
+        "Vai trò người thầy: người dẫn dắt, người gác cổng đạo đức, người kết nối văn hóa."
+      ],
+      "pillars": [
+        {
+          "icon": "fas fa-comments",
+          "title": "Tư duy phản biện",
+          "description": "Học sinh đối thoại với văn bản, đặt câu hỏi về giá trị và góc nhìn khác nhau."
+        },
+        {
+          "icon": "fas fa-pen-nib",
+          "title": "Ngữ văn ứng dụng",
+          "description": "Gắn học văn với viết báo, podcast, kịch bản và diễn thuyết."
+        },
+        {
+          "icon": "fas fa-user-shield",
+          "title": "Cộng tác cùng AI",
+          "description": "Khai thác AI để gợi ý ý tưởng, phân tích phong cách ngôn ngữ và tối ưu cấu trúc bài viết."
+        }
+      ],
+      "tools": [
+        "LLMs hỗ trợ gợi ý ý tưởng, phân tích phong cách ngôn ngữ, phản hồi nhanh."
+      ],
+      "outcomes": [
+        "Sản phẩm học tập: Podcast, Video phê bình, Tập san điện tử.",
+        "Đánh giá quá trình, đánh giá dự án, AI Feedback."
+      ],
+      "process_4s": [
+        "Sàng lọc (Input): Tự đọc và dùng AI giải mã điển tích, bối cảnh lịch sử.",
+        "Sơ đồ hóa (Process): Dùng Mind-map và AI bóc tách logic nhân vật.",
+        "Sáng tạo (Co-create): Dùng AI gợi ý dàn ý nhưng giữ bản sắc cá nhân.",
+        "Số hóa (Output): Xuất bản Podcast, Video phê bình, tập san điện tử."
+      ],
+      "evaluation": [
+        "Đánh giá quá trình: ghi nhận tiến bộ qua từng bản thảo.",
+        "Đánh giá qua dự án: vở kịch, phóng sự, tập san.",
+        "AI Feedback: phản hồi nhanh về ngữ pháp, bố cục."
+      ],
+      "digital_ethics": [
+        "Liêm chính số: sử dụng AI có đạo đức, chọn lọc và kiểm chứng thông tin."
+      ],
+      "copy": {
+        "pillars_title": "3 trụ cột Ngữ văn 4.0",
+        "pillars_subtitle": "Giữ hồn nhân bản - Mở rộng tư duy - Làm chủ ngôn từ",
+        "process_4s_title": "Quy trình học tập 4S",
+        "process_4s_subtitle": "Từ thụ động sang kiến tạo cùng AI",
+        "evaluation_title": "Phương pháp đánh giá mới",
+        "evaluation_subtitle": "Đánh giá quá trình, dự án và AI feedback"
+      },
+      "articulation": [
+        {
+          "level": "Tiểu học",
+          "focus": "Khơi gợi cảm xúc: ngôn ngữ kể chuyện, thơ ca, kịch nghệ.",
+          "output": "Podcast kể chuyện; Sách tranh tự sáng tác (AI minh họa)."
+        },
+        {
+          "level": "THCS",
+          "focus": "Tư duy hệ thống: thành thạo các dạng văn, phân tích tâm lý nhân vật.",
+          "output": "Tạp chí nội bộ; Kịch bản video ngắn; Tranh biện nhân văn."
+        },
+        {
+          "level": "THPT",
+          "focus": "Kiến tạo bản sắc: viết luận chuyên sâu, phê bình văn học so sánh.",
+          "output": "Dự án nghiên cứu văn hóa. Điểm cao kỳ thi Tốt nghiệp & ĐH."
+        }
+      ]
+    },
+    "lifeskills": {
+      "key": "lifeskills",
+      "year": "2026-2027",
+      "title": "Future with Heart",
+      "sections": [
+        "Chương trình Kỹ năng sống & Giá trị sống theo năm học 2026-2027."
+      ],
+      "outcomes": [],
+      "targets": {}
+    },
+    "principal_history": {
+      "key": "principal_history",
+      "year": "2026-2027",
+      "title": "Hành trình hình thành MIS",
+      "subtitle": "Từ một khởi đầu nhỏ đến một cộng đồng giáo dục bền vững.",
+      "intro": "Mỗi ngôi trường đều mang trong mình một câu chuyện. Câu chuyện của MIS bắt đầu không phải bằng những con số lớn, mà bằng một niềm tin giản dị: giáo dục cần được xây dựng từ nền tảng vững chắc và từ trái tim.",
+      "hero_quote": "Giáo dục con người Việt Nam phát triển toàn diện và phát huy tốt nhất tiềm năng, khả năng sáng tạo của mỗi cá nhân.",
+      "hero_badges": [
+        "2010 - nay",
+        "55 lớp học",
+        "Top 10 THPT Hà Nội 2024-2025"
+      ],
+      "stats": [
+        {
+          "value": "2010",
+          "label": "Khởi đầu hành trình"
+        },
+        {
+          "value": "55",
+          "label": "Lớp học hiện duy trì"
+        },
+        {
+          "value": "98,8%",
+          "label": "Học sinh đỗ ĐH top đầu Việt Nam"
+        },
+        {
+          "value": "135",
+          "label": "Huy chương ASMO 2025 cấp Quốc gia"
+        }
+      ],
+      "timeline": [
+        {
+          "period": "2010 - 2018",
+          "title": "Những viên gạch đầu tiên",
+          "summary": "MIS có tiền thân từ mô hình THCS FPT giai đoạn 2010 - 2018, đặt nền móng cho một môi trường giáo dục hiện đại và phát triển toàn diện.",
+          "highlights": [
+            "Năm học 2013 - 2014 khởi đầu với 03 lớp và 72 học sinh.",
+            "Xây dựng hệ thống cơ sở vật chất quy mô 1.500 học sinh, hơn 18.000m² sàn.",
+            "Giai đoạn 2016 - 2025, kết quả thi vào lớp 10 duy trì Top 2 ngoài công lập Quận Cầu Giấy và Top 10 ngoài công lập TP. Hà Nội."
+          ]
+        },
+        {
+          "period": "2018 - nay",
+          "title": "Chính thức thành lập Trường Đa Trí Tuệ MIS",
+          "summary": "Tháng 8/2018, Trường Tiểu học, THCS & THPT Đa Trí Tuệ MIS chính thức hình thành với mô hình liên cấp từ Tiểu học đến THPT.",
+          "highlights": [
+            "Duy trì 55 lớp học trong hệ thống liên cấp.",
+            "Xác lập sứ mệnh và triết lý: Học để tự do - Học để sáng tạo - Học để hạnh phúc - Thông minh để hạnh phúc.",
+            "Xây dựng môi trường giáo dục từ trái tim, khích lệ học sinh tự tin, tự lập và có trách nhiệm với cộng đồng."
+          ]
+        },
+        {
+          "period": "Tương lai",
+          "title": "Tiếp tục phát triển bằng 3 trụ cột",
+          "summary": "Trong bối cảnh giáo dục và công nghệ thay đổi nhanh, MIS tiếp tục phát triển theo hướng học thuật - công nghệ - giá trị sống.",
+          "highlights": [
+            "Future with AI: làm chủ công nghệ, AI và tư duy khoa học.",
+            "Future with Heart: nuôi dưỡng trí tuệ cảm xúc, giá trị sống và nhân cách.",
+            "Future with Foreign Languages: phát triển ngoại ngữ như công cụ học thuật và hội nhập."
+          ]
+        }
+      ],
+      "achievement_groups": [
+        {
+          "title": "Thành tích học thuật và công nghệ",
+          "items": [
+            "Vô địch quốc tế DC Wecode (2015, 2016, 2017).",
+            "Top 2 khu vực phía Bắc Robotacon - Thế vận hội Robot thế giới WRO (2018, 2019).",
+            "Giải Nhất và nhiều giải Nhì - Ba cuộc thi khoa học máy tính DXC Codes - Hoa Kỳ (2020, 2021).",
+            "Giải Vàng GMCC Global Mathematical Coding Competition 2020; Giải Đồng HKICO 2020; Giải Bạc quốc tế ISIF 2021.",
+            "Giải Vàng - Bạc quốc gia Olympic Lập trình sáng tạo Scratch Quốc tế 2022; Giải Vàng Khoa học máy tính Đông Nam Á 2022.",
+            "Giải Bạc Olympic lập trình sáng tạo quốc tế 2023; Giải Đồng Olympic tin học quốc gia 2023.",
+            "Giải Đồng và khuyến khích Tekmonk Coding Olympiad 2024; duy trì Top 5 quốc gia Thuật toán Bebras nhiều năm liên tiếp.",
+            "ASMO International 2025 cấp Quốc gia: 135 huy chương Vàng - Bạc - Đồng ở cả ba cấp học.",
+            "SteamCup Quốc tế Malaysia 2025: 2 Cúp Vàng và 3 Cúp Đồng, dẫn đầu đoàn Việt Nam."
+          ]
+        },
+        {
+          "title": "Kết quả học tập và hội nhập quốc tế",
+          "items": [
+            "Năm học 2024 - 2025, kết quả tốt nghiệp THPT của MIS xếp Top 10 các trường THPT TP. Hà Nội.",
+            "98,8% học sinh trúng tuyển các trường Đại học Top đầu Việt Nam.",
+            "Hơn 10% học sinh đạt học bổng cao tại các trường Đại học quốc tế.",
+            "Trên 50% học sinh đạt IELTS 5.0 - 7.5 và HSK 3 - 6."
+          ]
+        },
+        {
+          "title": "Ghi nhận tại các diễn đàn quốc tế",
+          "items": [
+            "Top 10 Thương hiệu Giáo dục Tiêu biểu Châu Á - Thái Bình Dương (Trung Quốc, 2025).",
+            "Top 50 Thương hiệu Nổi tiếng ASEAN (Singapore, 2025).",
+            "Top 20 Thương hiệu Sản phẩm Chất lượng Vàng vì Quyền lợi Người tiêu dùng Việt Nam (2025)."
+          ]
+        }
+      ],
+      "future_pillars": [
+        {
+          "title": "Future with AI",
+          "description": "Trang bị cho học sinh năng lực làm chủ công nghệ, trí tuệ nhân tạo và tư duy khoa học trong kỷ nguyên số.",
+          "icon": "fas fa-robot"
+        },
+        {
+          "title": "Future with Heart",
+          "description": "Nuôi dưỡng trí tuệ cảm xúc, giá trị sống và nhân cách để mỗi học sinh trở thành con người có trách nhiệm với xã hội.",
+          "icon": "fas fa-heart"
+        },
+        {
+          "title": "Future with Foreign Languages",
+          "description": "Phát triển ngoại ngữ như công cụ học thuật và hội nhập, giúp học sinh tự tin bước ra thế giới.",
+          "icon": "fas fa-globe-asia"
+        }
+      ],
+      "closing_title": "Một hành trình đang tiếp tục",
+      "closing_text": "Lịch sử hình thành MIS không chỉ là những mốc thời gian, mà là quá trình xây dựng một môi trường giáo dục ổn định, bền vững và hướng tới tương lai. Trong bối cảnh giáo dục thay đổi nhanh chóng, MIS tiếp tục giữ vững mục tiêu phát triển toàn diện, kết hợp giữa học thuật, công nghệ và giá trị sống để mỗi học sinh có thể trưởng thành theo cách phù hợp nhất với mình.",
+      "metadata": {
+        "source_doc": "HÀNH TRÌNH HÌNH THÀNH MIS.docx"
+      }
+    },
+    "edtech_ecosystem": {
+      "key": "edtech_ecosystem",
+      "year": "2026-2027",
+      "title": "Hệ sinh thái phần mềm hỗ trợ đào tạo 4.0",
+      "subtitle": "Công nghệ tiên phong – Nâng tầm tri thức",
+      "intro": "Tại MIS, các nền tảng EdTech được đưa vào định hướng chương trình và hoạt động trải nghiệm theo từng giai đoạn triển khai.",
+      "platforms": [
+        {
+          "key": "azota",
+          "name": "AZOTA",
+          "tagline": "Nền tảng EdTech tham chiếu cho định hướng số hóa quản lý và đánh giá.",
+          "award": "Giải Vàng Made in Viet Nam 2021",
+          "features": [
+            "Định hướng hệ sinh thái số kết nối Nhà trường - Giáo viên - Học sinh - Phụ huynh",
+            "Định hướng xây dựng ngân hàng đề thi số hóa",
+            "Mô hình chấm và phản hồi tự động bằng công nghệ AI",
+            "Cá nhân hóa lộ trình học tập theo dữ liệu",
+            "Tăng cường kênh theo dõi tiến độ học tập cho phụ huynh"
+          ]
+        },
+        {
+          "key": "icorrect",
+          "name": "iCorrect",
+          "tagline": "Công cụ luyện nói tiếng Anh được tham chiếu trong lộ trình ngoại ngữ.",
+          "features": [
+            "Luyện tập cá nhân hóa theo mục tiêu kỹ năng",
+            "Nhận phản hồi nhanh từ trợ lý AI",
+            "Bám sát nội dung chương trình học",
+            "Thực hành theo dạng bài mô phỏng IELTS"
+          ]
+        },
+        {
+          "key": "vr_ar",
+          "name": "Công nghệ VR/AR",
+          "tagline": "Trải nghiệm học tập đa chiều",
+          "features": [
+            "Mô hình 3D Toán, Hình học, Robot",
+            "Trải nghiệm nhập vai: thực địa số hóa",
+            "Phòng thí nghiệm ảo an toàn",
+            "Học vui - Hiểu sâu"
+          ]
+        },
+        {
+          "key": "nexta",
+          "name": "Lớp học thông minh Nexta",
+          "tagline": "Trợ lý cho hành trình cá nhân hóa",
+          "features": [
+            "Tương tác 1:1 theo hoạt động lớp học",
+            "Học liệu số sinh động & Gamification",
+            "Theo dõi điểm mạnh/yếu bằng AI-Track",
+            "Định hướng an toàn Internet và kỹ năng số"
+          ]
+        },
+        {
+          "key": "genai",
+          "name": "Generative AI trong học thuật",
+          "tagline": "Hỗ trợ nghiên cứu và sáng tạo",
+          "features": [
+            "Gemini, ChatGPT, DeepSeek Math, MathAI, GeoGebra AI (tham chiếu học thuật)",
+            "Canva AI & biên tập video chuyên nghiệp",
+            "Scratch (Tiểu học), Python (THCS & THPT)",
+            "Microsoft Ecosystem cộng tác trực tuyến"
+          ]
+        }
+      ]
+    }
+  },
+  "training_systems": [
+    {
+      "key": "steam",
+      "title": "Hệ STEAM Chuẩn / CLC",
+      "icon": "fas fa-cogs",
+      "description": "Chương trình STEAM theo chuẩn Bộ GD&ĐT, lồng ghép nội dung ứng dụng AI trong giảng dạy.",
+      "levels": {
+        "tieu_hoc": {
+          "english_hours": "7-9",
+          "chinese_hours": "1-2",
+          "english_target": "Cambridge Movers / CEFR Pre A2",
+          "chinese_target": "Chắc phát âm, giao tiếp cơ bản"
+        },
+        "thcs": {
+          "english_hours": "6-7",
+          "chinese_hours": "2",
+          "english_target": "CEFR A2+ / B1",
+          "chinese_target": "YCT2-3 (HSK1-2)"
+        },
+        "thpt": {
+          "english_hours": "6-7",
+          "chinese_hours": "3",
+          "english_target": "IELTS 4.0-6.0+ / CEFR B1-B2",
+          "chinese_target": "HSK 2-4"
+        }
+      }
+    },
+    {
+      "key": "math_tech",
+      "title": "Hệ Tài năng Toán – Công nghệ mới",
+      "icon": "fas fa-calculator",
+      "description": "Chương trình mũi nhọn bồi dưỡng học sinh năng lực vượt trội về Toán và STEM.",
+      "levels": {
+        "tieu_hoc": {
+          "english_hours": "11",
+          "chinese_hours": "1-2",
+          "english_target": "Cambridge Movers / CEFR Pre A2",
+          "chinese_target": "Chắc phát âm, giao tiếp cơ bản"
+        },
+        "thcs": {
+          "english_hours": "8",
+          "chinese_hours": "2",
+          "english_target": "CEFR A2+ / B1",
+          "chinese_target": "YCT2-3 (HSK1-2)"
+        },
+        "thpt": {
+          "english_hours": "7",
+          "chinese_hours": "3",
+          "english_target": "IELTS 4.0-6.0+ / CEFR B1-B2",
+          "chinese_target": "HSK 2-4"
+        }
+      }
+    },
+    {
+      "key": "language",
+      "title": "Hệ Tài năng Ngôn ngữ",
+      "icon": "fas fa-globe",
+      "description": "Chương trình mũi nhọn đào tạo song hành Tiếng Anh (IELTS) và Tiếng Trung (HSK).",
+      "sub_tracks": [
+        "Tiếng Anh tài năng",
+        "Tiếng Trung tài năng"
+      ],
+      "levels": {
+        "tieu_hoc": {
+          "english_hours": "14",
+          "chinese_hours": "1-3",
+          "english_target": "Cambridge Flyers / KET / PET / CEFR A2+",
+          "chinese_target": "YCT 1-3 (HSK1-2)"
+        },
+        "thcs": {
+          "english_hours": "10",
+          "chinese_hours": "5",
+          "english_target": "IELTS 4.0-6.0+ / CEFR B1-B2",
+          "chinese_target": "YCT4 (HSK3-4)"
+        },
+        "thpt": {
+          "english_hours": "10",
+          "chinese_hours": "5-8",
+          "english_target": "IELTS 6.5-8.0+ / CEFR B2-C1",
+          "chinese_target": "HSK 4-6"
+        }
+      },
+      "privileges": [
+        "Cường độ tiếp xúc tối đa: 10-18 tiết ngoại ngữ/tuần.",
+        "Hệ sinh thái Giáo viên Bản ngữ & AI: tương tác trực tiếp + trợ lý ảo 24/7.",
+        "Hệ thống giáo trình May đo: IELTS Master, Focus Plus, HSK Standard Course.",
+        "Học tập qua dự án (PBL): Video tranh biện, Infographic chuyên sâu."
+      ]
+    }
+  ]
+}

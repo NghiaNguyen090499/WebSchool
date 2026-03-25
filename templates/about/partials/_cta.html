@@ -1,0 +1,53 @@
+{% comment %}
+===========================================
+CTA (Call-to-Action) COMPONENT
+Usage: {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_eyebrow='...' (optional) cta_title='...' cta_subtitle='...' (optional) cta_primary='...' cta_primary_url='...' cta_secondary='...' (optional) cta_secondary_url='...' (optional) %}
+===========================================
+{% endcomment %}
+<section class="cta cta--{{ cta_variant|default:'gradient-red' }}" role="region" aria-label="Call to action">
+    <div class="cta__pattern" aria-hidden="true"></div>
+
+    <div class="cta__content">
+        <div class="container container--narrow">
+            {% if cta_eyebrow %}
+            <span class="badge badge--light">{{ cta_eyebrow }}</span>
+            {% endif %}
+
+            {% if cta_title %}
+            <h2 class="cta__title">{{ cta_title }}</h2>
+            {% endif %}
+
+            {% if cta_subtitle %}
+            <p class="cta__subtitle">{{ cta_subtitle }}</p>
+            {% endif %}
+
+            <div class="cta__button-group">
+                {% if cta_primary and cta_primary_url %}
+                {% if '#' in cta_primary_url or '/' in cta_primary_url %}
+                <a href="{{ cta_primary_url }}" class="btn btn--light btn--lg" aria-label="{{ cta_primary }}">
+                    {{ cta_primary }}
+                </a>
+                {% else %}
+                <a href="{% url cta_primary_url %}" class="btn btn--light btn--lg" aria-label="{{ cta_primary }}">
+                    {{ cta_primary }}
+                </a>
+                {% endif %}
+                {% endif %}
+
+                {% if cta_secondary and cta_secondary_url %}
+                {% if '#' in cta_secondary_url or '/' in cta_secondary_url %}
+                <a href="{{ cta_secondary_url }}" class="btn btn--ghost-light btn--lg"
+                    aria-label="{{ cta_secondary }}">
+                    {{ cta_secondary }}
+                </a>
+                {% else %}
+                <a href="{% url cta_secondary_url %}" class="btn btn--ghost-light btn--lg"
+                    aria-label="{{ cta_secondary }}">
+                    {{ cta_secondary }}
+                </a>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

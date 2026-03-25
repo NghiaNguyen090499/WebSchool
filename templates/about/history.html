@@ -1,0 +1,446 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block title %}Hành Trình Hình Thành MIS | MIS Đa Trí Tuệ{% endblock %}
+{% block meta_description %}Hành trình hình thành MIS - Từ một khởi đầu nhỏ đến một cộng đồng giáo dục bền vững. Khám
+phá câu chuyện xây dựng trường Đa Trí Tuệ MIS.{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/history.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="history-hero">
+    <img src="{% static 'images/anhtruong.jpg' %}" alt="" class="history-hero-bg" loading="eager" aria-hidden="true">
+    <div class="history-hero-overlay"></div>
+    <div class="history-hero-pattern"></div>
+    <div class="history-hero-content">
+        <div class="history-hero-badge">
+            <i class="fas fa-landmark"></i>
+            HÀNH TRÌNH HÌNH THÀNH
+        </div>
+        <h1 class="history-hero-title">
+            Hành Trình<br>
+            <span>Hình Thành MIS</span>
+        </h1>
+        <p class="history-hero-subtitle">
+            Từ một khởi đầu nhỏ đến một cộng đồng giáo dục bền vững
+        </p>
+        <div class="history-hero-quote">
+            <i class="fas fa-quote-left"></i>
+            <p>Mỗi ngôi trường đều mang trong mình một câu chuyện. Câu chuyện của MIS bắt đầu không phải bằng những con
+                số lớn, mà bằng một niềm tin giản dị: giáo dục cần được xây dựng từ nền tảng vững chắc và từ trái tim.
+            </p>
+        </div>
+    </div>
+    <a href="#history-timeline" class="history-scroll-indicator" aria-label="Cuộn xuống">
+        <span>Khám phá</span>
+        <i class="fas fa-chevron-down"></i>
+    </a>
+</section>
+
+<!-- Stats Bar -->
+<section class="history-stats-bar">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="history-stats-grid">
+            <div class="history-stat-item" x-data="{ count: 0 }"
+                x-intersect.once="let i = setInterval(() => { if(count < 15) count++; else clearInterval(i); }, 100)">
+                <div class="history-stat-number" x-text="count + '+'">15+</div>
+                <div class="history-stat-label">Năm xây dựng</div>
+            </div>
+            <div class="history-stat-item" x-data="{ count: 0 }"
+                x-intersect.once="let i = setInterval(() => { if(count < 55) count++; else clearInterval(i); }, 30)">
+                <div class="history-stat-number" x-text="count">55</div>
+                <div class="history-stat-label">Lớp học</div>
+            </div>
+            <div class="history-stat-item" x-data="{ count: 0 }"
+                x-intersect.once="let i = setInterval(() => { if(count < 25) count++; else clearInterval(i); }, 80)">
+                <div class="history-stat-number" x-text="count + '+'">25+</div>
+                <div class="history-stat-label">Giải thưởng quốc tế</div>
+            </div>
+            <div class="history-stat-item">
+                <div class="history-stat-number">98.8%</div>
+                <div class="history-stat-label">Đỗ ĐH Top đầu</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline Section -->
+<section id="history-timeline" class="history-timeline-section">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="history-section-header">
+            <div class="history-section-eyebrow">
+                <i class="fas fa-clock-rotate-left"></i>
+                Hành trình phát triển
+            </div>
+            <h2 class="history-section-title">Các Mốc Son Lịch Sử</h2>
+        </div>
+
+        <div class="history-timeline">
+            <!-- Milestone 1 -->
+            <div class="timeline-item" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'timeline-visible': show }">
+                <div class="timeline-marker">
+                    <div class="timeline-year">2010</div>
+                    <div class="timeline-dot"><i class="fas fa-seedling"></i></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-period">2010 – 2018</span>
+                            <h3>Những Viên Gạch Đầu Tiên</h3>
+                        </div>
+                        <div class="timeline-card-body">
+                            <p>Trường Tiểu học, THCS & THPT Đa Trí Tuệ MIS có tiền thân từ mô hình <strong>THCS
+                                    FPT</strong> giai đoạn 2010 – 2018, nơi đặt nền móng cho một môi trường giáo dục
+                                hiện đại, chú trọng phát triển toàn diện năng lực của học sinh.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 2 -->
+            <div class="timeline-item timeline-right" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'timeline-visible': show }">
+                <div class="timeline-marker">
+                    <div class="timeline-year">2013</div>
+                    <div class="timeline-dot"><i class="fas fa-building"></i></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-period">2013 – 2014</span>
+                            <h3>Khởi Đầu Khiêm Tốn</h3>
+                        </div>
+                        <div class="timeline-card-body">
+                            <p>Nhà trường khởi đầu với <strong>03 lớp</strong> và <strong>72 học sinh</strong>, đồng
+                                thời triển khai xây dựng hệ thống cơ sở vật chất quy mô phục vụ 1.500 học sinh với hơn
+                                <strong>18.000m² sàn</strong>, bao gồm phòng học hiện đại, khu bán trú, ký túc xá nội
+                                trú, nhà ăn và các khu chức năng chuyên biệt.
+                            </p>
+                            <div class="timeline-highlights">
+                                <span><i class="fas fa-users"></i> 03 lớp đầu tiên</span>
+                                <span><i class="fas fa-user-graduate"></i> 72 học sinh</span>
+                                <span><i class="fas fa-ruler-combined"></i> 18.000m² sàn</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 3 -->
+            <div class="timeline-item" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'timeline-visible': show }">
+                <div class="timeline-marker">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-period">2015 – 2017</span>
+                            <h3>Vô Địch Quốc Tế DC Wecode</h3>
+                        </div>
+                        <div class="timeline-card-body">
+                            <p>MIS khẳng định vị thế trên đấu trường quốc tế với danh hiệu <strong>Vô địch quốc tế DC
+                                    Wecode</strong> 3 năm liên tiếp (2015, 2016, 2017), mở đầu cho hàng loạt thành tích
+                                công nghệ nổi bật.</p>
+                            <div class="timeline-highlights">
+                                <span><i class="fas fa-medal"></i> 3 năm Vô địch</span>
+                                <span><i class="fas fa-code"></i> DC Wecode</span>
+                                <span><i class="fas fa-globe"></i> Quốc tế</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 4 -->
+            <div class="timeline-item timeline-right" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'timeline-visible': show }">
+                <div class="timeline-marker">
+                    <div class="timeline-year">2016</div>
+                    <div class="timeline-dot"><i class="fas fa-chart-line"></i></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-period">2016 – 2025</span>
+                            <h3>Top 2 Quận Cầu Giấy</h3>
+                        </div>
+                        <div class="timeline-card-body">
+                            <p>Chất lượng đào tạo được khẳng định khi kết quả thi vào lớp 10 của học sinh khối 9 giai
+                                đoạn 2016 – 2025 luôn duy trì <strong>Top 2 các trường ngoài công lập Quận Cầu
+                                    Giấy</strong> và <strong>Top 10 các trường ngoài công lập TP. Hà Nội</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 5 - The Big One -->
+            <div class="timeline-item" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'timeline-visible': show }">
+                <div class="timeline-marker">
+                    <div class="timeline-year timeline-year-major">2018</div>
+                    <div class="timeline-dot timeline-dot-major"><i class="fas fa-star"></i></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-card timeline-card-major">
+                        <div class="timeline-card-header">
+                            <span class="timeline-period">Tháng 8, 2018</span>
+                            <h3>Thành Lập Trường Đa Trí Tuệ MIS</h3>
+                        </div>
+                        <div class="timeline-card-body">
+                            <p>Trường Tiểu học, THCS & THPT Đa Trí Tuệ – MIS <strong>chính thức được thành lập</strong>
+                                với mô hình liên cấp từ Tiểu học đến THPT, hiện duy trì <strong>55 lớp học</strong>.</p>
+
+                            <blockquote class="timeline-quote">
+                                "Giáo dục con người Việt Nam phát triển toàn diện và phát huy tốt nhất tiềm năng, khả
+                                năng sáng tạo của mỗi cá nhân."
+                            </blockquote>
+
+                            <div class="timeline-philosophy">
+                                <div class="philosophy-title">Triết lý giáo dục</div>
+                                <div class="philosophy-items">
+                                    <span>Học để tự do</span>
+                                    <span>Học để sáng tạo</span>
+                                    <span>Học để hạnh phúc</span>
+                                    <span>Thông minh để hạnh phúc</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 6 -->
+            <div class="timeline-item timeline-right" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'timeline-visible': show }">
+                <div class="timeline-marker">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-dot"><i class="fas fa-laptop-code"></i></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-period">2020 – 2023</span>
+                            <h3>Chuỗi Giải Thưởng Quốc Tế</h3>
+                        </div>
+                        <div class="timeline-card-body">
+                            <div class="timeline-awards-grid">
+                                <div class="timeline-award">
+                                    <div class="award-icon"><i class="fas fa-medal"></i></div>
+                                    <div class="award-text">Giải Nhất DXC Codes - Hoa Kỳ</div>
+                                    <div class="award-year">2020-2021</div>
+                                </div>
+                                <div class="timeline-award">
+                                    <div class="award-icon"><i class="fas fa-medal"></i></div>
+                                    <div class="award-text">Giải Vàng GMCC</div>
+                                    <div class="award-year">2020</div>
+                                </div>
+                                <div class="timeline-award">
+                                    <div class="award-icon"><i class="fas fa-medal"></i></div>
+                                    <div class="award-text">Giải Bạc ISIF Quốc tế</div>
+                                    <div class="award-year">2021</div>
+                                </div>
+                                <div class="timeline-award">
+                                    <div class="award-icon"><i class="fas fa-medal"></i></div>
+                                    <div class="award-text">Giải Vàng KHMT Đông Nam Á</div>
+                                    <div class="award-year">2022</div>
+                                </div>
+                                <div class="timeline-award">
+                                    <div class="award-icon"><i class="fas fa-medal"></i></div>
+                                    <div class="award-text">Giải Đồng Olympic Tin học QG</div>
+                                    <div class="award-year">2023</div>
+                                </div>
+                                <div class="timeline-award">
+                                    <div class="award-icon"><i class="fas fa-medal"></i></div>
+                                    <div class="award-text">Giải Vàng-Bạc Scratch QT</div>
+                                    <div class="award-year">2022</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone 7 -->
+            <div class="timeline-item" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'timeline-visible': show }">
+                <div class="timeline-marker">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-dot"><i class="fas fa-award"></i></div>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-card">
+                        <div class="timeline-card-header">
+                            <span class="timeline-period">2025</span>
+                            <h3>Vinh Danh Quốc Tế</h3>
+                        </div>
+                        <div class="timeline-card-body">
+                            <p>MIS được vinh danh tại nhiều diễn đàn kinh tế – giáo dục quốc tế:</p>
+                            <div class="timeline-awards-badges">
+                                <div class="award-badge award-badge-gold">
+                                    <div class="badge-rank">TOP 10</div>
+                                    <div class="badge-title">Thương hiệu Giáo dục Tiêu biểu</div>
+                                    <div class="badge-region">Châu Á – Thái Bình Dương</div>
+                                </div>
+                                <div class="award-badge award-badge-silver">
+                                    <div class="badge-rank">TOP 50</div>
+                                    <div class="badge-title">Thương hiệu Nổi tiếng</div>
+                                    <div class="badge-region">ASEAN (Singapore)</div>
+                                </div>
+                                <div class="award-badge award-badge-bronze">
+                                    <div class="badge-rank">TOP 20</div>
+                                    <div class="badge-title">Sản phẩm Chất lượng Vàng</div>
+                                    <div class="badge-region">Việt Nam</div>
+                                </div>
+                            </div>
+                            <p class="mt-4">Tại <strong>SteamCup Quốc tế Malaysia 2025</strong>, đoàn học sinh MIS giành
+                                <strong>2 Cúp Vàng</strong> và <strong>3 Cúp Đồng</strong> - dẫn đầu đoàn Việt Nam. Học
+                                sinh đạt <strong>135 huy chương</strong> tại ASMO International 2025.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Academic Results Section -->
+<section class="history-results-section">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="history-section-header">
+            <div class="history-section-eyebrow">
+                <i class="fas fa-graduation-cap"></i>
+                Kết quả học tập
+            </div>
+            <h2 class="history-section-title">Kết Quả & Hội Nhập Quốc Tế</h2>
+            <p class="history-section-description">Năm học 2024 – 2025, kết quả tốt nghiệp THPT của MIS xếp Top 10 các
+                trường THPT TP. Hà Nội</p>
+        </div>
+
+        <div class="results-grid">
+            <div class="result-card" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'result-visible': show }">
+                <div class="result-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div class="result-number">98.8%</div>
+                <div class="result-text">Học sinh trúng tuyển các trường Đại học Top đầu Việt Nam</div>
+            </div>
+
+            <div class="result-card" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'result-visible': show }" style="transition-delay: 0.1s">
+                <div class="result-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <div class="result-number">10%+</div>
+                <div class="result-text">Đạt học bổng cao tại các trường Đại học quốc tế</div>
+            </div>
+
+            <div class="result-card" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'result-visible': show }" style="transition-delay: 0.2s">
+                <div class="result-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <div class="result-number">50%+</div>
+                <div class="result-text">Đạt chứng chỉ IELTS 5.0 – 7.5 và HSK 3 – 6</div>
+            </div>
+
+            <div class="result-card" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'result-visible': show }" style="transition-delay: 0.3s">
+                <div class="result-icon">
+                    <i class="fas fa-ranking-star"></i>
+                </div>
+                <div class="result-number">TOP 10</div>
+                <div class="result-text">Tốt nghiệp THPT TP. Hà Nội 2024-2025</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Future Vision Section -->
+<section class="history-future-section">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="history-section-header history-section-header-light">
+            <div class="history-section-eyebrow history-section-eyebrow-light">
+                <i class="fas fa-rocket"></i>
+                Tầm nhìn tương lai
+            </div>
+            <h2 class="history-section-title history-section-title-light">Ba Trụ Cột Chiến Lược</h2>
+            <p class="history-section-description history-section-description-light">Trong bối cảnh thế giới đang chuyển
+                mình mạnh mẽ bởi công nghệ, MIS tiếp tục định hướng phát triển giáo dục</p>
+        </div>
+
+        <div class="pillars-grid">
+            <div class="pillar-card" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'pillar-visible': show }">
+                <div class="pillar-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3 class="pillar-title">Future with AI</h3>
+                <p class="pillar-description">Trang bị cho học sinh năng lực làm chủ công nghệ, trí tuệ nhân tạo và tư
+                    duy khoa học trong kỷ nguyên số.</p>
+            </div>
+
+            <div class="pillar-card pillar-card-accent" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'pillar-visible': show }" style="transition-delay: 0.15s">
+                <div class="pillar-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="pillar-title">Future with Heart</h3>
+                <p class="pillar-description">Nuôi dưỡng trí tuệ cảm xúc, giá trị sống và nhân cách để mỗi học sinh trở
+                    thành con người có trách nhiệm với xã hội.</p>
+            </div>
+
+            <div class="pillar-card" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'pillar-visible': show }" style="transition-delay: 0.3s">
+                <div class="pillar-icon">
+                    <i class="fas fa-earth-americas"></i>
+                </div>
+                <h3 class="pillar-title">Future with Foreign Languages</h3>
+                <p class="pillar-description">Phát triển ngoại ngữ như công cụ học thuật và hội nhập, giúp học sinh tự
+                    tin bước ra thế giới.</p>
+            </div>
+        </div>
+
+        <div class="future-closing">
+            <blockquote>
+                <i class="fas fa-quote-left"></i>
+                <p>Lịch sử hình thành MIS không chỉ là những mốc thời gian. Đó là quá trình xây dựng một môi trường giáo
+                    dục ổn định, bền vững và hướng tới tương lai.</p>
+                <footer>Hành trình ấy vẫn đang tiếp tục.</footer>
+            </blockquote>
+            <div style="text-align:center;margin-top:1.5rem;">
+                <a href="https://docs.google.com/document/d/1Bxeoj8Afuna6nlDP-UA4eJ9-Dti_CtcY/edit?usp=drive_link&ouid=109509082830956020014&rtpof=true&sd=true"
+                    target="_blank" rel="noopener"
+                    style="display:inline-flex;align-items:center;gap:.5rem;font-size:.9rem;font-weight:600;color:#fff;background:linear-gradient(135deg,#1e3a5f,#0d47a1);padding:.65rem 1.5rem;border-radius:.5rem;text-decoration:none;transition:all .3s;box-shadow:0 2px 10px rgba(30,58,95,.3);">
+                    <i class="fas fa-file-alt"></i> Đọc toàn bộ tài liệu Lịch sử hình thành trường
+                    <i class="fas fa-external-link-alt" style="font-size:.75rem;opacity:.7;"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="history-cta-section">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2>Hãy trở thành một phần<br>của hành trình MIS</h2>
+        <p>Đăng ký tham quan trường và tìm hiểu môi trường giáo dục phù hợp nhất cho con bạn</p>
+        <div class="history-cta-buttons">
+            <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">
+                Đăng ký tư vấn <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            <a href="{% url 'about:strengths' %}" class="btn btn-outline-light btn-lg">
+                8 Điểm mạnh MIS <i class="fas fa-star ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

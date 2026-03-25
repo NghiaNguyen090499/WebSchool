@@ -1,0 +1,105 @@
+{% if panel.tag %}
+<span class="mis-tag">
+    {% if panel.tag.icon %}<i class="{{ panel.tag.icon }}"></i> {% endif %}{{ panel.tag.text }}
+</span>
+{% endif %}
+
+{% if panel.icon_circle %}
+<div class="mis-icon-circle {{ panel.icon_circle.color|default:'teal' }}">
+    <i class="{{ panel.icon_circle.icon }}"></i>
+</div>
+{% endif %}
+
+{% if panel.title %}
+{% if panel.heading_level == "h3" %}
+<h3>{{ panel.title }}</h3>
+{% else %}
+<h2>{{ panel.title }}</h2>
+{% endif %}
+{% endif %}
+{% if panel.subtitle %}<p class="mis-subtitle">{{ panel.subtitle }}</p>{% endif %}
+{% if panel.body %}<p>{{ panel.body }}</p>{% endif %}
+
+{% if panel.list %}
+<ul>
+    {% for bullet in panel.list %}
+    <li>{{ bullet }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if panel.chips %}
+<div class="mis-chip-lane" {% if panel.chips_margin_top %} style="margin-top:{{ panel.chips_margin_top }};" {% endif %}>
+    {% for chip in panel.chips %}
+    <span class="mis-chip">
+        {% if chip.icon %}<i class="{{ chip.icon }}"></i> {% endif %}{{ chip.text|default:chip }}
+    </span>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if panel.wire %}
+<div class="mis-wire" {% if panel.wire_margin_top %} style="margin-top:{{ panel.wire_margin_top }};" {% endif %}>{{
+    panel.wire }}</div>
+{% endif %}
+
+{% if panel.states %}
+<div class="mis-state-grid" {% if panel.states_margin_top %} style="margin-top:{{ panel.states_margin_top }};" {% endif %}>
+    {% for state in panel.states %}
+    <div class="mis-state">{{ state }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if panel.features %}
+<div class="mis-feature-row" {% if panel.features_margin_top %} style="margin-top:{{ panel.features_margin_top }};" {% endif %}>
+    {% for feat in panel.features %}
+    <div class="mis-feature-item">
+        {% if feat.icon %}
+        <div class="mis-feature-icon mis-icon-circle {{ feat.color|default:'teal' }}">
+            <i class="{{ feat.icon }}"></i>
+        </div>
+        {% endif %}
+        <div>
+            {% if feat.title %}<h4>{{ feat.title }}</h4>{% endif %}
+            {% if feat.text %}<p>{{ feat.text }}</p>{% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if panel.cards %}
+<div class="mis-grid {{ panel.cards_grid|default:'two' }}" {% if panel.cards_margin_top %}
+    style="margin-top:{{ panel.cards_margin_top }};" {% endif %}>
+    {% for card in panel.cards %}
+    <div class="mis-card">
+        {% if card.icon_circle %}
+        <div class="mis-icon-circle {{ card.icon_circle.color|default:'teal' }}" style="margin-bottom:.5rem;">
+            <i class="{{ card.icon_circle.icon }}"></i>
+        </div>
+        {% endif %}
+        {% if card.title %}<h3>{{ card.title }}</h3>{% endif %}
+        {% if card.text %}<p>{{ card.text }}</p>{% endif %}
+        {% if card.list %}
+        <ul>
+            {% for card_bullet in card.list %}
+            <li>{{ card_bullet }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if panel.cta %}
+<div class="mis-footer-cta">
+    {% if panel.cta.text %}<p>{{ panel.cta.text }}</p>{% endif %}
+    <a href="{{ panel.cta.href|default:'#' }}"
+        class="mis-btn {% if panel.cta.style == 'ghost' %}mis-btn-ghost{% else %}mis-btn-primary{% endif %}"
+        id="{{ panel.cta.id|default:'' }}">
+        {% if panel.cta.icon %}<i class="{{ panel.cta.icon }}"></i> {% endif %}{{ panel.cta.label }}
+    </a>
+</div>
+{% endif %}

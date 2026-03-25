@@ -1,0 +1,905 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}Đối Tác Chiến Lược - MIS Đa Trí Tuệ{% endblock %}
+{% block meta_description %}Khám phá mạng lưới đối tác chiến lược của Trường Đa Trí Tuệ MIS: STEAM, Robotics, ngoại ngữ, phát triển kỹ năng và cộng đồng.{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* ===== Partners Page Custom Styles ===== */
+    .partners-hero {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+        position: relative;
+        overflow: hidden;
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+    }
+    .partners-hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -30%;
+        width: 80%;
+        height: 200%;
+        background: radial-gradient(ellipse, rgba(220,38,38,0.12) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .partners-hero::after {
+        content: '';
+        position: absolute;
+        bottom: -20%;
+        left: -20%;
+        width: 60%;
+        height: 120%;
+        background: radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .partners-hero .floating-shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.06;
+        animation: float 20s ease-in-out infinite;
+    }
+    .partners-hero .floating-shape:nth-child(1) {
+        width: 400px; height: 400px;
+        top: -100px; right: -50px;
+        background: linear-gradient(135deg, #dc2626, #f59e0b);
+        animation-duration: 15s;
+    }
+    .partners-hero .floating-shape:nth-child(2) {
+        width: 300px; height: 300px;
+        bottom: -80px; left: 5%;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        animation-duration: 18s;
+        animation-delay: -5s;
+    }
+    .partners-hero .floating-shape:nth-child(3) {
+        width: 200px; height: 200px;
+        top: 30%; left: 50%;
+        background: linear-gradient(135deg, #10b981, #06b6d4);
+        animation-duration: 22s;
+        animation-delay: -10s;
+    }
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(30px, -40px) scale(1.05); }
+        66% { transform: translate(-20px, 30px) scale(0.95); }
+    }
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 20px;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 50px;
+        color: rgba(255,255,255,0.9);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+    }
+    .hero-badge i {
+        color: #f59e0b;
+    }
+    .partners-hero h1 {
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+    }
+    .partners-hero h1 span {
+        background: linear-gradient(135deg, #f59e0b, #ef4444);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .hero-subtitle {
+        font-size: 1.15rem;
+        color: rgba(255,255,255,0.7);
+        line-height: 1.7;
+        max-width: 600px;
+    }
+    .hero-highlight-cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+    @media (max-width: 768px) {
+        .hero-highlight-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+    .hero-highlight-card {
+        background: rgba(255,255,255,0.06);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        padding: 20px 16px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    .hero-highlight-card:hover {
+        background: rgba(255,255,255,0.1);
+        transform: translateY(-4px);
+        border-color: rgba(255,255,255,0.2);
+    }
+    .hero-highlight-card .icon-wrap {
+        width: 44px; height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px;
+        font-size: 1.1rem;
+    }
+    .hero-highlight-card .label {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.6);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    /* ===== Partner Category Section ===== */
+    .partner-category {
+        position: relative;
+    }
+    .partner-category-card {
+        background: #fff;
+        border-radius: 24px;
+        border: 1px solid rgba(0,0,0,0.06);
+        padding: 40px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+    .dark .partner-category-card {
+        background: rgb(23,23,23);
+        border-color: rgba(255,255,255,0.08);
+    }
+    .partner-category-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
+    }
+    .partner-category-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        border-radius: 24px 24px 0 0;
+    }
+    .partner-category-card.cat-steam::before { background: linear-gradient(90deg, #ef4444, #f97316); }
+    .partner-category-card.cat-language::before { background: linear-gradient(90deg, #3b82f6, #8b5cf6); }
+    .partner-category-card.cat-education::before { background: linear-gradient(90deg, #10b981, #06b6d4); }
+    .partner-category-card.cat-community::before { background: linear-gradient(90deg, #f59e0b, #ec4899); }
+
+    .cat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+    .cat-icon.steam { background: linear-gradient(135deg, #fef2f2, #fff7ed); color: #ef4444; }
+    .cat-icon.language { background: linear-gradient(135deg, #eff6ff, #f5f3ff); color: #3b82f6; }
+    .cat-icon.education { background: linear-gradient(135deg, #ecfdf5, #ecfeff); color: #10b981; }
+    .cat-icon.community { background: linear-gradient(135deg, #fffbeb, #fdf2f8); color: #f59e0b; }
+    .dark .cat-icon.steam { background: rgba(239,68,68,0.15); }
+    .dark .cat-icon.language { background: rgba(59,130,246,0.15); }
+    .dark .cat-icon.education { background: rgba(16,185,129,0.15); }
+    .dark .cat-icon.community { background: rgba(245,158,11,0.15); }
+
+    .partner-list {
+        list-style: none;
+        padding: 0;
+        margin: 16px 0 0;
+    }
+    .partner-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 0;
+        font-size: 0.92rem;
+        color: #525252;
+        border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .dark .partner-list li {
+        color: #a3a3a3;
+        border-bottom-color: rgba(255,255,255,0.04);
+    }
+    .partner-list li:last-child { border-bottom: none; }
+    .partner-list li i {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        flex-shrink: 0;
+        margin-top: 3px;
+    }
+    .partner-list li strong {
+        color: #171717;
+        font-weight: 600;
+    }
+    .dark .partner-list li strong {
+        color: #f5f5f5;
+    }
+    .partner-card-footer {
+        margin-top: auto;
+    }
+
+    /* ===== Quote Section ===== */
+    .partners-quote {
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    .partners-quote::before {
+        content: '\201C';
+        position: absolute;
+        top: -30px;
+        left: 5%;
+        font-size: 20rem;
+        color: rgba(255,255,255,0.03);
+        font-family: Georgia, serif;
+        line-height: 1;
+        pointer-events: none;
+    }
+    .partners-quote blockquote {
+        font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+        color: rgba(255,255,255,0.92);
+        font-style: italic;
+        font-weight: 400;
+        line-height: 1.7;
+        letter-spacing: -0.01em;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .quote-author {
+        margin-top: 24px;
+        color: rgba(255,255,255,0.5);
+        font-size: 0.9rem;
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    /* ===== Benefits Grid ===== */
+    .benefit-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 32px 28px;
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.35s ease;
+        position: relative;
+    }
+    .dark .benefit-card {
+        background: rgb(23,23,23);
+        border-color: rgba(255,255,255,0.06);
+    }
+    .benefit-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1);
+    }
+    .benefit-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #fef2f2, #fff7ed);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        color: #dc2626;
+        margin-bottom: 16px;
+    }
+    .dark .benefit-icon {
+        background: rgba(239,68,68,0.12);
+    }
+
+    /* ===== CTA Section ===== */
+    .partners-cta {
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    .partners-cta::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .partners-cta::after {
+        content: '';
+        position: absolute;
+        bottom: -40%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    /* ===== Animations ===== */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+
+    /* Network decoration lines */
+    .network-line {
+        position: absolute;
+        width: 1px;
+        background: linear-gradient(180deg, transparent, rgba(255,255,255,0.1), transparent);
+    }
+
+    /* ===== Logo Showcase ===== */
+    .logo-showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 20px;
+        align-items: center;
+    }
+    .logo-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 16px;
+        border-radius: 16px;
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        min-height: 120px;
+    }
+    .dark .logo-item {
+        background: rgb(23,23,23);
+        border-color: rgba(255,255,255,0.06);
+    }
+    .logo-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -8px rgba(0,0,0,0.1);
+    }
+    .logo-item img {
+        max-height: 60px;
+        max-width: 100%;
+        object-fit: contain;
+        filter: grayscale(30%);
+        opacity: 0.85;
+        transition: all 0.3s ease;
+    }
+    .logo-item:hover img {
+        filter: grayscale(0%);
+        opacity: 1;
+    }
+    .logo-initial {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .logo-item .logo-name {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #525252;
+        text-align: center;
+        margin-top: 8px;
+        line-height: 1.3;
+    }
+    .dark .logo-item .logo-name {
+        color: #a3a3a3;
+    }
+    .partner-mini-logos {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .dark .partner-mini-logos {
+        border-top-color: rgba(255,255,255,0.06);
+    }
+    .partner-mini-logo {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.06);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f5f5f5;
+        transition: all 0.3s ease;
+    }
+    .dark .partner-mini-logo {
+        background: rgba(255,255,255,0.05);
+        border-color: rgba(255,255,255,0.08);
+    }
+    .partner-mini-logo:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .partner-mini-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 4px;
+    }
+    .partner-mini-initial {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #fff;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- ========== HERO ========== -->
+<section class="partners-hero">
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 z-10 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div class="animate-on-scroll">
+                <div class="hero-badge mb-6">
+                    <i class="fas fa-handshake"></i>
+                    Đối Tác Chiến Lược
+                </div>
+                <h1 class="mb-6">
+                    Hợp Tác Cùng Các Tổ Chức <span>Giáo Dục Uy Tín</span>
+                </h1>
+                <p class="hero-subtitle mb-8">
+                    {{ page.content|truncatechars:200 }}
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#partner-categories" class="btn btn-primary btn-lg group">
+                        Khám phá đối tác
+                        <i class="fas fa-arrow-down ml-2 group-hover:translate-y-1 transition-transform"></i>
+                    </a>
+                    <a href="{% url 'contact:contact' %}" class="btn btn-ghost-invert btn-lg">
+                        Liên hệ hợp tác
+                    </a>
+                </div>
+            </div>
+
+            <div class="animate-on-scroll stagger-2">
+                <div class="hero-highlight-cards">
+                    <div class="hero-highlight-card">
+                        <div class="icon-wrap" style="background: rgba(239,68,68,0.15); color: #ef4444;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="label">Công nghệ & STEAM</div>
+                    </div>
+                    <div class="hero-highlight-card">
+                        <div class="icon-wrap" style="background: rgba(59,130,246,0.15); color: #3b82f6;">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="label">Ngoại Ngữ</div>
+                    </div>
+                    <div class="hero-highlight-card">
+                        <div class="icon-wrap" style="background: rgba(16,185,129,0.15); color: #10b981;">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="label">Giáo Dục & EQ</div>
+                    </div>
+                    <div class="hero-highlight-card">
+                        <div class="icon-wrap" style="background: rgba(245,158,11,0.15); color: #f59e0b;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="label">Cộng Đồng</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== STATS BAR ========== -->
+<section class="bg-white dark:bg-neutral-950 py-12 border-b border-neutral-100 dark:border-neutral-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="animate-on-scroll stagger-1">
+                <div class="text-3xl md:text-4xl font-extrabold text-red-600 mb-1">4</div>
+                <div class="text-sm font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Nhóm Đối Tác</div>
+            </div>
+            <div class="animate-on-scroll stagger-2">
+                <div class="text-3xl md:text-4xl font-extrabold text-red-600 mb-1">10+</div>
+                <div class="text-sm font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Tổ Chức Giáo Dục</div>
+            </div>
+            <div class="animate-on-scroll stagger-3">
+                <div class="text-3xl md:text-4xl font-extrabold text-red-600 mb-1">6</div>
+                <div class="text-sm font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Chương Trình Hợp Tác</div>
+            </div>
+            <div class="animate-on-scroll stagger-4">
+                <div class="text-3xl md:text-4xl font-extrabold text-red-600 mb-1">15+</div>
+                <div class="text-sm font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Năm Đồng Hành</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PARTNER LOGO SHOWCASE ========== -->
+{% if all_partners %}
+<section class="bg-neutral-50 dark:bg-neutral-900 py-16 border-b border-neutral-100 dark:border-neutral-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-10 animate-on-scroll">
+            <p class="text-sm font-semibold text-red-600 uppercase tracking-wider mb-2">Đối tác tin cậy</p>
+            <h3 class="text-xl md:text-2xl font-bold text-neutral-900 dark:text-white">
+                Đồng Hành Cùng Các Tổ Chức Uy Tín
+            </h3>
+        </div>
+        <div class="logo-showcase animate-on-scroll">
+            {% for partner in all_partners %}
+            <div class="logo-item">
+                {% if partner.logo %}
+                    <img src="{{ partner.logo.url }}" alt="{{ partner.name }}" loading="lazy">
+                {% else %}
+                    <div class="logo-initial" style="background: linear-gradient(135deg,
+                        {% if partner.partner_type == 'technology' %}#ef4444, #f97316
+                        {% elif partner.partner_type == 'language' %}#3b82f6, #8b5cf6
+                        {% elif partner.partner_type == 'education' %}#10b981, #06b6d4
+                        {% elif partner.partner_type == 'community' %}#f59e0b, #ec4899
+                        {% else %}#6b7280, #9ca3af{% endif %});">
+                        {{ partner.name|truncatechars:1 }}
+                    </div>
+                {% endif %}
+                <span class="logo-name">{{ partner.name }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ========== 4 PARTNER CATEGORIES ========== -->
+<section id="partner-categories" class="bg-neutral-50 dark:bg-neutral-900 py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 animate-on-scroll">
+            <span class="badge badge-primary eyebrow mb-4">Mạng Lưới Đối Tác</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+                4 Nhóm Đối Tác Chiến Lược
+            </h2>
+            <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+                MIS hợp tác với nhiều tổ chức giáo dục và đơn vị đào tạo uy tín nhằm mang đến cho học sinh cơ hội phát triển toàn diện.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- NHÓM 1: Công nghệ & STEAM -->
+            <div class="partner-category-card cat-steam animate-on-scroll stagger-1">
+                <div class="cat-icon steam">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-2">
+                    Đối Tác Công Nghệ & STEAM
+                </h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+                    Tiên phong triển khai giáo dục STEAM, Robotics và công nghệ sáng tạo cho học sinh từ sớm.
+                </p>
+                <ul class="partner-list">
+                    <li>
+                        <i class="fas fa-check" style="background: #fef2f2; color: #ef4444;"></i>
+                        <span><strong>Robohub Vietnam</strong> — Chương trình Robotics và công nghệ sáng tạo</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check" style="background: #fef2f2; color: #ef4444;"></i>
+                        <span><strong>MathExpress</strong> — Phát triển tư duy toán học theo phương pháp Singapore</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check" style="background: #fef2f2; color: #ef4444;"></i>
+                        <span><strong>Học viện STEM</strong> — Chương trình lập trình và công nghệ cho toàn trường</span>
+                    </li>
+                </ul>
+                <div class="partner-card-footer">
+                <!-- Partner logos in this category -->
+                {% if partners_tech %}
+                <div class="partner-mini-logos">
+                    {% for p in partners_tech %}
+                    <div class="partner-mini-logo" title="{{ p.name }}">
+                        {% if p.logo %}
+                            <img src="{{ p.logo.url }}" alt="{{ p.name }}">
+                        {% else %}
+                            <div class="partner-mini-initial" style="background: linear-gradient(135deg, #ef4444, #f97316);">{{ p.name|truncatechars:1 }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <a href="{% url 'about:robotics' %}" class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-red-600 hover:text-red-700 transition-colors">
+                    Xem chương trình Robotics <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                </div>
+            </div>
+
+            <!-- NHÓM 2: Ngoại ngữ -->
+            <div class="partner-category-card cat-language animate-on-scroll stagger-2">
+                <div class="cat-icon language">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-2">
+                    Đối Tác Đào Tạo Ngoại Ngữ
+                </h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+                    Phát triển đa ngôn ngữ, nền tảng hội nhập quốc tế và giao tiếp toàn cầu.
+                </p>
+                <ul class="partner-list">
+                    <li>
+                        <i class="fas fa-check" style="background: #eff6ff; color: #3b82f6;"></i>
+                        <span><strong>Jaxtina English Center</strong> — Đào tạo tiếng Anh học thuật và giao tiếp quốc tế</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check" style="background: #eff6ff; color: #3b82f6;"></i>
+                        <span><strong>Tiếng Trung Quốc Tế Thời Đại</strong> — Đào tạo tiếng Trung và du học Trung Quốc</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check" style="background: #eff6ff; color: #3b82f6;"></i>
+                        <span><strong>Giao lưu quốc tế</strong> — Kết nối với các trường đối tác trên thế giới</span>
+                    </li>
+                </ul>
+                <div class="partner-card-footer">
+                {% if partners_lang %}
+                <div class="partner-mini-logos">
+                    {% for p in partners_lang %}
+                    <div class="partner-mini-logo" title="{{ p.name }}">
+                        {% if p.logo %}
+                            <img src="{{ p.logo.url }}" alt="{{ p.name }}">
+                        {% else %}
+                            <div class="partner-mini-initial" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">{{ p.name|truncatechars:1 }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <a href="{% url 'about:overview_english' %}" class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors">
+                    Xem chương trình Ngoại ngữ <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                </div>
+            </div>
+
+            <!-- NHÓM 3: Giáo dục & Phát triển -->
+            <div class="partner-category-card cat-education animate-on-scroll stagger-3">
+                <div class="cat-icon education">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-2">
+                    Đối Tác Giáo Dục & Phát Triển
+                </h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+                    Trí tuệ cảm xúc, giá trị sống GRACE và kỹ năng lãnh đạo tương lai.
+                </p>
+                <ul class="partner-list">
+                    <li>
+                        <i class="fas fa-check" style="background: #ecfdf5; color: #10b981;"></i>
+                        <span><strong>Seroto Foundation</strong> — Chương trình giáo dục trí tuệ cảm xúc</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check" style="background: #ecfdf5; color: #10b981;"></i>
+                        <span><strong>Lyceum Global</strong> — Chương trình Giá trị sống và cảm xúc xã hội GRACE</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check" style="background: #ecfdf5; color: #10b981;"></i>
+                        <span><strong>Tư duy sáng tạo</strong> — Kỹ năng lãnh đạo và định hướng nghề nghiệp</span>
+                    </li>
+                </ul>
+                <div class="partner-card-footer">
+                {% if partners_edu %}
+                <div class="partner-mini-logos">
+                    {% for p in partners_edu %}
+                    <div class="partner-mini-logo" title="{{ p.name }}">
+                        {% if p.logo %}
+                            <img src="{{ p.logo.url }}" alt="{{ p.name }}">
+                        {% else %}
+                            <div class="partner-mini-initial" style="background: linear-gradient(135deg, #10b981, #06b6d4);">{{ p.name|truncatechars:1 }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <a href="{% url 'about:lifeskills' %}" class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-emerald-600 hover:text-emerald-700 transition-colors">
+                    Xem chương trình Kỹ năng sống <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                </div>
+            </div>
+
+            <!-- NHÓM 4: Cộng đồng & Trải nghiệm -->
+            <div class="partner-category-card cat-community animate-on-scroll stagger-4">
+                <div class="cat-icon community">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-2">
+                    Đối Tác Cộng Đồng & Trải Nghiệm
+                </h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+                    Phát triển tư duy nhân văn và trách nhiệm với xã hội.
+                </p>
+                <ul class="partner-list">
+                    <li>
+                        <i class="fas fa-check" style="background: #fffbeb; color: #f59e0b;"></i>
+                        <span><strong>Giáo dục giá trị sống</strong> — Hình thành nhân cách và đạo đức sống</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check" style="background: #fffbeb; color: #f59e0b;"></i>
+                        <span><strong>Hoạt động thiện nguyện</strong> — Trách nhiệm xã hội và dự án cộng đồng</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check" style="background: #fffbeb; color: #f59e0b;"></i>
+                        <span><strong>Trải nghiệm thực tế</strong> — Chương trình học tập cộng đồng cho học sinh</span>
+                    </li>
+                </ul>
+                <div class="partner-card-footer">
+                {% if partners_community %}
+                <div class="partner-mini-logos">
+                    {% for p in partners_community %}
+                    <div class="partner-mini-logo" title="{{ p.name }}">
+                        {% if p.logo %}
+                            <img src="{{ p.logo.url }}" alt="{{ p.name }}">
+                        {% else %}
+                            <div class="partner-mini-initial" style="background: linear-gradient(135deg, #f59e0b, #ec4899);">{{ p.name|truncatechars:1 }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <a href="{% url 'csr:list' %}" class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-amber-600 hover:text-amber-700 transition-colors">
+                    Xem Trách nhiệm xã hội <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== QUOTE ========== -->
+<section class="partners-quote py-20 lg:py-24">
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <div class="animate-on-scroll">
+            <blockquote>
+                "Thông qua mạng lưới hợp tác giáo dục uy tín, MIS mang đến cho học sinh một môi trường học tập hiện đại, nơi các em được tiếp cận với những chương trình giáo dục tiên tiến và cơ hội phát triển toàn diện."
+            </blockquote>
+            <p class="quote-author mt-6">
+                <strong class="text-white/80">MIS – Kết Nối Tri Thức, Mở Rộng Tương Lai</strong><br>
+                <span class="text-white/40 text-sm">MIS – Educating for the Future, with Heart.</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== BENEFITS ========== -->
+<section class="bg-white dark:bg-neutral-950 py-20 lg:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 animate-on-scroll">
+            <span class="badge badge-primary eyebrow mb-4">Giá Trị Hợp Tác</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+                Lợi Ích Khi Hợp Tác Cùng MIS
+            </h2>
+            <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+                Với định hướng <em>Future with AI – Future with Heart – Future with Foreign Languages</em>, MIS không ngừng mở rộng hợp tác.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="benefit-card animate-on-scroll stagger-1">
+                <div class="benefit-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-2">Nâng Cao Chất Lượng</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">
+                    Tiếp cận chương trình giáo dục tiên tiến từ đối tác chuyên nghiệp hàng đầu.
+                </p>
+            </div>
+            <div class="benefit-card animate-on-scroll stagger-2">
+                <div class="benefit-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-2">Phát Triển Toàn Diện</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">
+                    Phát triển tri thức, kỹ năng và khả năng hội nhập toàn cầu cho học sinh.
+                </p>
+            </div>
+            <div class="benefit-card animate-on-scroll stagger-3">
+                <div class="benefit-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-2">Kết Nối Quốc Tế</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">
+                    Giao lưu, trao đổi với các trường đối tác trên thế giới.
+                </p>
+            </div>
+            <div class="benefit-card animate-on-scroll stagger-4">
+                <div class="benefit-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="text-base font-bold text-neutral-900 dark:text-white mb-2">Chuẩn Bị Tương Lai</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400">
+                    Trang bị cho học sinh những năng lực cần thiết cho thế kỷ 21.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="partners-cta py-20 lg:py-24">
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <div class="animate-on-scroll">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Trở Thành Đối Tác Của MIS
+            </h2>
+            <p class="text-lg text-white/80 max-w-2xl mx-auto mb-10">
+                MIS luôn chào đón các tổ chức giáo dục, doanh nghiệp và đơn vị đào tạo cùng hợp tác xây dựng cộng đồng giáo dục tiên tiến.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Liên Hệ Hợp Tác
+                </a>
+                <a href="{% url 'admissions:list' %}" class="btn btn-ghost-invert btn-lg">
+                    Tìm hiểu tuyển sinh
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Intersection Observer for scroll animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>
+{% endblock %}

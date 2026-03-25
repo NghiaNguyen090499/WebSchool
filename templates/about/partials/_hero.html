@@ -1,0 +1,64 @@
+{% comment %}
+===========================================
+UNIVERSAL HERO COMPONENT
+Usage: {% include 'about/partials/_hero.html' with hero_variant='gradient-red' hero_eyebrow='...' hero_title='...' hero_subtitle='...' hero_headline='...' (optional) hero_cta_primary='...' hero_cta_primary_url='...' hero_cta_secondary='...' (optional) hero_cta_secondary_url='...' (optional) hero_highlight='...' (optional, for highlighted text in title) hero_image=page.image (optional) %}
+===========================================
+{% endcomment %}
+<section class="hero hero--{{ hero_variant|default:'gradient-red' }}" role="banner">
+    {% if hero_image %}
+    <img src="{{ hero_image.url }}" alt="{{ hero_title }}" class="hero__bg-image" loading="eager"
+        fetchpriority="high" width="1600" height="900" aria-hidden="true">
+    {% endif %}
+
+    <div class="hero__overlay" aria-hidden="true"></div>
+
+    {# Decorative elements #}
+    <div class="hero__deco hero__deco--blob-1" aria-hidden="true"></div>
+    <div class="hero__deco hero__deco--blob-2" aria-hidden="true"></div>
+    <div class="hero__deco hero__deco--blob-3" aria-hidden="true"></div>
+    <div class="hero__pattern" aria-hidden="true"></div>
+
+    <div class="hero__content">
+        <div class="container">
+            {% if hero_headline %}
+            <p class="hero__headline">
+                <span class="text-accent">{{ hero_headline|slice:":14" }}</span> –
+                <span class="text-accent-secondary">{{ hero_headline|slice:"17:" }}</span>
+            </p>
+            {% endif %}
+
+            {% if hero_eyebrow %}
+            <span class="badge badge--hero">{{ hero_eyebrow }}</span>
+            {% endif %}
+
+            <h1 class="hero__title">
+                {% if hero_highlight %}
+                {{ hero_title|default:"..." }} <span class="text-highlight">{{ hero_highlight }}</span>
+                {% else %}
+                {{ hero_title|default:"..." }}
+                {% endif %}
+            </h1>
+
+            {% if hero_subtitle %}
+            <p class="hero__subtitle">{{ hero_subtitle }}</p>
+            {% endif %}
+
+            {% if hero_cta_primary %}
+            <div class="hero__cta-group">
+                <a href="{% if '#' in hero_cta_primary_url %}{{ hero_cta_primary_url }}{% else %}{% url hero_cta_primary_url %}{% endif %}"
+                    class="btn btn--primary btn--lg" aria-label="{{ hero_cta_primary }} - {{ hero_title }}">
+                    {{ hero_cta_primary }}
+                    <i class="fas fa-arrow-right btn__icon" aria-hidden="true"></i>
+                </a>
+
+                {% if hero_cta_secondary %}
+                <a href="{% if '#' in hero_cta_secondary_url %}{{ hero_cta_secondary_url }}{% else %}{% url hero_cta_secondary_url %}{% endif %}"
+                    class="btn btn--ghost-light btn--lg" aria-label="{{ hero_cta_secondary }}">
+                    {{ hero_cta_secondary }}
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

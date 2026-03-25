@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} - MIS{% endblock %}
+
+{% block content %}
+<main class="curriculum">
+    {% include 'about/partials/curriculum/_curriculum_hero.html' with hero_id='hero' hero_theme='curriculum-hero--navy' hero_eyebrow='Chương trình STEAM' hero_title=page.title|default:'Hệ STEAM & Công nghệ sáng tạo' hero_subtitle='Đón đầu kỷ nguyên công nghệ với tư duy sáng tạo, kỹ năng số và năng lực giải quyết vấn đề cho học sinh MIS.' hero_bullet_1='Học qua dự án liên môn Science - Technology - Engineering - Art - Math.' hero_bullet_2='Lộ trình theo cấp học, tăng dần độ sâu tư duy thiết kế và năng lực số.' hero_bullet_3='Tập trung sản phẩm thật: robot, mô hình số, bài trình bày dự án.' hero_primary_label='Nhận tư vấn chương trình' hero_primary_url='admissions:list' hero_secondary_label='Tải lộ trình chi tiết' hero_secondary_url='#brochure' trust_badge_1='Project-based Learning' trust_badge_2='AI-enabled Classroom' trust_badge_3='Portfolio-based Outcomes' %}
+
+    {% include 'about/partials/curriculum/_trust_signal_strip.html' with signal_1_value='6 trục năng lực' signal_1_label='Nội dung cốt lõi xuyên suốt chương trình' signal_2_value='4 cấp học' signal_2_label='Thiết kế tăng dần độ khó theo lứa tuổi' signal_3_value='100% học sinh' signal_3_label='Tham gia dự án thực hành' %}
+
+    <section id="philosophy" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <h2 class="curriculum-h2">Academic Philosophy</h2>
+            <p class="curriculum-lead">STEAM tại MIS được thiết kế theo định hướng học qua trải nghiệm, tăng cường năng lực tư duy và khả năng ứng dụng vào tình huống thực tế.</p>
+            <div class="curriculum-grid curriculum-grid--3">
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-brain' title='Tư duy hệ thống' description='Phân tích vấn đề bằng cách tiếp cận logic và sáng tạo.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-laptop-code' title='Kỹ năng số' description='Làm quen công cụ số, lập trình cơ bản và an toàn số.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-users' title='Hợp tác & giao tiếp' description='Rèn làm việc nhóm, thuyết trình và quản lý dự án.' %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_roadmap_tabs_accordion.html' with roadmap_id='roadmap' roadmap_title='Curriculum Roadmap' roadmap_subtitle='Lộ trình theo cấp học với trọng tâm, công cụ và chuẩn đầu ra rõ ràng.' level_1_label='Tiểu học' level_1_badge='Lớp 1-5' level_1_focus='Khám phá khoa học, tư duy logic, lập trình trực quan, dự án đơn giản.' level_1_tool='Scratch Junior, mô hình STEM cơ bản, lớp học thông minh.' level_1_output='Sản phẩm mô hình, bài trình bày nhóm, nhật ký dự án.' level_2_label='THCS' level_2_badge='Lớp 6-9' level_2_focus='Tư duy thuật toán, robotics, thiết kế sản phẩm và giải quyết vấn đề xã hội.' level_2_tool='Python cơ bản, GeoGebra, Robotics kit, AI hỗ trợ mô phỏng.' level_2_output='Prototype dự án, infographic kỹ thuật, báo cáo thử nghiệm.' level_3_label='THPT' level_3_badge='Lớp 10-12' level_3_focus='Dự án capstone, định hướng nghề nghiệp công nghệ, ứng dụng AI và dữ liệu.' level_3_tool='Data project tools, AI co-pilot học tập, nền tảng thuyết trình số.' level_3_output='Portfolio tuyển sinh đại học, dự án liên ngành, hồ sơ năng lực số.' %}
+
+    <section id="learning-experience" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <h2 class="curriculum-h2">Learning Experience</h2>
+            <p class="curriculum-lead">Không gian học tập kết hợp lab, công cụ AI và phương pháp Project-based Learning để học sinh học sâu qua sản phẩm thực tế.</p>
+            <div class="curriculum-grid curriculum-grid--3">
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-robot' title='Robotics Lab' description='Lắp ráp, lập trình, thử nghiệm và tối ưu robot theo nhiệm vụ.' meta='Hands-on practice' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-vr-cardboard' title='Maker Studio' description='Thiết kế mô hình 3D, thử nghiệm cảm biến và tư duy thiết kế sản phẩm.' meta='Design thinking' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-microchip' title='AI Tools Integration' description='Khai thác AI để mô phỏng, phân tích và cải tiến ý tưởng dự án trong lớp.' meta='AI-assisted learning' %}
+            </div>
+        </div>
+    </section>
+
+    <section id="assessment-outcomes" class="curriculum-section curriculum-section--light curriculum-section--assessment-enhanced">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2">Assessment & Outcomes</h2>
+                <p class="curriculum-lead">Đánh giá dựa trên tiến trình và minh chứng sản phẩm nhằm đảm bảo đầu ra có thể đo lường.</p>
+            </div>
+
+            <div class="curriculum-assessment-layout">
+                <div class="curriculum-assessment-panel curriculum-reveal-delay-150" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Core Rubrics</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--info">Project-based</span>
+                    </div>
+                    <div class="curriculum-rubric">
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Năng lực giải quyết vấn đề' metric='Mức độ xác định vấn đề, đề xuất giải pháp, thử nghiệm và cải tiến.' evidence='Báo cáo dự án và bản ghi quy trình.' %}
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Năng lực hợp tác và giao tiếp' metric='Mức độ phối hợp nhóm, phân vai, trình bày và phản biện.' evidence='Video thuyết trình, phản hồi đồng đẳng.' %}
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Năng lực công nghệ số' metric='Mức độ sử dụng công cụ số và AI đúng mục tiêu học tập.' evidence='Portfolio sản phẩm số theo học kỳ.' %}
+                                </div>
+                </div>
+
+                <aside class="curriculum-assessment-panel curriculum-assessment-panel--milestones curriculum-reveal-delay-200" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Milestones</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--success">Visible Outputs</span>
+                    </div>
+                    <p class="curriculum-caption">Output artifacts are tracked each semester to validate practical competency growth.</p>
+                    <div class="curriculum-outcome-list curriculum-spacer-top">
+                                    <p class="curriculum-text">Chuẩn đầu ra tiêu biểu:</p>
+                                    <div class="curriculum-cta-row">
+                                        {% include 'about/partials/curriculum/_outcome_badge.html' with label='Sản phẩm dự án theo học kỳ' tone='success' %}
+                                        {% include 'about/partials/curriculum/_outcome_badge.html' with label='Portfolio năng lực số' tone='info' %}
+                                        {% include 'about/partials/curriculum/_outcome_badge.html' with label='Hồ sơ trình bày học thuật' tone='warning' %}
+                                    </div>
+                                </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_differentiation_matrix.html' with matrix_title='Differentiation: Vì sao STEAM tại MIS khác biệt?' row_1_label='Cách học' row_1_mis='Project-based, có rubric rõ và sản phẩm minh chứng.' row_1_traditional='Nặng lý thuyết, ít sản phẩm liên môn.' row_1_international='Đa dạng phương pháp, tùy thuộc từng hệ.' row_2_label='Tích hợp AI' row_2_mis='AI dùng như công cụ học tập có định hướng của giáo viên.' row_2_traditional='Ít tích hợp AI trong tiến trình lớp học.' row_2_international='Có tích hợp, mức độ triển khai khác nhau.' row_3_label='Đầu ra' row_3_mis='Portfolio dự án và năng lực số theo cấp học.' row_3_traditional='Đầu ra thiên về điểm kiểm tra.' row_3_international='Đầu ra theo chuẩn hệ, không luôn địa phương hóa.' row_4_label='Định hướng phụ huynh' row_4_mis='Theo dõi tiến trình học tập bằng minh chứng sản phẩm.' row_4_traditional='Theo dõi chủ yếu qua điểm số.' row_4_international='Theo dõi theo chuẩn trường, có thể khó đối chiếu nội địa.' %}
+
+    {% include 'about/partials/curriculum/_final_cta_cluster.html' with cta_title='Sẵn sàng trải nghiệm chương trình STEAM tại MIS?' cta_subtitle='Đặt lịch tham quan để quan sát lớp học thực tế và nhận tư vấn lộ trình phù hợp cho con.' visit_url='contact:contact' consult_url='admissions:list' brochure_dialog_id='steam-brochure-dialog' brochure_available=pdf_document.pdf_file %}
+
+    {% include 'about/partials/curriculum/_brochure_drawer.html' with brochure_dialog_id='steam-brochure-dialog' brochure_title='Brochure chương trình STEAM' %}
+</main>
+{% endblock %}

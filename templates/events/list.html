@@ -1,37 +1,196 @@
 {% extends 'base.html' %}
 {% load i18n static %}
 
-{% block title %}{% trans "Events" %} - EduSchool{% endblock %}
+{% block title %}Sự kiện - MIS Đa Trí Tuệ{% endblock %}
+{% block meta_description %}Sự kiện MIS: hoạt động học đường, trải nghiệm, hội thảo và chương trình kết nối cộng đồng.{% endblock %}
 
 {% block content %}
-<div class="bg-neutral min-h-screen py-20">
+<div class="bg-neutral-50 dark:bg-neutral-900 min-h-screen section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Page Header -->
         <div class="text-center mb-16 animate-fadeInUp">
-            <span class="inline-block px-4 py-2 bg-accent/20 text-primary-700 dark:text-primary-400 rounded-full text-sm font-semibold mb-4">
-                {% trans "School Life" %}
+            <span class="badge badge-accent eyebrow mb-4">
+                Đời sống học đường
             </span>
-            <h1 class="section-title font-display text-gray-900 dark:text-white mb-6">{% trans "School Events" %}</h1>
-            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                {% trans "Join us for exciting events and activities throughout the year" %}
+            <h1 class="page-title mb-6">Sự kiện của trường</h1>
+            <p class="lead max-w-2xl mx-auto">
+                Tham gia cùng chúng tôi trong các sự kiện và hoạt động hấp dẫn quanh năm
             </p>
+            <div class="mt-6 flex flex-wrap justify-center gap-3">
+                <a href="{% url 'events:list' %}"
+                    class="btn btn-sm {% if view_mode != 'calendar' %}btn-primary{% else %}btn-outline{% endif %}">
+                    <i class="fas fa-list mr-1.5"></i> Danh sách
+                </a>
+                <a href="{% url 'events:list' %}?view=calendar"
+                    class="btn btn-sm {% if view_mode == 'calendar' %}btn-primary{% else %}btn-outline{% endif %}">
+                    <i class="fas fa-calendar-alt mr-1.5"></i> Lịch tháng
+                </a>
+            </div>
         </div>
-        
+
+        {% if view_mode == 'calendar' %}
+        <section class="animate-fadeInUp">
+            <!-- Month Theme Banner -->
+            {% if month_theme %}
+            <div class="mb-6 rounded-2xl bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-700 dark:to-primary-800 p-5 md:p-6 text-white shadow-lg">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-white/15 backdrop-blur flex items-center justify-center text-xl">
+                        <i class="{{ month_theme_icon }}"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs uppercase tracking-widest text-white/70 font-semibold mb-0.5">Chủ điểm tháng</div>
+                        <h3 class="text-lg md:text-xl font-bold">{{ month_theme }}</h3>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Calendar Header -->
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                <div>
+                    <h2 class="title-md mb-1">{{ month_label }}</h2>
+                    <p class="text-muted text-sm">
+                        {% if event_count %}
+                        <span class="inline-flex items-center gap-1.5 text-primary-600 dark:text-primary-400 font-semibold">
+                            <i class="fas fa-calendar-check"></i> {{ event_count }} sự kiện
+                        </span>
+                        trong tháng này
+                        {% else %}
+                        Xem các sự kiện theo từng ngày trong tháng.
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="{% url 'events:list' %}?view=calendar&year={{ prev_month.year }}&month={{ prev_month.month }}"
+                        class="w-10 h-10 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-primary-50 hover:text-primary-600 hover:border-primary-200 dark:hover:bg-primary-900/30 dark:hover:text-primary-400 transition-all" title="Tháng trước">
+                        <i class="fas fa-chevron-left text-sm"></i>
+                    </a>
+                    <a href="{% url 'events:list' %}?view=calendar&year={{ today.year }}&month={{ today.month }}"
+                        class="px-4 h-10 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-sm font-semibold text-neutral-600 dark:text-neutral-300 hover:bg-primary-50 hover:text-primary-600 hover:border-primary-200 dark:hover:bg-primary-900/30 dark:hover:text-primary-400 transition-all" title="Về tháng hiện tại">
+                        <i class="fas fa-calendar-day mr-1.5"></i> Hôm nay
+                    </a>
+                    <a href="{% url 'events:list' %}?view=calendar&year={{ next_month.year }}&month={{ next_month.month }}"
+                        class="w-10 h-10 rounded-xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:bg-primary-50 hover:text-primary-600 hover:border-primary-200 dark:hover:bg-primary-900/30 dark:hover:text-primary-400 transition-all" title="Tháng sau">
+                        <i class="fas fa-chevron-right text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Calendar Grid -->
+            <p class="md:hidden text-sm text-muted mb-3"><i class="fas fa-hand-point-right mr-1"></i>Vuốt ngang để xem đầy đủ lịch.</p>
+            <div class="overflow-x-auto pb-2 -mx-1 px-1">
+                <div class="min-w-[760px]">
+                    <!-- Weekday Headers -->
+                    <div class="grid grid-cols-7 gap-1.5 mb-1.5">
+                        <div class="text-center py-2.5 text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 rounded-xl">T2</div>
+                        <div class="text-center py-2.5 text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 rounded-xl">T3</div>
+                        <div class="text-center py-2.5 text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 rounded-xl">T4</div>
+                        <div class="text-center py-2.5 text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 rounded-xl">T5</div>
+                        <div class="text-center py-2.5 text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 rounded-xl">T6</div>
+                        <div class="text-center py-2.5 text-xs font-bold uppercase tracking-wider text-primary-500 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 rounded-xl">T7</div>
+                        <div class="text-center py-2.5 text-xs font-bold uppercase tracking-wider text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 rounded-xl">CN</div>
+                    </div>
+
+                    <!-- Calendar Days -->
+                    <div class="space-y-1.5">
+                        {% for week in calendar_weeks %}
+                        <div class="grid grid-cols-7 gap-1.5">
+                            {% for day in week %}
+                            <div class="min-h-[110px] rounded-xl border p-2 transition-all duration-200
+                                {% if day.is_today %}
+                                    border-primary-400 dark:border-primary-500 bg-primary-50/60 dark:bg-primary-900/20 ring-1 ring-primary-300 dark:ring-primary-600 shadow-sm
+                                {% elif day.is_weekend and day.in_month %}
+                                    border-neutral-100 dark:border-neutral-700 bg-neutral-50/80 dark:bg-neutral-800/60
+                                {% elif day.in_month %}
+                                    border-neutral-200/60 dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:border-neutral-300 hover:shadow-sm dark:hover:border-neutral-600
+                                {% else %}
+                                    border-transparent bg-neutral-50/40 dark:bg-neutral-800/30 opacity-40
+                                {% endif %}
+                            ">
+                                <!-- Day Number -->
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg text-xs font-bold
+                                        {% if day.is_today %}
+                                            bg-primary-600 text-white shadow-sm
+                                        {% elif day.is_weekend and day.in_month %}
+                                            text-primary-500 dark:text-primary-400
+                                        {% elif day.in_month %}
+                                            text-neutral-700 dark:text-neutral-200
+                                        {% else %}
+                                            text-neutral-400 dark:text-neutral-600
+                                        {% endif %}
+                                    ">{{ day.date|date:"j" }}</span>
+                                    {% if day.events %}
+                                    <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+                                    {% endif %}
+                                </div>
+                                <!-- Events -->
+                                <div class="space-y-1">
+                                    {% for event in day.events|slice:":2" %}
+                                    <a href="{{ event.get_absolute_url }}"
+                                        class="group/evt flex items-start gap-1.5 px-1.5 py-1 rounded-lg bg-primary-50 dark:bg-primary-900/30 hover:bg-primary-100 dark:hover:bg-primary-900/50 transition-colors">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-primary-500 mt-1.5 shrink-0"></span>
+                                        <span class="text-xs font-medium text-primary-700 dark:text-primary-300 line-clamp-2 leading-tight group-hover/evt:text-primary-800 dark:group-hover/evt:text-primary-200">{{ event.title }}</span>
+                                    </a>
+                                    {% endfor %}
+                                    {% if day.events|length > 2 %}
+                                    <span class="block text-center text-xs text-primary-500 font-semibold cursor-default">+{{ day.events|length|add:"-2" }} khác</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-neutral-500 dark:text-neutral-400">
+                <span class="flex items-center gap-1.5">
+                    <span class="w-6 h-6 rounded-lg bg-primary-600 text-white flex items-center justify-center text-[10px] font-bold">{{ today|date:"j" }}</span>
+                    Hôm nay
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-primary-500"></span>
+                    Có sự kiện
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <span class="w-5 h-5 rounded bg-primary-50 dark:bg-primary-900/30 border border-primary-100 dark:border-primary-800"></span>
+                    Cuối tuần
+                </span>
+            </div>
+
+            {% if not has_events %}
+            <div class="text-center py-16 mt-6">
+                <div class="w-20 h-20 mx-auto bg-neutral-100 dark:bg-neutral-800 rounded-2xl flex items-center justify-center mb-5">
+                    <i class="fas fa-calendar-xmark text-3xl text-neutral-400 dark:text-neutral-500"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-2">Chưa có sự kiện trong {{ month_label }}</h3>
+                <p class="text-muted text-sm mb-4">Các sự kiện sẽ được cập nhật sớm theo kế hoạch phong trào nhà trường.</p>
+                <a href="{% url 'events:list' %}" class="btn btn-sm btn-outline">
+                    Xem danh sách sự kiện <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            {% endif %}
+        </section>
+        {% else %}
         <!-- Upcoming Events -->
         {% if upcoming_events %}
         <section class="mb-20 animate-fadeInUp">
             <div class="flex items-center mb-8">
                 <div class="flex-1">
-                    <h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-2">{% trans "Upcoming Events" %}</h2>
-                    <p class="text-gray-600 dark:text-gray-400">{% trans "Don't miss these exciting upcoming events" %}</p>
+                    <h2 class="title-md mb-2">Sự kiện sắp tới</h2>
+                    <p class="text-muted">Đừng bỏ lỡ những sự kiện hấp dẫn này</p>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {% for event in upcoming_events %}
-                <div class="card hover-lift overflow-hidden p-0 group">
+                <div class="card overflow-hidden p-0 group">
                     {% if event.image %}
                     <div class="relative h-64 overflow-hidden">
-                        <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full h-full object-cover image-hover">
+                        <img src="{{ event.image.url }}" alt="{{ event.title }}"
+                            class="w-full h-full object-cover image-hover" width="800" height="600">
                         <div class="absolute top-4 right-4">
                             <div class="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-xl shadow-lg">
                                 <div class="text-primary-600 font-bold text-sm">{{ event.date|date:"M d" }}</div>
@@ -51,21 +210,25 @@
                     </div>
                     {% endif %}
                     <div class="p-8">
-                        <div class="flex items-center text-primary-600 dark:text-primary-400 font-semibold mb-4 text-sm">
+                        <div
+                            class="flex items-center text-primary-600 dark:text-primary-400 font-semibold mb-4 text-sm">
                             <i class="far fa-calendar-alt mr-2"></i>
-                            <span>{{ event.date|date:"F d, Y" }}</span>
+                            <span>{{ event.date|date:"d/m/Y" }}</span>
                             {% if event.time %}
-                            <span class="ml-4"><i class="far fa-clock mr-1"></i>{{ event.time|time:"g:i A" }}</span>
+                            <span class="ml-4"><i class="far fa-clock mr-1"></i>{{ event.time|time:"H:i" }}</span>
                             {% endif %}
                         </div>
-                        <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">{{ event.title }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 leading-relaxed">{{ event.description }}</p>
-                        <div class="flex items-center text-sm text-gray-500 mb-6">
+                        <h3
+                            class="card-title mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">
+                            {{ event.title }}</h3>
+                        <p class="text-muted mb-4 line-clamp-3 leading-relaxed">{{ event.description|striptags|truncatechars:160 }}</p>
+                        <div class="flex items-center text-sm text-muted mb-6">
                             <i class="fas fa-map-marker-alt mr-2 text-primary-500"></i>
                             <span>{{ event.location }}</span>
                         </div>
-                        <a href="{{ event.get_absolute_url }}" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200">
-                            {% trans "Learn More" %} <i class="fas fa-arrow-right ml-2"></i>
+                        <a href="{{ event.get_absolute_url }}"
+                            class="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200">
+                            Tìm hiểu thêm <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>
@@ -73,59 +236,101 @@
             </div>
         </section>
         {% endif %}
-        
+
         <!-- Past Events -->
         {% if past_events %}
         <section class="animate-fadeInUp">
             <div class="flex items-center mb-8">
                 <div class="flex-1">
-                    <h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-2">{% trans "Past Events" %}</h2>
-                    <p class="text-gray-600 dark:text-gray-400">{% trans "Relive our memorable past events" %}</p>
+                    <h2 class="title-md mb-2">Sự kiện đã qua</h2>
+                    <p class="text-muted">Xem lại những sự kiện đáng nhớ đã diễn ra</p>
                 </div>
             </div>
             <div class="space-y-6">
                 {% for event in past_events %}
-                <div class="card hover-lift overflow-hidden p-0">
+                <div class="card overflow-hidden p-0">
                     <div class="flex flex-col md:flex-row gap-6">
                         {% if event.image %}
                         <div class="w-full md:w-64 h-64 flex-shrink-0 relative overflow-hidden rounded-2xl">
-                            <img src="{{ event.image.url }}" alt="{{ event.title }}" class="w-full h-full object-cover image-hover">
+                            <img src="{{ event.image.url }}" alt="{{ event.title }}"
+                                class="w-full h-full object-cover image-hover" width="800" height="600">
                         </div>
                         {% else %}
-                        <div class="w-full md:w-64 h-64 flex-shrink-0 bg-gradient-to-br from-gray-400 to-gray-600 rounded-2xl flex items-center justify-center">
+                        <div
+                            class="w-full md:w-64 h-64 flex-shrink-0 bg-gradient-to-br from-neutral-400 to-neutral-600 rounded-2xl flex items-center justify-center">
                             <i class="fas fa-calendar-alt text-6xl text-white/30"></i>
                         </div>
                         {% endif %}
                         <div class="flex-1 p-6 md:p-8">
-                            <div class="flex items-center text-primary-600 dark:text-primary-400 font-semibold mb-3 text-sm">
+                            <div
+                                class="flex items-center text-primary-600 dark:text-primary-400 font-semibold mb-3 text-sm">
                                 <i class="far fa-calendar-alt mr-2"></i>
-                                <span>{{ event.date|date:"F d, Y" }}</span>
+                                <span>{{ event.date|date:"d/m/Y" }}</span>
                             </div>
-                            <h3 class="text-2xl font-display font-bold mb-3 text-gray-900 dark:text-white">{{ event.title }}</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">{{ event.description|truncatewords:30 }}</p>
-                            <div class="flex items-center text-sm text-gray-500 mb-6">
+                            <h3 class="card-title mb-3">{{ event.title }}</h3>
+                            <p class="text-muted mb-4 leading-relaxed">{{ event.description|striptags|truncatechars:160 }}</p>
+                            <div class="flex items-center text-sm text-muted mb-6">
                                 <i class="fas fa-map-marker-alt mr-2 text-primary-500"></i>
                                 <span>{{ event.location }}</span>
                             </div>
-                            <a href="{{ event.get_absolute_url }}" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200">
-                                {% trans "View Details" %} <i class="fas fa-arrow-right ml-2"></i>
+                            <a href="{{ event.get_absolute_url }}"
+                                class="inline-flex items-center text-primary-600 dark:text-primary-400 font-semibold hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200">
+                                Xem chi tiết <i class="fas fa-arrow-right ml-2"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
+            {% if past_page_obj and past_page_obj.has_other_pages %}
+            <nav class="news-pagination mt-10">
+                {% if past_page_obj.has_previous %}
+                <a href="?page=1" class="news-pagination-btn" title="Trang đầu">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+                <a href="?page={{ past_page_obj.previous_page_number }}" class="news-pagination-btn"
+                    title="Trang trước">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+                {% else %}
+                <span class="news-pagination-btn disabled"><i class="fas fa-angle-double-left"></i></span>
+                <span class="news-pagination-btn disabled"><i class="fas fa-angle-left"></i></span>
+                {% endif %}
+
+                {% for num in past_page_obj.paginator.page_range %}
+                {% if past_page_obj.number == num %}
+                <span class="news-pagination-btn active">{{ num }}</span>
+                {% elif num > past_page_obj.number|add:'-3' and num < past_page_obj.number|add:'3' %}
+                <a href="?page={{ num }}" class="news-pagination-btn">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+
+                {% if past_page_obj.has_next %}
+                <a href="?page={{ past_page_obj.next_page_number }}" class="news-pagination-btn" title="Trang sau">
+                    <i class="fas fa-angle-right"></i>
+                </a>
+                <a href="?page={{ past_page_obj.paginator.num_pages }}" class="news-pagination-btn" title="Trang cuối">
+                    <i class="fas fa-angle-double-right"></i>
+                </a>
+                {% else %}
+                <span class="news-pagination-btn disabled"><i class="fas fa-angle-right"></i></span>
+                <span class="news-pagination-btn disabled"><i class="fas fa-angle-double-right"></i></span>
+                {% endif %}
+            </nav>
+            {% endif %}
         </section>
         {% endif %}
-        
+
         {% if not upcoming_events and not past_events %}
         <div class="text-center py-20">
-            <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-calendar-alt text-4xl text-gray-400"></i>
+            <div
+                class="w-24 h-24 bg-neutral-200 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-calendar-alt text-4xl text-muted"></i>
             </div>
-            <p class="text-xl text-gray-500 dark:text-gray-400 mb-2">{% trans "No events available" %}</p>
-            <p class="text-gray-400 dark:text-gray-500">{% trans "Events will appear here once they are added" %}</p>
+            <p class="text-xl text-muted mb-2">Chưa có sự kiện nào</p>
+            <p class="text-muted">Sự kiện sẽ xuất hiện ở đây khi được thêm vào</p>
         </div>
+        {% endif %}
         {% endif %}
     </div>
 </div>

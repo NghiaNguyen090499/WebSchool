@@ -1,0 +1,184 @@
+{% extends "core/lowfi/base.html" %}
+
+{% block lowfi_body %}
+<!-- ═══════════════════════════════════════════════════════════
+     LEVEL HERO  –  THCS (Secondary)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-level-hero thcs mis-reveal" id="thcs-hero">
+    <div class="mis-level-hero-grid">
+        <article>
+            <span class="mis-level-badge">
+                <i class="fas fa-comments"></i> Cấp THCS
+            </span>
+            <h2>Tư duy hệ thống & Sáng tạo số</h2>
+            <p class="mis-subtitle">
+                Phát triển tư duy phản biện, tranh biện và năng lực thực thi
+                dự án liên môn với AI — hành trang cho công dân số thế hệ mới.
+            </p>
+            <div class="mis-cta-row">
+                <a href="{% url 'contact:contact' %}" class="mis-btn mis-btn-primary" id="thcs-cta-consult">
+                    <i class="fas fa-phone-volume"></i> Đăng ký tư vấn
+                </a>
+                <a href="{% url 'admissions:list' %}" class="mis-btn mis-btn-ghost" id="thcs-cta-schedule">
+                    <i class="fas fa-calendar-check"></i> Đặt lịch trải nghiệm
+                </a>
+            </div>
+        </article>
+        <aside class="mis-level-quote">
+            <div class="mis-level-quote-icon">
+                <i class="fas fa-scale-balanced"></i>
+            </div>
+            <p>
+                Tranh biện không chỉ là kỹ năng giao tiếp mà là phương pháp tư duy:
+                xây dựng luận điểm, phân tích bằng chứng và tự phản biện để đạt được
+                hiểu biết sâu sắc hơn.
+            </p>
+            <div class="mis-level-quote-meta">
+                <strong>Debate Cockpit</strong>
+                <span>Vấn đề → Lập luận → Bằng chứng → Phản biện → Tự đánh giá</span>
+            </div>
+        </aside>
+    </div>
+    <div class="mis-level-stats">
+        <div class="mis-level-stat">
+            <strong>11–15</strong>
+            <span>Độ tuổi</span>
+        </div>
+        <div class="mis-level-stat">
+            <strong>IELTS</strong>
+            <span>4.0 – 6.0+</span>
+        </div>
+        <div class="mis-level-stat">
+            <strong>Python</strong>
+            <span>Lập trình nền tảng</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CORE MODULES
+     ═══════════════════════════════════════════════════════════ -->
+<div class="mis-section-header mis-reveal" data-delay="1">
+    <span class="mis-tag"><i class="fas fa-database"></i> Module trọng tâm</span>
+    <h2>Hai trụ cột kiến thức cấp THCS</h2>
+    <p class="mis-subtitle">Kết hợp dữ liệu khoa học với năng lực truyền thông số, xây nền tư duy hệ thống.</p>
+</div>
+
+<section class="mis-grid two mis-reveal" data-delay="1" id="thcs-modules">
+    <article class="mis-pillar-card thcs">
+        <span class="mis-pillar-index thcs">01</span>
+        <h3><i class="fas fa-database"></i> Toán & Khoa học dữ liệu</h3>
+        <ul>
+            <li>Xử lý Big Data theo ngữ cảnh học đường và dự án thực tế.</li>
+            <li>Hình học 3D với GeoGebra, mô phỏng trực quan bằng AI.</li>
+            <li>Nền tảng Python để xây tư duy thuật toán và mô hình hóa.</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip"><i class="fab fa-python"></i> Python</span>
+            <span class="mis-chip">GeoGebra</span>
+            <span class="mis-chip">Big Data</span>
+        </div>
+    </article>
+
+    <article class="mis-pillar-card thcs">
+        <span class="mis-pillar-index thcs">02</span>
+        <h3><i class="fas fa-pen-fancy"></i> Ngữ văn & Truyền thông số</h3>
+        <ul>
+            <li>Viết kịch bản, xây dựng tạp chí nội bộ theo quy trình biên tập.</li>
+            <li>Dùng Mind-map để bóc tách ý tưởng và logic nhân vật.</li>
+            <li>Viết phản biện có hỗ trợ AI, vẫn giữ bản sắc cá nhân.</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">Mind-map</span>
+            <span class="mis-chip">Editorial</span>
+            <span class="mis-chip">Debate</span>
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PROJECT STUDIO
+     ═══════════════════════════════════════════════════════════ -->
+<div class="mis-section-header mis-reveal" data-delay="2">
+    <span class="mis-tag"><i class="fas fa-diagram-project"></i> Studio dự án</span>
+    <h2>Sản phẩm thực tế từ học sinh THCS</h2>
+</div>
+
+<section class="mis-grid three mis-reveal" data-delay="2" id="thcs-projects">
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-a">
+            <i class="fas fa-chart-pie"></i>
+        </div>
+        <div class="mis-experience-body">
+            <h3>Infographic Studio</h3>
+            <p>Chuyển dữ liệu thành câu chuyện trực quan phục vụ truyền thông học đường.</p>
+        </div>
+    </article>
+
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-c">
+            <i class="fas fa-book-open"></i>
+        </div>
+        <div class="mis-experience-body">
+            <h3>Sổ tay Toán học số</h3>
+            <p>Sổ tay cộng tác có truy vết nguồn và phiên bản nội dung.</p>
+        </div>
+    </article>
+
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-d">
+            <i class="fas fa-user-secret"></i>
+        </div>
+        <div class="mis-experience-body">
+            <h3>Dự án Cảnh báo Deepfake</h3>
+            <p>Phát hiện tin giả và triển khai chiến dịch nâng cao nhận thức trong trường.</p>
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     LANGUAGE ROADMAP
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-section mis-reveal" data-delay="3" id="thcs-language">
+    <span class="mis-tag"><i class="fas fa-language"></i> Lộ trình ngoại ngữ</span>
+    <h2>Mục tiêu giao tiếp quốc tế</h2>
+    <div class="mis-feature-row">
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle thcs">
+                <i class="fas fa-flag-usa"></i>
+            </div>
+            <div>
+                <h4>Tiếng Anh – IELTS 4.0–6.0+</h4>
+                <p>Kết hợp tranh biện và luyện nói với trợ lý AI, đạt chuẩn giao tiếp quốc tế.</p>
+            </div>
+        </div>
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle thcs">
+                <i class="fas fa-earth-asia"></i>
+            </div>
+            <div>
+                <h4>Tiếng Trung – HSK 1–3</h4>
+                <p>Gắn với giao tiếp văn hóa và nhiệm vụ học thuật liên môn.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FINAL CTA
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-level-cta thcs mis-reveal" data-delay="4" id="thcs-final-cta">
+    <div>
+        <p class="mis-kicker">Tư duy hệ thống – Sáng tạo không giới hạn</p>
+        <h2>Đặt lịch trải nghiệm lớp THCS tại MIS</h2>
+    </div>
+    <div class="mis-cta-row">
+        <a href="{% url 'contact:contact' %}" class="mis-btn mis-btn-primary" id="thcs-cta-bottom-consult">
+            <i class="fas fa-phone-volume"></i> Nhận tư vấn 1:1
+        </a>
+        <a href="{% url 'admissions:list' %}" class="mis-btn mis-btn-ghost" id="thcs-cta-bottom-admissions">
+            <i class="fas fa-user-graduate"></i> Xem thông tin tuyển sinh
+        </a>
+    </div>
+</section>
+{% endblock %}

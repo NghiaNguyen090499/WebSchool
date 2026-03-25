@@ -1,0 +1,492 @@
+{% extends 'base.html' %}
+{% load i18n static media_tags about_extras %}
+
+{% block title %}{{ page.title|default:"Tại Sao Chọn MIS?" }} - Trường Đa Trí Tuệ MIS{% endblock %}
+{% block meta_description %}{{ page.content|striptags|truncatechars:160|default:"Khám phá lý do MIS là lựa chọn hàng đầu cho giáo dục toàn diện: Đa Trí Tuệ Gardner, Song ngữ Quốc tế, STEAM & Robotics, Giá trị GRACE." }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/about/whymis.css' %}?v=6">
+{% endblock %}
+
+{% block content %}
+<div class="whymis-page">
+    {% with sections=page.sections.all hero_section=page.sections.all|first %}
+    <section id="top" class="hero hero--gradient-red whymis-hero-section" role="banner">
+        {% if hero_section and hero_section.image %}
+        <img src="{{ hero_section.image.url }}" alt="" class="hero__bg-image" loading="eager" fetchpriority="high" aria-hidden="true">
+        {% elif page.image %}
+        <img src="{{ page.image.url }}" alt="" class="hero__bg-image" loading="eager" fetchpriority="high" aria-hidden="true">
+        {% else %}
+        <img src="{% static 'images/student-life/student-life-hero.jpg' %}" alt="" class="hero__bg-image" loading="eager" fetchpriority="high" aria-hidden="true">
+        {% endif %}
+        <div class="hero__overlay" aria-hidden="true"></div>
+        <div class="hero__deco hero__deco--blob-1" aria-hidden="true"></div>
+        <div class="hero__deco hero__deco--blob-3" aria-hidden="true"></div>
+        <div class="hero__content">
+            <div class="container">
+                <div class="whymis-hero-split">
+                    <div class="whymis-hero-split__text">
+                        <span class="badge badge--hero">
+                            {{ hero_section.eyebrow|default:page.get_page_type_display|default:"Tại sao chọn MIS?" }}
+                        </span>
+                        <h1 class="hero__title">
+                            {{ hero_section.title|default:page.title|default:"Tại Sao Phụ Huynh Tin Tưởng MIS?" }}
+                            {% if hero_section.highlight_text %}
+                            <br><span class="text-highlight">{{ hero_section.highlight_text }}</span>
+                            {% endif %}
+                        </h1>
+                        <p class="hero__subtitle">
+                            {{ hero_section.subtitle|default:page.content|default:"Chương trình giáo dục tại MIS được xây dựng trên những triết lý tiên tiến, giúp mỗi học sinh phát triển toàn diện."|striptags|truncatewords:30 }}
+                        </p>
+                        <div class="hero__cta-group">
+                            <a href="{% if hero_section.cta_url %}{{ hero_section.cta_url }}{% else %}{% url 'admissions:list' %}{% endif %}" class="btn btn--primary btn--lg">
+                                {{ hero_section.cta_text|default:"Đăng ký tư vấn" }}
+                                <i class="fas fa-arrow-right btn__icon" aria-hidden="true"></i>
+                            </a>
+                            <a href="{% if hero_section.cta_secondary_url %}{{ hero_section.cta_secondary_url }}{% else %}{% url 'contact:contact' %}{% endif %}" class="btn btn--ghost-light btn--lg">
+                                {{ hero_section.cta_secondary_text|default:"Đặt lịch tham quan" }}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="whymis-hero-split__visual">
+                        <img src="{% static 'images/about/whymis-hero-bg.jpg' %}" alt="8 Năng Lực Chuyên Môn & 5 Năng Lực Chung tại MIS" class="whymis-hero-infographic" loading="eager">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if sections %}
+    <nav class="whymis-nav" aria-label="Điều hướng nội dung trang">
+        <div class="whymis-shell">
+            <div class="whymis-nav-list">
+                <a class="whymis-nav-link is-active" href="#top" data-target="#top">Tổng Quan</a>
+                {% for section in sections %}
+                {% if section.layout != 'hero' %}
+                <a class="whymis-nav-link" href="#section-{{ forloop.counter }}" data-target="#section-{{ forloop.counter }}">
+                    {{ section.eyebrow|default:section.title|default:section.get_layout_display }}
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    {% for section in sections %}
+    {% if section.layout == 'hero' %}
+    {% elif section.layout == 'stats' %}
+    <section id="section-{{ forloop.counter }}" class="whymis-section whymis-bg-{{ section.background|default:'white' }} js-whymis-section">
+        <div class="whymis-shell">
+            <header class="whymis-header whymis-reveal">
+                {% if section.eyebrow %}<span class="whymis-eyebrow">{{ section.eyebrow }}</span>{% endif %}
+                <h2 class="whymis-title">{{ section.title|default:"Kết Quả Được Kiểm Chứng" }}</h2>
+                {% if section.subtitle or section.content %}
+                <p class="whymis-subtitle whymis-clamp-2">{{ section.subtitle|default:section.content|striptags|truncatewords:24 }}</p>
+                {% endif %}
+            </header>
+
+            <div class="whymis-stats-grid">
+                {% for kpi in section.get_kpi_list %}
+                <article class="whymis-stat-card whymis-reveal">
+                    <div class="whymis-stat-number js-stat-number" data-number="{{ kpi|stat_number }}">{{ kpi|stat_number }}</div>
+                    <div class="whymis-stat-label">{{ kpi|stat_label }}</div>
+                </article>
+                {% empty %}
+                <article class="whymis-stat-card whymis-reveal">
+                    <div class="whymis-stat-number js-stat-number" data-number="15+">15+</div>
+                    <div class="whymis-stat-label">Năm Kinh Nghiệm</div>
+                </article>
+                <article class="whymis-stat-card whymis-reveal">
+                    <div class="whymis-stat-number js-stat-number" data-number="98%">98%</div>
+                    <div class="whymis-stat-label">Đậu Đại Học Top</div>
+                </article>
+                <article class="whymis-stat-card whymis-reveal">
+                    <div class="whymis-stat-number js-stat-number" data-number="500+">500+</div>
+                    <div class="whymis-stat-label">Học Sinh Mỗi Năm</div>
+                </article>
+                <article class="whymis-stat-card whymis-reveal">
+                    <div class="whymis-stat-number js-stat-number" data-number="50+">50+</div>
+                    <div class="whymis-stat-label">Học Bổng Mỗi Năm</div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% elif section.layout == 'features' %}
+    <section id="section-{{ forloop.counter }}" class="whymis-section whymis-bg-{{ section.background|default:'light' }} js-whymis-section"
+        x-data="{
+            open: false, idx: -1, items: [],
+            init() { try { this.items = JSON.parse(this.$el.querySelector('.js-fd')?.textContent || '[]') } catch(e) {} },
+            show(i) { if(this.items[i]) { this.idx = i; this.open = true; document.body.style.overflow='hidden' } },
+            hide() { this.open = false; document.body.style.overflow='' },
+            next() { if(this.idx < this.items.length - 1) this.idx++ },
+            prev() { if(this.idx > 0) this.idx-- }
+        }">
+        <script type="application/json" class="js-fd">{{ section|feature_details_json }}</script>
+        <div class="whymis-shell">
+            <header class="whymis-header whymis-reveal">
+                {% if section.eyebrow %}<span class="whymis-eyebrow">{{ section.eyebrow }}</span>{% endif %}
+                <h2 class="whymis-title">{{ section.title|default:"Những Trải Nghiệm Làm Nên Khác Biệt" }}</h2>
+                {% if section.subtitle %}<p class="whymis-subtitle whymis-clamp-2">{{ section.subtitle|striptags|truncatewords:22 }}</p>{% endif %}
+            </header>
+
+            {% with timeline_items=section.get_timeline_list %}
+            <div class="whymis-pillars-grid">
+                {% if timeline_items %}
+                {% for item in timeline_items %}
+                <article class="whymis-pillar whymis-reveal whymis-pillar--clickable"
+                         @click="show({{ forloop.counter0 }})"
+                         @keydown.enter="show({{ forloop.counter0 }})"
+                         role="button" tabindex="0">
+                    <figure class="whymis-pillar-media">
+                        {% with card_image=section|feature_image_for:forloop.counter %}
+                        {% if card_image %}
+                        <img src="{{ card_image.url }}" alt="{{ item|feature_title }}" loading="lazy">
+                        {% else %}
+                        {% cycle 'images/about/features/mam-non.png' 'images/about/features/tieu-hoc.png' 'images/about/features/thcs.png' 'images/about/features/thpt.png' as feature_image_path silent %}
+                        <img src="{% static feature_image_path %}" alt="{{ item|feature_title }}" loading="lazy" decoding="async">
+                        {% endif %}
+                        {% endwith %}
+                    </figure>
+                    <span class="whymis-pillar-index">{{ forloop.counter|stringformat:"02d" }}</span>
+                    <h3 class="whymis-pillar-title">{{ item }}</h3>
+                    <span class="whymis-pillar-more" x-show="items.length > 0">
+                        <i class="fas fa-arrow-right"></i> Xem chi tiết
+                    </span>
+                </article>
+                {% endfor %}
+                {% else %}
+                <article class="whymis-pillar whymis-reveal">
+                    <figure class="whymis-pillar-media">
+                        <img src="{% static 'images/about/features/mam-non.png' %}" alt="Đa Trí Tuệ Gardner" loading="lazy" decoding="async">
+                    </figure>
+                    <span class="whymis-pillar-index">01</span>
+                    <h3 class="whymis-pillar-title">Đa Trí Tuệ Gardner</h3>
+                    <p class="whymis-pillar-body">Khơi mở và phát triển nhiều loại hình trí tuệ để mỗi học sinh học theo thế mạnh riêng.</p>
+                </article>
+                <article class="whymis-pillar whymis-reveal">
+                    <figure class="whymis-pillar-media">
+                        <img src="{% static 'images/about/features/tieu-hoc.png' %}" alt="Song Ngữ Quốc Tế" loading="lazy" decoding="async">
+                    </figure>
+                    <span class="whymis-pillar-index">02</span>
+                    <h3 class="whymis-pillar-title">Song Ngữ Quốc Tế</h3>
+                    <p class="whymis-pillar-body">Tăng năng lực tiếng Anh và tiếng Trung cùng các chuẩn đầu ra phù hợp từng cấp học.</p>
+                </article>
+                <article class="whymis-pillar whymis-reveal">
+                    <figure class="whymis-pillar-media">
+                        <img src="{% static 'images/about/features/thcs.png' %}" alt="STEAM và Robotics" loading="lazy" decoding="async">
+                    </figure>
+                    <span class="whymis-pillar-index">03</span>
+                    <h3 class="whymis-pillar-title">STEAM Và Robotics</h3>
+                    <p class="whymis-pillar-body">Ứng dụng công nghệ, sáng tạo và tư duy giải quyết vấn đề cho thế kỷ 21.</p>
+                </article>
+                {% endif %}
+            </div>
+            {% endwith %}
+        </div>
+
+        <!-- Feature Detail Modal -->
+        <div class="whymis-modal-overlay" x-cloak
+             x-show="open"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             @click.self="hide()"
+             @keydown.escape.window="hide()"
+             @keydown.left.window="prev()"
+             @keydown.right.window="next()">
+            <div class="whymis-modal"
+                 x-show="open"
+                 x-transition:enter="transition ease-out duration-300 delay-75"
+                 x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 @click.stop>
+                <button class="whymis-modal-close" @click="hide()" aria-label="Đóng">
+                    <i class="fas fa-times"></i>
+                </button>
+                <template x-if="idx >= 0 && items[idx]">
+                    <div class="whymis-modal-content">
+                        <span class="whymis-modal-index" x-text="String(idx + 1).padStart(2, '0')"></span>
+                        <h3 class="whymis-modal-title" x-text="items[idx].title"></h3>
+                        <div class="whymis-modal-body" x-html="items[idx].content"></div>
+                        <div class="whymis-modal-nav">
+                            <button class="whymis-modal-nav-btn" @click="prev()" :disabled="idx <= 0">
+                                <i class="fas fa-chevron-left"></i> Trước
+                            </button>
+                            <span class="whymis-modal-nav-count" x-text="(idx + 1) + ' / ' + items.length"></span>
+                            <button class="whymis-modal-nav-btn" @click="next()" :disabled="idx >= items.length - 1">
+                                Sau <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    {% elif section.layout == 'text_left' or section.layout == 'text_right' %}
+    <section id="section-{{ forloop.counter }}" class="whymis-section whymis-bg-{{ section.background|default:'white' }} js-whymis-section">
+        <div class="whymis-shell">
+                <div class="whymis-split {% if section.layout == 'text_right' %}whymis-split--reverse{% endif %}">
+                <div class="whymis-reveal">
+                    {% if section.eyebrow %}<span class="whymis-eyebrow">{{ section.eyebrow }}</span>{% endif %}
+                    <h2 class="whymis-title">{{ section.title }}</h2>
+                    {% if section.subtitle %}<p class="whymis-subtitle whymis-clamp-2">{{ section.subtitle|striptags|truncatewords:28 }}</p>{% endif %}
+                    {% if section.content %}
+                    <div class="whymis-copy whymis-copy--compact">{{ section.content|truncatewords:45|linebreaks }}</div>
+                    {% if section.content|wordcount > 45 %}
+                    <details class="whymis-more">
+                        <summary>Xem thêm nội dung</summary>
+                        <div class="whymis-more-content">
+                            <div class="whymis-copy">{{ section.content|linebreaks }}</div>
+                        </div>
+                    </details>
+                    {% endif %}
+                    {% endif %}
+
+                    {% if section.get_timeline_list %}
+                    <ul class="whymis-checklist">
+                        {% for item in section.get_timeline_list %}
+                        <li><i class="fas fa-check-circle" aria-hidden="true"></i><span>{{ item }}</span></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {% if section.cta_text %}
+                    <div class="whymis-actions" style="justify-content:flex-start; margin-top:1.2rem;">
+                        <a href="{{ section.cta_url|default:'#' }}" class="btn btn-primary">
+                            {{ section.cta_text }} <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <figure class="whymis-media whymis-reveal">
+                    {% if section.image %}
+                    <img src="{{ section.image.url }}" alt="{{ section.title }}" loading="lazy">
+                    {% else %}
+                    <img src="{% static 'images/partners/partners.png' %}" alt="{{ section.title|default:'Môi trường học tập tại MIS' }}" loading="lazy">
+                    {% endif %}
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    {% elif section.layout == 'quote' %}
+    <section id="section-{{ forloop.counter }}" class="whymis-section whymis-bg-{{ section.background|default:'light' }} js-whymis-section">
+        <div class="whymis-shell">
+            <figure class="whymis-quote-card whymis-reveal">
+                <blockquote class="whymis-quote">"{{ section.content }}"</blockquote>
+                {% if section.title %}<figcaption class="whymis-quote-author">{{ section.title }}</figcaption>{% endif %}
+                {% if section.subtitle %}<div class="whymis-quote-role">{{ section.subtitle }}</div>{% endif %}
+            </figure>
+        </div>
+    </section>
+
+    {% elif section.layout == 'cta' %}
+    {# CTA sections are handled by the shared partial at the bottom of the page #}
+
+    {% else %}
+    <section id="section-{{ forloop.counter }}" class="whymis-section whymis-bg-{{ section.background|default:'white' }} js-whymis-section">
+        <div class="whymis-shell whymis-shell--narrow">
+            <header class="whymis-header whymis-reveal">
+                {% if section.eyebrow %}<span class="whymis-eyebrow">{{ section.eyebrow }}</span>{% endif %}
+                {% if section.title %}<h2 class="whymis-title">{{ section.title }}</h2>{% endif %}
+                {% if section.subtitle %}<p class="whymis-subtitle whymis-clamp-2">{{ section.subtitle|striptags|truncatewords:28 }}</p>{% endif %}
+            </header>
+            {% if section.content %}
+            <div class="whymis-copy whymis-copy--compact whymis-reveal">{{ section.content|truncatewords:55|linebreaks }}</div>
+            {% if section.content|wordcount > 55 %}
+            <details class="whymis-more whymis-reveal">
+                <summary>Xem thêm nội dung</summary>
+                <div class="whymis-more-content">
+                    <div class="whymis-copy">{{ section.content|linebreaks }}</div>
+                </div>
+            </details>
+            {% endif %}
+            {% endif %}
+        </div>
+    </section>
+    {% endif %}
+
+    {% empty %}
+    <section id="section-fallback-1" class="whymis-section whymis-bg-light js-whymis-section">
+        <div class="whymis-shell">
+            <header class="whymis-header whymis-reveal">
+                <span class="whymis-eyebrow">Why MIS</span>
+                <h2 class="whymis-title">Nền Tảng Toàn Diện Cho Tương Lai</h2>
+                <p class="whymis-subtitle">Kết hợp học thuật, trải nghiệm cá nhân hóa và môi trường giáo dục nhân văn.</p>
+            </header>
+            <div class="whymis-pillars-grid">
+                <article class="whymis-pillar whymis-reveal">
+                    <figure class="whymis-pillar-media">
+                        <img src="{% static 'images/about/features/mam-non.png' %}" alt="Đa Trí Tuệ Gardner" loading="lazy" decoding="async">
+                    </figure>
+                    <span class="whymis-pillar-index">01</span>
+                    <h3 class="whymis-pillar-title">Đa Trí Tuệ Gardner</h3>
+                    <p class="whymis-pillar-body">Khơi mở và phát triển nhiều loại hình trí tuệ để mỗi học sinh học theo thế mạnh riêng.</p>
+                </article>
+                <article class="whymis-pillar whymis-reveal">
+                    <figure class="whymis-pillar-media">
+                        <img src="{% static 'images/about/features/tieu-hoc.png' %}" alt="Song Ngữ Quốc Tế" loading="lazy" decoding="async">
+                    </figure>
+                    <span class="whymis-pillar-index">02</span>
+                    <h3 class="whymis-pillar-title">Song Ngữ Quốc Tế</h3>
+                    <p class="whymis-pillar-body">Tăng năng lực tiếng Anh và tiếng Trung cùng các chuẩn đầu ra phù hợp từng cấp học.</p>
+                </article>
+                <article class="whymis-pillar whymis-reveal">
+                    <figure class="whymis-pillar-media">
+                        <img src="{% static 'images/about/features/thpt.png' %}" alt="STEAM và Robotics" loading="lazy" decoding="async">
+                    </figure>
+                    <span class="whymis-pillar-index">03</span>
+                    <h3 class="whymis-pillar-title">STEAM Và Robotics</h3>
+                    <p class="whymis-pillar-body">Ứng dụng công nghệ, sáng tạo và tư duy giải quyết vấn đề cho thế kỷ 21.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    {% endfor %}
+    {% endwith %}
+</div>
+
+{% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_eyebrow='MIS' cta_title='Sẵn Sàng Cho Hành Trình Tuyệt Vời?' cta_subtitle='Đặt lịch tham quan hoặc đăng ký tư vấn để tìm lộ trình phù hợp nhất cho con.' cta_primary='Đăng ký tư vấn' cta_primary_url='admissions:list' cta_secondary='Đặt lịch tham quan' cta_secondary_url='contact:contact' %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const revealItems = document.querySelectorAll('.whymis-reveal');
+        if (!reducedMotion && 'IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.18,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealItems.forEach((item) => revealObserver.observe(item));
+        } else {
+            revealItems.forEach((item) => item.classList.add('is-visible'));
+        }
+
+        const statNodes = document.querySelectorAll('.js-stat-number');
+        const parseStat = (rawValue) => {
+            const raw = (rawValue || '').toString().trim();
+            const digits = raw.match(/\d+/g);
+            const target = digits ? parseInt(digits.join(''), 10) : 0;
+            const suffix = raw.replace(/[\d.,]/g, '');
+            return {
+                raw,
+                target,
+                suffix,
+            };
+        };
+
+        const animateStat = (node) => {
+            if (node.dataset.counted === '1') {
+                return;
+            }
+            node.dataset.counted = '1';
+            const { raw, target, suffix } = parseStat(node.dataset.number || node.textContent);
+            if (!target || reducedMotion) {
+                node.textContent = raw;
+                return;
+            }
+
+            const duration = 1300;
+            const start = performance.now();
+            const frame = (timestamp) => {
+                const progress = Math.min((timestamp - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                node.textContent = Math.round(target * eased) + suffix;
+                if (progress < 1) {
+                    requestAnimationFrame(frame);
+                } else {
+                    node.textContent = raw;
+                }
+            };
+            requestAnimationFrame(frame);
+        };
+
+        if ('IntersectionObserver' in window && !reducedMotion) {
+            const statObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        animateStat(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.4
+            });
+
+            statNodes.forEach((node) => statObserver.observe(node));
+        } else {
+            statNodes.forEach((node) => animateStat(node));
+        }
+
+        const navLinks = Array.from(document.querySelectorAll('.whymis-nav-link[data-target]'));
+        if (!navLinks.length || !('IntersectionObserver' in window)) {
+            return;
+        }
+
+        const sectionMap = new Map();
+        navLinks.forEach((link) => {
+            const target = document.querySelector(link.dataset.target);
+            if (target) {
+                sectionMap.set(target.id, link);
+            }
+        });
+
+        const setActiveLink = (linkToActivate) => {
+            navLinks.forEach((link) => {
+                link.classList.toggle('is-active', link === linkToActivate);
+            });
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                const link = sectionMap.get(entry.target.id);
+                if (link) {
+                    setActiveLink(link);
+                }
+            });
+        }, {
+            threshold: 0.45,
+            rootMargin: '-20% 0px -45% 0px'
+        });
+
+        sectionMap.forEach((_, id) => {
+            const section = document.getElementById(id);
+            if (section) {
+                sectionObserver.observe(section);
+            }
+        });
+
+        navLinks.forEach((link) => {
+            link.addEventListener('click', function () {
+                setActiveLink(this);
+            });
+        });
+    });
+</script>
+{% endblock %}

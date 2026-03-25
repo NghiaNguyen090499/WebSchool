@@ -1,0 +1,22 @@
+{% load i18n %}
+
+{% if breadcrumb_section or breadcrumb_current %}
+<nav class="flex items-center gap-2 text-sm mb-4" aria-label="Breadcrumb">
+    <a href="{% url 'portal:dashboard' %}" class="text-muted hover:text-primary transition-colors">
+        <i class="fas fa-home icon-base"></i>
+    </a>
+    {% if breadcrumb_section %}
+    <span class="text-neutral-300">/</span>
+    {% if breadcrumb_section_url %}
+    <a href="{{ breadcrumb_section_url }}" class="text-muted hover:text-primary transition-colors">{{ breadcrumb_section
+        }}</a>
+    {% else %}
+    <span class="text-muted">{{ breadcrumb_section }}</span>
+    {% endif %}
+    {% endif %}
+    {% if breadcrumb_current %}
+    <span class="text-neutral-300">/</span>
+    <span class="font-medium" style="color:var(--p-gray-800)">{{ breadcrumb_current }}</span>
+    {% endif %}
+</nav>
+{% endif %}

@@ -1,0 +1,957 @@
+{% extends "landing/base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block meta_description %}{{ page.meta_description }}{% endblock %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════ */
+:root {
+  --navy: #050a1a;
+  --navy2: #0d1440;
+  --cyan: #00d4ff;
+  --cyan2: #38bdf8;
+  --purple: #7c3aed;
+  --gold: #f59e0b;
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.6);
+  --panel: #111827;
+  --border: rgba(255,255,255,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #050a1a;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ═══════════════════════════════════════════
+   POSTER PAGE (both pages share this structure)
+   ═══════════════════════════════════════════ */
+.poster-page {
+  width: min(680px, 100%);
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #050a1a 0%, #0d1440 50%, #0a0820 100%);
+}
+
+/* BG glows */
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-tl {
+  width: clamp(240px, 50vw, 400px);
+  height: clamp(240px, 50vw, 400px);
+  top: -80px; left: -60px;
+  background: radial-gradient(circle, rgba(56,189,248,0.18) 0%, transparent 70%);
+}
+.glow-br {
+  width: clamp(300px, 60vw, 500px);
+  height: clamp(300px, 60vw, 500px);
+  bottom: -100px; right: -80px;
+  background: radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%);
+}
+.glow-mid {
+  width: clamp(360px, 80vw, 600px);
+  height: clamp(180px, 35vw, 300px);
+  top: 40%; left: 50%; transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 70%);
+}
+
+/* Stars */
+.stars { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.star {
+  position: absolute;
+  background: #fff;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Skyline */
+.skyline {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.skyline img {
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.27;
+  mix-blend-mode: screen;
+}
+
+/* Content z-index */
+.page-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(14px, 2.5vw, 22px) clamp(16px, 4vw, 36px) clamp(10px, 2vw, 16px);
+}
+
+/* ════════════════════════════════
+   PAGE 1 — HERO & MAIN POSTER
+   ════════════════════════════════ */
+
+/* Logo / Hero */
+.hero-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  width: 100%;
+  animation: fadeSlideDown 0.8s ease both;
+}
+.hero-logo-img {
+  width: 100%;
+  max-width: 680px;
+  height: auto;
+  display: block;
+}
+
+/* Date venue */
+.date-venue {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 2vw, 14px);
+  margin: clamp(6px, 1.2vw, 10px) 0 clamp(4px, 1vw, 8px);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 18px);
+  width: 100%;
+  animation: fadeSlideDown 0.8s 0.15s ease both;
+}
+.time-badge {
+  background: #00d4ff;
+  color: #050a1a;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(9px, 1.6vw, 11px);
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+.date-pill {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(16px, 3.6vw, 24px);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  padding: 2px clamp(8px, 1.6vw, 14px);
+  white-space: nowrap;
+}
+.venue-text { flex: 1; text-align: right; }
+.venue-text .v1 {
+  font-weight: 700;
+  font-size: clamp(9px, 1.8vw, 12px);
+  color: #fff;
+  line-height: 1.3;
+}
+.venue-text .v2 {
+  font-size: clamp(8px, 1.4vw, 10px);
+  color: rgba(255,255,255,0.5);
+  margin-top: 2px;
+}
+
+/* Tagline pill */
+.tagline-pill {
+  border: 2px solid transparent;
+  background:
+    rgba(255,255,255,0.04),
+    linear-gradient(160deg, #050a1a, #0d1440) padding-box,
+    linear-gradient(135deg, #00d4ff, #7c3aed) border-box;
+  border-radius: 999px;
+  padding: clamp(8px, 1.6vw, 12px) clamp(16px, 3vw, 28px);
+  text-align: center;
+  margin-bottom: clamp(4px, 1vw, 8px);
+  width: 100%;
+  animation: fadeSlideUp 0.8s 0.3s ease both;
+}
+.tagline-pill p {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(12px, 2.6vw, 18px);
+  color: #fff;
+  line-height: 1.3;
+  letter-spacing: .5px;
+}
+
+/* Privilege header */
+.privilege-header {
+  text-align: center;
+  margin-bottom: clamp(2px, 0.5vw, 6px);
+  animation: fadeSlideUp 0.8s 0.4s ease both;
+}
+.privilege-header .ph1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(12px, 2.4vw, 16px);
+  color: #fff;
+  letter-spacing: .5px;
+}
+.privilege-header .ph1 em { color: #00d4ff; font-style: normal; }
+.privilege-header .ph2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: clamp(10px, 1.9vw, 13px);
+  color: rgba(255,255,255,0.7);
+  margin-top: 2px;
+}
+.privilege-header .ph2 em { color: #00d4ff; font-style: normal; }
+
+/* Benefit section - full-width strip image */
+.benefit-section {
+  width: 100%;
+  margin-bottom: 0;
+  animation: fadeSlideUp 0.8s 0.5s ease both;
+}
+.benefit-strip-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
+.benefit-labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(4px, 1vw, 10px);
+  text-align: center;
+}
+.benefit-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(9px, 1.7vw, 12px);
+  color: #fff;
+  letter-spacing: .3px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  padding: clamp(6px, 1.2vw, 10px) 4px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+}
+
+/* CTA headline */
+.cta-headline {
+  text-align: center;
+  margin-bottom: clamp(2px, 0.5vw, 6px);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(16px, 3.2vw, 22px);
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: .3px;
+  animation: fadeSlideUp 0.8s 0.6s ease both;
+}
+
+/* QR section */
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(4px, 1vw, 8px);
+  animation: fadeSlideUp 0.8s 0.7s ease both;
+}
+.qr-register-img {
+  width: clamp(260px, 50vw, 400px);
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+.register-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(12px, 2.4vw, 16px);
+  letter-spacing: 1px;
+  padding: clamp(8px, 1.6vw, 12px) clamp(24px, 5vw, 40px);
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 20px rgba(14,165,233,0.25);
+}
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(14,165,233,0.35);
+  color: #fff;
+}
+
+/* Footer logos */
+.footer-logos {
+  width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: clamp(4px, 1vw, 8px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeSlideUp 0.8s 0.8s ease both;
+}
+.footer-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.footer-label {
+  font-size: clamp(7px, 1.3vw, 9px);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+}
+.partner-logos-img {
+  max-width: 100%;
+  height: auto;
+  filter: brightness(1.2) saturate(0.8);
+}
+
+/* ════════════════════════════════
+   PAGE 2 — COUNTDOWN + SCHEDULE
+   ════════════════════════════════ */
+.p2-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 4vw, 36px) clamp(16px, 4vw, 36px) clamp(20px, 3vw, 28px);
+  gap: 0;
+}
+
+/* Countdown header */
+.countdown-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.5vw, 14px);
+  margin-bottom: clamp(16px, 3vw, 26px);
+}
+.chi-con-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 7vw, 48px);
+  color: #fff;
+  letter-spacing: -1px;
+  line-height: 1;
+  text-align: center;
+}
+.countdown-boxes {
+  display: flex;
+  align-items: center;
+  gap: clamp(6px, 1.4vw, 12px);
+}
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.cd-num {
+  background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15));
+  border: 1.5px solid rgba(0,212,255,0.35);
+  border-radius: 10px;
+  min-width: clamp(52px, 12vw, 80px);
+  padding: clamp(8px, 1.8vw, 14px) clamp(6px, 1.2vw, 10px);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 6vw, 44px);
+  color: #fff;
+  text-align: center;
+  line-height: 1;
+  text-shadow: 0 0 16px rgba(0,212,255,0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform 0.3s ease;
+}
+.cd-num.tick {
+  transform: scale(1.08);
+}
+.cd-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(8px, 1.5vw, 11px);
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.cd-sep {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(22px, 5vw, 36px);
+  color: #00d4ff;
+  line-height: 1;
+  margin-bottom: 18px;
+  animation: twinkle 2s ease-in-out infinite;
+}
+.date-badge-p2 {
+  text-align: right;
+  flex-shrink: 0;
+}
+.date-badge-p2 .time-sm {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(9px, 1.6vw, 11px);
+  font-weight: 700;
+  color: #00d4ff;
+  background: rgba(0,212,255,0.15);
+  padding: 2px 10px;
+  border-radius: 4px;
+  letter-spacing: .5px;
+  display: inline-block;
+  margin-bottom: 4px;
+}
+.date-badge-p2 .date-big {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(16px, 3.5vw, 24px);
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  padding: 3px clamp(8px, 1.6vw, 14px);
+  display: inline-block;
+}
+
+/* Schedule */
+.schedule-title {
+  text-align: center;
+  margin-bottom: clamp(14px, 3vw, 22px);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(16px, 3.5vw, 24px);
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.tl-item { display: flex; gap: 0; position: relative; }
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 20px;
+  bottom: -6px;
+  width: 1.5px;
+  background: rgba(56,189,248,0.2);
+}
+.tl-item:last-child::before { display: none; }
+.tl-bullet {
+  width: 24px; height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: clamp(8px, 1.8vw, 14px);
+  margin-top: 2px;
+}
+.tl-diamond {
+  width: 12px; height: 12px;
+  background: #00d4ff;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(0,212,255,0.5);
+}
+.tl-diamond.gold { background: #f59e0b; box-shadow: 0 0 10px rgba(245,158,11,0.5); }
+.tl-body { flex: 1; padding-bottom: clamp(10px, 2.2vw, 16px); }
+.tl-time {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(11px, 1.9vw, 13px);
+  color: #f59e0b;
+  letter-spacing: .3px;
+}
+.tl-main {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(12px, 2vw, 14px);
+  color: #fff;
+  margin-top: 1px;
+}
+.tl-subs {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tl-sub {
+  font-size: clamp(10px, 1.7vw, 12px);
+  color: rgba(255,255,255,0.55);
+  line-height: 1.4;
+  padding-left: 8px;
+  border-left: 2px solid rgba(56,189,248,0.2);
+}
+
+/* CTA footer p2 */
+.cta-footer-p2 {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2.5vw, 18px);
+  margin-top: clamp(16px, 3vw, 22px);
+  padding-top: clamp(16px, 3vw, 22px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.qr-sm-wrap {
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 5px;
+  background: rgba(255,255,255,0.04);
+  flex-shrink: 0;
+}
+.qr-sm-wrap img {
+  width: clamp(80px, 16vw, 120px);
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+.cta-text-block { flex: 1; }
+.cta-text-block .ct1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(16px, 3.5vw, 24px);
+  color: #fff;
+  line-height: 1;
+}
+.cta-text-block .ct1 em {
+  color: #00d4ff;
+  font-style: normal;
+  font-size: 0.7em;
+  font-weight: 700;
+}
+.cta-text-block .ct2 {
+  font-size: clamp(9px, 1.6vw, 11px);
+  color: rgba(255,255,255,0.5);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+.cta-text-block .ct3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: clamp(12px, 2vw, 14px);
+  color: #00d4ff;
+  margin-top: 4px;
+}
+.cta-text-block .ct3 a {
+  color: #00d4ff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.cta-text-block .ct3 a:hover { color: #fff; }
+
+/* ── Landing footer ── */
+.landing-footer {
+  border: 1px solid var(--border);
+  background: rgba(7,13,36,0.58);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 auto;
+  max-width: 680px;
+  width: calc(100% - 24px);
+  border-radius: 20px;
+  padding: clamp(12px, 2.5vw, 18px) clamp(14px, 2.5vw, 24px);
+  color: rgba(255,255,255,0.72);
+  font-size: clamp(11px, 1.6vw, 14px);
+  box-shadow: 0 1px 2px rgba(7,9,20,0.28), 0 24px 52px rgba(7,9,20,0.26);
+  margin-bottom: 20px;
+}
+.landing-footer p { margin: 0; }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 14px;
+}
+.footer-links a {
+  color: rgba(255,255,255,0.82);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--cyan); }
+
+/* ─── Scroll reveal ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes rocketFloat {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-10px) rotate(-5deg); }
+}
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.8; transform: scale(1); }
+}
+@keyframes sparkleFloat {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+  50% { transform: scale(1.2) rotate(15deg); opacity: 0.9; }
+}
+
+/* Sparkle SVG stars */
+.sparkle {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.7;
+  animation: sparkleFloat 4s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 480px) {
+  .benefit-grid { gap: 6px; }
+  .benefit-card { padding: 8px 6px; border-radius: 8px; }
+  .countdown-header { gap: 8px; }
+  .cta-footer-p2 { gap: 10px; }
+  .landing-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-links { justify-content: flex-start; }
+}
+</style>
+{% endblock %}
+
+{% block landing_content %}
+<main class="mis-page">
+  <h1 class="sr-only">{{ page.title }}</h1>
+
+  <!-- ══════════════════════════════════════════════
+       PAGE 1 — Main Event Poster
+       ══════════════════════════════════════════════ -->
+  <section class="poster-page" id="page1">
+    <!-- BG Effects -->
+    <div class="bg-glow glow-tl"></div>
+    <div class="bg-glow glow-br"></div>
+    <div class="bg-glow glow-mid"></div>
+
+    <!-- Stars -->
+    <div class="stars">
+      <div class="star" style="width:14px;height:14px;top:15%;left:4%;animation-delay:0s"></div>
+      <div class="star" style="width:10px;height:10px;top:28%;left:7%;animation-delay:0.8s"></div>
+      <div class="star" style="width:18px;height:18px;top:55%;left:3%;animation-delay:1.5s"></div>
+      <div class="star" style="width:12px;height:12px;top:70%;left:5%;animation-delay:2.2s"></div>
+      <div class="star" style="width:16px;height:16px;top:18%;right:5%;animation-delay:0.4s;background:#00d4ff"></div>
+      <div class="star" style="width:10px;height:10px;top:42%;right:4%;animation-delay:1.8s"></div>
+      <div class="star" style="width:20px;height:20px;top:65%;right:3%;animation-delay:2.8s;background:#7c3aed"></div>
+      <div class="star" style="width:12px;height:12px;top:80%;right:6%;animation-delay:3.2s"></div>
+    </div>
+
+    <!-- Skyline -->
+    <div class="skyline">
+      <img src="{% static 'images/landing/mis-innovation-day-2026/city-skyline.png' %}" alt="" aria-hidden="true">
+    </div>
+
+    <div class="page-content">
+
+      <!-- HERO LOGO -->
+      <div class="hero-logo">
+        <img class="hero-logo-img" src="{% static 'images/landing/mis-innovation-day-2026/logo-event.png' %}?v=1" alt="MIS Innovation Day 2026 – The New Era">
+      </div>
+
+      <!-- DATE VENUE -->
+      <div class="date-venue">
+        <div class="time-badge">{{ page.event_time }}</div>
+        <div class="date-pill">{{ page.event_date }}</div>
+        <div class="venue-text">
+          <div class="v1">TRƯỜNG TIỂU HỌC<br>THCS &amp; THPT ĐA TRÍ TUỆ</div>
+          <div class="v2">Số 37 Hoàng Quán Chi, Cầu Giấy</div>
+        </div>
+      </div>
+
+      <!-- TAGLINE PILL -->
+      <div class="tagline-pill">
+        <p>MỘT KỶ NGUYÊN GIÁO DỤC MỚI<br>ĐƯỢC KHAI MỞ.</p>
+      </div>
+
+      <!-- PRIVILEGE HEADER -->
+      <div class="privilege-header">
+        <p class="ph1">ĐẶC QUYỀN <em>DUY NHẤT {{ page.event_date }}</em></p>
+        <p class="ph2">DÀNH CHO HỌC SINH <em>NHẬP HỌC TRONG NGÀY HỘI</em></p>
+      </div>
+
+      <!-- BENEFIT SECTION -->
+      <div class="benefit-section">
+        <img class="benefit-strip-img" src="{% static 'images/landing/mis-innovation-day-2026/qua-tang.png' %}?v=2" alt="Đặc quyền ngày hội: Giảm 10% học phí, Tặng 01 set đồng phục, Voucher 50.000 VNĐ">
+      </div>
+
+      <!-- CTA HEADLINE -->
+      <div class="cta-headline">
+        MỘT NGÀY – MỘT QUYẾT ĐỊNH<br>MỘT TƯƠNG LAI KHÁC BIỆT CHO CON
+      </div>
+
+      <!-- QR REGISTRATION -->
+      <div class="qr-section">
+        <img class="qr-register-img" src="{% static 'images/landing/mis-innovation-day-2026/qr-dang-ky.png' %}?v=2" alt="Quét mã QR để đăng ký tham dự">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfzPUd2I8iELPColQjIqdQOONW3se_hDY2UM0VnRpP213oXdg/viewform?zarsrc=1303" target="_blank" rel="noopener noreferrer" class="register-btn">
+          <i class="fas fa-pen-to-square" style="margin-right:8px"></i>ĐĂNG KÝ NGAY
+        </a>
+      </div>
+
+      <!-- PARTNER LOGOS -->
+      <div class="footer-logos">
+        <img class="partner-logos-img" src="{% static 'images/landing/mis-innovation-day-2026/logo-doi-tac.png' %}?v=2" alt="Đơn vị tổ chức: MIS – Đối tác: RBH, Jaxtina, MathExpress, Nha Khoa Đại Dương, UWE Bristol, Supporter, Crabit, eKidbooks, Triviet">
+      </div>
+
+    </div><!-- /page-content -->
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       PAGE 2 — Countdown + Schedule
+       ══════════════════════════════════════════════ -->
+  <section class="poster-page" id="page2">
+    <!-- BG Effects -->
+    <div class="bg-glow glow-tl"></div>
+    <div class="bg-glow glow-br"></div>
+
+    <!-- Stars -->
+    <div class="stars">
+      <div class="star" style="width:14px;height:14px;top:12%;left:4%;animation-delay:0.3s"></div>
+      <div class="star" style="width:10px;height:10px;top:32%;left:6%;animation-delay:1.1s"></div>
+      <div class="star" style="width:16px;height:16px;top:60%;left:3%;animation-delay:2.0s"></div>
+      <div class="star" style="width:18px;height:18px;top:20%;right:4%;animation-delay:0.7s;background:#00d4ff"></div>
+      <div class="star" style="width:12px;height:12px;top:45%;right:5%;animation-delay:1.6s"></div>
+      <div class="star" style="width:20px;height:20px;top:72%;right:3%;animation-delay:2.5s;background:#7c3aed"></div>
+    </div>
+
+    <!-- Skyline -->
+    <div class="skyline">
+      <img src="{% static 'images/landing/mis-innovation-day-2026/city-skyline.png' %}" alt="" aria-hidden="true">
+    </div>
+
+    <!-- Sparkle SVGs -->
+    <svg class="sparkle" style="left:3%;top:15%;width:20px;--delay:0.4s" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="rgba(255,255,255,0.65)"/>
+    </svg>
+    <svg class="sparkle" style="right:4%;top:8%;width:24px;--delay:1.8s" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="rgba(0,212,255,0.55)"/>
+    </svg>
+    <svg class="sparkle" style="left:5%;bottom:25%;width:28px;--delay:2.6s" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" fill="rgba(255,255,255,0.5)"/>
+    </svg>
+
+    <div class="p2-content">
+
+      <!-- COUNTDOWN HEADER -->
+      <div class="countdown-header reveal" id="countdown-section">
+        <span class="chi-con-text">CHỈ CÒN</span>
+        <div class="countdown-boxes" aria-live="polite">
+          <div class="cd-unit">
+            <div class="cd-num" id="cd-days">--</div>
+            <div class="cd-label">Ngày</div>
+          </div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit">
+            <div class="cd-num" id="cd-hours">--</div>
+            <div class="cd-label">Giờ</div>
+          </div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit">
+            <div class="cd-num" id="cd-mins">--</div>
+            <div class="cd-label">Phút</div>
+          </div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit">
+            <div class="cd-num" id="cd-secs">--</div>
+            <div class="cd-label">Giây</div>
+          </div>
+        </div>
+        <div class="date-badge-p2">
+          <div class="time-sm">{{ page.event_time }}</div>
+          <div class="date-big">{{ page.event_date }}</div>
+        </div>
+      </div>
+
+      <!-- SCHEDULE TITLE -->
+      <div class="schedule-title reveal" style="transition-delay: 0.1s;">CHƯƠNG TRÌNH NGÀY HỘI</div>
+
+      <!-- TIMELINE -->
+      <div class="timeline reveal" style="transition-delay: 0.2s;">
+        <div class="tl-item">
+          <div class="tl-bullet"><div class="tl-diamond"></div></div>
+          <div class="tl-body">
+            <div class="tl-time">7:30 – 8:00</div>
+            <div class="tl-main">Check in &amp; đón tiếp</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-bullet"><div class="tl-diamond"></div></div>
+          <div class="tl-body">
+            <div class="tl-time">8:00 – 8:30</div>
+            <div class="tl-main">Khai mạc chương trình</div>
+            <div class="tl-subs"><div class="tl-sub">THE NEW ERA – MIS Innovation Day 2026</div></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-bullet"><div class="tl-diamond"></div></div>
+          <div class="tl-body">
+            <div class="tl-time">8:30 – 9:30</div>
+            <div class="tl-main">Chương trình sân khấu nghệ thuật</div>
+            <div class="tl-subs"><div class="tl-sub">"A New Era of AI, Heart &amp; Global Minds – Một kỷ nguyên giáo dục mới được khai mở"</div></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-bullet"><div class="tl-diamond"></div></div>
+          <div class="tl-body">
+            <div class="tl-time">9:30 – 12:00</div>
+            <div class="tl-main">Trải nghiệm tại các gian hàng Workshop</div>
+            <div class="tl-subs">
+              <div class="tl-sub">Hội thảo tuyển sinh MIS: THE WORLD IS CHANGING</div>
+              <div class="tl-sub">Teambuilding Gắn kết gia đình</div>
+              <div class="tl-sub">Trải nghiệm công nghệ cao · STEAM lập trình &amp; robotics</div>
+              <div class="tl-sub">Ăn trưa, mua sắm</div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-bullet"><div class="tl-diamond"></div></div>
+          <div class="tl-body">
+            <div class="tl-time">13:30 – 16:00</div>
+            <div class="tl-main">Chung kết hội thao Tháng 3</div>
+            <div class="tl-subs">
+              <div class="tl-sub">Trận chung kết Giải thể thao CB-GV</div>
+              <div class="tl-sub">Trận chung kết Giải thể thao Học sinh</div>
+              <div class="tl-sub">Trận Giao hữu bóng đá PHHS &amp; CBGV</div>
+              <div class="tl-sub">Giao hữu Kéo co · Cầu lông · Pickleball</div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-bullet"><div class="tl-diamond gold"></div></div>
+          <div class="tl-body">
+            <div class="tl-time">16:00</div>
+            <div class="tl-main">Bế mạc ngày hội</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA FOOTER -->
+      <div class="cta-footer-p2 reveal" id="dang-ky" style="transition-delay: 0.3s;">
+        <div class="qr-sm-wrap">
+          <img src="{% static 'images/landing/mis-innovation-day-2026/qr-dang-ky.png' %}?v=2" alt="Mã QR đăng ký tham dự">
+        </div>
+        <div class="cta-text-block">
+          <div class="ct1">ĐĂNG KÝ <em>THAM DỰ NGÀY HỘI</em></div>
+          <div class="ct2">Để nhà trường có thể đón tiếp chu đáo nhất xin quý vị vui lòng xác nhận tham dự chương trình. Quét mã QR hoặc nhấn nút bên dưới:</div>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfzPUd2I8iELPColQjIqdQOONW3se_hDY2UM0VnRpP213oXdg/viewform?zarsrc=1303" target="_blank" rel="noopener noreferrer" class="register-btn" style="margin-top:10px; display:inline-flex; align-items:center;">
+            <i class="fas fa-pen-to-square" style="margin-right:8px"></i>ĐĂNG KÝ NGAY
+          </a>
+          <div class="ct3" style="margin-top:8px;"><a href="tel:{{ page.hotline|cut:' ' }}">{{ page.hotline }}</a></div>
+        </div>
+      </div>
+
+    </div><!-- /p2-content -->
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="landing-footer">
+    <p>{{ page.footer_note }}</p>
+    <div class="footer-links">
+      <a href="tel:{{ page.hotline|cut:' ' }}">{{ page.hotline }}</a>
+      <a href="mailto:{{ page.email }}">{{ page.email }}</a>
+      <a href="{% url 'core:home' %}">Trang chủ</a>
+    </div>
+  </footer>
+</main>
+
+<script>
+(function () {
+  /* ─── Countdown Timer ─── */
+  var prevVals = {};
+  function updateCountdown() {
+    var target = new Date("{{ page.event_starts_at }}").getTime();
+    var now = Date.now();
+    var diff = target - now;
+    var elD = document.getElementById("cd-days");
+    var elH = document.getElementById("cd-hours");
+    var elM = document.getElementById("cd-mins");
+    var elS = document.getElementById("cd-secs");
+    if (!elD) return;
+    if (diff <= 0) {
+      elD.textContent = "0"; elH.textContent = "0";
+      elM.textContent = "0"; elS.textContent = "0";
+      var chiCon = document.querySelector(".chi-con-text");
+      if (chiCon) chiCon.textContent = "HÔM NAY!";
+      return;
+    }
+    var days = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var mins = Math.floor((diff % 3600000) / 60000);
+    var secs = Math.floor((diff % 60000) / 1000);
+    var vals = {d: String(days), h: String(hours).padStart(2,"0"), m: String(mins).padStart(2,"0"), s: String(secs).padStart(2,"0")};
+    function setVal(el, key, val) {
+      if (prevVals[key] !== val) {
+        el.textContent = val;
+        el.classList.remove("tick");
+        void el.offsetWidth;
+        el.classList.add("tick");
+        prevVals[key] = val;
+      }
+    }
+    setVal(elD, "d", vals.d);
+    setVal(elH, "h", vals.h);
+    setVal(elM, "m", vals.m);
+    setVal(elS, "s", vals.s);
+  }
+
+  /* ─── Scroll Reveal ─── */
+  function initReveal() {
+    var els = document.querySelectorAll(".reveal");
+    if (!els.length || !("IntersectionObserver" in window)) {
+      els.forEach(function(el) { el.classList.add("visible"); });
+      return;
+    }
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function(el) { observer.observe(el); });
+  }
+
+  /* ─── Init ─── */
+  updateCountdown();
+  initReveal();
+  window.setInterval(updateCountdown, 1000);
+})();
+</script>
+{% endblock %}

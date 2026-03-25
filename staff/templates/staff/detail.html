@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ staff.name }} | Đội ngũ{% endblock %}
+
+{% block content %}
+<section class="pt-28 pb-16 bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <a href="{% url 'staff:list' %}" class="inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-700">
+            <i class="fas fa-arrow-left mr-2"></i>Quay lại danh sách
+        </a>
+
+        <div class="mt-6 bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200/60 dark:border-neutral-700 p-8">
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="shrink-0">
+                    {% if staff.avatar %}
+                    <img src="{{ staff.avatar.url }}" alt="{{ staff.name }}"
+                        class="w-32 h-32 rounded-2xl object-cover border border-neutral-200/60 dark:border-neutral-700">
+                    {% else %}
+                    <div class="w-32 h-32 rounded-2xl bg-red-600 text-white flex items-center justify-center text-3xl font-bold">
+                        {{ staff.name|slice:":1" }}
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="min-w-0">
+                    <h1 class="text-3xl font-bold text-neutral-900 dark:text-white">{{ staff.name }}</h1>
+                    <p class="mt-1 text-sm text-red-600 font-semibold">{{ staff.get_role_display }}</p>
+                    {% if staff.degree %}
+                    <p class="mt-2 text-neutral-600 dark:text-neutral-300">Học vị: {{ staff.degree }}</p>
+                    {% endif %}
+
+                    {% if staff.get_languages_list %}
+                    <div class="mt-4">
+                        <p class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Ngôn ngữ</p>
+                        <div class="mt-2 flex flex-wrap gap-2">
+                            {% for lang in staff.get_languages_list %}
+                            <span class="text-xs font-semibold px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200">
+                                {{ lang }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if staff.specialties %}
+            <div class="mt-8">
+                <h2 class="text-lg font-bold text-neutral-900 dark:text-white">Chuyên môn / AI</h2>
+                <p class="mt-2 text-neutral-600 dark:text-neutral-300 whitespace-pre-line">{{ staff.specialties }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

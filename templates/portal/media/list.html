@@ -1,0 +1,95 @@
+{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Media{% endblock %}
+{% block header_title %}Media{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Media" %}
+
+<div class="portal-toolbar">
+    <div>
+        <h1 class="page-title">Thu vi?n Media</h1>
+        <p class="portal-subtitle">{{ page_obj.paginator.count|default:object_list.count }} t?p tin</p>
+    </div>
+    <a href="{% url 'portal:media_upload' %}" class="btn btn-primary btn-md">
+        <i class="fas fa-cloud-arrow-up icon-md"></i> Upload
+    </a>
+</div>
+
+<form method="get" class="portal-filters" role="search">
+    <div class="portal-search" style="flex:1;min-width:200px">
+        <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Tìm ki?m media..."
+            aria-label="Tìm ki?m">
+    </div>
+    <select name="type" aria-label="Lo?i" onchange="this.form.submit()">
+        <option value="">T?t c?</option>
+        <option value="image" {% if request.GET.type == 'image' %}selected{% endif %}>Hình ?nh</option>
+        <option value="document" {% if request.GET.type == 'document' %}selected{% endif %}>Tài li?u</option>
+        <option value="video" {% if request.GET.type == 'video' %}selected{% endif %}>Video</option>
+    </select>
+    <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-search icon-md"></i>
+        L?c</button>
+</form>
+
+<div class="portal-table-container">
+    <table class="portal-table" aria-label="Danh sách media">
+        <thead>
+            <tr>
+                <th scope="col" style="width:60px">Preview</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Lo?i</th>
+                <th scope="col">Kích thu?c</th>
+                <th scope="col">Ngày upload</th>
+                <th scope="col" style="text-align:right">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>
+                    {% if item.is_image %}
+                    <img src="{{ item.file.url }}" alt="{{ item.title }}"
+                        style="width:48px;height:48px;object-fit:cover;border-radius:var(--p-radius-md)">
+                    {% else %}
+                    <div
+                        style="width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--p-gray-100);border-radius:var(--p-radius-md);color:var(--p-gray-400)">
+                        <i class="fas fa-file icon-lg"></i>
+                    </div>
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="font-semibold truncate" style="max-width:300px;color:var(--p-gray-800)">{{ item.title }}
+                    </div>
+                </td>
+                <td><span class="badge badge-neutral">{{ item.get_file_type_display|default:item.file_type }}</span>
+                </td>
+                <td class="text-muted">{{ item.file.size|filesizeformat }}</td>
+                <td><time datetime="{{ item.created_at|date:'Y-m-d' }}">{{ item.created_at|date:"d/m/Y" }}</time></td>
+                <td style="text-align:right">
+                    <div style="display:flex;gap:6px;justify-content:flex-end">
+                        <a href="{{ item.file.url }}" target="_blank" class="btn btn-ghost btn-xs" data-tooltip="Xem"><i
+                                class="fas fa-external-link icon-sm"></i></a>
+                        <a href="{% url 'portal:media_delete' item.pk %}" class="btn btn-ghost btn-xs"
+                            style="color:var(--p-danger)" data-tooltip="Xóa"><i class="fas fa-trash icon-sm"></i></a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">
+                    <div class="portal-empty-state py-8">
+                        <div class="portal-empty-icon"><i class="fas fa-image"></i></div>
+                        <p class="portal-empty-title">Chua có media nào</p>
+                        <a href="{% url 'portal:media_upload' %}" class="btn btn-primary btn-sm"><i
+                                class="fas fa-cloud-arrow-up icon-md"></i> Upload</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include "portal/includes/pagination.html" %}
+{% endblock %}

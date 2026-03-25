@@ -1,0 +1,27 @@
+﻿{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Upload Media{% endblock %}
+{% block header_title %}Upload Media{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Media" breadcrumb_section_url=media_list_url
+breadcrumb_current="Upload" %}
+
+<form method="post" enctype="multipart/form-data" class="portal-form" novalidate>
+    {% csrf_token %}
+    <div class="portal-actions-sticky">
+        <h1 class="page-title">Upload tập tin mới</h1>
+        <div style="display:flex;gap:8px">
+            <a href="{% url 'portal:media_list' %}" class="btn btn-secondary btn-sm">Hủy</a>
+            <button type="submit" class="btn btn-primary btn-md btn-save-trigger">
+                <i class="fas fa-cloud-arrow-up icon-md"></i>
+                <span class="btn-text">Upload</span>
+            </button>
+        </div>
+    </div>
+    <div class="portal-card">
+        <div class="portal-card-body">{% include "portal/includes/form_fields.html" %}</div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% comment %}
+Roadmap Tabs + Accordion
+Inputs:
+- roadmap_id
+- roadmap_title
+- roadmap_subtitle
+- level_1_id/label/badge/focus/tool/output
+- level_2_...
+- level_3_...
+{% endcomment %}
+<section id="{{ roadmap_id|default:'roadmap' }}" class="curriculum-section curriculum-section--light">
+    <div class="container">
+        <h2 class="curriculum-h2">{{ roadmap_title }}</h2>
+        {% if roadmap_subtitle %}<p class="curriculum-lead">{{ roadmap_subtitle }}</p>{% endif %}
+
+        <div class="curriculum-tabs" data-curriculum-tabs>
+            <div class="curriculum-tabs__list" role="tablist" aria-label="Lộ trình theo cấp học">
+                <button type="button" role="tab" id="{{ roadmap_id|default:'roadmap' }}-tab-1" aria-controls="{{ roadmap_id|default:'roadmap' }}-panel-1" aria-selected="true" tabindex="0" class="curriculum-tab is-active">
+                    {{ level_1_label }}
+                </button>
+                <button type="button" role="tab" id="{{ roadmap_id|default:'roadmap' }}-tab-2" aria-controls="{{ roadmap_id|default:'roadmap' }}-panel-2" aria-selected="false" tabindex="-1" class="curriculum-tab">
+                    {{ level_2_label }}
+                </button>
+                <button type="button" role="tab" id="{{ roadmap_id|default:'roadmap' }}-tab-3" aria-controls="{{ roadmap_id|default:'roadmap' }}-panel-3" aria-selected="false" tabindex="-1" class="curriculum-tab">
+                    {{ level_3_label }}
+                </button>
+            </div>
+
+            <section id="{{ roadmap_id|default:'roadmap' }}-panel-1" class="curriculum-tab-panel is-active" role="region" aria-labelledby="{{ roadmap_id|default:'roadmap' }}-tab-1">
+                <div class="curriculum-level-card">
+                    {% if level_1_badge %}<p class="curriculum-caption"><strong>{{ level_1_badge }}</strong></p>{% endif %}
+                    {% if level_1_focus %}<p class="curriculum-text"><strong>Trọng tâm:</strong> {{ level_1_focus }}</p>{% endif %}
+                    {% if level_1_tool %}<p class="curriculum-text"><strong>Công cụ:</strong> {{ level_1_tool }}</p>{% endif %}
+                    {% if level_1_output %}<p class="curriculum-text"><strong>Đầu ra:</strong> {{ level_1_output }}</p>{% endif %}
+                </div>
+            </section>
+            <section id="{{ roadmap_id|default:'roadmap' }}-panel-2" class="curriculum-tab-panel" role="region" aria-labelledby="{{ roadmap_id|default:'roadmap' }}-tab-2" hidden>
+                <div class="curriculum-level-card">
+                    {% if level_2_badge %}<p class="curriculum-caption"><strong>{{ level_2_badge }}</strong></p>{% endif %}
+                    {% if level_2_focus %}<p class="curriculum-text"><strong>Trọng tâm:</strong> {{ level_2_focus }}</p>{% endif %}
+                    {% if level_2_tool %}<p class="curriculum-text"><strong>Công cụ:</strong> {{ level_2_tool }}</p>{% endif %}
+                    {% if level_2_output %}<p class="curriculum-text"><strong>Đầu ra:</strong> {{ level_2_output }}</p>{% endif %}
+                </div>
+            </section>
+            <section id="{{ roadmap_id|default:'roadmap' }}-panel-3" class="curriculum-tab-panel" role="region" aria-labelledby="{{ roadmap_id|default:'roadmap' }}-tab-3" hidden>
+                <div class="curriculum-level-card">
+                    {% if level_3_badge %}<p class="curriculum-caption"><strong>{{ level_3_badge }}</strong></p>{% endif %}
+                    {% if level_3_focus %}<p class="curriculum-text"><strong>Trọng tâm:</strong> {{ level_3_focus }}</p>{% endif %}
+                    {% if level_3_tool %}<p class="curriculum-text"><strong>Công cụ:</strong> {{ level_3_tool }}</p>{% endif %}
+                    {% if level_3_output %}<p class="curriculum-text"><strong>Đầu ra:</strong> {{ level_3_output }}</p>{% endif %}
+                </div>
+            </section>
+        </div>
+
+        <div class="curriculum-accordion" data-curriculum-accordion>
+            <div class="curriculum-accordion-item">
+                <h3>
+                    <button type="button" class="curriculum-accordion-trigger" aria-expanded="true" aria-controls="{{ roadmap_id|default:'roadmap' }}-mobile-1" id="{{ roadmap_id|default:'roadmap' }}-mobile-trigger-1">{{ level_1_label }}</button>
+                </h3>
+                <div id="{{ roadmap_id|default:'roadmap' }}-mobile-1" role="region" aria-labelledby="{{ roadmap_id|default:'roadmap' }}-mobile-trigger-1" class="curriculum-accordion-panel is-open">
+                    <div class="curriculum-level-card">
+                        {% if level_1_badge %}<p class="curriculum-caption"><strong>{{ level_1_badge }}</strong></p>{% endif %}
+                        {% if level_1_focus %}<p class="curriculum-text"><strong>Trọng tâm:</strong> {{ level_1_focus }}</p>{% endif %}
+                        {% if level_1_tool %}<p class="curriculum-text"><strong>Công cụ:</strong> {{ level_1_tool }}</p>{% endif %}
+                        {% if level_1_output %}<p class="curriculum-text"><strong>Đầu ra:</strong> {{ level_1_output }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="curriculum-accordion-item">
+                <h3>
+                    <button type="button" class="curriculum-accordion-trigger" aria-expanded="false" aria-controls="{{ roadmap_id|default:'roadmap' }}-mobile-2" id="{{ roadmap_id|default:'roadmap' }}-mobile-trigger-2">{{ level_2_label }}</button>
+                </h3>
+                <div id="{{ roadmap_id|default:'roadmap' }}-mobile-2" role="region" aria-labelledby="{{ roadmap_id|default:'roadmap' }}-mobile-trigger-2" class="curriculum-accordion-panel" hidden>
+                    <div class="curriculum-level-card">
+                        {% if level_2_badge %}<p class="curriculum-caption"><strong>{{ level_2_badge }}</strong></p>{% endif %}
+                        {% if level_2_focus %}<p class="curriculum-text"><strong>Trọng tâm:</strong> {{ level_2_focus }}</p>{% endif %}
+                        {% if level_2_tool %}<p class="curriculum-text"><strong>Công cụ:</strong> {{ level_2_tool }}</p>{% endif %}
+                        {% if level_2_output %}<p class="curriculum-text"><strong>Đầu ra:</strong> {{ level_2_output }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="curriculum-accordion-item">
+                <h3>
+                    <button type="button" class="curriculum-accordion-trigger" aria-expanded="false" aria-controls="{{ roadmap_id|default:'roadmap' }}-mobile-3" id="{{ roadmap_id|default:'roadmap' }}-mobile-trigger-3">{{ level_3_label }}</button>
+                </h3>
+                <div id="{{ roadmap_id|default:'roadmap' }}-mobile-3" role="region" aria-labelledby="{{ roadmap_id|default:'roadmap' }}-mobile-trigger-3" class="curriculum-accordion-panel" hidden>
+                    <div class="curriculum-level-card">
+                        {% if level_3_badge %}<p class="curriculum-caption"><strong>{{ level_3_badge }}</strong></p>{% endif %}
+                        {% if level_3_focus %}<p class="curriculum-text"><strong>Trọng tâm:</strong> {{ level_3_focus }}</p>{% endif %}
+                        {% if level_3_tool %}<p class="curriculum-text"><strong>Công cụ:</strong> {{ level_3_tool }}</p>{% endif %}
+                        {% if level_3_output %}<p class="curriculum-text"><strong>Đầu ra:</strong> {{ level_3_output }}</p>{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

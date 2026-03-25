@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title|default:'Kỹ năng sống & Giá trị sống (SEL)' }} - MIS{% endblock %}
+{% block meta_description %}
+Chương trình Kỹ năng sống & Giá trị sống (SEL) tại MIS giúp học sinh phát triển trí tuệ cảm xúc, bản lĩnh cá nhân và
+năng lực công dân số trong kỷ nguyên AI.
+{% endblock %}
+{% block canonical_url %}{% firstof lifeskills_overview.entries.lifeskills.canonical_url request.build_absolute_uri %}{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "{{ request.build_absolute_uri|escapejs }}#webpage",
+    "url": "{{ request.build_absolute_uri|escapejs }}",
+    "name": "{{ page.title|default:'Kỹ năng sống & Giá trị sống (SEL)'|escapejs }}",
+    "description": "Chương trình Kỹ năng sống & Giá trị sống tại MIS giúp học sinh phát triển trí tuệ cảm xúc, khả năng hợp tác và năng lực công dân số.",
+    "inLanguage": "vi",
+    "isPartOf": {
+        "@type": "WebSite",
+        "name": "MIS",
+        "url": "{{ request.scheme|escapejs }}://{{ request.get_host|escapejs }}"
+    }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<main class="curriculum">
+
+    {% include 'about/partials/curriculum/_curriculum_hero.html' with hero_id='hero' hero_theme='curriculum-hero--navy' hero_eyebrow='Future with Heart | SEL & Values Education' hero_title=page.title|default:'Kỹ năng sống & Giá trị sống (SEL)' hero_subtitle=lifeskills_block.sections.0|default:'Giáo dục trái tim song hành với năng lực học thuật, giúp học sinh làm chủ cảm xúc, giao tiếp văn minh và trưởng thành có trách nhiệm.' hero_bullet_1='Phát triển đồng bộ năng lực SEL, giá trị sống và kỹ năng công dân số theo từng cấp học.' hero_bullet_2='Mỗi học sinh có lộ trình rèn luyện cá nhân hóa: tự nhận thức - hợp tác - ra quyết định.' hero_bullet_3='Đánh giá qua hành vi quan sát được, nhật ký phát triển và portfolio dự án cộng đồng.' hero_primary_label='Đăng ký tư vấn chương trình' hero_primary_url='admissions:list' hero_secondary_label='Tải lộ trình chi tiết' hero_secondary_url='#brochure' trust_badge_1='SEL chuẩn quốc tế' trust_badge_2='Character Education' trust_badge_3='Whole-child Development' %}
+
+    {% include 'about/partials/curriculum/_trust_signal_strip.html' with signal_1_value='K1-K12' signal_1_label='Lộ trình liên thông theo độ tuổi' signal_2_value='5 Nhóm năng lực' signal_2_label='SEL - Giá trị sống - Công dân số' signal_3_value='Theo tuần' signal_3_label='Theo dõi tiến bộ hành vi & năng lực' %}
+
+    <section id="key-facts" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Key Facts {{ program_year|default:'2026-2027' }}</h2>
+                <p class="curriculum-lead">Các chỉ số giúp phụ huynh nhìn rõ cấu trúc chương trình Kỹ năng sống và cơ chế theo dõi đầu ra tại MIS.</p>
+            </div>
+            <div class="curriculum-key-facts curriculum-reveal-delay-100" data-reveal>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-heart"></i></div>
+                    <p class="curriculum-key-fact__value">5 Nhóm</p>
+                    <p class="curriculum-key-fact__label">Tự nhận thức, hợp tác, ra quyết định, thích ứng, trách nhiệm xã hội</p>
+                </article>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-brain"></i></div>
+                    <p class="curriculum-key-fact__value">SEL + 4Cs</p>
+                    <p class="curriculum-key-fact__label">Kết hợp năng lực cảm xúc với giao tiếp, hợp tác, phản biện và sáng tạo</p>
+                </article>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
+                    <p class="curriculum-key-fact__value">Rubrics</p>
+                    <p class="curriculum-key-fact__label">Đánh giá đa chiều bằng minh chứng hành vi và tiến trình phát triển</p>
+                </article>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-folder-open"></i></div>
+                    <p class="curriculum-key-fact__value">Portfolio</p>
+                    <p class="curriculum-key-fact__label">Hồ sơ năng lực cá nhân cho định hướng học tập và nghề nghiệp</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="curriculum-section curriculum-section--light">
+        <div class="curriculum-deco curriculum-deco--circle" style="width:112px;height:112px;top:7%;right:4%;" aria-hidden="true"></div>
+        <div class="curriculum-deco curriculum-deco--dot-grid" style="width:152px;height:108px;bottom:8%;left:2%;" aria-hidden="true"></div>
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Triết lý đào tạo Future with Heart</h2>
+                <p class="curriculum-lead">Trong kỷ nguyên AI, sự khác biệt bền vững nằm ở năng lực làm người: quản trị cảm xúc, kết nối cộng đồng và đưa ra quyết định đúng đắn. MIS xây dựng không gian học nơi học sinh vừa phát triển trí tuệ vừa nuôi dưỡng nhân cách.</p>
+            </div>
+            <div class="curriculum-grid curriculum-grid--3 curriculum-reveal-delay-150" data-reveal>
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-heart' title='Giá trị sống & nhân cách' description='Nuôi dưỡng biết ơn, tôn trọng, trách nhiệm, can đảm và tinh thần dấn thân qua tình huống thực tế.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-users' title='Năng lực cảm xúc xã hội (SEL)' description='Rèn tự nhận thức, tự quản trị, đồng cảm, giao tiếp và hợp tác tích cực trong môi trường học đường.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-shield-alt' title='Công dân số có trách nhiệm' description='Trang bị tư duy sử dụng công nghệ và AI an toàn, có đạo đức, biết kiểm chứng thông tin và tự bảo vệ.' %}
+            </div>
+        </div>
+    </section>
+
+    <div class="curriculum-reveal-delay-50" data-reveal>
+        {% include 'about/partials/curriculum/_roadmap_tabs_accordion.html' with roadmap_id='roadmap' roadmap_title='Lộ trình phát triển theo cấp học' roadmap_subtitle='Thiết kế theo tâm lý lứa tuổi, tăng dần độ sâu năng lực cảm xúc - xã hội - tự chủ học tập.' level_1_label='Tiểu học' level_1_badge='K1-K5 | Khám phá & Hình thành' level_1_focus='Gọi tên cảm xúc, hình thành thói quen tích cực, ứng xử văn minh và hợp tác cơ bản.' level_1_tool='Nhật ký cảm xúc, trò chơi tình huống, hoạt động kể chuyện và dự án lớp học nhỏ.' level_1_output='Học sinh biết tự điều chỉnh hành vi, tôn trọng bạn bè và tự tin giao tiếp trong lớp.' level_2_label='THCS' level_2_badge='K6-K9 | Kết nối & Bản lĩnh' level_2_focus='Quản lý áp lực học tập, xây dựng quan hệ lành mạnh, phản biện văn minh và ra quyết định có trách nhiệm.' level_2_tool='Case study học đường, hoạt động nhóm, nhật ký phản tư và công cụ số hỗ trợ tự đánh giá.' level_2_output='Học sinh có khả năng hợp tác hiệu quả, kiểm soát cảm xúc và giải quyết xung đột tích cực.' level_3_label='THPT' level_3_badge='K10-K12 | Định hướng & Trưởng thành' level_3_focus='Tư duy độc lập, thích ứng trước thay đổi, định vị giá trị cá nhân và trách nhiệm xã hội.' level_3_tool='Dự án cộng đồng, mentoring định hướng nghề nghiệp, portfolio năng lực và phản biện liên ngành.' level_3_output='Học sinh sẵn sàng cho đại học và môi trường quốc tế với bản lĩnh, sự đồng cảm và năng lực tự học.' %}
+    </div>
+
+    <section id="learning-experience" class="curriculum-section curriculum-section--neutral">
+        <div class="curriculum-deco curriculum-deco--circle" style="width:90px;height:90px;bottom:6%;right:3%;" aria-hidden="true"></div>
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Learning Experience</h2>
+                <p class="curriculum-lead">Mỗi tiết học Kỹ năng sống tại MIS được thiết kế theo chu trình khám phá cảm xúc, thực hành tình huống và phản tư để chuyển hóa thành hành vi tích cực hàng ngày.</p>
+            </div>
+            <div class="curriculum-grid curriculum-grid--3 curriculum-reveal-delay-150" data-reveal>
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-comments' title='Circle Time & Mentoring' description='Giáo viên dẫn dắt thảo luận theo tình huống thực tế, giúp học sinh nhận diện cảm xúc và xây dựng góc nhìn tích cực.' meta='Teacher-guided reflection' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-people-arrows' title='Role-play & Collaboration Lab' description='Học sinh luyện giao tiếp, phản biện và giải quyết xung đột qua hoạt động nhóm, dự án lớp và thử thách cộng đồng.' meta='Practice-centered sessions' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-laptop-house' title='Digital Citizenship Studio' description='Tích hợp công cụ số và AI để học sinh học cách kiểm chứng thông tin, ứng xử văn minh và tự bảo vệ trên môi trường số.' meta='AI-safe behavior training' %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         GRACE & TRÍ TUỆ CẢM XÚC – from WEB chốt.pptx Slide 6
+         ═══════════════════════════════════════════════════ -->
+    <section id="grace-activities" class="curriculum-section curriculum-section--light">
+        <div class="curriculum-deco curriculum-deco--circle" style="width:100px;height:100px;top:5%;left:3%;" aria-hidden="true"></div>
+        <div class="curriculum-deco curriculum-deco--dot-grid" style="width:130px;height:90px;bottom:6%;right:2%;" aria-hidden="true"></div>
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Hoạt động GRACE & Trí tuệ cảm xúc</h2>
+                <p class="curriculum-lead">Không chỉ dừng ở lý thuyết, MIS kiến tạo những trải nghiệm thực tế giúp học sinh phát triển năng lực cảm xúc xã hội (SEL) – từ nghiên cứu khoa học tầm quốc tế đến các hoạt động sẻ chia đầy nhân văn.</p>
+            </div>
+
+            <div class="curriculum-grid curriculum-grid--1 curriculum-reveal-delay-150" data-reveal style="display:flex;flex-direction:column;gap:2.5rem;">
+
+                <!-- Activity 1: GRACE tại Hawaii & Kymviet -->
+                <article class="activity-card">
+                    <div class="activity-card__hero">
+                        <img src="/media/about/lifeskills/grace_hawaii.png" alt="Báo cáo khoa học về GRACE tại Hawaii – USA" loading="lazy" decoding="async">
+                        <div class="activity-card__hero-overlay activity-card__hero-overlay--navy"></div>
+                        <div class="activity-card__hero-content">
+                            <span class="activity-card__badge"><i class="fas fa-globe-americas"></i> Nghiên cứu quốc tế</span>
+                            <h3 class="activity-card__title">MISers & Hoạt động phát triển Cảm xúc Xã hội (SEL)</h3>
+                        </div>
+                    </div>
+                    <div class="activity-card__body">
+                            <p class="activity-card__text">
+                                Học sinh MIS đã tham gia <strong>báo cáo khoa học về GRACE tại Hawaii – USA</strong>, mang nghiên cứu về giá trị sống và cảm xúc xã hội ra trường quốc tế. Song song đó, chương trình <strong>"Thấu hiểu & Yêu thương"</strong> cùng người điếc tại Kymviet giúp học sinh trải nghiệm sâu sắc sự đồng cảm và tôn trọng sự khác biệt.
+                            </p>
+                            <div class="activity-card__tags">
+                                <span class="tag tag--green"><i class="fas fa-globe-americas"></i> GRACE – Hawaii, USA</span>
+                                <span class="tag tag--red"><i class="fas fa-heart"></i> Thấu hiểu & Yêu thương</span>
+                                <span class="tag tag--blue"><i class="fas fa-hands"></i> Kymviet</span>
+                            </div>
+                            <div class="activity-card__links">
+                                <a href="{% url 'admissions:list' %}" class="social-link social-link--navy"><i class="fas fa-school"></i> Tuyển sinh MIS</a>
+                                <a href="https://www.youtube.com/watch?v=_fUqZM35aPg" target="_blank" rel="noopener" class="social-link social-link--red"><i class="fab fa-youtube"></i> Video Kymviet</a>
+                                <a href="{% url 'admissions:detail' 'mam_non' %}" class="social-link social-link--green"><i class="fas fa-newspaper"></i> Tuyển sinh Mầm non</a>
+                            </div>
+                    </div>
+                </article>
+
+                <!-- Activity 2: Hoạt động SEL tại trường -->
+                <article class="activity-card">
+                    <div class="activity-card__hero">
+                        <img src="/media/about/lifeskills/sel_activities.png" alt="Hoạt động SEL tại trường MIS" loading="lazy" decoding="async">
+                        <div class="activity-card__hero-overlay activity-card__hero-overlay--red"></div>
+                        <div class="activity-card__hero-content">
+                            <span class="activity-card__badge"><i class="fas fa-users"></i> Hoạt động nội khóa</span>
+                            <h3 class="activity-card__title">Chương trình SEL tại trường</h3>
+                        </div>
+                    </div>
+                    <div class="activity-card__body">
+                            <p class="activity-card__text">
+                                Các hoạt động giáo dục cảm xúc xã hội (SEL) được triển khai xuyên suốt trong chương trình học chính khóa tại MIS. Học sinh được tham gia <strong>circle time, trò chơi nhập vai, dự án nhóm</strong> và các hoạt động phản tư – giúp rèn luyện khả năng tự nhận thức, đồng cảm, giao tiếp và hợp tác tích cực trong môi trường học đường.
+                            </p>
+                            <div class="activity-card__tags">
+                                <span class="tag tag--orange"><i class="fas fa-comments"></i> Circle Time</span>
+                                <span class="tag tag--purple"><i class="fas fa-people-arrows"></i> Role-play</span>
+                                <span class="tag tag--indigo"><i class="fas fa-project-diagram"></i> Dự án nhóm</span>
+                                <span class="tag tag--teal"><i class="fas fa-brain"></i> Phản tư</span>
+                            </div>
+                            <div class="activity-card__links">
+                                <a href="{% url 'admissions:detail' 'tieu_hoc' %}" class="social-link social-link--brand"><i class="fas fa-school"></i> Tuyển sinh Tiểu học</a>
+                                <a href="{% url 'admissions:detail' 'thcs' %}" class="social-link social-link--brand"><i class="fas fa-school"></i> Tuyển sinh THCS</a>
+                                <a href="{% url 'admissions:detail' 'thpt' %}" class="social-link social-link--brand"><i class="fas fa-school"></i> Tuyển sinh THPT</a>
+                            </div>
+                            <details style="margin-top:1rem;">
+                                <summary style="cursor:pointer;font-size:.85rem;font-weight:600;color:var(--color-brand-primary-dark);display:inline-flex;align-items:center;gap:.4rem;">
+                                    <i class="fas fa-plus-circle"></i> Xem thêm hoạt động SEL (+9 bài viết)
+                                </summary>
+                                <div class="activity-card__more-links">
+                                    <a href="{% url 'admissions:detail' 'mam_non' %}" class="social-link social-link--compact"><i class="fas fa-school"></i> Tuyển sinh Mầm non</a>
+                                    <a href="{% url 'admissions:detail' 'tieu_hoc' %}" class="social-link social-link--compact"><i class="fas fa-school"></i> Tuyển sinh Tiểu học</a>
+                                    <a href="{% url 'admissions:detail' 'thcs' %}" class="social-link social-link--compact"><i class="fas fa-school"></i> Tuyển sinh THCS</a>
+                                    <a href="{% url 'admissions:detail' 'thpt' %}" class="social-link social-link--compact"><i class="fas fa-school"></i> Tuyển sinh THPT</a>
+                                    <a href="{% url 'admissions:list' %}" class="social-link social-link--compact"><i class="fas fa-list"></i> Tổng quan tuyển sinh</a>
+                                    <a href="https://www.facebook.com/media/set/?set=a.894579309371839&type=3" target="_blank" rel="noopener" class="social-link social-link--compact"><i class="fas fa-images"></i> Album ảnh 1</a>
+                                    <a href="https://www.facebook.com/media/set/?set=a.708088354687603&type=3" target="_blank" rel="noopener" class="social-link social-link--compact"><i class="fas fa-images"></i> Album ảnh 2</a>
+                                    <a href="https://www.facebook.com/media/set/?set=a.939599901536446&type=3" target="_blank" rel="noopener" class="social-link social-link--compact"><i class="fas fa-images"></i> Album ảnh 3</a>
+                                </div>
+                            </details>
+                    </div>
+                </article>
+
+                <!-- Activity 3: Đào tạo Trí tuệ cảm xúc cùng Seroto -->
+                <article class="activity-card">
+                    <div class="activity-card__hero">
+                        <img src="/media/about/lifeskills/eq_seroto.png" alt="Đào tạo Trí tuệ cảm xúc cùng Seroto" loading="lazy" decoding="async">
+                        <div class="activity-card__hero-overlay activity-card__hero-overlay--purple"></div>
+                        <div class="activity-card__hero-content">
+                            <span class="activity-card__badge"><i class="fas fa-brain"></i> Đào tạo chuyên sâu</span>
+                            <h3 class="activity-card__title">Đào tạo Trí tuệ cảm xúc cùng Seroto</h3>
+                        </div>
+                    </div>
+                    <div class="activity-card__body">
+                            <p class="activity-card__text">
+                                MIS phối hợp cùng <strong>Seroto</strong> – đơn vị chuyên về giáo dục trí tuệ cảm xúc – triển khai chương trình đào tạo chuyên sâu cho học sinh. Các em được trang bị <strong>khả năng nhận diện và quản trị cảm xúc</strong>, kỹ năng đồng cảm, xử lý xung đột và xây dựng mối quan hệ lành mạnh – nền tảng thiết yếu cho sự phát triển toàn diện.
+                            </p>
+                            <div class="activity-card__tags">
+                                <span class="tag tag--purple-dark"><i class="fas fa-brain"></i> Trí tuệ cảm xúc (EQ)</span>
+                                <span class="tag tag--indigo"><i class="fas fa-handshake"></i> Seroto</span>
+                                <span class="tag tag--red"><i class="fas fa-heart"></i> Quản trị cảm xúc</span>
+                            </div>
+                            <div class="activity-card__links">
+                                <a href="{% url 'admissions:list' %}" class="social-link social-link--purple"><i class="fas fa-school"></i> Tuyển sinh MIS</a>
+                                <a href="https://youtu.be/rLmpbRf1Q8s?si=QGr_ggAwY701Ajmq" target="_blank" rel="noopener" class="social-link social-link--red"><i class="fab fa-youtube"></i> Video Seroto</a>
+                                <a href="{% url 'admissions:detail' 'mam_non' %}" class="social-link social-link--brand"><i class="fas fa-school"></i> Tuyển sinh Mầm non</a>
+                                <a href="{% url 'admissions:detail' 'tieu_hoc' %}" class="social-link social-link--brand"><i class="fas fa-school"></i> Tuyển sinh Tiểu học</a>
+                            </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="assessment-outcomes" class="curriculum-section curriculum-section--light curriculum-section--assessment-enhanced">
+        <div class="curriculum-deco curriculum-deco--dot-grid" style="width:140px;height:100px;top:6%;right:2%;" aria-hidden="true"></div>
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Kiểm tra & Cột mốc đầu ra</h2>
+                <p class="curriculum-lead">Đánh giá không dừng ở điểm số, mà tập trung vào tiến trình phát triển hành vi, mức độ tự chủ và khả năng vận dụng trong các bối cảnh học tập - xã hội thực tế.</p>
+            </div>
+
+            <div class="curriculum-assessment-layout">
+                <div class="curriculum-assessment-panel curriculum-reveal-delay-150" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Rubrics đánh giá cốt lõi</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--info">SEL + Values Framework</span>
+                    </div>
+                    <div class="curriculum-rubric">
+                        {% include 'about/partials/curriculum/_assessment_rubric.html' with icon='fas fa-smile' criterion='Tự nhận thức & tự quản trị' metric='Mức độ nhận diện cảm xúc, làm chủ hành vi và kiên trì trước áp lực học tập.' evidence='Nhật ký phản tư, theo dõi hành vi theo tuần, nhận xét giáo viên chủ nhiệm.' %}
+                        {% include 'about/partials/curriculum/_assessment_rubric.html' with icon='fas fa-user-friends' criterion='Giao tiếp - hợp tác - đồng cảm' metric='Khả năng lắng nghe, phản hồi văn minh, phối hợp nhóm và tôn trọng khác biệt.' evidence='Quan sát tình huống lớp học, đánh giá đồng đẳng, sản phẩm làm việc nhóm.' %}
+                        {% include 'about/partials/curriculum/_assessment_rubric.html' with icon='fas fa-globe' criterion='Trách nhiệm xã hội & công dân số' metric='Khả năng đưa ra quyết định có trách nhiệm, sử dụng công nghệ an toàn và có đạo đức.' evidence='Portfolio dự án cộng đồng, minh chứng hoạt động trực tuyến, bản cam kết hành vi số.' %}
+                    </div>
+                </div>
+
+                <aside class="curriculum-assessment-panel curriculum-assessment-panel--milestones curriculum-reveal-delay-200" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Cột mốc theo dõi ưu tiên</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--success">Theo dõi định kỳ</span>
+                    </div>
+                    <p class="curriculum-caption">Phụ huynh theo dõi tiến bộ thông qua minh chứng cụ thể, không chỉ qua nhận xét định tính.</p>
+                    <div class="curriculum-outcome-list curriculum-spacer-top">
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">01</span><span>Biểu đồ tiến bộ SEL cá nhân cập nhật theo tuần.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">02</span><span>Hồ sơ hành vi tích cực và năng lực hợp tác theo học kỳ.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">03</span><span>Portfolio dự án cộng đồng làm căn cứ định hướng lớp tiếp theo.</span></p>
+                        <p class="curriculum-caption curriculum-caption--warning-note"><i class="fas fa-exclamation-circle curriculum-icon curriculum-icon--warning"></i><span>Khung chỉ số định lượng chi tiết theo từng lớp đang tiếp tục cập nhật từ nguồn chuẩn chương trình.</span></p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section class="curriculum-section curriculum-section--accent">
+        <div class="container">
+            <div class="curriculum-stats-strip curriculum-reveal-delay-100" data-reveal>
+                <div class="curriculum-stat">
+                    <span class="curriculum-stat__number">100%</span>
+                    <span class="curriculum-stat__label">Học sinh tham gia hoạt động SEL định kỳ</span>
+                </div>
+                <div class="curriculum-stat">
+                    <span class="curriculum-stat__number">5C+</span>
+                    <span class="curriculum-stat__label">Nhóm kỹ năng trọng yếu được theo dõi liên tục</span>
+                </div>
+                <div class="curriculum-stat">
+                    <span class="curriculum-stat__number">K1-K12</span>
+                    <span class="curriculum-stat__label">Lộ trình xuyên suốt, nhất quán giữa các cấp</span>
+                </div>
+                <div class="curriculum-stat">
+                    <span class="curriculum-stat__number">SEL</span>
+                    <span class="curriculum-stat__label">Chuẩn giáo dục cảm xúc xã hội làm nền tảng</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="curriculum-reveal-delay-100" data-reveal>
+        {% include 'about/partials/curriculum/_differentiation_matrix.html' with matrix_title='Sự khác biệt của Kỹ năng sống tại MIS' row_1_label='Mục tiêu chương trình' row_1_mis='Phát triển toàn diện trí tuệ - cảm xúc - nhân cách, gắn trực tiếp với hành vi hàng ngày của học sinh.' row_1_traditional='Tập trung truyền đạt nội quy, thiếu cơ chế luyện tập và phản hồi cá nhân hóa.' row_1_international='Có framework mạnh nhưng cần điều chỉnh để phù hợp bối cảnh văn hóa học đường Việt Nam.' row_2_label='Phương pháp triển khai' row_2_mis='Circle time, role-play, dự án cộng đồng và mentoring theo nhóm tuổi.' row_2_traditional='Thiên về lý thuyết, ít hoạt động trải nghiệm liên tục.' row_2_international='Đa dạng phương pháp, mức độ tương thích tùy từng hệ thống trường.' row_3_label='Đánh giá tiến bộ' row_3_mis='Rubrics đa chiều + minh chứng hành vi + portfolio theo học kỳ.' row_3_traditional='Đánh giá định tính ngắn hạn, thiếu dữ liệu theo dõi tiến trình.' row_3_international='Đánh giá bài bản nhưng có thể khó so sánh trực tiếp theo chuẩn nội địa.' row_4_label='Năng lực đầu ra' row_4_mis='Học sinh bản lĩnh, đồng cảm, giao tiếp tốt và có trách nhiệm trong môi trường số.' row_4_traditional='Năng lực mềm phát triển không đồng đều giữa học sinh.' row_4_international='Đầu ra tốt, nhưng chi phí đầu tư và mức cá nhân hóa khác nhau theo hệ trường.' %}
+    </div>
+
+    {% include 'about/partials/curriculum/_final_cta_cluster.html' with cta_title='Đồng hành cùng con trưởng thành hạnh phúc' cta_subtitle='Nhận tư vấn lộ trình Kỹ năng sống & Giá trị sống phù hợp với tính cách, độ tuổi và mục tiêu phát triển của con.' visit_url='contact:contact' consult_url='admissions:list' brochure_dialog_id='lifeskills-brochure-dialog' brochure_available=pdf_document.pdf_file %}
+
+    {% include 'about/partials/curriculum/_brochure_drawer.html' with brochure_dialog_id='lifeskills-brochure-dialog' brochure_title='Brochure chương trình Kỹ năng sống & Giá trị sống (SEL)' %}
+</main>
+{% endblock %}

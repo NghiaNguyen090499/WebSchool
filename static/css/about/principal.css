@@ -1,0 +1,580 @@
+/* ═══════════════════════════════════════════
+   PRINCIPAL PAGE — Thông điệp Tổng Giám đốc
+   ═══════════════════════════════════════════ */
+
+/* ── Base ── */
+.history-page {
+    --history-bg: #f8fafc;
+    --history-surface: #ffffff;
+    --history-ink: #0f172a;
+    --history-muted: #475569;
+    --history-line: #e2e8f0;
+    --history-accent: #991b1b;
+    --history-accent-soft: #fee2e2;
+    background: linear-gradient(180deg, #fffaf9 0%, var(--history-bg) 28%, #ffffff 100%);
+    color: var(--history-ink);
+}
+
+.history-shell {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════
+   HERO SECTION
+   ═══════════════════════════════════════ */
+.history-hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    background:
+        radial-gradient(circle at top right, rgba(251, 191, 36, 0.16), transparent 28%),
+        linear-gradient(135deg, #450a0a 0%, #7f1d1d 46%, #0f172a 100%);
+}
+
+.history-hero__media {
+    position: absolute;
+    inset: 0;
+    opacity: 0.18;
+}
+
+.principal-page .history-hero__media {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.history-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.history-hero__grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+    gap: 40px;
+    align-items: center;
+    padding: 88px 0 72px;
+}
+
+.history-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.history-eyebrow--soft {
+    background: var(--history-accent);
+    border-color: transparent;
+    color: #fff;
+}
+
+.history-title {
+    margin: 16px 0 14px;
+    font-size: clamp(2.4rem, 4.8vw, 4.6rem);
+    line-height: 1.03;
+    letter-spacing: -0.04em;
+}
+
+.history-lead {
+    margin: 0;
+    font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 54rem;
+}
+
+/* ── Principal Hero — Redesigned (no redundant h1) ── */
+.principal-hero__accent-line {
+    width: 56px;
+    height: 3px;
+    margin: 20px 0 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #fbbf24, #f59e0b 60%, rgba(245, 158, 11, 0.2));
+}
+
+.principal-hero__headline {
+    margin: 18px 0 0;
+    font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+    font-weight: 500;
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 52ch;
+    font-style: italic;
+}
+
+.principal-hero__subtext {
+    margin: 16px 0 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+    letter-spacing: 0.01em;
+}
+
+.history-intro {
+    margin: 20px 0 0;
+    max-width: 62ch;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.history-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.history-badges span,
+.history-source {
+    font-size: 0.9rem;
+}
+
+.history-badges span {
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.history-hero__aside {
+    display: grid;
+    gap: 14px;
+}
+
+.history-quote {
+    padding: 22px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.history-quote__label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.history-quote p {
+    margin: 0;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.history-source {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+/* ═══════════════════════════════════════
+   PRINCIPAL — Hero Quote Callout
+   ═══════════════════════════════════════ */
+.principal-hero-quote {
+    position: relative;
+    margin: 16px 0 0;
+    padding: 0;
+    border: none;
+}
+
+.principal-hero-quote__mark {
+    font-size: 4rem;
+    line-height: 0.5;
+    color: rgba(245, 158, 11, 0.6);
+    font-family: Georgia, 'Times New Roman', serif;
+    position: absolute;
+    left: -6px;
+    top: -8px;
+}
+
+.principal-hero-quote .history-lead {
+    padding-left: 28px;
+    border-left: 3px solid rgba(245, 158, 11, 0.4);
+    font-style: italic;
+}
+
+/* ═══════════════════════════════════════
+   PRINCIPAL — Profile Card (Circular Avatar)
+   ═══════════════════════════════════════ */
+.principal-profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 36px 28px 32px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.principal-profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* Avatar ring — decorative gradient border */
+.principal-profile-card__avatar-ring {
+    padding: 4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 30%, #dc2626 70%, #991b1b 100%);
+    box-shadow:
+        0 8px 32px rgba(245, 158, 11, 0.3),
+        0 0 0 6px rgba(255, 255, 255, 0.06);
+    margin-bottom: 20px;
+}
+
+.principal-profile-card__avatar {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(15, 23, 42, 0.9);
+}
+
+.principal-profile-card__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    transition: transform 0.6s ease;
+}
+
+.principal-profile-card:hover .principal-profile-card__avatar img {
+    transform: scale(1.08);
+}
+
+/* Info section */
+.principal-profile-card__info h2 {
+    margin: 0 0 6px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.principal-profile-card__role {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Small quote teaser */
+.principal-profile-card__quote {
+    margin: 16px 0 0;
+    padding: 12px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.82rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.principal-profile-card__quote i {
+    color: rgba(245, 158, 11, 0.6);
+    font-size: 0.7rem;
+    margin-right: 4px;
+}
+
+/* ═══════════════════════════════════════
+   SECTIONS — Generic
+   ═══════════════════════════════════════ */
+.history-section {
+    padding: 72px 0;
+}
+
+.history-section--soft {
+    background: linear-gradient(180deg, rgba(254, 242, 242, 0.72) 0%, rgba(248, 250, 252, 0.94) 100%);
+}
+
+.history-section__intro {
+    max-width: 760px;
+    margin-bottom: 28px;
+}
+
+.history-section__intro h2 {
+    margin: 14px 0 10px;
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.history-section__intro p {
+    margin: 0;
+    color: var(--history-muted);
+    line-height: 1.78;
+}
+
+.history-card {
+    border-radius: 28px;
+    background: var(--history-surface);
+    border: 1px solid rgba(226, 232, 240, 0.96);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06);
+    padding: 26px 24px;
+}
+
+/* ═══════════════════════════════════════
+   PRINCIPAL — Message Section
+   ═══════════════════════════════════════ */
+.principal-message-section {
+    padding: 80px 0;
+}
+
+.principal-section-head {
+    max-width: 780px;
+    margin-bottom: 36px;
+}
+
+.principal-section-head h2 {
+    margin: 14px 0 10px;
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--history-ink);
+}
+
+.principal-section-head p {
+    margin: 0;
+    color: var(--history-muted);
+    line-height: 1.78;
+    font-size: 1.05rem;
+}
+
+/* Full-width message card */
+.principal-message-card--full {
+    border-radius: 28px;
+    background: var(--history-surface);
+    border: 1px solid rgba(226, 232, 240, 0.96);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06);
+    padding: 48px 44px;
+}
+
+/* Quote callout inside message */
+.principal-message-callout {
+    position: relative;
+    margin-bottom: 36px;
+    padding: 28px 32px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(254, 242, 242, 0.8) 0%, rgba(255, 251, 235, 0.6) 100%);
+    border-left: 4px solid var(--history-accent);
+}
+
+.principal-message-callout__label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--history-accent);
+}
+
+.principal-message-callout p {
+    margin: 0;
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--history-accent);
+    font-style: italic;
+}
+
+/* Greeting */
+.principal-message-greeting {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--history-ink);
+    margin-bottom: 8px;
+}
+
+/* Message body text */
+.principal-message-copy {
+    font-size: 1.02rem;
+    line-height: 1.85;
+    color: var(--history-muted);
+}
+
+.principal-message-copy p {
+    margin: 0 0 16px;
+}
+
+.principal-message-copy p:last-child {
+    margin-bottom: 0;
+}
+
+/* Closing message */
+.principal-message-closing {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--history-line);
+    font-size: 1.02rem;
+    line-height: 1.85;
+    color: var(--history-muted);
+    font-style: italic;
+}
+
+.principal-message-closing p {
+    margin: 0 0 12px;
+}
+
+.principal-message-closing p:last-child {
+    margin-bottom: 0;
+}
+
+/* Signature block */
+.principal-signature {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 2px solid var(--history-line);
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.principal-signature__line {
+    width: 80px;
+    height: 3px;
+    margin-bottom: 18px;
+    background: linear-gradient(90deg, transparent, var(--history-accent));
+    border-radius: 2px;
+}
+
+.principal-signature strong {
+    display: block !important;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--history-ink);
+    margin-bottom: 6px;
+}
+
+.principal-signature span {
+    display: block !important;
+    font-size: 0.9rem;
+    color: var(--history-muted);
+    line-height: 1.5;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+@media (max-width: 1100px) {
+    .history-hero__grid {
+        grid-template-columns: 1fr;
+        align-items: start;
+    }
+
+    .principal-hero__headline {
+        font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+        max-width: 60ch;
+    }
+
+    .principal-profile-card {
+        flex-direction: row;
+        text-align: left;
+        gap: 24px;
+        padding: 28px 32px;
+    }
+
+    .principal-profile-card__avatar-ring {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+
+    .principal-profile-card__avatar {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+@media (max-width: 720px) {
+    .history-shell {
+        width: min(100% - 24px, 1180px);
+    }
+
+    .history-hero__grid {
+        padding: 64px 0 48px;
+        gap: 24px;
+    }
+
+    .principal-hero__headline {
+        font-size: 1.25rem;
+        line-height: 1.6;
+    }
+
+    .principal-hero__accent-line {
+        width: 40px;
+        margin-top: 16px;
+    }
+
+    .principal-message-card--full {
+        padding: 28px 20px;
+        border-radius: 22px;
+    }
+
+    .principal-message-callout {
+        padding: 20px 22px;
+    }
+
+    .principal-signature {
+        text-align: left;
+    }
+
+    .principal-signature__line {
+        margin-left: 0;
+    }
+
+    .history-section {
+        padding: 56px 0;
+    }
+
+    .principal-message-section {
+        padding: 56px 0;
+    }
+
+    .history-card {
+        border-radius: 22px;
+        padding: 22px 18px;
+    }
+
+    .principal-profile-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 24px 20px;
+    }
+
+    .principal-profile-card__avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .principal-profile-card__info h2 {
+        font-size: 1.1rem;
+    }
+
+    .principal-profile-card__quote {
+        display: none;
+    }
+}

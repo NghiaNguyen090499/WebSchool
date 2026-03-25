@@ -1,0 +1,11 @@
+{% comment %}
+Academic Pillar Card — Enhanced
+Inputs: title, description, icon_class
+{% endcomment %}
+<article class="curriculum-card curriculum-card--pillar">
+    <div class="curriculum-card__icon" aria-hidden="true">
+        <i class="{{ icon_class|default:'fas fa-graduation-cap' }}"></i>
+    </div>
+    <h3 class="curriculum-h3">{{ title }}</h3>
+    <p class="curriculum-text">{{ description }}</p>
+</article>

@@ -1,0 +1,379 @@
+{% extends "base.html" %}
+
+{% block title %}Cơ sở vật chất{% endblock %}
+
+{% block content %}
+<section
+
+    class="section relative overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-red-50/30 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
+
+    <!-- Decorative Elements -->
+
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+
+        <div class="absolute -top-20 -right-20 w-[400px] h-[400px] bg-red-400/10 rounded-full blur-3xl"></div>
+
+        <div class="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-red-300/10 rounded-full blur-3xl"></div>
+
+        <svg class="absolute top-20 right-20 w-64 h-64 text-red-200/30 dark:text-red-800/20" viewBox="0 0 200 200"
+
+            fill="currentColor">
+
+            <circle cx="100" cy="100" r="80" fill="none" stroke="currentColor" stroke-width="2"
+
+                stroke-dasharray="8 8" />
+
+            <circle cx="100" cy="100" r="50" fill="none" stroke="currentColor" stroke-width="2" />
+
+        </svg>
+
+    </div>
+
+
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Section Header -->
+
+        <div class="text-center mb-16">
+
+            <span
+
+                class="inline-block px-4 py-2 bg-red-600/10 text-red-700 dark:text-red-400 rounded-full text-sm font-semibold uppercase tracking-wider mb-4">
+
+                Smart Campus
+
+            </span>
+
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-white mb-6">
+
+                Cơ sở vật chất <span
+
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-500">Thông minh</span>
+
+            </h2>
+
+            <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+
+                Hạ tầng giáo dục hiện đại, tích hợp công nghệ AI và năng lượng xanh, tạo môi trường học tập tối ưu cho
+
+                thế hệ tương lai
+
+            </p>
+
+        </div>
+
+
+
+        <!-- Features Grid -->
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+
+            <!-- Smart Classroom -->
+
+            <div
+
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+
+                <div
+
+                    class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-500/25 group-hover:scale-110 transition-transform">
+
+                    <i class="fas fa-chalkboard-teacher text-2xl text-white"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">100% Phòng học Thông minh</h3>
+
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+
+                    Trang bị bảng tương tác, hệ thống âm thanh hiện đại và kết nối IoT cho trải nghiệm học tập số hóa
+
+                </p>
+
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <span>Bảng tương tác 4K</span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AR-VR Lab -->
+
+            <div
+
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+
+                <div
+
+                    class="w-16 h-16 bg-gradient-to-br from-red-400 to-rose-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-400/25 group-hover:scale-110 transition-transform">
+
+                    <i class="fas fa-vr-cardboard text-2xl text-white"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Phòng Lab AR-VR</h3>
+
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+
+                    Công nghệ thực tế ảo và thực tế tăng cường giúp học sinh trải nghiệm kiến thức một cách sống động
+
+                </p>
+
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <span>Immersive Learning</span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AI Speaking Lab -->
+
+            <div
+
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+
+                <div
+
+                    class="w-16 h-16 bg-gradient-to-br from-rose-500 to-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-rose-500/25 group-hover:scale-110 transition-transform">
+
+                    <i class="fas fa-microphone-alt text-2xl text-white"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">i-Correct AI Speaking Lab</h3>
+
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+
+                    Hệ thống AI hỗ trợ luyện phát âm và giao tiếp tiếng Anh, phản hồi tức thì và cá nhân hóa
+
+                </p>
+
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <span>AI-Powered Feedback</span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEAM Lab -->
+
+            <div
+
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+
+                <div
+
+                    class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-600/25 group-hover:scale-110 transition-transform">
+
+                    <i class="fas fa-cogs text-2xl text-white"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">STEAM & Robotics Lab</h3>
+
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+
+                    Phòng thực hành STEAM tiêu chuẩn quốc tế với robot, drone, máy in 3D và các thiết bị lập trình
+
+                </p>
+
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <span>Hands-on Learning</span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AI Lab -->
+
+            <div
+
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+
+                <div
+
+                    class="w-16 h-16 bg-gradient-to-br from-rose-400 to-red-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-rose-400/25 group-hover:scale-110 transition-transform">
+
+                    <i class="fas fa-brain text-2xl text-white"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Ph?ng Lab AI</h3>
+
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+
+                    Trang b? ph?ng Lab-AI hi?n ??i v?i tr? l? ?o chuy?n bi?t, h? tr? tr?i nghi?m c?ng ngh?.
+
+                </p>
+
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <span>AI-Ready</span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Pandora Farm -->
+
+            <div
+
+                class="group bg-white dark:bg-neutral-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-neutral-100 dark:border-neutral-700 hover:border-red-200">
+
+                <div
+
+                    class="w-16 h-16 bg-gradient-to-br from-red-500 to-rose-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-red-500/25 group-hover:scale-110 transition-transform">
+
+                    <i class="fas fa-seedling text-2xl text-white"></i>
+
+                </div>
+
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Pandora Landscape Farm</h3>
+
+                <p class="text-neutral-600 dark:text-neutral-400 mb-4">
+
+                    Trang trại khoa học công nghệ 5ha - không gian trải nghiệm thực tế về nông nghiệp và sinh thái
+
+                </p>
+
+                <div class="flex items-center gap-2 text-red-600 dark:text-red-400 font-medium text-sm">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    <span>5 Hecta trải nghiệm</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Campus Highlight Banner -->
+
+        <div class="relative bg-gradient-to-r from-red-600 to-red-700 rounded-3xl overflow-hidden">
+
+            <div
+
+                class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22%23fff%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M0%200h40v40H0z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E')]">
+
+            </div>
+
+            <div class="relative p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
+
+                <div class="text-center md:text-left">
+
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">
+
+                        Pandora Landscape & Green Campus
+
+                    </h3>
+
+                    <p class="text-red-100 text-lg">
+
+                        Campus xanh đối diện Công viên Cầu Giấy, kết nối khu trải nghiệm Pandora Landscape 5ha.
+
+                    </p>
+
+                </div>
+
+                <a href="{% url 'contact:contact' %}"
+
+                    class="btn btn-light btn-lg whitespace-nowrap">
+                    <span>Đặt lịch tham quan</span>
+
+                    <i class="fas fa-calendar-alt"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+            Đặt lịch tham quan cơ sở vật chất MIS
+        </h2>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-8">
+            Trải nghiệm trực tiếp không gian học tập thông minh và hệ sinh thái giáo dục hiện đại.
+        </p>
+        <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg">
+            Đặt lịch tham quan
+        </a>
+    </div>
+</section>
+
+{% comment %}
+<section class="pt-20 pb-16 bg-white dark:bg-neutral-950">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header class="mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white">Cơ sở vật chất & tiện ích</h2>
+            <p class="mt-2 text-neutral-600 dark:text-neutral-300 max-w-2xl">Không gian học tập hiện đại, phòng lab công nghệ và tiện ích hỗ trợ toàn diện.</p>
+        </header>
+
+        {% for key, group in facility_groups.items %}
+        <section class="mb-12">
+            <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-4">{{ group.label }}</h3>
+            <div class="grid gap-6 sm:grid-cols-2">
+                {% for facility in group.items %}
+                <article class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200/60 dark:border-neutral-700 overflow-hidden">
+                    {% if facility.image %}
+                    <figure class="aspect-[3/2] overflow-hidden">
+                        <img src="{{ facility.image.url }}" alt="{{ facility.name }}" class="w-full h-full object-cover">
+                    </figure>
+                    {% endif %}
+                    <div class="p-6 space-y-3">
+                        <h4 class="text-lg font-bold text-neutral-900 dark:text-white">{{ facility.name }}</h4>
+                        {% if facility.description %}
+                        <p class="text-sm text-neutral-600 dark:text-neutral-300">{{ facility.description }}</p>
+                        {% endif %}
+                        {% if facility.map_embed %}
+                        <div class="rounded-xl overflow-hidden border border-neutral-200/60 dark:border-neutral-700">
+                            {{ facility.map_embed|safe }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </article>
+                {% empty %}
+                <div class="col-span-full bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200/60 dark:border-neutral-700 p-6 text-center">
+                    <p class="text-neutral-600 dark:text-neutral-300">Chưa có dữ liệu cơ sở vật chất.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endfor %}
+    </div>
+</section>
+{% endcomment %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{
+  "name": "websiteschool",
+  "version": "1.0.0",
+  "description": "Hệ thống website trường học xây dựng bằng Django, tập trung vào quản trị nội dung, giới thiệu chương trình đào tạo, tuyển sinh và truyền thông. Hệ thống hỗ trợ đa ngôn ngữ (VI/EN), quản lý media, và cung cấp các module nội dung chuyên biệt cho nhu cầu của trường.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --minify",
+    "watch:css": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NghiaNguyen090499/WebSchool.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NghiaNguyen090499/WebSchool/issues"
+  },
+  "homepage": "https://github.com/NghiaNguyen090499/WebSchool#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "flowbite": "^4.0.1"
+  }
+}

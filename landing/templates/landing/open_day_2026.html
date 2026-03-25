@@ -1,0 +1,209 @@
+{% extends "landing/base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }}{% endblock %}
+{% block meta_description %}{{ page.meta_description }}{% endblock %}
+
+{% block landing_content %}
+
+{% block extra_css %}
+<style>
+  /* ── Page background ── */
+  body {
+    background-color: #f5f5f4;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header: sharper blur + subtle bottom glow ── */
+  .lp-header {
+    box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.04);
+    transition: box-shadow .2s;
+  }
+  .lp-header.scrolled {
+    box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 8px 32px rgba(0,0,0,.08);
+  }
+
+  /* ── Nav logo text ── */
+  .lp-event-label {
+    letter-spacing: .22em;
+    background: linear-gradient(90deg, #b91c1c, #dc2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ── Nav buttons ── */
+  .lp-btn-outline {
+    transition: background .18s, border-color .18s, color .18s, transform .15s;
+  }
+  .lp-btn-outline:hover {
+    background: #f5f5f4;
+    border-color: #a3a3a3;
+    transform: translateY(-1px);
+  }
+
+  .lp-btn-primary {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    box-shadow: 0 2px 10px rgba(185,28,28,.28);
+    transition: background .18s, box-shadow .18s, transform .15s;
+  }
+  .lp-btn-primary:hover {
+    background: linear-gradient(135deg, #b91c1c, #991b1b);
+    box-shadow: 0 4px 20px rgba(185,28,28,.4);
+    transform: translateY(-1px);
+  }
+
+  /* ── Image cards ── */
+  .lp-figure {
+    /* Layered shadow: crisp near + diffuse far */
+    box-shadow:
+      0 1px 2px rgba(15,23,42,.06),
+      0 4px 12px rgba(15,23,42,.08),
+      0 24px 64px rgba(15,23,42,.13);
+    transition: transform .35s cubic-bezier(.22,.68,0,1.2), box-shadow .35s ease;
+    will-change: transform;
+  }
+  .lp-figure:hover {
+    transform: translateY(-4px) scale(1.004);
+    box-shadow:
+      0 2px 4px rgba(15,23,42,.06),
+      0 8px 24px rgba(15,23,42,.1),
+      0 40px 80px rgba(15,23,42,.16);
+  }
+
+  /* Reveal animation: each card fades + slides up on scroll */
+  .lp-figure {
+    opacity: 0;
+    transform: translateY(32px);
+    animation: lp-reveal .55s cubic-bezier(.22,.68,0,1.1) forwards;
+  }
+  .lp-figure:nth-child(1) { animation-delay: .05s; }
+  .lp-figure:nth-child(2) { animation-delay: .18s; }
+  .lp-figure:nth-child(3) { animation-delay: .3s;  }
+  .lp-figure:nth-child(n+4) { animation-delay: .4s; }
+
+  @keyframes lp-reveal {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Footer ── */
+  .lp-footer-link {
+    transition: color .15s;
+    position: relative;
+  }
+  .lp-footer-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -1px;
+    width: 0; height: 1px;
+    background: #dc2626;
+    transition: width .2s;
+  }
+  .lp-footer-link:hover::after { width: 100%; }
+
+  /* ── Mobile CTA bar ── */
+  .lp-cta-bar {
+    /* Stronger shadow to lift above content */
+    box-shadow: 0 -1px 0 rgba(0,0,0,.06), 0 -8px 32px rgba(0,0,0,.08);
+  }
+  .lp-cta-primary {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    box-shadow: 0 4px 16px rgba(185,28,28,.35);
+    transition: filter .18s, transform .15s;
+  }
+  .lp-cta-primary:hover { filter: brightness(1.06); transform: scale(1.01); }
+
+  .lp-cta-secondary {
+    transition: background .18s, border-color .18s, transform .15s;
+  }
+  .lp-cta-secondary:hover {
+    background: #f5f5f4;
+    border-color: #a3a3a3;
+    transform: scale(1.01);
+  }
+</style>
+{% endblock %}
+
+{# ── HEADER ── #}
+<header class="lp-header sticky top-0 z-30 border-b border-black/5 bg-white/92 backdrop-blur">
+    <div class="mx-auto flex max-w-[920px] items-center justify-between gap-3 px-3 py-3 sm:px-4">
+        <a href="{% url 'core:home' %}" class="inline-flex min-w-0 items-center gap-3 text-neutral-900">
+            <img src="{% static 'images/logo/logo.png' %}" alt="MIS"
+                 class="h-9 w-auto object-contain transition-opacity hover:opacity-80">
+            <div class="min-w-0">
+                <p class="lp-event-label truncate text-sm font-bold uppercase">{{ page.event_label }}</p>
+                <p class="truncate text-xs text-neutral-400">Sự kiện tuyển sinh</p>
+            </div>
+        </a>
+        <div class="hidden items-center gap-2 sm:flex">
+            <a href="{% url 'admissions:list' %}"
+               class="lp-btn-outline rounded-full border border-neutral-300 px-4 py-2 text-sm font-semibold text-neutral-700">
+                Tuyển sinh
+            </a>
+            <a href="tel:{{ page.hotline|cut:' ' }}"
+               class="lp-btn-primary rounded-full px-4 py-2 text-sm font-semibold text-white">
+                {{ page.hotline }}
+            </a>
+        </div>
+    </div>
+</header>
+
+{# ── MAIN ── #}
+<main class="px-3 pb-24 pt-5 sm:px-4 sm:py-7 sm:pb-10 lg:px-6 lg:py-10">
+    <h1 class="sr-only">{{ page.title }}</h1>
+    <p class="sr-only">{{ page.meta_description }}</p>
+
+    <div class="mx-auto flex max-w-[920px] flex-col gap-5 sm:gap-7">
+        {% for image in page.image_pages %}
+        <figure class="lp-figure overflow-hidden rounded-2xl bg-white ring-1 ring-black/5">
+            <picture>
+                <source srcset="{% static image.webp_src %}" type="image/webp">
+                <img
+                    src="{% static image.src %}"
+                    alt="{{ image.alt }}"
+                    class="block h-auto w-full"
+                    {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+                >
+            </picture>
+        </figure>
+        {% endfor %}
+    </div>
+</main>
+
+{# ── FOOTER ── #}
+<footer class="px-3 pb-24 sm:px-4 sm:pb-10 lg:px-6">
+    <div class="mx-auto flex max-w-[920px] flex-col gap-3 border-t border-black/8 pt-5 text-xs text-neutral-400 sm:flex-row sm:items-center sm:justify-between">
+        <p>{{ page.footer_note }}</p>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <a href="tel:{{ page.hotline|cut:' ' }}" class="lp-footer-link transition hover:text-red-700">{{ page.hotline }}</a>
+            <a href="mailto:{{ page.email }}" class="lp-footer-link transition hover:text-red-700">{{ page.email }}</a>
+            <a href="{% url 'core:home' %}" class="lp-footer-link transition hover:text-red-700">Trang chủ</a>
+        </div>
+    </div>
+</footer>
+
+{# ── MOBILE CTA BAR ── #}
+<div class="lp-cta-bar fixed inset-x-0 bottom-0 z-40 border-t border-black/5 bg-white/96 p-3 backdrop-blur sm:hidden">
+    <div class="mx-auto flex max-w-[920px] gap-2.5">
+        <a href="{% url 'contact:contact' %}"
+           class="lp-cta-primary flex-1 rounded-full px-4 py-3 text-center text-sm font-semibold text-white">
+            Đăng ký tư vấn
+        </a>
+        <a href="tel:{{ page.hotline|cut:' ' }}"
+           class="lp-cta-secondary rounded-full border border-neutral-300 px-4 py-3 text-sm font-semibold text-neutral-700">
+            Gọi ngay
+        </a>
+    </div>
+</div>
+
+{# ── Scroll-shadow JS (tiny, no deps) ── #}
+<script>
+  (function () {
+    const hdr = document.querySelector('.lp-header');
+    if (!hdr) return;
+    const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+{% endblock %}

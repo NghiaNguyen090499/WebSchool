@@ -1,0 +1,148 @@
+﻿{% extends "base.html" %}
+{% load static i18n %}
+
+{% block title %}{{ page.title|default:"Mission & Core Values" }} - MIS{% endblock %}
+{% block meta_description %}{{ page.subtitle|default:page.title|default:"MIS mission and core values" }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/about/mission.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main class="mission-page">
+    <section class="mission-hero" aria-labelledby="mission-hero-title">
+        <div class="mission-hero-media" aria-hidden="true">
+            {% if hero_section and hero_section.image %}
+            <img src="{{ hero_section.image.url }}" alt="">
+            {% elif page.image %}
+            <img src="{{ page.image.url }}" alt="">
+            {% else %}
+            <img src="{% static 'images/hero/slide1.jpg' %}" alt="">
+            {% endif %}
+        </div>
+
+        <div class="mission-wrap mission-hero-grid">
+            <div>
+                <span class="mission-kicker" style="background: rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.26);">
+                    {{ hero_section.eyebrow|default:page.get_page_type_display }}
+                </span>
+                <h1 id="mission-hero-title" class="mission-title">{{ hero_section.title|default:page.title }}</h1>
+                {% if hero_section.subtitle %}
+                <p class="mission-lead">{{ hero_section.subtitle }}</p>
+                {% endif %}
+
+                <!-- <div class="mission-actions">
+                    <a class="mission-btn mission-btn-primary" href="{% url 'admissions:list' %}">{% trans "Admissions" %}</a>
+                    <a class="mission-btn mission-btn-secondary" href="{% url 'contact:contact' %}">{% trans "Contact" %}</a>
+                </div> -->
+            </div>
+
+            {% if hero_section.content %}
+            <aside class="mission-side-card" aria-label="Mission highlights">
+                <h2>{% trans "Key Commitments" %}</h2>
+                <div class="mission-side-content">{{ hero_section.content|linebreaksbr }}</div>
+            </aside>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="mission-section mission-section--soft">
+        <div class="mission-wrap">
+            <div class="mission-panels">
+                {% for section in panel_sections %}
+                <article class="mission-panel {% cycle 'is-left' 'is-right' %}">
+                    <div class="mission-panel-body">
+                        {% if section.eyebrow %}
+                        <span class="mission-kicker" style="background:#fee2e2; color:#991b1b;">{{ section.eyebrow }}</span>
+                        {% endif %}
+
+                        {% if section.title %}
+                        <h2 class="mission-heading">{{ section.title }}</h2>
+                        {% endif %}
+
+                        {% if section.subtitle %}
+                        <p class="mission-subtitle">{{ section.subtitle }}</p>
+                        {% endif %}
+
+                        {% if section.content %}
+                        <div class="mission-text">{{ section.content|linebreaksbr }}</div>
+                        {% endif %}
+
+                        {% if section.get_timeline_list %}
+                        <ul class="mission-timeline">
+                            {% for item in section.get_timeline_list %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        {% if section.get_kpi_list %}
+                        <div class="mission-kpi">
+                            {% for kpi in section.get_kpi_list %}
+                            <span>{{ kpi }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mission-panel-media" aria-hidden="true">
+                        {% if section.image %}
+                        <img src="{{ section.image.url }}" alt="{{ section.title|default:page.title }}">
+                        {% elif page.image %}
+                        <img src="{{ page.image.url }}" alt="{{ page.title }}">
+                        {% else %}
+                        <i class="fas fa-compass"></i>
+                        {% endif %}
+                    </div>
+                </article>
+                {% empty %}
+                <article class="mission-panel">
+                    <div class="mission-panel-body">
+                        <h2 class="mission-heading">{{ page.title }}</h2>
+                        <div class="mission-text">{{ page.content|linebreaksbr }}</div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-section">
+        <div class="mission-wrap">
+            <span class="mission-kicker" style="background:#fee2e2; color:#991b1b;">Giá trị cốt lõi</span>
+            <h2 class="mission-heading">GRACE</h2>
+            <div class="mission-values">
+                {% for value in grace_values %}
+                <article class="mission-value">
+                    <span class="mission-value-index">{{ forloop.counter }}</span>
+                    <h3 class="mission-value-title" data-grace-title="{{ value.title }}">{{ value.title }}</h3>
+                    <p class="mission-value-desc">{{ value.description }}</p>
+                </article>
+                {% empty %}
+                <article class="mission-value" style="grid-column:1/-1;">
+                    <h3 class="mission-value-title">GRACE</h3>
+                    <p class="mission-value-desc">{% trans "Core values are being updated." %}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_title=page.title cta_subtitle=page.get_page_type_display cta_primary='Request Consultation' cta_primary_url='admissions:list' cta_secondary='Contact Us' cta_secondary_url='contact:contact' %}
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('[data-grace-title]').forEach(function (el) {
+            var raw = el.getAttribute('data-grace-title') || '';
+            if (!raw || raw.indexOf('|') === -1) return;
+            var parts = raw.split('|');
+            var en = parts[0].trim();
+            var vi = parts.slice(1).join('|').trim();
+            el.innerHTML = '<span class="mission-value-en">' + en + '</span><span>' + vi + '</span>';
+        });
+    });
+</script>
+{% endblock %}
+

@@ -1,0 +1,229 @@
+/* ── Domain Cards ──────────────────────── */
+    .domain-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+        border-radius: var(--radius-xl);
+        background: var(--color-surface-light);
+        border: 1px solid var(--color-neutral-100, #f5f5f5);
+        transition: all var(--duration-base) var(--easing-smooth);
+    }
+
+    .domain-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        border-color: var(--color-brand-primary, #dc2626);
+    }
+
+    .domain-card__num {
+        flex-shrink: 0;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--gradient-primary);
+        color: var(--color-text-on-primary);
+        font-weight: var(--font-extrabold);
+        font-size: 0.8rem;
+        box-shadow: 0 3px 10px rgba(220, 38, 38, 0.25);
+    }
+
+    .domain-card__text {
+        font-size: 0.9rem;
+        color: var(--color-text-secondary, #525252);
+        line-height: 1.6;
+    }
+
+    /* ── Roadmap Level Cards ──────────────── */
+    .level-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.4rem 1rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: var(--font-bold);
+        background: var(--gradient-primary);
+        color: var(--color-text-on-primary);
+        border: 1px solid rgba(220, 38, 38, 0.3);
+    }
+
+    .roadmap-card-v2 {
+        padding: 2rem;
+        border-radius: var(--radius-2xl);
+        background: var(--color-surface-light);
+        border: 1px solid var(--color-neutral-100, #f5f5f5);
+        transition: all var(--duration-base) var(--easing-smooth);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .roadmap-card-v2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #dc2626, #f87171);
+        transform: scaleX(0);
+        transition: transform var(--duration-base) var(--easing-smooth);
+        transform-origin: left;
+    }
+
+    .roadmap-card-v2:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .roadmap-card-v2:hover::after {
+        transform: scaleX(1);
+    }
+
+    /* ── Core Pillar Cards ───────────────── */
+    .pillar-v2 {
+        text-align: center;
+        padding: 2rem 1.5rem;
+        border-radius: var(--radius-2xl);
+        background: var(--color-surface-light);
+        border: 1px solid var(--color-neutral-100, #f5f5f5);
+        transition: all var(--duration-base) var(--easing-smooth);
+    }
+
+    .pillar-v2:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+        border-color: var(--color-brand-primary, #dc2626);
+    }
+
+    .pillar-v2__icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: 0 auto 1rem;
+        border-radius: var(--radius-xl);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--gradient-primary);
+        color: var(--color-text-on-primary);
+        font-size: 1.3rem;
+        transition: all var(--duration-base) var(--easing-smooth);
+    }
+
+    .pillar-v2:hover .pillar-v2__icon {
+        background: var(--gradient-primary);
+        color: var(--color-text-on-primary);
+        transform: scale(1.1);
+    }
+
+    .pillar-v2__text {
+        font-size: 0.9rem;
+        color: var(--color-text-secondary, #525252);
+        line-height: 1.6;
+    }
+
+    /* ── Tool Chips ──────────────────────── */
+    .tool-chip {
+        text-align: center;
+        padding: 1.5rem 1rem;
+        border-radius: var(--radius-xl);
+        background: var(--color-surface-light);
+        border: 1px solid var(--color-neutral-100, #f5f5f5);
+        transition: all var(--duration-base) var(--easing-smooth);
+    }
+
+    .tool-chip:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        border-color: var(--color-brand-primary, #dc2626);
+    }
+
+    .tool-chip__icon {
+        width: 3rem;
+        height: 3rem;
+        margin: 0 auto 0.75rem;
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+    }
+
+    .tool-chip:nth-child(1) .tool-chip__icon {
+        background: #eef2ff;
+        color: #4f46e5;
+    }
+
+    .tool-chip:nth-child(2) .tool-chip__icon {
+        background: #ecfdf5;
+        color: #059669;
+    }
+
+    .tool-chip:nth-child(3) .tool-chip__icon {
+        background: #fdf4ff;
+        color: #a855f7;
+    }
+
+    .tool-chip:nth-child(4) .tool-chip__icon {
+        background: #fff7ed;
+        color: #ea580c;
+    }
+
+    .tool-chip:nth-child(5) .tool-chip__icon {
+        background: var(--color-brand-primary);
+        color: var(--color-text-on-primary);
+    }
+
+    .tool-chip__name {
+        font-size: 0.85rem;
+        font-weight: var(--font-semibold);
+        color: var(--color-text-primary, #171717);
+    }
+
+    /* ── Outcome Cards ──────────────────── */
+    .outcome-v2 {
+        background: var(--color-surface-light);
+        padding: 1.75rem;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--color-neutral-100, #f5f5f5);
+        transition: all var(--duration-base) var(--easing-smooth);
+    }
+
+    .outcome-v2:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        border-color: var(--color-brand-primary, #dc2626);
+    }
+
+    .outcome-v2__num {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--gradient-primary);
+        color: var(--color-text-on-primary);
+        font-weight: var(--font-extrabold);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+    }
+
+    .outcome-v2__text {
+        font-size: 0.9rem;
+        color: var(--color-text-secondary, #525252);
+        line-height: 1.7;
+    }
+
+    /* ── Decorative ──────────────────────── */
+    .deco-dots {
+        position: absolute;
+        inset: 0;
+        opacity: 0.03;
+        pointer-events: none;
+        background-image: radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0);
+        background-size: 24px 24px;
+    }

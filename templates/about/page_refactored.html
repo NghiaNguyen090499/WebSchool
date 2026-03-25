@@ -1,0 +1,482 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{{ page.title }} - MIS Äa TrÃ­ Tuá»‡{% endblock %}
+
+{% block meta_description %}
+{% if page.page_type == 'steam' %}ChÆ°Æ¡ng trÃ¬nh STEAM MIS - ÄÃ³n Ä‘áº§u ká»· nguyÃªn cÃ´ng nghá»‡ vá»›i tÆ° duy sÃ¡ng táº¡o, ká»¹ nÄƒng sá»‘
+vÃ  AI
+{% elif page.page_type == 'chinese' %}Há»‡ Tiáº¿ng Trung TÃ i NÄƒng MIS - Lá»™ trÃ¬nh HSK chuáº©n quá»‘c táº¿, cam káº¿t Ä‘áº§u ra HSK 4-6
+{% elif page.page_type == 'overview_english' %}Há»‡ Tiáº¿ng Anh TÃ i NÄƒng MIS x Jaxtina - Cam káº¿t IELTS 6.0-7.5+, chÆ°Æ¡ng
+trÃ¬nh Cambridge
+{% elif page.page_type == 'academics' %}ChÆ°Æ¡ng trÃ¬nh GiÃ¡o dá»¥c MIS - 4 cáº¥p há»c tá»« Máº§m non Ä‘áº¿n THPT, phÃ¡t triá»ƒn toÃ n diá»‡n
+{% else %}{{ page.title }} - TrÆ°á»ng MIS Äa TrÃ­ Tuá»‡{% endif %}
+{% endblock %}
+
+{% block extra_head %}
+
+{% endblock %}
+
+{% block content %}
+<main class="about-scope">
+
+    {% comment %}
+    ===========================================
+    STEAM PROGRAM PAGE
+    ===========================================
+    {% endcomment %}
+    {% if page.page_type == 'steam' %}
+    {% include 'about/partials/_hero.html' with hero_variant='gradient-red' hero_eyebrow='ChÆ°Æ¡ng trÃ¬nh STEAM' hero_title=page.title|default:"Há»‡ STEAM & CÃ´ng nghá»‡ sÃ¡ng táº¡o" hero_subtitle='ÄÃ³n Ä‘áº§u ká»· nguyÃªn cÃ´ng nghá»‡ vá»›i tÆ° duy sÃ¡ng táº¡o, ká»¹ nÄƒng sá»‘ vÃ nÄƒng lá»±c giáº£i quyáº¿t váº¥n Ä‘á» cho há»c sinh MIS.' hero_cta_primary='KhÃ¡m phÃ¡ chÆ°Æ¡ng trÃ¬nh' hero_cta_primary_url='#steam-pillars' hero_cta_secondary='TÆ° váº¥n ngay' hero_cta_secondary_url=contact_url hero_image=page.image %}
+
+    <section id="steam-philosophy" class="section section--light">
+        <div class="container">
+            <div class="split-layout">
+                <div class="split-layout__content">
+                    {% include 'about/partials/_section_header.html' with eyebrow='Triáº¿t lÃ½ chÆ°Æ¡ng trÃ¬nh' title='STEAM táº¡i MIS: há»c qua dá»± Ã¡n, há»c Ä‘á»ƒ giáº£i quyáº¿t váº¥n Ä‘á»' subtitle='ChÆ°Æ¡ng trÃ¬nh STEAM Ä‘Æ°á»£c thiáº¿t káº¿ theo lá»™ trÃ¬nh 4 cáº¥p há»c, káº¿t há»£p khoa há»c - cÃ´ng nghá»‡ - ká»¹ thuáº­t - nghá»‡ thuáº­t - toÃ¡n há»c. Há»c sinh Ä‘Æ°á»£c khai má»Ÿ tÆ° duy, rÃ¨n ká»¹ nÄƒng sá»‘, tÆ° duy thiáº¿t káº¿ vÃ sÃ¡ng táº¡o.' %}
+
+                    <div class="feature-grid feature-grid--2col">
+                        <div class="feature-card">
+                            <div class="feature-card__icon feature-card__icon--primary">
+                                <i class="fas fa-brain" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="feature-card__title">TÆ° duy há»‡ thá»‘ng</h3>
+                            <p class="feature-card__description">PhÃ¢n tÃ­ch váº¥n Ä‘á» theo cÃ¡ch tiáº¿p cáº­n logic vÃ  sÃ¡ng táº¡o.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card__icon feature-card__icon--primary">
+                                <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="feature-card__title">Ká»¹ nÄƒng sá»‘</h3>
+                            <p class="feature-card__description">LÃ m quen cÃ´ng cá»¥, ná»n táº£ng sá»‘ vÃ  an toÃ n sá»‘.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card__icon feature-card__icon--primary">
+                                <i class="fas fa-users" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="feature-card__title">Ká»¹ nÄƒng má»m</h3>
+                            <p class="feature-card__description">LÃ m viá»‡c nhÃ³m, trÃ¬nh bÃ y vÃ  quáº£n lÃ½ dá»± Ã¡n.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-card__icon feature-card__icon--primary">
+                                <i class="fas fa-rocket" aria-hidden="true"></i>
+                            </div>
+                            <h3 class="feature-card__title">SÃ¡ng táº¡o á»©ng dá»¥ng</h3>
+                            <p class="feature-card__description">Sáº£n pháº©m tháº­t - cáº£m há»©ng tháº­t - tÃ¡c Ä‘á»™ng tháº­t.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split-layout__visual">
+                    <div class="info-card info-card--gradient-red">
+                        <div class="info-card__header">STEAM lÃ  gÃ¬?</div>
+                        <div class="info-card__content">
+                            <div class="steam-letter">
+                                <div class="steam-letter__icon">S</div>
+                                <div>
+                                    <div class="steam-letter__title">Science</div>
+                                    <div class="steam-letter__description">KhÃ¡m phÃ¡ vÃ  quan sÃ¡t tháº¿ giá»›i.</div>
+                                </div>
+                            </div>
+                            <div class="steam-letter">
+                                <div class="steam-letter__icon">T</div>
+                                <div>
+                                    <div class="steam-letter__title">Technology</div>
+                                    <div class="steam-letter__description">á»¨ng dá»¥ng cÃ´ng cá»¥ sá»‘ vÃ o bÃ i há»c.</div>
+                                </div>
+                            </div>
+                            <div class="steam-letter">
+                                <div class="steam-letter__icon">E</div>
+                                <div>
+                                    <div class="steam-letter__title">Engineering</div>
+                                    <div class="steam-letter__description">Thiáº¿t káº¿, láº¯p rÃ¡p vÃ  thá»­ nghiá»‡m.</div>
+                                </div>
+                            </div>
+                            <div class="steam-letter">
+                                <div class="steam-letter__icon">A</div>
+                                <div>
+                                    <div class="steam-letter__title">Art</div>
+                                    <div class="steam-letter__description">TÆ° duy thiáº¿t káº¿ vÃ  tháº©m má»¹.</div>
+                                </div>
+                            </div>
+                            <div class="steam-letter">
+                                <div class="steam-letter__icon">M</div>
+                                <div>
+                                    <div class="steam-letter__title">Math</div>
+                                    <div class="steam-letter__description">Ná»n táº£ng logic vÃ  Ä‘o lÆ°á»ng.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="steam-pillars" class="section section--neutral">
+        <div class="container">
+            {% include 'about/partials/_section_header.html' with eyebrow='Ná»™i dung cá»‘t lÃµi' title='6 trá»¥c nÄƒng lá»±c trong chÆ°Æ¡ng trÃ¬nh STEAM' subtitle='ChÆ°Æ¡ng trÃ¬nh Ä‘Æ°á»£c xÃ¢y dá»±ng theo cÃ¡c chá»§ Ä‘á» liÃªn káº¿t, phÃ¡t triá»ƒn Ä‘á»“ng thá»i kiáº¿n thá»©c vÃ ká»¹ nÄƒng.' alignment='center' %}
+
+            <div class="card-grid card-grid--3col">
+                {% for pillar in steam_pillars %}
+                <div class="pillar-card">
+                    <div class="pillar-card__icon">
+                        <i class="fas fa-{{ pillar.icon }}" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="pillar-card__title">{{ pillar.title }}</h3>
+                    <p class="pillar-card__description">{{ pillar.description }}</p>
+                </div>
+                {% empty %}
+                {# Fallback if no data #}
+                <div class="pillar-card">
+                    <div class="pillar-card__icon"><i class="fas fa-code" aria-hidden="true"></i></div>
+                    <h3 class="pillar-card__title">Láº­p trÃ¬nh cÆ¡ báº£n</h3>
+                    <p class="pillar-card__description">LÃ m quen ngÃ´n ngá»¯ láº­p trÃ¬nh phÃ¹ há»£p Ä‘á»™ tuá»•i, tÆ° duy logic vÃ  cáº¥u
+                        trÃºc lá»‡nh.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-card__icon"><i class="fas fa-project-diagram" aria-hidden="true"></i></div>
+                    <h3 class="pillar-card__title">TÆ° duy thuáº­t toÃ¡n</h3>
+                    <p class="pillar-card__description">PhÃ¢n tÃ­ch bÃ i toÃ¡n, táº¡o luá»“ng bÆ°á»›c giáº£i, tá»‘i Æ°u giáº£i phÃ¡p.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-card__icon"><i class="fas fa-layer-group" aria-hidden="true"></i></div>
+                    <h3 class="pillar-card__title">Dá»± Ã¡n thá»±c hÃ nh</h3>
+                    <p class="pillar-card__description">Há»c qua dá»± Ã¡n cÃ¡ nhÃ¢n vÃ  nhÃ³m, trÃ¬nh bÃ y sáº£n pháº©m vÃ  bÃ¡o cÃ¡o.
+                    </p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-card__icon"><i class="fas fa-comments" aria-hidden="true"></i></div>
+                    <h3 class="pillar-card__title">Ká»¹ nÄƒng má»m</h3>
+                    <p class="pillar-card__description">Há»£p tÃ¡c, giao tiáº¿p, tÆ° duy pháº£n biá»‡n vÃ  trÃ¬nh bÃ y tá»± tin.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-card__icon"><i class="fas fa-microchip" aria-hidden="true"></i></div>
+                    <h3 class="pillar-card__title">TrÃ­ tuá»‡ nhÃ¢n táº¡o</h3>
+                    <p class="pillar-card__description">LÃ m quen dá»¯ liá»‡u, mÃ´ hÃ¬nh AI Ä‘Æ¡n giáº£n vÃ  á»©ng dá»¥ng thá»±c táº¿.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-card__icon"><i class="fas fa-pen-nib" aria-hidden="true"></i></div>
+                    <h3 class="pillar-card__title">Thiáº¿t káº¿ Ä‘á»“ há»a</h3>
+                    <p class="pillar-card__description">RÃ¨n tÆ° duy tháº©m má»¹, bá»‘ cá»¥c, Ä‘á»“ há»a sá»‘ vÃ  sáº£n pháº©m truyá»n thÃ´ng.
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_title='Sáºµn sÃ ng cho hÃ nh trÃ¬nh cÃ´ng nghá»‡ cá»§a con?' cta_subtitle='LiÃªn há»‡ ngay Ä‘á»ƒ nháº­n tÆ° váº¥n chi tiáº¿t vÃ tráº£i nghiá»‡m lá»›p há»c STEAM táº¡i MIS.' cta_primary='TÆ° váº¥n ngay' cta_primary_url=contact_url cta_secondary='ÄÄƒng kÃ½ tuyá»ƒn sinh' cta_secondary_url=admissions_url %}
+
+
+    {% comment %}
+    ===========================================
+    CHINESE PROGRAM PAGE
+    ===========================================
+    {% endcomment %}
+    {% elif page.page_type == 'overview_chinese' or page.page_type == 'chinese' %}
+    {% include 'about/partials/_hero.html' with hero_variant='gradient-red' hero_eyebrow='ChÆ°Æ¡ng trÃ¬nh Tiáº¿ng Trung' hero_title=page.title|default:"Há»‡ Tiáº¿ng Trung TÃ i NÄƒng MIS x Quá»‘c Táº¿ Thá»i Äáº¡i" hero_subtitle='ThÃ´ng tháº¡o ngoáº¡i ngá»¯ thá»© hai - xuáº¥t sáº¯c Ä‘á»ƒ dáº«n Ä‘áº§u. Lá»™ trÃ¬nh HSK chuáº©n quá»‘c táº¿ dÃ nh riÃªng cho há»c sinh THPT.' hero_cta_primary='Xem lá»™ trÃ¬nh HSK' hero_cta_primary_url='#chinese-roadmap' hero_cta_secondary='TÆ° váº¥n ngay' hero_cta_secondary_url=contact_url hero_image=page.image %}
+
+    <section id="chinese-roadmap" class="section section--light">
+        <div class="container">
+            {% include 'about/partials/_section_header.html' with eyebrow='Lá»™ trÃ¬nh HSK' title='Há»c theo lá»™ trÃ¬nh 3 nÄƒm THPT' subtitle='Há»c sinh tiáº¿n bá»™ theo tá»«ng cáº¥p Ä‘á»™, Ä‘á»§ nÄƒng lá»±c thi chá»©ng chá»‰ vÃ á»©ng dá»¥ng thá»±c táº¿.' alignment='center' %}
+
+            <div class="card-grid card-grid--3col">
+                <div class="roadmap-card">
+                    <div class="roadmap-card__badge">Lá»›p 10</div>
+                    <h3 class="roadmap-card__title">Tiáº¿ng Trung sÆ¡ cáº¥p HSK 1-2</h3>
+                    <ul class="checklist">
+                        <li class="checklist__item">Há»c phÃ¡t Ã¢m chuáº©n, chá»¯ HÃ¡n cÆ¡ báº£n.</li>
+                        <li class="checklist__item">Giao tiáº¿p theo cÃ¡c chá»§ Ä‘á» gáº§n gÅ©i.</li>
+                        <li class="checklist__item">Thi HSK 1-2, xÃ¢y ná»n vá»¯ng cháº¯c.</li>
+                    </ul>
+                </div>
+                <div class="roadmap-card roadmap-card--highlight">
+                    <div class="roadmap-card__badge">Lá»›p 11</div>
+                    <h3 class="roadmap-card__title">Tiáº¿ng Trung trung cáº¥p HSK 3-4</h3>
+                    <ul class="checklist">
+                        <li class="checklist__item">Há»c giao tiáº¿p vá»›i 8 chá»§ Ä‘á» chuyÃªn sÃ¢u.</li>
+                        <li class="checklist__item">Cá»§ng cá»‘ ngá»¯ phÃ¡p vÃ  vá»‘n tá»«.</li>
+                        <li class="checklist__item">Thi HSK 3-4, tÄƒng tá»‘c ká»¹ nÄƒng.</li>
+                    </ul>
+                </div>
+                <div class="roadmap-card">
+                    <div class="roadmap-card__badge">Lá»›p 12</div>
+                    <h3 class="roadmap-card__title">Tiáº¿ng Trung cao cáº¥p HSK 5</h3>
+                    <ul class="checklist">
+                        <li class="checklist__item">Ã”n táº­p HSK 4, luyá»‡n thi HSK 5.</li>
+                        <li class="checklist__item">Äá»c - viáº¿t há»c thuáº­t, pháº£n xáº¡ nÃ¢ng cao.</li>
+                        <li class="checklist__item">Thi chá»©ng chá»‰ vÃ  hoÃ n thiá»‡n há»“ sÆ¡.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_title='Sáºµn sÃ ng chinh phá»¥c tiáº¿ng Trung?' cta_subtitle='LiÃªn há»‡ ngay Ä‘á»ƒ Ä‘Æ°á»£c tÆ° váº¥n lá»™ trÃ¬nh há»c phÃ¹ há»£p vÃ tráº£i nghiá»‡m lá»›p há»c tiáº¿ng Trung táº¡i MIS.' cta_primary='TÆ° váº¥n ngay' cta_primary_url=contact_url cta_secondary='ÄÄƒng kÃ½ tuyá»ƒn sinh' cta_secondary_url=admissions_url %}
+
+
+    {% comment %}
+    ===========================================
+    ENGLISH PROGRAM PAGE
+    ===========================================
+    {% endcomment %}
+    {% elif page.page_type == 'overview_english' %}
+    {% include 'about/partials/_hero.html' with hero_variant='gradient-red' hero_eyebrow='CHÆ¯Æ NG TRÃŒNH TIáº¾NG ANH' hero_title=page.title|default:"Há»‡ Tiáº¿ng Anh TÃ i NÄƒng" hero_subtitle='MIS x Jaxtina English - Chinh phá»¥c Ä‘á»‰nh cao ngÃ´n ngá»¯, sáºµn sÃ ng há»™i nháº­p toÃ n cáº§u vá»›i lá»™ trÃ¬nh chuáº©n Cambridge vÃ IELTS.' hero_cta_primary='ÄÄƒng kÃ½ tÆ° váº¥n' hero_cta_primary_url=admissions_url hero_cta_secondary='Tham quan trÆ°á»ng' hero_cta_secondary_url=contact_url hero_image=page.image %}
+
+    <section class="section section--light">
+        <div class="container">
+            <div class="split-layout">
+                <div class="split-layout__content">
+                    {% include 'about/partials/_section_header.html' with eyebrow='Há»‡ tiáº¿ng Anh tÃ i nÄƒng' title='ChÆ°Æ¡ng trÃ¬nh tÃ­ch há»£p quá»‘c táº¿, Ä‘á»“ng hÃ nh cÃ¹ng Jaxtina English' subtitle='ChÆ°Æ¡ng trÃ¬nh Ä‘Æ°á»£c cá»‘ váº¥n bá»Ÿi cÃ¡c chuyÃªn gia há»c thuáº­t, tÃ­ch há»£p chuáº©n Cambridge vÃ lá»™ trÃ¬nh IELTS tá»« lá»›p 6, giÃºp há»c sinh phÃ¡t triá»ƒn toÃ n diá»‡n 4 ká»¹ nÄƒng Nghe â€“ NÃ³i â€“ Äá»c â€“ Viáº¿t.' %}
+
+                    <div class="checklist">
+                        <div class="checklist__item">ChÆ°Æ¡ng trÃ¬nh chuáº©n quá»‘c táº¿, phÃ¹ há»£p há»c sinh Viá»‡t Nam.</div>
+                        <div class="checklist__item">Cam káº¿t Ä‘áº§u ra IELTS 6.0â€“7.5+ khi tá»‘t nghiá»‡p THPT.</div>
+                        <div class="checklist__item">á»¨ng dá»¥ng cÃ´ng nghá»‡ AI Icorrect há»— trá»£ giao tiáº¿p 1-1.</div>
+                    </div>
+                </div>
+
+                <div class="split-layout__visual">
+                    <div class="info-card info-card--gradient-red">
+                        <div class="info-card__header">MIS x Jaxtina</div>
+                        <div class="info-card__content">
+                            <div class="feature-item-inline">
+                                <i class="fas fa-globe" aria-hidden="true"></i>
+                                <div>
+                                    <div class="feature-item-inline__title">ChÆ°Æ¡ng trÃ¬nh tÃ­ch há»£p quá»‘c táº¿</div>
+                                    <div class="feature-item-inline__description">Äá»‹nh hÆ°á»›ng há»c thuáº­t chuáº©n Cambridge.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feature-item-inline">
+                                <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                                <div>
+                                    <div class="feature-item-inline__title">Lá»™ trÃ¬nh IELTS tá»« lá»›p 6</div>
+                                    <div class="feature-item-inline__description">TÄƒng cÆ¡ há»™i vÃ o cÃ¡c trÆ°á»ng Ä‘áº¡i há»c.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="feature-item-inline">
+                                <i class="fas fa-robot" aria-hidden="true"></i>
+                                <div>
+                                    <div class="feature-item-inline__title">á»¨ng dá»¥ng cÃ´ng nghá»‡ AI</div>
+                                    <div class="feature-item-inline__description">Há»— trá»£ luyá»‡n pháº£n xáº¡ giao tiáº¿p.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_primary='ÄÄƒng kÃ½ tÆ° váº¥n' cta_primary_url=admissions_url cta_secondary='Tham quan trÆ°á»ng' cta_secondary_url=contact_url %}
+
+
+    {% comment %}
+    ===========================================
+    ACADEMICS OVERVIEW PAGE
+    ===========================================
+    {% endcomment %}
+    {% elif page.page_type == 'academics' %}
+    {% include 'about/partials/_hero.html' with hero_variant='gradient-red' hero_eyebrow='ChÆ°Æ¡ng trÃ¬nh GiÃ¡o dá»¥c' hero_title='Tá»•ng quan ChÆ°Æ¡ng trÃ¬nh há»c MIS' hero_subtitle='Há»‡ thá»‘ng Ä‘Ã o táº¡o 4 cáº¥p há»c tá»« Máº§m non Ä‘áº¿n THPT, tÃ­ch há»£p chÆ°Æ¡ng trÃ¬nh Quá»‘c gia vá»›i phÆ°Æ¡ng phÃ¡p giÃ¡o dá»¥c hiá»‡n Ä‘áº¡i' hero_headline='GiÃ¡o dá»¥c con tim â€“ Kiáº¿n táº¡o giÃ¡ trá»‹ sá»‘ng' hero_image=page.image %}
+
+    <section class="section section--light">
+        <div class="container">
+            {% include 'about/partials/_section_header.html' with eyebrow='4 Cáº¥p há»c' title='Lá»™ trÃ¬nh PhÃ¡t triá»ƒn ToÃ n diá»‡n' subtitle='Má»—i cáº¥p há»c táº¡i MIS Ä‘Æ°á»£c thiáº¿t káº¿ vá»›i triáº¿t lÃ½ "Khai phÃ¡ khÃ¡c biá»‡t", phÃ¡t triá»ƒn Ä‘á»“ng thá»i trÃ­ tuá»‡, nhÃ¢n cÃ¡ch vÃ ká»¹ nÄƒng' alignment='center' %}
+
+            <div class="card-grid card-grid--4col">
+                <a href="{% url 'about:preschool' %}" class="level-card level-card--preschool"
+                    aria-label="TÃ¬m hiá»ƒu chÆ°Æ¡ng trÃ¬nh Máº§m non">
+                    <div class="level-card__icon">
+                        <i class="fas fa-baby" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="level-card__title">Máº§m Non</h3>
+                    <p class="level-card__meta">3-6 tuá»•i â€¢ Song ngá»¯ 50/50</p>
+                    <p class="level-card__description">PhÆ°Æ¡ng phÃ¡p Hands-on Learning, mÃ´i trÆ°á»ng song ngá»¯ Anh-Viá»‡t, khÆ¡i
+                        dáº­y trÃ­ tÃ² mÃ² vÃ  sÃ¡ng táº¡o</p>
+                    <span class="level-card__cta">Xem chi tiáº¿t <i class="fas fa-arrow-right"
+                            aria-hidden="true"></i></span>
+                </a>
+
+                <a href="{% url 'about:primary' %}" class="level-card level-card--primary"
+                    aria-label="TÃ¬m hiá»ƒu chÆ°Æ¡ng trÃ¬nh Tiá»ƒu há»c">
+                    <div class="level-card__icon">
+                        <i class="fas fa-book-reader" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="level-card__title">Tiá»ƒu Há»c</h3>
+                    <p class="level-card__meta">Lá»›p 1-5 â€¢ Cambridge + STEM</p>
+                    <p class="level-card__description">TÃ­ch há»£p STEM/STEAM, Tiáº¿ng Anh Cambridge, lÃ m quen Tiáº¿ng Trung vÃ 
+                        cÃ¡c hoáº¡t Ä‘á»™ng tráº£i nghiá»‡m</p>
+                    <span class="level-card__cta">Xem chi tiáº¿t <i class="fas fa-arrow-right"
+                            aria-hidden="true"></i></span>
+                </a>
+
+                <a href="{% url 'about:middle' %}" class="level-card level-card--middle"
+                    aria-label="TÃ¬m hiá»ƒu chÆ°Æ¡ng trÃ¬nh THCS">
+                    <div class="level-card__icon">
+                        <i class="fas fa-flask" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="level-card__title">THCS</h3>
+                    <p class="level-card__meta">Lá»›p 6-9 â€¢ 9 TrÃ­ tuá»‡ + Robotics</p>
+                    <p class="level-card__description">PhÃ¡t triá»ƒn 9 loáº¡i hÃ¬nh trÃ­ tuá»‡, Robotics, Debate, AI vÃ  cÃ¡c CLB
+                        há»c thuáº­t chuyÃªn sÃ¢u</p>
+                    <span class="level-card__cta">Xem chi tiáº¿t <i class="fas fa-arrow-right"
+                            aria-hidden="true"></i></span>
+                </a>
+
+                <a href="{% url 'about:high' %}" class="level-card level-card--high"
+                    aria-label="TÃ¬m hiá»ƒu chÆ°Æ¡ng trÃ¬nh THPT">
+                    <div class="level-card__icon">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="level-card__title">THPT</h3>
+                    <p class="level-card__meta">Lá»›p 10-12 â€¢ Nghá» nghiá»‡p 4.0</p>
+                    <p class="level-card__description">Äá»‹nh hÆ°á»›ng nghá» nghiá»‡p 4.0, thá»±c táº­p doanh nghiá»‡p cÃ´ng nghá»‡, lá»™
+                        trÃ¬nh cÃ¡ nhÃ¢n hÃ³a</p>
+                    <span class="level-card__cta">Xem chi tiáº¿t <i class="fas fa-arrow-right"
+                            aria-hidden="true"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_title='KhÃ¡m phÃ¡ chi tiáº¿t tá»«ng cáº¥p há»c' cta_subtitle='TÃ¬m hiá»ƒu chÆ°Æ¡ng trÃ¬nh phÃ¹ há»£p cho con báº¡n vÃ Ä‘Äƒng kÃ½ tham quan trÆ°á»ng ngay hÃ´m nay' cta_primary='Äáº·t lá»‹ch tham quan' cta_primary_url=contact_url cta_secondary='ÄÄƒng kÃ½ tuyá»ƒn sinh' cta_secondary_url=admissions_url %}
+
+
+    {% comment %}
+    ===========================================
+    DYNAMIC SECTION-BASED PAGES
+    ===========================================
+    {% endcomment %}
+    {% elif page.sections.exists %}
+    {% for section in page.sections.all %}
+    {% if section.layout == 'hero' %}
+    {% include 'about/partials/_hero.html' with hero_variant='gradient-red' hero_eyebrow=section.eyebrow hero_title=section.title|default:page.title hero_subtitle=section.subtitle hero_cta_primary=section.cta_text hero_cta_primary_url=section.cta_url hero_cta_secondary=section.cta_secondary_text hero_cta_secondary_url=section.cta_secondary_url hero_highlight=section.highlight_text hero_image=section.image %}
+    {% elif section.layout == 'cta' %}
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_eyebrow=section.eyebrow cta_title=section.title cta_subtitle=section.subtitle cta_primary=section.cta_text cta_primary_url=section.cta_url cta_secondary=section.cta_secondary_text cta_secondary_url=section.cta_secondary_url %}
+    {% else %}
+    {# Fallback for other section types - preserve original rendering #}
+    <section class="section section--{{ section.background }}">
+        <div class="container">
+            {% if section.title %}
+            {% include 'about/partials/_section_header.html' with eyebrow=section.eyebrow title=section.title alignment='center' %}
+            {% endif %}
+            <div class="prose">{{ section.content|linebreaks }}</div>
+        </div>
+    </section>
+    {% endif %}
+    {% endfor %}
+
+
+    {% comment %}
+    ===========================================
+    LEGACY FALLBACK
+    ===========================================
+    {% endcomment %}
+    {% else %}
+    <div class="section section--light">
+        <div class="container container--narrow">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="{% url 'core:home' %}">Trang chá»§</a>
+                <span class="breadcrumb__separator">/</span>
+                <a href="{% url 'about:mission' %}">Vá» chÃºng tÃ´i</a>
+                <span class="breadcrumb__separator">/</span>
+                <span class="breadcrumb__current">{{ page.get_page_type_display }}</span>
+            </nav>
+
+            <header class="page-header">
+                <span class="badge badge--accent">{{ page.get_page_type_display }}</span>
+                <h1 class="page-title">{{ page.title }}</h1>
+                {% if page.image %}
+                <div class="page-header__image">
+                    <img src="{{ page.image.url }}" alt="{{ page.title }}" loading="lazy">
+                </div>
+                {% endif %}
+            </header>
+
+            <div class="prose">
+                {{ page.content|linebreaks }}
+            </div>
+
+            <nav class="page-nav" aria-label="Related pages">
+                <a href="{% url 'about:mission' %}"
+                    class="btn btn--outline {% if page.page_type == 'mission' %}btn--active{% endif %}">
+                    <i class="fas fa-users" aria-hidden="true"></i>Vá» chÃºng tÃ´i
+                </a>
+                <a href="{% url 'about:vision' %}"
+                    class="btn btn--outline {% if page.page_type == 'vision' %}btn--active{% endif %}">
+                    <i class="fas fa-gem" aria-hidden="true"></i>GiÃ¡ trá»‹ cá»‘t lÃµi
+                </a>
+                <a href="{% url 'about:principal' %}"
+                    class="btn btn--outline {% if page.page_type == 'principal' %}btn--active{% endif %}">
+                    <i class="fas fa-history" aria-hidden="true"></i>Lá»‹ch sá»­ hÃ¬nh thÃ nh
+                </a>
+            </nav>
+        </div>
+    </div>
+    {% endif %}
+
+</main>
+
+{# Skip to main content link for accessibility #}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Lazy load images with Intersection Observer
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
+    }
+
+    // Animated counter for stats
+    document.querySelectorAll('[data-count]').forEach(el => {
+        const target = parseInt(el.dataset.count);
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                let current = 0;
+                const increment = target / 60;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        el.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        el.textContent = Math.ceil(current);
+                    }
+                }, 16);
+                observer.disconnect();
+            }
+        });
+        observer.observe(el);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                target.focus(); // For accessibility
+            }
+        });
+    });
+</script>
+{% endblock %}
+

@@ -21,6 +21,12 @@ class Category(models.Model):
         return self.name
 
 
+class ActiveNewsManager(models.Manager):
+    """Only return non-archived news by default."""
+    def get_queryset(self):
+        return super().get_queryset().filter(is_archived=False)
+
+
 class News(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
@@ -29,8 +35,14 @@ class News(models.Model):
     excerpt = models.TextField(max_length=300, blank=True, help_text="Short summary for listing pages")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     is_featured = models.BooleanField(default=False)
+    is_archived = models.BooleanField(default=False, help_text="Archived news are hidden from public views")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # Default manager: only active (non-archived) news
+    objects = ActiveNewsManager()
+    # Fallback manager: all news including archived
+    all_objects = models.Manager()
     
     class Meta:
         verbose_name_plural = 'News'

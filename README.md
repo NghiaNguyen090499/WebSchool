@@ -1,149 +1,85 @@
-# Website Trường MIS - Đa Trí Tuệ
+# Website Trường MIS – Đa Trí Tuệ
 
-Website trường học hiện đại được xây dựng với Django 5.2 và Tailwind CSS.
+Hệ thống website trường học xây dựng bằng Django, tập trung vào quản trị nội dung,
+giới thiệu chương trình đào tạo, tuyển sinh và truyền thông. Hệ thống hỗ trợ đa
+ngôn ngữ (VI/EN), quản lý media, và cung cấp các module nội dung chuyên biệt
+cho nhu cầu của trường.
 
-## 🚀 Tính năng
+## Tổng quan chức năng
+- Trang chủ: hero slider, giá trị cốt lõi, thống kê, chương trình đào tạo, thành tích,
+  chia sẻ phụ huynh, đối tác, podcast, gương mặt học sinh, cơ sở vật chất.
+- Tuyển sinh: thông tin theo cấp học, điểm nổi bật, form đăng ký và quản lý hồ sơ.
+- Tin tức & Sự kiện: bài viết, danh mục, bài nổi bật, lịch sự kiện.
+- Thư viện ảnh: album, ảnh theo sự kiện/chủ đề.
+- Giới thiệu/Academics: nội dung dạng section, hỗ trợ tài liệu PDF.
+- Liên hệ: form liên hệ, đăng ký tư vấn, lead từ chatbot.
+- CSR & Hoạt động ngoại khóa: dự án CSR, hoạt động ngoại khóa.
+- Đội ngũ: danh sách nhân sự/giáo viên.
+- Portal nội bộ: CRUD cho tin tức, sự kiện, tuyển sinh và hồ sơ đăng ký.
 
-- **Trang chủ**: Hero slider, Giá trị cốt lõi, Giới thiệu, Video, Thống kê, Chương trình học, Tin tức, Sự kiện, Thư viện ảnh
-- **Tuyển sinh**: Thông tin tuyển sinh theo cấp học, Form đăng ký trực tuyến
-- **Tin tức**: Danh sách tin tức, chi tiết bài viết
-- **Sự kiện**: Lịch sự kiện, chi tiết sự kiện
-- **Thư viện ảnh**: Album ảnh, hiển thị gallery
-- **Liên hệ**: Form liên hệ, thông tin trường
-
-## 📋 Yêu cầu hệ thống
-
+## Công nghệ & hạ tầng
 - Python 3.10+
-- Django 5.2+
+- Django 5.2 (Template-based)
+- Django REST Framework, django-cors-headers
 - SQLite (development) / PostgreSQL (production)
+- Pillow (xử lý ảnh), WhiteNoise (static), Gunicorn (production)
 
-## 🛠️ Cài đặt Development
+## Đa ngôn ngữ
+- Hỗ trợ EN/VI với `LocaleMiddleware` và `i18n_patterns`.
+- URL mặc định không có prefix ngôn ngữ (`prefix_default_language=False`).
 
+## Cấu trúc thư mục chính
+```
+WebsiteSchool/
+├── school_website/        # Django settings/urls/wsgi
+├── core/                  # Trang chủ, menu, chương trình đào tạo, nội dung nền
+├── admissions/            # Tuyển sinh & đăng ký
+├── news/                  # Tin tức
+├── events/                # Sự kiện
+├── gallery/               # Thư viện ảnh
+├── about/                 # Giới thiệu, Academics, PDF
+├── contact/               # Liên hệ, tư vấn, lead
+├── staff/                 # Đội ngũ
+├── csr/                   # Trách nhiệm xã hội
+├── activities/            # Hoạt động ngoại khóa
+├── portal/                # Portal quản trị nội dung
+├── templates/             # HTML templates
+├── static/                # CSS/JS/Images
+├── media/                 # Uploads
+└── scripts/               # Script seeding/cập nhật dữ liệu
+```
+
+## Cài đặt nhanh (Development)
 ```bash
-# Clone repository
-git clone <repository-url>
-cd WebsiteSchool
-
-# Tạo virtual environment
 python -m venv venv
 
-# Activate (Windows)
+# Windows
 .\venv\Scripts\activate
 
-# Activate (Linux/Mac)
+# Linux/Mac
 source venv/bin/activate
 
-# Cài đặt dependencies
 pip install -r requirements.txt
-
-# Chạy migrations
 python manage.py migrate
-
-# Tạo dữ liệu mẫu tuyển sinh
-python manage.py create_admission_data
-
-# Tạo superuser
 python manage.py createsuperuser
-
-# Chạy development server
 python manage.py runserver
 ```
 
-## 🚢 Triển khai Production (Linux)
-
-### 1. Clone và cài đặt
-
+## Dữ liệu mẫu
 ```bash
-# Clone repository
-git clone <repository-url> /var/www/mis-website
-cd /var/www/mis-website
-
-# Tạo virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Cài đặt dependencies
-pip install -r requirements.txt
-pip install gunicorn psycopg2-binary
+python manage.py create_admission_data
 ```
 
-### 2. Cấu hình environment
+## Cấu hình môi trường
+Tham khảo `.env.example` cho các biến cấu hình phổ biến (SECRET_KEY, DATABASE_URL,
+EMAIL_*, STATIC_*, MEDIA_*). Dự án hiện đọc cấu hình trực tiếp trong
+`school_website/settings.py`, nên khi triển khai production cần đồng bộ lại việc
+đọc biến môi trường hoặc cập nhật settings theo hạ tầng.
 
-```bash
-# Tạo file .env
-cp .env.example .env
+## Quản trị
+- Admin: `http://localhost:8000/admin/`
+- Portal nội bộ: `http://localhost:8000/portal/`
 
-# Chỉnh sửa cấu hình
-nano .env
-```
-
-### 3. Cấu hình Database (PostgreSQL)
-
-```sql
-CREATE DATABASE mis_website;
-CREATE USER mis_user WITH PASSWORD 'your_password';
-GRANT ALL PRIVILEGES ON DATABASE mis_website TO mis_user;
-```
-
-### 4. Chạy migrations
-
-```bash
-python manage.py migrate
-python manage.py collectstatic --noinput
-python manage.py createsuperuser
-```
-
-### 5. Cấu hình Gunicorn
-
-```bash
-# Chạy với Gunicorn
-gunicorn school_website.wsgi:application --bind 0.0.0.0:8000 --workers 3
-```
-
-### 6. Cấu hình Nginx
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-
-    location /static/ {
-        alias /var/www/mis-website/staticfiles/;
-    }
-
-    location /media/ {
-        alias /var/www/mis-website/media/;
-    }
-
-    location / {
-        proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-}
-```
-
-## 📁 Cấu trúc dự án
-
-```
-WebsiteSchool/
-├── school_website/     # Django settings
-├── core/               # Trang chủ, Core Values, Statistics
-├── admissions/         # Tuyển sinh
-├── news/               # Tin tức
-├── events/             # Sự kiện
-├── gallery/            # Thư viện ảnh
-├── about/              # Giới thiệu
-├── contact/            # Liên hệ
-├── templates/          # HTML templates
-├── static/             # CSS, JS, Images
-└── media/              # User uploads
-```
-
-## 🔑 Admin Panel
-
-Truy cập: `http://localhost:8000/admin/`
-
-## 📝 License
-
-© 2024 MIS Đa Trí Tuệ. All rights reserved.
+## Tài liệu liên quan
+- `SETUP.md` – Hướng dẫn triển khai chi tiết
+- `CRAWL_GUIDE.md`, `DATA_UPDATE_SUMMARY.md` – Tài liệu dữ liệu/crawl (nếu dùng)

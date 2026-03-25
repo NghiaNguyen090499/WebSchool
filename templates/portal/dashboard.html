@@ -1,0 +1,200 @@
+﻿{% extends "portal/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block header_title %}Dashboard{% endblock %}
+
+{% block portal_content %}
+<section class="section" aria-labelledby="dashboard-heading">
+    <div class="max-w-6xl mx-auto">
+        <div class="portal-toolbar mb-6">
+            <div>
+                <h1 id="dashboard-heading" class="page-title">Dashboard</h1>
+                <p class="portal-subtitle">Tổng quan hoạt động quản trị nội dung</p>
+            </div>
+            <div style="display:flex;gap:8px">
+                <a href="{% url 'portal:news_create' %}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus icon-md"></i> Tạo tin
+                </a>
+                <a href="{% url 'portal:event_create' %}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-plus icon-md"></i> Tạo sự kiện
+                </a>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="portal-stats-grid" role="list" aria-label="Thống kê nhanh">
+            <div class="portal-stat-card" role="listitem">
+                <div class="portal-stat-icon" aria-hidden="true">
+                    <i class="fas fa-newspaper portal-section-icon--teal"></i>
+                </div>
+                <div class="portal-stat-label">Tin tức</div>
+                <div class="portal-stat-value">{{ news_count }}</div>
+                <a href="{% url 'portal:news_list' %}" class="portal-stat-link">Quản lý tin tức →</a>
+            </div>
+            <div class="portal-stat-card" role="listitem">
+                <div class="portal-stat-icon" aria-hidden="true">
+                    <i class="fas fa-calendar-days portal-section-icon--blue"></i>
+                </div>
+                <div class="portal-stat-label">Sự kiện</div>
+                <div class="portal-stat-value">{{ events_count }}</div>
+                <a href="{% url 'portal:event_list' %}" class="portal-stat-link">Quản lý sự kiện →</a>
+            </div>
+            <div class="portal-stat-card" role="listitem">
+                <div class="portal-stat-icon" aria-hidden="true">
+                    <i class="fas fa-graduation-cap portal-section-icon--purple"></i>
+                </div>
+                <div class="portal-stat-label">Tuyển sinh</div>
+                <div class="portal-stat-value">{{ admissions_count }}</div>
+                <a href="{% url 'portal:admissions_list' %}" class="portal-stat-link">Quản lý tuyển sinh →</a>
+            </div>
+            <div class="portal-stat-card" role="listitem">
+                <div class="portal-stat-icon" aria-hidden="true">
+                    <i class="fas fa-clipboard-list portal-section-icon--amber"></i>
+                </div>
+                <div class="portal-stat-label">Đăng ký</div>
+                <div class="portal-stat-value">{{ registrations_count }}</div>
+                <a href="{% url 'portal:admissions_registrations_list' %}" class="portal-stat-link">Xem đăng ký →</a>
+            </div>
+            <div class="portal-stat-card" role="listitem">
+                <div class="portal-stat-icon" aria-hidden="true">
+                    <i class="fas fa-file-lines portal-section-icon--pink"></i>
+                </div>
+                <div class="portal-stat-label">Trang</div>
+                <div class="portal-stat-value">{{ pages_count }}</div>
+                <a href="{% url 'portal:pages_list' %}" class="portal-stat-link">Quản lý trang →</a>
+            </div>
+        </div>
+
+        <!-- Recent Content Grid -->
+        <div class="portal-grid-2 mb-6">
+            <!-- Recent News -->
+            <div class="portal-card">
+                <div class="portal-card-header">
+                    <h2 class="title-sm"><i class="fas fa-newspaper portal-section-icon--teal icon-lg" style="margin-right:6px"></i>Tin tức mới</h2>
+                    <a href="{% url 'portal:news_list' %}" class="btn btn-ghost btn-xs">Tất cả</a>
+                </div>
+                <ul class="portal-list" aria-label="Tin tức mới nhất">
+                    {% for item in recent_news %}
+                    <li class="portal-list-item">
+                        <div style="min-width:0">
+                            <div class="portal-list-title truncate">{{ item.title }}</div>
+                            <time class="portal-list-meta" datetime="{{ item.created_at|date:'Y-m-d' }}">
+                                {{ item.created_at|date:"d/m/Y" }}
+                            </time>
+                        </div>
+                        {% if portal_is_editor %}
+                        <a href="{% url 'portal:news_edit' item.pk %}" class="btn btn-ghost btn-xs"
+                            aria-label="Sửa tin {{ item.title }}"><i class="fas fa-pen icon-sm"></i></a>
+                        {% endif %}
+                    </li>
+                    {% empty %}
+                    <li class="portal-list-empty">
+                        <i class="fas fa-inbox" style="margin-right:4px"></i> Chưa có tin tức nào.
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Recent Events -->
+            <div class="portal-card">
+                <div class="portal-card-header">
+                    <h2 class="title-sm"><i class="fas fa-calendar-days portal-section-icon--blue icon-lg" style="margin-right:6px"></i>Sự kiện mới</h2>
+                    <a href="{% url 'portal:event_list' %}" class="btn btn-ghost btn-xs">Tất cả</a>
+                </div>
+                <ul class="portal-list" aria-label="Sự kiện mới nhất">
+                    {% for item in recent_events %}
+                    <li class="portal-list-item">
+                        <div style="min-width:0">
+                            <div class="portal-list-title truncate">{{ item.title }}</div>
+                            <time class="portal-list-meta" datetime="{{ item.date|date:'Y-m-d' }}">
+                                {{ item.date|date:"d/m/Y" }}
+                            </time>
+                        </div>
+                        {% if portal_is_editor %}
+                        <a href="{% url 'portal:event_edit' item.pk %}" class="btn btn-ghost btn-xs"
+                            aria-label="Sửa sự kiện {{ item.title }}"><i class="fas fa-pen icon-sm"></i></a>
+                        {% endif %}
+                    </li>
+                    {% empty %}
+                    <li class="portal-list-empty">
+                        <i class="fas fa-inbox" style="margin-right:4px"></i> Chưa có sự kiện nào.
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Recent Registrations -->
+        <div class="portal-card mb-6">
+            <div class="portal-card-header">
+                <h2 class="title-sm"><i class="fas fa-clipboard-list portal-section-icon--amber icon-lg" style="margin-right:6px"></i>Đăng ký gần đây</h2>
+                <a href="{% url 'portal:admissions_registrations_list' %}" class="btn btn-ghost btn-xs">Tất cả</a>
+            </div>
+            <div class="portal-table-container portal-table-container--plain">
+                <table class="portal-table" aria-label="Đăng ký tuyển sinh gần đây">
+                    <thead>
+                        <tr>
+                            <th scope="col">Phụ huynh</th>
+                            <th scope="col">Điện thoại</th>
+                            <th scope="col">Học sinh</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Ngày tạo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in recent_registrations %}
+                        <tr>
+                            <td class="font-semibold" style="color:var(--p-gray-800)">{{ item.parent_name }}</td>
+                            <td>{{ item.parent_phone }}</td>
+                            <td>{{ item.student_name }}</td>
+                            <td><span class="badge badge-info">{{ item.get_status_display }}</span></td>
+                            <td>
+                                <time datetime="{{ item.created_at|date:'Y-m-d' }}">{{ item.created_at|date:"d/m/Y"
+                                    }}</time>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5">
+                                <div class="portal-empty-state py-6">
+                                    <div class="portal-empty-icon" aria-hidden="true"><i class="fas fa-inbox"></i></div>
+                                    <p class="portal-empty-title">Chưa có đăng ký nào</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recent Pages -->
+        <div class="portal-card">
+            <div class="portal-card-header">
+                <h2 class="title-sm"><i class="fas fa-file-lines portal-section-icon--pink icon-lg" style="margin-right:6px"></i>Trang gần đây</h2>
+                <a href="{% url 'portal:pages_list' %}" class="btn btn-ghost btn-xs">Tất cả</a>
+            </div>
+            <ul class="portal-list" aria-label="Trang nội dung gần đây">
+                {% for item in recent_pages %}
+                <li class="portal-list-item">
+                    <div style="min-width:0">
+                        <div class="portal-list-title truncate">{{ item.title }}</div>
+                        <time class="portal-list-meta" datetime="{{ item.updated_at|date:'Y-m-d' }}">
+                            Cập nhật: {{ item.updated_at|date:"d/m/Y" }}
+                        </time>
+                    </div>
+                    {% if portal_is_editor %}
+                    <a href="{% url 'portal:pages_edit' item.pk %}" class="btn btn-ghost btn-xs"
+                        aria-label="Sửa trang {{ item.title }}"><i class="fas fa-pen icon-sm"></i></a>
+                    {% endif %}
+                </li>
+                {% empty %}
+                <li class="portal-list-empty">
+                    <i class="fas fa-inbox" style="margin-right:4px"></i> Chưa có trang nào.
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

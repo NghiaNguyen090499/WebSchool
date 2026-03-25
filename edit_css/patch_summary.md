@@ -1,0 +1,32 @@
+# Patch Summary
+
+## Generated Files
+- `static/css/custom.fixed.css`
+  - Normalized public-site colors to variable fallbacks instead of raw hex and named colors.
+  - Re-aligned body and heading font declarations with the shared typography token names.
+  - Tokenized the ad-hoc secondary blue CTA palette instead of leaving it hard-coded.
+- `static/css/portal.fixed.css`
+  - Replaced repeated hard-coded portal surface, border, and text colors with tokenized fallbacks.
+  - Fixed a low-contrast empty-state color on white cards.
+  - Tokenized portal links and form focus states instead of leaving a separate blue scale in place.
+- `static/css/variables.fixed.css`
+  - Added a design-token alias file for the new fallback variables used across the `.fixed` outputs.
+- `static/portal/portal.fixed.css`
+  - Collapsed repeated raw portal sidebar colors back onto the existing `--p-*` token namespace.
+  - Removed direct hex duplication in sidebar, surface, and neutral rules without changing the portal palette.
+  - Left the teal admin palette in place but documented it as a separate token system from the public site.
+- `templates/about/history.fixed.html`
+  - Tokenized the closing CTA button gradient and shadow instead of leaving a one-off inline blue theme.
+- `templates/about/lifeskills.fixed.html`
+  - Replaced repeated inline badge, chip, and action-link colors with variable fallbacks to reduce palette drift.
+  - Preserved the page-specific thematic accents by using semantic alias variables with literal fallbacks.
+- `templates/about/partners.fixed.html`
+  - Tokenized repeated inline partner-card accent colors and gradients using CSS variable fallbacks.
+- `templates/portal/base.fixed.html`
+  - Replaced inline portal control colors with the portal token namespace.
+- `templates/portal/dashboard.fixed.html`
+  - Moved dashboard stat icon colors off inline hex values and onto portal/public token fallbacks.
+- `templates/portal/login.fixed.html`
+  - Tokenized the login page palette with variable fallbacks instead of raw hex values.
+  - Fixed two low-contrast muted text styles on white surfaces by darkening them to `#64748b` equivalents.
+  - Standardized local font declarations onto a reusable UI font variable.

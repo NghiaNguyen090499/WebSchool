@@ -1,0 +1,47 @@
+{% extends "portal/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% if object %}Sửa: {{ object.title }}{% else %}Tạo tuyển sinh{% endif %}{% endblock %}
+{% block header_title %}{% if object %}Sửa tuyển sinh{% else %}Tạo tuyển sinh{% endif %}{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof tinymce !== 'undefined') {
+            tinymce.init({
+                selector: '#id_content',
+                height: 400,
+                menubar: false,
+                plugins: 'lists link image table code fullscreen',
+                toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | bullist numlist | link image | code fullscreen',
+                content_style: "body { font-family: 'Inter', sans-serif; font-size: 14px; }"
+            });
+        }
+    });
+</script>
+{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Tuyển sinh"
+breadcrumb_section_url=admissions_list_url breadcrumb_current=object.title|default:"Tạo mới" %}
+
+<form method="post" enctype="multipart/form-data" class="portal-form" novalidate>
+    {% csrf_token %}
+    <div class="portal-actions-sticky">
+        <h1 class="page-title">{% if object %}Sửa: {{ object.title|truncatewords:6 }}{% else %}Tạo đợt tuyển sinh mới{%
+            endif %}</h1>
+        <div style="display:flex;gap:8px">
+            <a href="{% url 'portal:admissions_list' %}" class="btn btn-secondary btn-sm">Hủy</a>
+            <button type="submit" class="btn btn-primary btn-md btn-save-trigger">
+                <i class="fas fa-check icon-md"></i>
+                <span class="btn-text">{% if object %}Cập nhật{% else %}Tạo{% endif %}</span>
+            </button>
+        </div>
+    </div>
+    <div class="portal-card">
+        <div class="portal-card-body">{% include "portal/includes/form_fields.html" %}</div>
+    </div>
+</form>
+{% endblock %}

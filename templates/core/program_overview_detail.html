@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ page.title }} - MIS{% endblock %}
+{% block meta_description %}{{ page.description|default:page.title|striptags|truncatechars:160 }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/pdf-images.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="section relative overflow-hidden hero-gradient-bg">
+    <div class="pointer-events-none absolute inset-0">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="absolute inset-0 opacity-20"
+            style="background-image: radial-gradient(circle, rgba(255, 255, 255, 0.45) 1px, transparent 1px); background-size: 28px 28px;">
+        </div>
+        <div class="absolute -top-24 -left-12 w-72 h-72 rounded-full bg-white/15 blur-3xl"></div>
+        <div class="absolute -bottom-20 -right-6 w-80 h-80 rounded-full bg-red-300/20 blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="mb-8 text-sm animate-fadeInUp">
+            <a href="{% url 'core:home' %}" class="text-white/70 hover:text-white transition-colors">Trang chủ</a>
+            <span class="mx-2 text-white/50">/</span>
+            <span class="text-white">Chương trình tổng quan</span>
+        </nav>
+
+        <div class="max-w-4xl animate-fadeInUp">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium mb-6 border border-white/20">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Chương trình học</span>
+                </div>
+                <h1 class="hero-title mb-6 max-w-3xl">{{ page.title }}</h1>
+                {% if page.subtitle %}
+                <p class="text-lg md:text-xl text-white/85 mb-8 leading-relaxed max-w-2xl">{{ page.subtitle }}</p>
+                {% endif %}
+                <div class="flex flex-wrap items-center gap-3">
+                    <a href="#program-materials"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-primary-700 font-semibold hover:bg-primary-50 transition-colors">
+                        <i class="fas fa-file-lines"></i>
+                        <span>Xem nội dung</span>
+                    </a>
+                    {% if page.source_url %}
+                    <a href="{{ page.source_url }}" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/35 bg-white/10 text-white font-semibold hover:bg-white/15 transition-colors">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>Mở trang nguồn</span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if page.description %}
+<section class="section bg-white dark:bg-neutral-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-neutral-50 dark:bg-neutral-800 rounded-3xl p-8 shadow-premium">
+            <div class="prose dark:prose-invert max-w-none">
+                {{ page.description|linebreaks }}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section id="program-materials" class="pdf-images-section">
+    <div class="container">
+        <div class="pdf-images-container">
+            <div class="download-section">
+                <h2 class="text-2xl md:text-3xl font-bold mb-3">
+                    <i class="fas fa-file-lines mr-2"></i>
+                    {{ page.title }}
+                </h2>
+                {% if page.subtitle %}
+                <p class="mb-4 text-lg opacity-90">{{ page.subtitle }}</p>
+                {% endif %}
+                <div class="flex flex-wrap gap-3 justify-center">
+                    {% if page.source_url %}
+                    <a href="{{ page.source_url }}" target="_blank" rel="noopener noreferrer" class="download-btn">
+                        <i class="fas fa-external-link-alt"></i>
+                        Mở trang nguồn
+                    </a>
+                    {% else %}
+                    <span class="download-btn is-disabled">
+                        <i class="fas fa-external-link-alt"></i>
+                        Mở trang nguồn
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if images %}
+            <div class="space-y-0">
+                {% for image in images %}
+                {% if image.image %}
+                <img src="{{ image.image.url }}"
+                    alt="{{ image.alt_text|default:page.title }}"
+                    class="pdf-page-image mx-auto max-w-6xl" loading="lazy">
+                {% else %}
+                <img src="{{ image.image_url }}"
+                    alt="{{ image.alt_text|default:page.title }}"
+                    class="pdf-page-image mx-auto max-w-6xl" loading="lazy">
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center text-gray-600 py-8">
+                Nội dung hình ảnh sẽ được cập nhật sớm.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

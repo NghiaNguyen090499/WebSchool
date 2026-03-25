@@ -1,43 +1,49 @@
 {% extends 'base.html' %}
 {% load i18n static %}
 
-{% block title %}{{ album.name }} - {% trans "Gallery" %} - EduSchool{% endblock %}
+{% block title %}{{ album.name }} - Thư viện ảnh - MIS Đa Trí Tuệ{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css">
 {% endblock %}
 
 {% block content %}
-<div class="bg-neutral min-h-screen py-20">
+<div class="bg-neutral-50 dark:bg-neutral-900 min-h-screen section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Back Button -->
-        <a href="{% url 'gallery:list' %}" class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 font-semibold transition-all duration-200 hover:translate-x-[-4px] animate-fadeInUp">
-            <i class="fas fa-arrow-left mr-3"></i> {% trans "Back to Gallery" %}
+        <a href="{% url 'gallery:list' %}"
+            class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 font-semibold transition-all duration-200 hover:translate-x-[-4px] animate-fadeInUp">
+            <i class="fas fa-arrow-left mr-3"></i> Quay lại Thư viện ảnh
         </a>
-        
+
         <!-- Album Header -->
         <header class="mb-12 animate-fadeInUp">
-            <h1 class="text-4xl md:text-5xl font-display font-bold mb-6 text-gray-900 dark:text-white">{{ album.name }}</h1>
+            <h1 class="page-title mb-6">{{ album.name }}</h1>
             {% if album.description %}
-            <p class="text-lg text-gray-600 dark:text-gray-400 mb-6 leading-relaxed max-w-3xl">{{ album.description }}</p>
+            <p class="lead mb-6 max-w-3xl">{{ album.description }}</p>
             {% endif %}
-            <div class="flex items-center text-gray-500 dark:text-gray-400">
-                <div class="flex items-center px-4 py-2 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+            <div class="flex items-center text-muted">
+                <div class="flex items-center px-4 py-2 bg-white dark:bg-neutral-800 rounded-xl shadow-md">
                     <i class="fas fa-images mr-2 text-primary-500"></i>
-                    <span class="font-semibold">{{ photos.count }} {% trans "photos" %}</span>
+                    <span class="font-semibold">{{ page_count }} / {{ total_photos }} ảnh</span>
                 </div>
             </div>
         </header>
-        
+
         <!-- Photos Grid (Masonry-like) -->
         {% if photos %}
         <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 animate-fadeInUp">
             {% for photo in photos %}
-            <a href="{{ photo.image.url }}" data-lightbox="gallery" data-title="{{ photo.caption|default:album.name }}" class="block mb-4 break-inside-avoid group">
-                <div class="relative overflow-hidden rounded-2xl shadow-md hover:shadow-premium-lg transition-all duration-300 hover:-translate-y-1">
-                    <img src="{{ photo.image.url }}" alt="{{ photo.caption|default:album.name }}" class="w-full h-auto object-cover image-hover">
+            {% if photo.image %}
+            <a href="{{ photo.image.url }}" data-lightbox="gallery" data-title="{{ photo.caption|default:album.name }}"
+                class="block mb-4 break-inside-avoid group">
+                <div
+                    class="relative overflow-hidden rounded-2xl shadow-md hover:shadow-premium-lg transition-all duration-300 hover:-translate-y-1">
+                    <img src="{{ photo.image.url }}" alt="{{ photo.caption|default:album.name }}"
+                        class="w-full h-auto object-cover image-hover" loading="lazy" decoding="async">
                     {% if photo.caption %}
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
                             <p class="text-sm font-medium">{{ photo.caption }}</p>
                         </div>
@@ -45,14 +51,25 @@
                     {% endif %}
                 </div>
             </a>
+            {% endif %}
             {% endfor %}
         </div>
+        {% if page_obj and page_obj.has_next %}
+        <div class="mt-10 text-center">
+            <a href="?page={{ page_obj.next_page_number }}"
+                class="btn btn-ghost btn-md">
+                Tải thêm
+                <i class="fas fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+        {% endif %}
         {% else %}
         <div class="text-center py-20">
-            <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-image text-4xl text-gray-400"></i>
+            <div
+                class="w-24 h-24 bg-neutral-200 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-image text-4xl text-muted"></i>
             </div>
-            <p class="text-xl text-gray-500 dark:text-gray-400">{% trans "No photos in this album" %}</p>
+            <p class="text-xl text-muted">Chưa có ảnh trong album này</p>
         </div>
         {% endif %}
     </div>
@@ -65,7 +82,7 @@
     lightbox.option({
         'resizeDuration': 200,
         'wrapAround': true,
-        'albumLabel': "{% trans 'Image' %} %1 {% trans 'of' %} %2",
+        'albumLabel': "Ảnh %1 / %2",
         'fadeDuration': 300,
         'imageFadeDuration': 300
     });

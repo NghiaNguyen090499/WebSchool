@@ -1,0 +1,206 @@
+{% extends "core/lowfi/base.html" %}
+
+{% block lowfi_body %}
+<!-- ═══════════════════════════════════════════════════════════
+     STRATEGIC MESSAGE
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-section mis-reveal" id="home-strategy">
+    <span class="mis-tag"><i class="fas fa-compass"></i> Thông điệp chiến lược</span>
+    <h2>Chuyển dịch từ Nền kinh tế tri thức sang Nền kinh tế sáng tạo</h2>
+    <p class="mis-subtitle">
+        Trong kỷ nguyên AI, học sinh được định danh bằng năng lực tương tác và sáng tạo cùng AI,
+        thay vì chỉ ghi nhớ kiến thức một chiều.
+    </p>
+    <div class="mis-grid two" style="margin-top:1.25rem;">
+        <article class="mis-card">
+            <div class="mis-icon-circle teal" style="margin-bottom:.5rem;">
+                <i class="fas fa-pencil-ruler"></i>
+            </div>
+            <h3>Giáo viên là Kiến trúc sư tri thức</h3>
+            <ul>
+                <li>Thiết kế không gian học tập thay cho truyền thụ một chiều.</li>
+                <li>Dẫn dắt học sinh tư duy phản biện và sử dụng AI có đạo đức.</li>
+                <li>Phân tích dữ liệu để cá nhân hóa lộ trình học tập.</li>
+            </ul>
+        </article>
+        <article class="mis-card">
+            <div class="mis-icon-circle coral" style="margin-bottom:.5rem;">
+                <i class="fas fa-microchip"></i>
+            </div>
+            <h3>Học sinh là Nhà lãnh đạo công nghệ</h3>
+            <ul>
+                <li>Làm chủ công cụ AI để giải quyết vấn đề thực tiễn.</li>
+                <li>Kiến tạo sản phẩm học tập bằng tư duy hệ thống.</li>
+                <li>Phát triển phẩm chất công dân toàn cầu và đạo đức số.</li>
+            </ul>
+        </article>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     K-12 PATHWAY
+     ═══════════════════════════════════════════════════════════ -->
+<div class="mis-section-header mis-reveal" data-delay="1">
+    <span class="mis-tag"><i class="fas fa-sitemap"></i> Lộ trình liên thông K-12</span>
+    <h2>4 chặng phát triển năng lực</h2>
+    <p class="mis-subtitle">Mỗi cấp học là một bước tiến từ làm quen công nghệ đến kiến tạo tương lai.</p>
+</div>
+
+<section class="mis-grid four mis-reveal" data-delay="1" id="home-pathway">
+    <a class="mis-pillar-card prep" href="{% url 'core:mis_lowfi_page' page_key='preparation' %}"
+        style="text-decoration:none;">
+        <span class="mis-pillar-index prep"><i class="fas fa-seedling"></i></span>
+        <h3>The Preparation</h3>
+        <ul>
+            <li>Mầm non & Tiền Tiểu học</li>
+            <li>Bước đệm an toàn để vào kỷ nguyên AI</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">An toàn số</span>
+            <span class="mis-chip">Tư duy nền</span>
+        </div>
+        <span class="mis-link-arrow">Khám phá <i class="fas fa-arrow-right"></i></span>
+    </a>
+
+    <a class="mis-pillar-card primary" href="{% url 'core:mis_lowfi_page' page_key='primary' %}"
+        style="text-decoration:none;">
+        <span class="mis-pillar-index primary"><i class="fas fa-rocket"></i></span>
+        <h3>Tiểu học</h3>
+        <ul>
+            <li>Khai phá & Cảm thụ số</li>
+            <li>Học tập trò chơi hóa (Gamification)</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">Thực tiễn</span>
+            <span class="mis-chip">Sáng tạo</span>
+        </div>
+        <span class="mis-link-arrow">Khám phá <i class="fas fa-arrow-right"></i></span>
+    </a>
+
+    <a class="mis-pillar-card thcs" href="{% url 'core:mis_lowfi_page' page_key='thcs' %}"
+        style="text-decoration:none;">
+        <span class="mis-pillar-index thcs"><i class="fas fa-comments"></i></span>
+        <h3>THCS</h3>
+        <ul>
+            <li>Tư duy hệ thống & tranh biện</li>
+            <li>Dữ liệu lớn và sáng tạo số</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">Debate</span>
+            <span class="mis-chip">Big Data</span>
+        </div>
+        <span class="mis-link-arrow">Khám phá <i class="fas fa-arrow-right"></i></span>
+    </a>
+
+    <a class="mis-pillar-card thpt" href="{% url 'core:mis_lowfi_page' page_key='thpt' %}"
+        style="text-decoration:none;">
+        <span class="mis-pillar-index thpt"><i class="fas fa-bullseye"></i></span>
+        <h3>THPT</h3>
+        <ul>
+            <li>Mô hình hóa chuyên sâu</li>
+            <li>Định hướng nghề nghiệp & hồ sơ năng lực số</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">AI Track</span>
+            <span class="mis-chip">Career</span>
+        </div>
+        <span class="mis-link-arrow">Khám phá <i class="fas fa-arrow-right"></i></span>
+    </a>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CORE VALUES & STUDENT WORK
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-grid two mis-reveal" data-delay="2" id="home-values">
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-star"></i> Định vị MIS</span>
+        <h2>Giá trị cốt lõi trong kỷ nguyên AI</h2>
+        <div class="mis-chip-lane">
+            <span class="mis-chip"><i class="fas fa-microchip"></i> AI-integrated</span>
+            <span class="mis-chip"><i class="fas fa-lightbulb"></i> Creative Economy</span>
+            <span class="mis-chip"><i class="fas fa-globe"></i> Global Citizen</span>
+        </div>
+        <div class="mis-wire" style="margin-top:1rem;">
+            Chạm từng giá trị để xem minh chứng học tập theo cấp học.
+        </div>
+    </article>
+
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-award"></i> Sản phẩm học sinh</span>
+        <h2>Minh chứng năng lực nổi bật</h2>
+        <div class="mis-feature-row">
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle teal">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                    <h4>Dự án AI/STEM</h4>
+                    <p>Sản phẩm công nghệ thực tế</p>
+                </div>
+            </div>
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle thcs">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div>
+                    <h4>Clip tranh biện</h4>
+                    <p>Kỹ năng trình bày & phản biện</p>
+                </div>
+            </div>
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle thpt">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div>
+                    <h4>Digital Portfolio</h4>
+                    <p>Hồ sơ năng lực cá nhân</p>
+                </div>
+            </div>
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle coral">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div>
+                    <h4>Hành trình học bổng</h4>
+                    <p>Thành tích & cơ hội quốc tế</p>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ECOSYSTEM & PARENT PORTAL
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-grid two mis-reveal" data-delay="3" id="home-ecosystem">
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-cubes"></i> Hệ sinh thái công nghệ</span>
+        <h2>Toolchain tham chiếu</h2>
+        <p class="mis-subtitle">
+            Azota, Nexta, iCorrect, Doubao, VR/AR và Generative AI trong định hướng nội dung chương trình và hoạt động lớp học.
+        </p>
+        <div class="mis-footer-cta">
+            <p>Xem chi tiết danh mục công cụ theo định hướng chương trình.</p>
+            <a href="{% url 'core:mis_lowfi_page' page_key='edtech' %}" class="mis-btn mis-btn-primary"
+                id="home-cta-edtech">
+                <i class="fas fa-arrow-right"></i> Trang EdTech
+            </a>
+        </div>
+    </article>
+
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-gauge-high"></i> Góc phụ huynh</span>
+        <h2>Bảng điều khiển AI-Track</h2>
+        <p class="mis-subtitle">
+            Theo dõi tiến độ thời gian thực, lộ trình năng lực và gợi ý hành động cá nhân hóa cho gia đình.
+        </p>
+        <div class="mis-footer-cta">
+            <p>Xem luồng trải nghiệm dành cho phụ huynh.</p>
+            <a href="{% url 'core:mis_lowfi_page' page_key='parent-portal' %}" class="mis-btn mis-btn-primary"
+                id="home-cta-parent">
+                <i class="fas fa-arrow-right"></i> Parent Portal
+            </a>
+        </div>
+    </article>
+</section>
+{% endblock %}

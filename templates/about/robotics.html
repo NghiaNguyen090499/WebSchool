@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} - Robotics Công nghệ mới - MIS{% endblock %}
+{% block meta_description %}
+Chương trình Robotics tại MIS phát triển tư duy logic, giải quyết vấn đề, lập trình và năng lực công nghệ thông qua mô hình học tập dự án chuẩn quốc tế.
+{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<style>
+    .curriculum.curriculum--mis-red {
+        --curriculum-accent-primary: var(--color-brand-primary);
+        --curriculum-accent-secondary: var(--color-brand-primary-light);
+        --curriculum-accent-tertiary: #f97316;
+        --curriculum-accent-soft: #fee2e2;
+        --curriculum-glow: rgba(220, 38, 38, 0.22);
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-section--light {
+        background:
+            radial-gradient(ellipse at 92% 8%, rgba(239, 68, 68, 0.08), transparent 40%),
+            radial-gradient(ellipse at 12% 94%, rgba(220, 38, 38, 0.06), transparent 40%),
+            var(--color-surface-light);
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-section--neutral {
+        background:
+            radial-gradient(ellipse at 80% 20%, rgba(239, 68, 68, 0.05), transparent 50%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 242, 242, 0.95) 100%);
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-hero--navy {
+        background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 30%, #b91c1c 60%, #dc2626 100%);
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-hero--navy::before {
+        background:
+            radial-gradient(circle at 15% 25%, rgba(254, 202, 202, 0.24) 0, transparent 35%),
+            radial-gradient(circle at 85% 20%, rgba(252, 165, 165, 0.18) 0, transparent 35%),
+            radial-gradient(circle at 50% 95%, rgba(185, 28, 28, 0.2) 0, transparent 40%);
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-tab.is-active,
+    .curriculum.curriculum--mis-red .curriculum-tab[aria-selected="true"] {
+        background: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-primary-dark) 100%);
+        border-color: var(--color-brand-primary-dark);
+        box-shadow: 0 8px 20px rgba(220, 38, 38, 0.22);
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-table thead th {
+        background: linear-gradient(135deg, #991b1b 0%, #b91c1c 55%, #dc2626 100%);
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-table td:nth-child(2) {
+        background: rgba(220, 38, 38, 0.05);
+        color: #991b1b;
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-outcome-order {
+        color: #991b1b;
+        background: #fee2e2;
+        border-color: #fecaca;
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-trust-item {
+        border-color: #fecaca;
+        background: linear-gradient(160deg, #ffffff 0%, #fef2f2 100%);
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-key-fact {
+        border-color: #fecaca;
+        background: linear-gradient(160deg, #ffffff 0%, #fef2f2 100%);
+    }
+
+    .curriculum.curriculum--mis-red .curriculum-key-fact__icon {
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        color: #b91c1c;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="curriculum curriculum--mis-red">
+    {% include 'about/partials/curriculum/_curriculum_hero.html' with hero_id='hero' hero_theme='curriculum-hero--navy' hero_eyebrow='Chương trình Robotics' hero_title=page.title|default:'Robotics Công nghệ mới' hero_subtitle='Lộ trình Robotics tại MIS tích hợp thiết kế kỹ thuật, lập trình và AI để hình thành năng lực công nghệ bền vững cho học sinh từ Tiểu học đến THPT.' hero_bullet_1='Học qua dự án thực tế: lắp ráp, lập trình, thử nghiệm và tối ưu sản phẩm robot.' hero_bullet_2='Phát triển tư duy hệ thống, kỹ năng giải quyết vấn đề và năng lực cộng tác nhóm.' hero_bullet_3='Định hướng portfolio công nghệ cho thi đấu, học bổng và tuyển sinh đại học.' hero_primary_label='Đăng ký tư vấn chương trình' hero_primary_url='admissions:list' hero_secondary_label='Tải lộ trình chi tiết' hero_secondary_url='#brochure' trust_badge_1='Project-based Learning' trust_badge_2='AI-supported Robotics' trust_badge_3='Portfolio-ready' %}
+
+    {% include 'about/partials/curriculum/_trust_signal_strip.html' with signal_1_value='K1-K12' signal_1_label='Lộ trình liên thông theo cấp học' signal_2_value='STEM + Robotics' signal_2_label='Học liên môn qua dự án công nghệ' signal_3_value='Hands-on Lab' signal_3_label='Thực hành Robotics hằng tuần' %}
+
+    <section id="key-facts" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Key Facts 2026-2027</h2>
+                <p class="curriculum-lead">Bốn chỉ số cốt lõi giúp phụ huynh nhìn nhanh cấu trúc chương trình và chuẩn đầu ra của hệ Robotics tại MIS.</p>
+            </div>
+            <div class="curriculum-key-facts curriculum-reveal-delay-100" data-reveal>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-layer-group"></i></div>
+                    <p class="curriculum-key-fact__value">3 cấp học</p>
+                    <p class="curriculum-key-fact__label">Thiết kế lộ trình riêng cho Tiểu học, THCS và THPT</p>
+                </article>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-robot"></i></div>
+                    <p class="curriculum-key-fact__value">100% thực hành</p>
+                    <p class="curriculum-key-fact__label">Học sinh trực tiếp lắp ráp, vận hành và kiểm thử robot</p>
+                </article>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-code"></i></div>
+                    <p class="curriculum-key-fact__value">Coding Track</p>
+                    <p class="curriculum-key-fact__label">Tăng dần từ lập trình trực quan đến lập trình nâng cao</p>
+                </article>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-folder-open"></i></div>
+                    <p class="curriculum-key-fact__value">Portfolio</p>
+                    <p class="curriculum-key-fact__label">Minh chứng năng lực theo học kỳ, sẵn sàng cho thi đấu và tuyển sinh</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy" class="curriculum-section curriculum-section--light">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Triết lý đào tạo chuyên sâu</h2>
+                <p class="curriculum-lead">Robotics tại MIS không chỉ dừng ở lắp ráp robot. Chương trình định hướng học sinh làm chủ tư duy kỹ thuật, thuật toán và năng lực đổi mới sáng tạo để xử lý bài toán thực tiễn trong kỷ nguyên số.</p>
+            </div>
+            <div class="curriculum-grid curriculum-grid--3 curriculum-reveal-delay-150" data-reveal>
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-brain' title='Tư duy hệ thống' description='Phân rã vấn đề phức tạp thành các bước logic, tối ưu quy trình và kiểm soát chất lượng giải pháp.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-tools' title='Năng lực kỹ thuật' description='Làm chủ cơ cấu, cảm biến, truyền động và tiêu chuẩn thử nghiệm trong môi trường phòng lab.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-lightbulb' title='Đổi mới sáng tạo' description='Biến ý tưởng thành nguyên mẫu có thể vận hành, cải tiến theo dữ liệu và phản hồi thực tế.' %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_roadmap_tabs_accordion.html' with roadmap_id='robotics-roadmap' roadmap_title='Lộ trình Robotics liên thông' roadmap_subtitle='Tổng quan trọng tâm học tập, công cụ công nghệ và chuẩn đầu ra theo từng cấp học.' level_1_label='Tiểu học' level_1_badge='Lớp 1-5' level_1_focus='Làm quen tư duy lập trình, cơ cấu robot cơ bản và kỹ năng hợp tác qua nhiệm vụ trực quan.' level_1_tool='Scratch Junior, robotics kit nền tảng, hoạt động nhóm theo trạm học tập.' level_1_output='Hoàn thành mô hình robot đơn giản, thuyết trình được nguyên lý vận hành.' level_2_label='THCS' level_2_badge='Lớp 6-9' level_2_focus='Phát triển lập trình điều khiển, tích hợp cảm biến và tối ưu giải pháp theo tình huống ứng dụng.' level_2_tool='Microcontroller, block-to-text coding, mô phỏng kỹ thuật trong phòng lab Robotics.' level_2_output='Thiết kế prototype robot có khả năng xử lý nhiệm vụ thực tế và báo cáo thử nghiệm.' level_3_label='THPT' level_3_badge='Lớp 10-12' level_3_focus='Thiết kế dự án liên môn, phân tích dữ liệu vận hành và tối ưu hệ thống robot với AI hỗ trợ.' level_3_tool='Python/C++, AI tools for simulation, quản trị dự án công nghệ theo chuẩn capstone.' level_3_output='Sở hữu portfolio công nghệ có chiều sâu, sẵn sàng cho thi đấu và định hướng ngành STEM.' %}
+
+    <section id="learning-experience" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Trải nghiệm học tập Robotics</h2>
+                <p class="curriculum-lead">Mỗi học phần được tổ chức theo chu trình học sâu: Problem Briefing -> Design -> Build -> Test -> Present, giúp học sinh trưởng thành qua sản phẩm thực chất.</p>
+            </div>
+            <div class="curriculum-grid curriculum-grid--3 curriculum-reveal-delay-150" data-reveal>
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-cogs' title='Design & Build Lab' description='Thiết kế cơ khí, lắp ráp mô hình, hiệu chỉnh kết cấu và kiểm thử nhiều vòng theo chuẩn kỹ thuật.' meta='Hands-on engineering' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-code-branch' title='Coding & Control' description='Lập trình điều khiển robot, kết nối cảm biến và xử lý logic theo nhiệm vụ thực tế.' meta='Algorithmic thinking' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-chart-line' title='Showcase & Reflection' description='Bảo vệ giải pháp, phân tích dữ liệu kiểm thử và đề xuất cải tiến theo phản hồi hội đồng.' meta='Portfolio development' %}
+            </div>
+        </div>
+    </section>
+
+    <section id="assessment-outcomes" class="curriculum-section curriculum-section--light curriculum-section--assessment-enhanced">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2">Kiểm tra & Cột mốc đầu ra</h2>
+                <p class="curriculum-lead">Hệ thống đánh giá đa chiều theo rubrics và minh chứng sản phẩm giúp phản ánh đúng năng lực kỹ thuật, tư duy và khả năng vận dụng của học sinh.</p>
+            </div>
+
+            <div class="curriculum-assessment-layout">
+                <div class="curriculum-assessment-panel curriculum-reveal-delay-150" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Rubrics đánh giá cốt lõi</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--info">Engineering + AI</span>
+                    </div>
+                    <div class="curriculum-rubric">
+                        {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Tư duy giải quyết vấn đề' metric='Mức độ xác định bài toán, thiết kế chiến lược và năng lực tối ưu qua từng lần thử nghiệm.' evidence='Nhật ký dự án, test case, báo cáo cải tiến theo vòng lặp.' %}
+                        {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Năng lực kỹ thuật & lập trình' metric='Độ chính xác trong lắp ráp, điều khiển, tích hợp cảm biến và kiểm soát hệ thống robot.' evidence='Mã nguồn, video demo, dữ liệu vận hành và kết quả thực nghiệm.' %}
+                        {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Năng lực cộng tác & trình bày học thuật' metric='Khả năng phối hợp nhóm, phân vai, thuyết trình và bảo vệ phương án kỹ thuật.' evidence='Slide bảo vệ, phản hồi đồng đẳng, hồ sơ portfolio học kỳ.' %}
+                    </div>
+                </div>
+
+                <aside class="curriculum-assessment-panel curriculum-assessment-panel--milestones curriculum-reveal-delay-200" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Cột mốc ưu tiên</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--success">Visible Outputs</span>
+                    </div>
+                    <p class="curriculum-caption">Mỗi giai đoạn học có sản phẩm cụ thể để phụ huynh theo dõi tiến trình phát triển năng lực công nghệ.</p>
+                    <div class="curriculum-outcome-list curriculum-spacer-top">
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">01</span><span>Prototype robot theo chủ đề từng học kỳ.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">02</span><span>Portfolio dự án công nghệ cá nhân/nhóm có minh chứng rõ ràng.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">03</span><span>Hồ sơ sẵn sàng cho các sân chơi STEM - Robotics trong nước và quốc tế.</span></p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_differentiation_matrix.html' with matrix_title='Sự khác biệt của Robotics tại MIS' row_1_label='Kiến trúc chương trình' row_1_mis='Liên thông 3 cấp học, thiết kế theo năng lực và tăng dần độ sâu kỹ thuật.' row_1_traditional='Rời rạc theo hoạt động ngắn hạn, thiếu chuẩn đầu ra liên tục.' row_1_international='Mạnh về chuẩn nhưng mức độ bản địa hóa khác nhau theo hệ thống.' row_2_label='Mức độ thực hành' row_2_mis='100% học sinh thực hành lắp ráp, lập trình và tối ưu sản phẩm thật.' row_2_traditional='Thực hành hạn chế, thiên về quan sát hoặc mô phỏng đơn giản.' row_2_international='Thực hành tốt nhưng yêu cầu chi phí đầu tư cao.' row_3_label='Đánh giá đầu ra' row_3_mis='Đánh giá qua rubrics, demo sản phẩm và portfolio có dữ liệu minh chứng.' row_3_traditional='Đánh giá nặng lý thuyết, thiếu minh chứng quá trình.' row_3_international='Đánh giá theo chuẩn hệ, khó đối chiếu trực tiếp với mục tiêu nội địa.' %}
+
+    {% include 'about/partials/curriculum/_final_cta_cluster.html' with cta_title='Sẵn sàng trải nghiệm Robotics tại MIS?' cta_subtitle='Đặt lịch tham quan phòng lab và nhận tư vấn lộ trình Robotics phù hợp cho từng cấp học của con.' visit_url='contact:contact' consult_url='admissions:list' brochure_dialog_id='robotics-brochure-dialog' brochure_available=pdf_document.pdf_file %}
+
+    {% include 'about/partials/curriculum/_brochure_drawer.html' with brochure_dialog_id='robotics-brochure-dialog' brochure_title='Brochure chương trình Robotics' %}
+</main>
+{% endblock %}

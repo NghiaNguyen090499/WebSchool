@@ -1,0 +1,92 @@
+{% load static %}
+{% comment %}
+Brochure Drawer
+Inputs:
+- pdf_document
+- pdf_pages
+- brochure_dialog_id
+- brochure_title
+- brochure_subtitle
+{% endcomment %}
+<section id="brochure" class="curriculum-section curriculum-section--light">
+    <div class="container">
+        {% firstof brochure_title pdf_document.title 'Brochure chương trình' as resolved_brochure_title %}
+        {% firstof brochure_subtitle pdf_document.subtitle 'Xem nhanh brochure và tải bản đầy đủ để tham khảo chi tiết lộ trình.' as resolved_brochure_subtitle %}
+        <div class="curriculum-brochure">
+            <h2 class="curriculum-h2">{{ resolved_brochure_title }}</h2>
+            <p class="curriculum-lead">{{ resolved_brochure_subtitle }}</p>
+
+            <div class="curriculum-brochure__actions">
+                <button type="button" class="curriculum-btn curriculum-btn--outline" {% if pdf_pages %}data-open-dialog="{{ brochure_dialog_id|default:'brochure-dialog' }}"{% else %}disabled aria-disabled="true"{% endif %}>
+                    Xem preview
+                </button>
+                {% if pdf_document and pdf_document.pdf_file %}
+                <a class="curriculum-btn curriculum-btn--primary" href="{{ pdf_document.pdf_file.url }}" download>Tải brochure</a>
+                <a class="curriculum-btn curriculum-btn--outline" href="{{ pdf_document.pdf_file.url }}" target="_blank" rel="noopener noreferrer">Mở PDF</a>
+                {% else %}
+                <button type="button" class="curriculum-btn curriculum-btn--primary" disabled aria-disabled="true">Tải brochure</button>
+                <button type="button" class="curriculum-btn curriculum-btn--outline" disabled aria-disabled="true">Mở PDF</button>
+                {% endif %}
+            </div>
+
+            {% if pdf_pages %}
+            {% with cover=pdf_pages|first %}
+            <div class="curriculum-brochure__cover">
+                <a class="curriculum-brochure__cover-link" href="{{ cover.image.url }}" target="_blank" rel="noopener noreferrer">
+                    <img src="{{ cover.image.url }}" alt="{{ cover.alt_text|default:resolved_brochure_title|default:'Brochure cover' }}" loading="lazy" decoding="async" width="640" height="360">
+                </a>
+            </div>
+            {% endwith %}
+
+            <details class="curriculum-brochure__inline">
+                <summary class="curriculum-brochure__inline-summary">View all brochure images on page</summary>
+                <div class="curriculum-brochure__inline-gallery">
+                    {% for page_image in pdf_pages %}
+                    <a class="curriculum-brochure__inline-thumb" href="{{ page_image.image.url }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ page_image.image.url }}"
+                             alt="{{ page_image.alt_text|default:'Brochure page' }}"
+                             loading="lazy"
+                             decoding="async"
+                             width="480"
+                             height="270">
+                    </a>
+                    {% endfor %}
+                </div>
+                <p class="curriculum-caption">Click an image to open full size in a new tab.</p>
+            </details>
+            {% endif %}
+        </div>
+    </div>
+
+    <dialog id="{{ brochure_dialog_id|default:'brochure-dialog' }}" class="curriculum-dialog" aria-labelledby="{{ brochure_dialog_id|default:'brochure-dialog' }}-title" data-brochure-dialog>
+        <div class="curriculum-dialog__header">
+            <h3 id="{{ brochure_dialog_id|default:'brochure-dialog' }}-title" class="curriculum-h3">Preview brochure</h3>
+            <button type="button" class="curriculum-dialog__close" data-close-dialog aria-label="Đóng preview">×</button>
+        </div>
+        <div class="curriculum-dialog__body">
+            {% if pdf_pages %}
+                {% for page_image in pdf_pages %}
+                <figure class="curriculum-dialog__thumb">
+                    <a class="curriculum-dialog__thumb-link" href="{{ page_image.image.url }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ page_image.image.url }}"
+                             alt="{{ page_image.alt_text|default:'Brochure page' }}"
+                             loading="lazy"
+                             decoding="async"
+                             width="640"
+                             height="360">
+                    </a>
+                </figure>
+                {% endfor %}
+            {% else %}
+                <p class="curriculum-text">Preview hiện chưa sẵn sàng.</p>
+            {% endif %}
+        </div>
+        <div class="curriculum-dialog__footer">
+            {% if pdf_document and pdf_document.pdf_file %}
+            <a class="curriculum-btn curriculum-btn--primary" href="{{ pdf_document.pdf_file.url }}" download>Tải brochure</a>
+            <a class="curriculum-btn curriculum-btn--outline" href="{{ pdf_document.pdf_file.url }}" target="_blank" rel="noopener noreferrer">Mở PDF</a>
+            {% endif %}
+            <button type="button" class="curriculum-btn curriculum-btn--outline" data-close-dialog>Đóng</button>
+        </div>
+    </dialog>
+</section>

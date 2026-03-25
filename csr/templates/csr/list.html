@@ -1,0 +1,829 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Trách Nhiệm Xã Hội | MIS{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/csr.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="csr-hero">
+    {% if hero_image %}
+    <img src="{{ hero_image.image.url }}" alt="{{ hero_image.caption|default:'CSR MIS' }}" class="hero-bg-image">
+    {% else %}
+    <img src="{% static 'images/hero/csr-hero.jpg' %}" alt="CSR MIS" class="hero-bg-image"
+        onerror="this.style.display='none'">
+    {% endif %}
+
+    <div class="csr-hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="max-w-2xl">
+            <div class="csr-hero-badge">
+                <i class="fas fa-heart-pulse"></i>
+                Social Purpose
+            </div>
+            <h1 class="csr-hero-title mt-6">
+                Trách Nhiệm <span>Xã Hội</span>
+            </h1>
+            <p class="csr-hero-description mt-6">
+                MIS cam kết tạo tác động bền vững cho cộng đồng thông qua các dự án giáo dục,
+                bảo vệ môi trường và hỗ trợ trẻ em vùng khó khăn.
+            </p>
+        </div>
+    </div>
+
+    <a href="#csr-overview" class="scroll-indicator" aria-label="Cuộn tới phần tổng quan CSR">
+        <span>Cuộn xuống</span>
+    </a>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="stats-container">
+            <div class="stats-card">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Dự Án</div>
+                    </div>
+
+                    <div class="stat-item" x-data="{ count: 0, target: {{ total_images|default:0 }} }" x-intersect="$nextTick(() => {
+                             let interval = setInterval(() => {
+                                 if(count < target) count++;
+                                 else clearInterval(interval);
+                             }, 50)
+                         })">
+                        <div class="stat-icon">
+                            <i class="fas fa-images"></i>
+                        </div>
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Hình Ảnh</div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Tình Nguyện Viên</div>
+                    </div>
+
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Người Thụ Hưởng</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section id="csr-overview" class="csr-mission-section">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-start">
+            <div class="csr-mission-copy">
+                <div class="csr-section-eyebrow">Sứ mệnh của chúng tôi</div>
+                <h2 class="csr-section-title">
+                    Cùng học sinh lan tỏa điều tích cực
+                </h2>
+                <p class="csr-section-description">
+                    Chúng tôi tin rằng mỗi trải nghiệm phục vụ cộng đồng đều góp phần hình thành nhân cách,
+                    tinh thần trách nhiệm và sự thấu cảm của học sinh. Thông qua các dự án CSR, học sinh
+                    được trải nghiệm, học hỏi và đóng góp cho xã hội.
+                </p>
+
+                <div class="csr-impact-badges">
+                    <span class="csr-impact-badge"><i class="fas fa-seedling"></i>Giáo dục vì phát triển bền vững</span>
+                    <span class="csr-impact-badge"><i class="fas fa-hands-holding-circle"></i>Học qua hành động thực
+                        tế</span>
+                    <span class="csr-impact-badge"><i class="fas fa-heart"></i>Nuôi dưỡng lòng trắc ẩn</span>
+                </div>
+
+                <div class="csr-mission-highlight">
+                    <div class="csr-mission-highlight-item">
+                        <strong>{{ total_projects|default:0 }}</strong>
+                        <span>Dự án đang triển khai</span>
+                    </div>
+                    <div class="csr-mission-highlight-item">
+                        <strong>{{ total_images|default:0 }}</strong>
+                        <span>Khoảnh khắc được ghi lại</span>
+                    </div>
+                    <div class="csr-mission-highlight-item">
+                        <strong>500+</strong>
+                        <span>Lượt học sinh tham gia</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+                <div class="csr-feature-card">
+                    <div class="csr-feature-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="csr-feature-title">Giáo Dục</div>
+                    <p class="csr-feature-text">Hỗ trợ học sinh vùng khó khăn tiếp cận giáo dục chất lượng.</p>
+                </div>
+
+                <div class="csr-feature-card">
+                    <div class="csr-feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="csr-feature-title">Môi Trường</div>
+                    <p class="csr-feature-text">Các dự án bảo vệ môi trường và phát triển bền vững.</p>
+                </div>
+
+                <div class="csr-feature-card">
+                    <div class="csr-feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="csr-feature-title">Cộng Đồng</div>
+                    <p class="csr-feature-text">Kết nối và hỗ trợ cộng đồng địa phương phát triển.</p>
+                </div>
+
+                <div class="csr-feature-card">
+                    <div class="csr-feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="csr-feature-title">Từ Thiện</div>
+                    <p class="csr-feature-text">Các hoạt động thiện nguyện và hỗ trợ trẻ em có hoàn cảnh đặc biệt.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURED PROJECT – HÀNH ĐỘNG NHỎ - NGÔI TRƯỜNG LỚN
+     ═══════════════════════════════════════════════════ -->
+<section class="featured-project-section" x-data="{ showGallery: false, lightboxOpen: false, lightboxImage: '' }">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-10">
+            <div class="csr-section-eyebrow justify-center">
+                <i class="fas fa-fire"></i> Dự Án Tiêu Biểu
+            </div>
+            <h2 class="csr-section-title">Dự Án Nổi Bật</h2>
+        </div>
+
+        <!-- Featured Card -->
+        <div class="featured-project-card" x-data="{ show: false }" x-intersect:enter="show = true"
+            :class="{ 'opacity-0 translate-y-8': !show, 'opacity-100 translate-y-0': show }"
+            style="transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);">
+
+            <!-- Hero Image Area -->
+            <div class="featured-project-hero">
+                <img src="{% static 'images/csr/hanh-dong-nho-cover.png' %}"
+                    alt="Hành Động Nhỏ - Ngôi Trường Lớn" class="featured-project-hero-img" loading="eager">
+                <div class="featured-project-hero-overlay"></div>
+                <div class="featured-project-hero-content">
+                    <div class="featured-project-badge-featured">
+                        <i class="fas fa-award"></i> Dự Án Tiêu Biểu
+                    </div>
+                    <h3 class="featured-project-hero-title">
+                        Hành Động Nhỏ <span>Ngôi Trường Lớn</span>
+                    </h3>
+                    <p class="featured-project-hero-subtitle">
+                        Mỗi hành động nhỏ của MISers đều góp phần xây dựng một ngôi trường lớn mạnh
+                    </p>
+                </div>
+            </div>
+
+            <div class="featured-project-body">
+                <div>
+                    <!-- Left: Description -->
+                    <div>
+                        <h4 class="featured-project-content-title">
+                            <i class="fas fa-seedling text-green-600 dark:text-green-400 mr-2"></i>
+                            Về dự án
+                        </h4>
+                        <div class="featured-project-description">
+                            <p>
+                                <strong>"Hành Động Nhỏ – Ngôi Trường Lớn"</strong> là chương trình trách nhiệm xã hội
+                                đặc biệt của MIS, nơi học sinh, giáo viên và phụ huynh cùng nhau thực hiện
+                                những hành động thiết thực để xây dựng và cải thiện môi trường học tập.
+                            </p>
+                            <p>
+                                Từ việc trồng cây xanh, dọn vệ sinh, sơn lại tường lớp học, đến trao tặng
+                                sách vở và đồ dùng học tập – mỗi hành động đều mang ý nghĩa to lớn.
+                                Chương trình giúp MISers hiểu rằng sự thay đổi bắt đầu từ những điều nhỏ nhất,
+                                và khi cả cộng đồng chung tay, mọi ngôi trường đều có thể trở nên tốt đẹp hơn.
+                            </p>
+                            <p>
+                                Dự án không chỉ mang lại lợi ích vật chất mà còn nuôi dưỡng tinh thần trách nhiệm,
+                                lòng yêu thương và sự đoàn kết trong mỗi MISer – những giá trị cốt lõi
+                                mà MIS luôn hướng tới.
+                            </p>
+                        </div>
+
+                        <!-- Impact Metrics -->
+                        <div class="featured-project-impacts">
+                            <div class="featured-project-impact-item">
+                                <i class="fas fa-school"></i>
+                                <span>Cải thiện trường học</span>
+                            </div>
+                            <div class="featured-project-impact-item">
+                                <i class="fas fa-users"></i>
+                                <span>Cộng đồng chung tay</span>
+                            </div>
+                            <div class="featured-project-impact-item">
+                                <i class="fas fa-hand-holding-heart"></i>
+                                <span>Giáo dục qua trải nghiệm</span>
+                            </div>
+                            <div class="featured-project-impact-item">
+                                <i class="fas fa-seedling"></i>
+                                <span>Phát triển bền vững</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats — full width -->
+                <div class="featured-project-quick-stats featured-project-quick-stats--wide">
+                    <div class="featured-stat">
+                        <div class="featured-stat-icon"><i class="fas fa-heart"></i></div>
+                        <div class="featured-stat-text">
+                            <strong>Yêu thương</strong>
+                            <span>Lan tỏa giá trị</span>
+                        </div>
+                    </div>
+                    <div class="featured-stat">
+                        <div class="featured-stat-icon"><i class="fas fa-hands-helping"></i></div>
+                        <div class="featured-stat-text">
+                            <strong>Đoàn kết</strong>
+                            <span>Cùng nhau hành động</span>
+                        </div>
+                    </div>
+                    <div class="featured-stat">
+                        <div class="featured-stat-icon"><i class="fas fa-star"></i></div>
+                        <div class="featured-stat-text">
+                            <strong>Trách nhiệm</strong>
+                            <span>Với cộng đồng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Photo Gallery Spotlight ═══ -->
+            <div class="featured-gallery-section" x-data="gallerySpotlight()" x-init="init()">
+
+                <div class="featured-gallery-header">
+                    <div class="featured-gallery-title-area">
+                        <i class="fas fa-camera-retro"></i>
+                        <div>
+                            <h4 class="featured-gallery-heading">Khoảnh Khắc Đáng Nhớ</h4>
+                            <p class="featured-gallery-subtitle">Hình ảnh thực tế từ chương trình</p>
+                        </div>
+                    </div>
+                    <div class="featured-gallery-counter">
+                        <span x-text="current + 1">1</span> / <span x-text="total">12</span>
+                    </div>
+                </div>
+
+                <!-- Main Slideshow — only 2 <img> elements, not 12 -->
+                <div class="featured-gallery-showcase">
+                    <div class="featured-gallery-main"
+                        @click="lightboxImage = images[current].full; lightboxOpen = true">
+                        <!-- Current image -->
+                        <img :src="images[current].src" :alt="images[current].caption"
+                            class="featured-gallery-slide active" :key="'slide-'+current">
+                        <!-- Preload next image (hidden) -->
+                        <link rel="prefetch" :href="images[nextIndex].src" as="image">
+                        <div class="featured-gallery-caption">
+                            <i class="fas fa-quote-left"></i>
+                            <span x-text="images[current].caption"></span>
+                        </div>
+                        <div class="featured-gallery-zoom-hint">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+
+                    <button class="featured-gallery-nav prev" @click.stop="go(-1)" aria-label="Ảnh trước">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="featured-gallery-nav next" @click.stop="go(1)" aria-label="Ảnh tiếp">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Thumbnail Strip — tiny WebP thumbs (~6KB each) -->
+                <div class="featured-gallery-thumbs" x-ref="thumbStrip">
+                    <template x-for="(img, i) in images" :key="'t'+i">
+                        <button class="featured-gallery-thumb"
+                            :class="{ 'active': current === i }"
+                            @click.stop="jumpTo(i)">
+                            <img :src="img.thumb" :alt="img.caption" loading="lazy" decoding="async">
+                        </button>
+                    </template>
+                </div>
+            </div>
+
+            <script>
+            function gallerySpotlight() {
+                return {
+                    current: 0,
+                    total: 12,
+                    images: [
+                        { src: '/media/csr/ngoi-truong-lon/web/MIS00390.webp', full: '/media/csr/ngoi-truong-lon/MIS00390.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/MIS00390.webp', caption: 'Học sinh MIS cùng nhau tham gia hoạt động' },
+                        { src: '/media/csr/ngoi-truong-lon/web/MIS00421.webp', full: '/media/csr/ngoi-truong-lon/MIS00421.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/MIS00421.webp', caption: 'Những nụ cười rạng rỡ trong ngày hội' },
+                        { src: '/media/csr/ngoi-truong-lon/web/DSCF9287.webp', full: '/media/csr/ngoi-truong-lon/DSCF9287.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/DSCF9287.webp', caption: 'Chung tay cải thiện môi trường học tập' },
+                        { src: '/media/csr/ngoi-truong-lon/web/IMG_0110.webp', full: '/media/csr/ngoi-truong-lon/IMG_0110.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/IMG_0110.webp', caption: 'Khoảnh khắc ý nghĩa của MISers' },
+                        { src: '/media/csr/ngoi-truong-lon/web/MIS00657.webp', full: '/media/csr/ngoi-truong-lon/MIS00657.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/MIS00657.webp', caption: 'Hành động nhỏ, ý nghĩa lớn' },
+                        { src: '/media/csr/ngoi-truong-lon/web/MIS00827.webp', full: '/media/csr/ngoi-truong-lon/MIS00827.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/MIS00827.webp', caption: 'Cộng đồng MIS đoàn kết sẻ chia' },
+                        { src: '/media/csr/ngoi-truong-lon/web/DSCF9350.webp', full: '/media/csr/ngoi-truong-lon/DSCF9350.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/DSCF9350.webp', caption: 'Trải nghiệm thực tế đáng nhớ' },
+                        { src: '/media/csr/ngoi-truong-lon/web/MIS01168.webp', full: '/media/csr/ngoi-truong-lon/MIS01168.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/MIS01168.webp', caption: 'Lan tỏa giá trị yêu thương' },
+                        { src: '/media/csr/ngoi-truong-lon/web/IMG_0487.webp', full: '/media/csr/ngoi-truong-lon/IMG_0487.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/IMG_0487.webp', caption: 'Hành trình thiện nguyện đầy cảm xúc' },
+                        { src: '/media/csr/ngoi-truong-lon/web/MIS01377.webp', full: '/media/csr/ngoi-truong-lon/MIS01377.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/MIS01377.webp', caption: 'Những khoảnh khắc đáng trân trọng' },
+                        { src: '/media/csr/ngoi-truong-lon/web/MIS00999.webp', full: '/media/csr/ngoi-truong-lon/MIS00999.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/MIS00999.webp', caption: 'Tinh thần trách nhiệm xã hội' },
+                        { src: '/media/csr/ngoi-truong-lon/web/MIS01535.webp', full: '/media/csr/ngoi-truong-lon/MIS01535.jpg', thumb: '/media/csr/ngoi-truong-lon/thumb/MIS01535.webp', caption: 'MISers và hành trình ý nghĩa' }
+                    ],
+                    get nextIndex() { return (this.current + 1) % this.total; },
+                    init() {
+                        this.total = this.images.length;
+                        this.scrollThumb();
+                    },
+                    go(dir) {
+                        this.current = (this.current + dir + this.total) % this.total;
+                        this.scrollThumb();
+                    },
+                    jumpTo(i) {
+                        this.current = i;
+                        this.scrollThumb();
+                    },
+                    scrollThumb() {
+                        this.$nextTick(() => {
+                            const strip = this.$refs.thumbStrip;
+                            const active = strip?.children[this.current];
+                            if (active && strip) {
+                                const offset = active.offsetLeft - ((strip.clientWidth - active.clientWidth) / 2);
+                                strip.scrollTo({
+                                    left: Math.max(offset, 0),
+                                    behavior: 'smooth'
+                                });
+                            }
+                        });
+                    }
+                };
+            }
+            </script>
+        </div>
+    </div>
+
+    <!-- Featured Project Lightbox -->
+    <div class="lightbox-overlay" :class="{ 'active': lightboxOpen }" @click.self="lightboxOpen = false"
+        @keydown.escape.window="lightboxOpen = false" x-cloak>
+        <button class="lightbox-close" @click="lightboxOpen = false">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="lightbox-content">
+            <img :src="lightboxImage" alt="Gallery Image">
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="csr-projects" class="projects-section" x-data="{
+    lightboxOpen: false,
+    lightboxImage: '',
+    storyModalOpen: false,
+    activeProject: null,
+    cleanDescription(text) {
+        if (!text) return '';
+
+        let cleaned = text;
+
+        cleaned = cleaned.replace(/Share\s*on\s*(Twitter|Facebook|LinkedIn)/gi, '');
+        cleaned = cleaned.replace(/ShareTweet/gi, '');
+        cleaned = cleaned.replace(/Share\s*Tweet/gi, '');
+
+        const relatedPostsIndex = cleaned.indexOf('Bài Cùng Chuyên Mục');
+        if (relatedPostsIndex > 0) {
+            cleaned = cleaned.substring(0, relatedPostsIndex);
+        }
+
+        cleaned = cleaned.replace(/var\s+jnews_module[\w_]*\s*=\s*\{[\s\S]*?\};/g, '');
+        cleaned = cleaned.replace(/var\s+[\w_]+\s*=\s*\{[^}]*\};/g, '');
+
+        cleaned = cleaned.replace(/MIS CHARITY FOUNDATION[\s\S]*$/gi, '');
+        cleaned = cleaned.replace(/Quỹ Thiện Nguyện MIS[\s\S]*$/gi, '');
+        cleaned = cleaned.replace(/Website:\s*misvn\.edu\.vn[\s\S]*$/gi, '');
+        cleaned = cleaned.replace(/Lô TH2 khu ĐTM[\s\S]*$/gi, '');
+
+        cleaned = cleaned.replace(/Học để tự do[\s\S]*$/gi, '');
+        cleaned = cleaned.replace(/CÓ MỘT THỨ TUYỆT VỜI HƠN CẢ[\s\S]*$/gi, '');
+        cleaned = cleaned.replace(/Thông minh để Hạnh phúc[\s\S]*$/gi, '');
+
+        cleaned = cleaned.replace(/—{2,}/g, '');
+        cleaned = cleaned.replace(/-{3,}/g, '');
+        cleaned = cleaned.replace(/_{3,}/g, '');
+
+        cleaned = cleaned.replace(/\d{3}\s*\d{4}\s*\d{3}/g, '');
+        cleaned = cleaned.replace(/Youtube:\s*https?:\/\/[^\s]+/gi, '');
+
+        cleaned = cleaned.replace(/\s{3,}/g, ' ');
+        cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
+
+        cleaned = cleaned.replace(/(MANG YÊU THƯƠNG[^\n]*?)(?=Trong\s+15\s+ngày)/gi, '$1\n\n');
+        cleaned = cleaned.replace(/(15\s+NGÀY\s*&\s*8\s+ĐỢT\s+THIỆN\s+NGUYỆN)/gi, '\n\n$1\n\n');
+        cleaned = cleaned.replace(/(MCF\s+ĐÃ\s+THỰC\s+HIỆN\s+8\s+ĐỢT\s+THIỆN\s+NGUYỆN[^\n]*?)(?=Đợt\s+1\s*\|)/gi, '\n\n$1\n\n');
+        cleaned = cleaned.replace(/(Đợt\s+\d+\s*\|\s*[^\n]+)/g, '\n• $1');
+        cleaned = cleaned.replace(/(Trân trọng!)/gi, '\n\n$1');
+        cleaned = cleaned.trim();
+
+        cleaned = cleaned.replace(/\n/g, '<br><br>');
+
+        return cleaned;
+    }
+}">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="csr-section-eyebrow justify-center">Dự Án CSR</div>
+            <h2 class="csr-section-title">Các Dự Án Nổi Bật</h2>
+            <p class="csr-section-description max-w-2xl mx-auto">
+                Khám phá những dự án có tác động tích cực đến cộng đồng mà MIS đã và đang thực hiện.
+            </p>
+        </div>
+
+        <div class="space-y-8">
+            {% for project in projects %}
+            <article class="project-card" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'opacity-0 translate-y-8': !show, 'opacity-100 translate-y-0': show }"
+                style="transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+                <div
+                    class="grid lg:grid-cols-2 gap-0 {% if forloop.counter|divisibleby:2 %}lg:grid-flow-row-dense{% endif %}">
+                    <!-- Image -->
+                    <div class="project-image-wrapper {% if forloop.counter|divisibleby:2 %}lg:col-start-2{% endif %}">
+                        {% if project.primary_image %}
+                        <img src="{{ project.primary_image.image.url }}" alt="{{ project.title }}" class="project-image"
+                            loading="lazy" decoding="async">
+                        {% else %}
+                        <div
+                            class="w-full h-full min-h-[280px] bg-gradient-to-br from-neutral-200 to-neutral-300 dark:from-neutral-700 dark:to-neutral-800 flex items-center justify-center">
+                            <i class="fas fa-image text-4xl text-neutral-400 dark:text-neutral-500"></i>
+                        </div>
+                        {% endif %}
+                        <div class="project-badge">
+                            <i class="fas fa-star"></i>
+                            Dự Án CSR
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div
+                        class="project-content flex flex-col justify-center {% if forloop.counter|divisibleby:2 %}lg:col-start-1 lg:row-start-1{% endif %}">
+                        <h3 class="project-title">{{ project.title }}</h3>
+                        <p class="project-description description-truncated">{{ project.description|truncatewords:50 }}
+                        </p>
+
+                        {% if project.get_impact_metrics_list %}
+                        <div class="impact-metrics">
+                            {% for metric in project.get_impact_metrics_list|slice:":3" %}
+                            <span class="impact-item">
+                                <i class="fas fa-check-circle"></i>
+                                {{ metric }}
+                            </span>
+                            {% endfor %}
+                            {% if project.get_impact_metrics_list|length > 3 %}
+                            <span class="impact-item">
+                                <i class="fas fa-plus"></i>
+                                +{{ project.get_impact_metrics_list|length|add:"-3" }} khác
+                            </span>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <button class="btn-read-more" @click="activeProject = {
+                                    title: '{{ project.title|escapejs }}',
+                                    description: `{{ project.description|escapejs }}`,
+                                    image: '{% if project.primary_image %}{{ project.primary_image.image.url }}{% endif %}',
+                                    metrics: [{% for m in project.get_impact_metrics_list %}'{{ m|escapejs }}'{% if not forloop.last %},{% endif %}{% endfor %}],
+                                    images: [{% for img in project.active_images|slice:':8' %}{ url: '{{ img.image.url }}', caption: '{{ img.caption|default:project.title|escapejs }}' }{% if not forloop.last %},{% endif %}{% endfor %}]
+                                }; storyModalOpen = true">
+                            <span>Xem chi tiết</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <h3 class="empty-state-title">Chưa có dự án CSR</h3>
+                <p class="empty-state-text">Các dự án CSR sẽ được cập nhật sớm.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" :class="{ 'active': lightboxOpen }" @click.self="lightboxOpen = false"
+        @keydown.escape.window="lightboxOpen = false; storyModalOpen = false" x-cloak>
+        <button class="lightbox-close" @click="lightboxOpen = false">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="lightbox-content">
+            <img :src="lightboxImage" alt="Gallery Image">
+        </div>
+    </div>
+
+    <!-- Story Modal -->
+    <div class="story-modal-overlay" :class="{ 'active': storyModalOpen }" @click.self="storyModalOpen = false" x-cloak>
+        <div class="story-modal" x-show="activeProject">
+            <!-- Header with Image -->
+            <div class="story-modal-header">
+                <template x-if="activeProject && activeProject.image">
+                    <img :src="activeProject.image" :alt="activeProject?.title">
+                </template>
+                <template x-if="!activeProject || !activeProject.image">
+                    <div class="w-full h-full bg-gradient-to-br from-red-600 to-red-800"></div>
+                </template>
+                <div class="story-modal-header-content">
+                    <div class="story-modal-badge">
+                        <i class="fas fa-heart"></i>
+                        Dự Án CSR
+                    </div>
+                    <h3 class="story-modal-title" x-text="activeProject?.title"></h3>
+                </div>
+                <button class="story-modal-close" @click="storyModalOpen = false">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="story-modal-body">
+                <div class="story-content" x-html="cleanDescription(activeProject?.description)"></div>
+
+                <!-- Impact Metrics -->
+                <template x-if="activeProject?.metrics?.length > 0">
+                    <div class="story-impact-section">
+                        <div class="story-impact-title">
+                            <i class="fas fa-chart-line mr-2"></i>Chỉ Số Tác Động
+                        </div>
+                        <div class="story-impact-grid">
+                            <template x-for="(metric, index) in activeProject.metrics" :key="index">
+                                <span class="story-impact-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span x-text="metric"></span>
+                                </span>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Gallery Preview -->
+                <template x-if="activeProject?.images?.length > 0">
+                    <div class="story-gallery-section">
+                        <div class="story-gallery-title">
+                            <i class="fas fa-images mr-2"></i>Hình Ảnh Hoạt Động
+                        </div>
+                        <div class="story-gallery-grid">
+                            <template x-for="(img, index) in activeProject.images" :key="index">
+                                <div class="story-gallery-item" @click="lightboxImage = img.url; lightboxOpen = true">
+                                    <img :src="img.url" :alt="img.caption" loading="lazy" decoding="async">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CSR JOURNEY TIMELINE – Dynamic from Database
+     ═══════════════════════════════════════════════════ -->
+{% if journey_featured or journey_more %}
+<section class="csr-journey-section" style="background: linear-gradient(180deg, #fafafa 0%, #f5f5f5 100%)"
+    x-data="{ showAll: false, lightboxOpen: false, lightboxImage: '', journeyModalOpen: false, activeJourney: null }">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="csr-section-eyebrow justify-center"><i class="fas fa-route"></i> Hành trình thiện nguyện</div>
+            <h2 class="csr-section-title">Hơn 15 Năm Lan Tỏa Yêu Thương</h2>
+            <p class="csr-section-description max-w-2xl mx-auto">
+                Từ 2008 đến nay, MIS đã thực hiện hàng trăm hoạt động thiện nguyện, đồng hành cùng cộng đồng
+                qua những chương trình ý nghĩa khắp mọi miền đất nước.
+            </p>
+        </div>
+
+        <div class="csr-journey-timeline space-y-8">
+
+            <!-- Featured Journey Programs -->
+            {% for program in journey_featured %}
+            <article class="project-card" x-data="{ show: false }" x-intersect:enter="show = true"
+                :class="{ 'opacity-0 translate-y-8': !show, 'opacity-100 translate-y-0': show }"
+                style="transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+                <div class="grid lg:grid-cols-2 gap-0 {% if forloop.counter|divisibleby:2 %}lg:grid-flow-row-dense{% endif %}">
+                    <!-- Image -->
+                    <div class="project-image-wrapper {% if forloop.counter|divisibleby:2 %}lg:col-start-2{% endif %}">
+                        {% if program.cover_image %}
+                        <img src="{{ program.cover_image.url }}" alt="{{ program.title }}" class="project-image" loading="lazy" decoding="async">
+                        {% else %}
+                        <div class="w-full h-full min-h-[280px] bg-gradient-to-br from-red-600 via-red-700 to-red-800 flex items-center justify-center">
+                            <i class="fas {{ program.icon }} text-6xl text-white/25"></i>
+                        </div>
+                        {% endif %}
+                        <div class="project-badge">
+                            <i class="fas fa-calendar"></i> {{ program.period }}
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="project-content flex flex-col justify-center {% if forloop.counter|divisibleby:2 %}lg:col-start-1 lg:row-start-1{% endif %}">
+                        <h3 class="project-title">{{ program.title }}</h3>
+                        <p class="project-description">{{ program.short_description }}</p>
+                        {% if program.get_tags_list %}
+                        <div class="impact-metrics">
+                            {% for tag in program.get_tags_list %}
+                            <span class="impact-item"><i class="fas fa-check-circle"></i> {{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <button class="btn-read-more" @click="activeJourney = {
+                            title: '{{ program.title|escapejs }}',
+                            period: '{{ program.period|escapejs }}',
+                            description: '{{ program.full_description|escapejs }}',
+                            image: '{% if program.cover_image %}{{ program.cover_image.url }}{% endif %}',
+                            tags: [{% for t in program.get_tags_list %}'{{ t|escapejs }}'{% if not forloop.last %},{% endif %}{% endfor %}],
+                            images: [{% for img in program.active_gallery %}{ url: '{{ img.image.url }}', caption: '{{ img.caption|escapejs }}' }{% if not forloop.last %},{% endif %}{% endfor %}]
+                        }; journeyModalOpen = true">
+                            <span>Xem chi tiết</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+
+            <!-- Show More Button -->
+            {% if journey_more %}
+            <div x-show="!showAll" class="text-center py-10">
+                <button @click="showAll = true"
+                    class="inline-flex items-center gap-3 px-8 py-4 bg-white dark:bg-neutral-800 border-2 border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 font-semibold rounded-2xl shadow-sm hover:shadow-md hover:border-red-400 transition-all duration-300 group">
+                    <span>Xem thêm {{ journey_more_count }} chương trình khác</span>
+                    <i class="fas fa-chevron-down group-hover:translate-y-1 transition-transform"></i>
+                </button>
+            </div>
+
+            <!-- Remaining Programs (hidden by default) -->
+            <div x-show="showAll" x-transition.duration.500ms class="space-y-8">
+                {% for program in journey_more %}
+                <article class="project-card" x-data="{ show: false }" x-intersect:enter="show = true"
+                    :class="{ 'opacity-0 translate-y-8': !show, 'opacity-100 translate-y-0': show }"
+                    style="transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);">
+                    <div class="grid lg:grid-cols-2 gap-0 {% if forloop.counter|divisibleby:2 %}lg:grid-flow-row-dense{% endif %}">
+                        <!-- Image -->
+                        <div class="project-image-wrapper {% if forloop.counter|divisibleby:2 %}lg:col-start-2{% endif %}">
+                            {% if program.cover_image %}
+                            <img src="{{ program.cover_image.url }}" alt="{{ program.title }}" class="project-image" loading="lazy" decoding="async">
+                            {% else %}
+                            <div class="w-full h-full min-h-[280px] bg-gradient-to-br from-red-600 via-red-700 to-red-800 flex items-center justify-center">
+                                <i class="fas {{ program.icon }} text-6xl text-white/25"></i>
+                            </div>
+                            {% endif %}
+                            <div class="project-badge">
+                                <i class="fas fa-calendar"></i> {{ program.period }}
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="project-content flex flex-col justify-center {% if forloop.counter|divisibleby:2 %}lg:col-start-1 lg:row-start-1{% endif %}">
+                            <h3 class="project-title">{{ program.title }}</h3>
+                            <p class="project-description">{{ program.short_description }}</p>
+                            {% if program.get_tags_list %}
+                            <div class="impact-metrics">
+                                {% for tag in program.get_tags_list %}
+                                <span class="impact-item"><i class="fas fa-check-circle"></i> {{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <button class="btn-read-more" @click="activeJourney = {
+                                title: '{{ program.title|escapejs }}',
+                                period: '{{ program.period|escapejs }}',
+                                description: '{{ program.full_description|escapejs }}',
+                                image: '{% if program.cover_image %}{{ program.cover_image.url }}{% endif %}',
+                                tags: [{% for t in program.get_tags_list %}'{{ t|escapejs }}'{% if not forloop.last %},{% endif %}{% endfor %}],
+                                images: [{% for img in program.active_gallery %}{ url: '{{ img.image.url }}', caption: '{{ img.caption|escapejs }}' }{% if not forloop.last %},{% endif %}{% endfor %}]
+                            }; journeyModalOpen = true">
+                                <span>Xem chi tiết</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- Journey Story Modal -->
+    <div class="story-modal-overlay" :class="{ 'active': journeyModalOpen }" @click.self="journeyModalOpen = false"
+        @keydown.escape.window="journeyModalOpen = false" x-cloak>
+        <div class="story-modal" x-show="activeJourney">
+            <!-- Header with Image -->
+            <div class="story-modal-header">
+                <template x-if="activeJourney && activeJourney.image">
+                    <img :src="activeJourney.image" :alt="activeJourney?.title">
+                </template>
+                <template x-if="!activeJourney || !activeJourney.image">
+                    <div class="w-full h-full bg-gradient-to-br from-red-600 to-red-800"></div>
+                </template>
+                <div class="story-modal-header-content">
+                    <div class="story-modal-badge">
+                        <i class="fas fa-route"></i>
+                        <span x-text="activeJourney?.period"></span>
+                    </div>
+                    <h3 class="story-modal-title" x-text="activeJourney?.title"></h3>
+                </div>
+                <button class="story-modal-close" @click="journeyModalOpen = false">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="story-modal-body">
+                <div class="story-content" x-html="activeJourney?.description"></div>
+
+                <!-- Tags -->
+                <template x-if="activeJourney?.tags?.length > 0">
+                    <div class="story-impact-section">
+                        <div class="story-impact-title">
+                            <i class="fas fa-tags mr-2"></i>Từ Khóa
+                        </div>
+                        <div class="story-impact-grid">
+                            <template x-for="(tag, index) in activeJourney.tags" :key="index">
+                                <span class="story-impact-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span x-text="tag"></span>
+                                </span>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Gallery Preview -->
+                <template x-if="activeJourney?.images?.length > 0">
+                    <div class="story-gallery-section">
+                        <div class="story-gallery-title">
+                            <i class="fas fa-images mr-2"></i>Hình Ảnh Hoạt Động
+                        </div>
+                        <div class="story-gallery-grid">
+                            <template x-for="(img, index) in activeJourney.images" :key="index">
+                                <div class="story-gallery-item" @click="lightboxImage = img.url; lightboxOpen = true">
+                                    <img :src="img.url" :alt="img.caption" loading="lazy" decoding="async">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- Journey Lightbox -->
+    <div class="lightbox-overlay" :class="{ 'active': lightboxOpen }" @click.self="lightboxOpen = false"
+        @keydown.escape.window="lightboxOpen = false" x-cloak>
+        <button class="lightbox-close" @click="lightboxOpen = false">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="lightbox-content">
+            <img :src="lightboxImage" alt="Gallery Image">
+        </div>
+    </div>
+</section>
+{% endif %}
+
+</section>
+
+
+<!-- CSR CTA Section -->
+<section class="csr-cta-section">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="csr-cta-title">Cùng MIS lan tỏa yêu thương</h2>
+        <p class="csr-cta-desc">Hãy đồng hành cùng chúng tôi trên hành trình giáo dục bằng con tim và trách nhiệm xã hội
+        </p>
+        <div class="csr-cta-buttons">
+            <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-lg">
+                Liên hệ với chúng tôi <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            <a href="{% url 'about:history' %}" class="btn btn-outline-light btn-lg">
+                Hành trình MIS <i class="fas fa-landmark ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

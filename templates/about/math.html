@@ -1,0 +1,425 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} - Hệ Toán Tài Năng - MIS{% endblock %}
+{% block meta_description %}
+Chương trình Toán học tại MIS tiên phong tích hợp AI vào giảng dạy, định hướng Toán học ứng dụng, kết hợp tư duy thuật
+toán và STEM Portfolio.
+{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "{{ request.build_absolute_uri|escapejs }}#webpage",
+    "url": "{{ request.build_absolute_uri|escapejs }}",
+    "name": "{{ page.title|default:'Hệ Toán Tài Năng MIS x MathExpress'|escapejs }}",
+    "description": "Chương trình Toán học tại MIS tiên phong tích hợp AI vào giảng dạy, định hướng Toán học ứng dụng, kết hợp tư duy thuật toán và STEM Portfolio.",
+    "inLanguage": "vi",
+    "isPartOf": {
+        "@type": "WebSite",
+        "name": "MIS",
+        "url": "{{ request.scheme|escapejs }}://{{ request.get_host|escapejs }}"
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Trang chủ",
+            "item": "{{ request.scheme|escapejs }}://{{ request.get_host|escapejs }}{% url 'core:home' %}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Chương trình giáo dục",
+            "item": "{{ request.scheme|escapejs }}://{{ request.get_host|escapejs }}{% url 'about:academics' %}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ page.title|default:'Hệ Toán Tài Năng MIS x MathExpress'|escapejs }}",
+            "item": "{{ request.build_absolute_uri|escapejs }}"
+        }
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "{{ page.title|default:'Hệ Toán Tài Năng MIS x MathExpress'|escapejs }}",
+    "description": "Lộ trình Toán học tích hợp AI, tư duy thuật toán và STEM Portfolio theo 3 cấp học.",
+    "provider": {
+        "@type": "EducationalOrganization",
+        "name": "MIS",
+        "url": "{{ request.scheme|escapejs }}://{{ request.get_host|escapejs }}"
+    },
+    "educationalLevel": ["Tiểu học", "THCS", "THPT"],
+    "inLanguage": "vi"
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<main class="curriculum">
+
+    {# ──────────── HERO ──────────── #}
+    {% include 'about/partials/curriculum/_curriculum_hero.html' with hero_id='hero' hero_theme='curriculum-hero--navy' hero_eyebrow='Hệ Toán Tài Năng & Công Nghệ Mới' hero_title=page.title|default:'Smart Math 4.0' hero_subtitle='Tiên phong tích hợp AI vào giảng dạy Toán học, phát triển tư duy logic và năng lực công dân số sẵn sàng cho kỷ nguyên công nghệ.' hero_bullet_1=math_block.sections.0|default:'Toán học tích hợp AI và mô phỏng trực quan theo cấp học, loại bỏ tư duy lối mòn.' hero_bullet_2=math_block.sections.1|default:'Tăng cường tư duy thuật toán, STEM Portfolio và năng lực giải quyết vấn đề thực tế.' hero_bullet_3=math_block.sections.2|default:'Liên thông lộ trình từ Tiểu học đến THPT với chuẩn đầu ra khắt khe, rõ ràng.' hero_primary_label='Đăng ký tư vấn Toán học' hero_primary_url='admissions:list' hero_secondary_label='Tải lộ trình chi tiết' hero_secondary_url='#brochure' trust_badge_1='Chuẩn đầu ra vượt trội' trust_badge_2='AI-enabled Teaching' trust_badge_3='STEM Portfolio' %}
+
+    {# ──────────── TRUST SIGNAL STRIP ──────────── #}
+    {% include 'about/partials/curriculum/_trust_signal_strip.html' with signal_1_value='K1-K12' signal_1_label='Lộ trình liên thông đồng bộ' signal_2_value='3 Trụ cột' signal_2_label='Toán - Thuật toán - Công nghệ' signal_3_value='Portfolio' signal_3_label='Minh chứng năng lực tuyển sinh Đại học' %}
+
+    {# ──────────── KEY FACTS ──────────── #}
+    <section id="key-facts" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Key Facts 2026-2027</h2>
+                <p class="curriculum-lead">Bốn chỉ số cốt lõi giúp phụ huynh nhìn nhanh kiến trúc chương trình và chuẩn
+                    đầu ra của hệ Toán Tài Năng tại MIS.</p>
+            </div>
+            <div class="curriculum-key-facts curriculum-reveal-delay-100" data-reveal>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <p class="curriculum-key-fact__value">K1-K12</p>
+                    <p class="curriculum-key-fact__label">Lộ trình liên thông xuyên suốt 12 năm</p>
+                </article>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-layer-group"></i></div>
+                    <p class="curriculum-key-fact__value">3 Cấp học</p>
+                    <p class="curriculum-key-fact__label">Tiểu học - THCS - THPT với chuẩn đầu ra rõ ràng</p>
+                </article>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-cubes"></i></div>
+                    <p class="curriculum-key-fact__value">3 Trụ cột</p>
+                    <p class="curriculum-key-fact__label">Toán học, Thuật toán và Công nghệ số</p>
+                </article>
+                <article class="curriculum-key-fact">
+                    <div class="curriculum-key-fact__icon" aria-hidden="true"><i class="fas fa-folder-open"></i></div>
+                    <p class="curriculum-key-fact__value">Portfolio</p>
+                    <p class="curriculum-key-fact__label">Minh chứng năng lực cho định hướng tuyển sinh Đại học</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    {# ──────────── PHILOSOPHY ──────────── #}
+    <section id="philosophy" class="curriculum-section curriculum-section--light">
+        <!-- Decorative elements -->
+        <div class="curriculum-deco curriculum-deco--circle" style="width:120px;height:120px;top:5%;right:4%;"
+            aria-hidden="true"></div>
+        <div class="curriculum-deco curriculum-deco--dot-grid" style="width:160px;height:120px;bottom:8%;left:2%;"
+            aria-hidden="true"></div>
+
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Triết lý đào tạo chuyên sâu
+                </h2>
+                <p class="curriculum-lead">Chương trình không chỉ giải bài tập trên giấy, mà định hướng Toán học ứng
+                    dụng, kết hợp tư duy máy tính, mô phỏng trực quan và thiết kế dự án để giải quyết triệt để các bài
+                    toán thực tiễn.</p>
+            </div>
+
+            <div class="curriculum-grid curriculum-grid--3 curriculum-reveal-delay-150" data-reveal>
+                {% if math_block.pillars %}
+                {% for pillar in math_block.pillars|slice:":3" %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class=pillar.icon title=pillar.title description=pillar.description %}
+                {% endfor %}
+                {% else %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-brain' title='Tư duy thuật toán (Algorithmic Thinking)' description='Phát triển năng lực cốt lõi: phân tích, tách biệt vấn đề phức tạp thành các bước lập luận logic, tuần tự.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-project-diagram' title='Mô hình hóa (Mathematical Modeling)' description='Sử dụng dữ liệu thực tế để xây dựng mô hình toán học, biểu diễn bằng đồ thị trực quan và công cụ phần mềm.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-robot' title='Học Toán cùng Trí tuệ nhân tạo (AI)' description='Khai thác sức mạnh AI (DeepSeek, ChatGPT) để kiểm chứng giả thuyết, tối ưu chiến lược giải và phát triển luận điểm Toán học.' %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {# ──────────── ROADMAP ──────────── #}
+    <div class="curriculum-reveal-delay-50" data-reveal>
+        {% include 'about/partials/curriculum/_roadmap_tabs_accordion.html' with roadmap_id='roadmap' roadmap_title='Lộ trình Đào tạo Liên thông' roadmap_subtitle='Tổng quan trọng tâm kiến thức, công cụ công nghệ và chuẩn đầu ra theo từng cấp học.' level_1_label='Tiểu học' level_1_badge='K1-K5' level_1_focus=grade_roadmap.K3.focus|default:'Nền tảng số học đa chiều, nhận diện hình học không gian cơ bản và mô hình hóa trực quan.' level_1_tool=grade_roadmap.K3.ai_tools|default:'Trò chơi tương tác, Scratch cơ bản, Học Toán qua khối hình khối.' level_1_output=grade_roadmap.K5.output|default:'Tự tin xử lý dữ liệu đời sống, yêu thích Toán học và hoàn thiện Portfolio tư duy.' level_2_label='THCS' level_2_badge='K6-K9' level_2_focus=grade_roadmap.K8.focus|default:'Đại số ứng dụng, Hình học đồ hình và Xác suất thống kê gắn chặt với các bài toán kinh tế, đời sống.' level_2_tool=grade_roadmap.K8.ai_tools|default:'GeoGebra 3D, Wolfram Alpha, Sử dụng AI Tutor làm trợ giảng phản biện.' level_2_output=grade_roadmap.K9.output|default:'Xây dựng Portfolio Toán-AI cá nhân, hình thành năng lực tự giải quyết vấn đề số liệu phức tạp.' level_3_label='THPT' level_3_badge='K10-K12' level_3_focus=grade_roadmap.K11.focus|default:'Hàm số bậc cao, Vi tích phân, Lý thuyết xác suất sâu và phân tích Dữ liệu lớn (Big Data).' level_3_tool=grade_roadmap.K12.ai_tools|default:'Python (Pandas/Matplotlib), AI Data Analysis, Lập trình mô phỏng.' level_3_output=grade_roadmap.K12.output|default:'Sở hữu Portfolio Khoa học Dữ liệu cạnh tranh, sẵn sàng cho các nhóm ngành STEM tại Đại học top đầu.' %}
+    </div>
+
+    {# ──────────── LEARNING EXPERIENCE ──────────── #}
+    <section id="learning-experience" class="curriculum-section curriculum-section--neutral">
+        <!-- Decorative elements -->
+        <div class="curriculum-deco curriculum-deco--circle" style="width:90px;height:90px;bottom:6%;right:3%;"
+            aria-hidden="true"></div>
+
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Trải nghiệm Học tập Smart Math
+                </h2>
+                <p class="curriculum-lead">Một tiết học Toán tại MIS không có sự nhàm chán. Tiết học được thiết kế năng
+                    động theo chu trình: Khởi động nhận thức → Khám phá công nghệ → Luyện tập tư duy → Giao bài cá nhân
+                    hóa.</p>
+            </div>
+
+            <div class="curriculum-grid curriculum-grid--3 curriculum-reveal-delay-150" data-reveal>
+                {% if sample_lesson.tieu_hoc %}
+                <article class="curriculum-card curriculum-card--learning">
+                    <h3 class="curriculum-h3 curriculum-math-level-title">
+                        <span class="curriculum-math-level-badge">K1-K5</span> Tiểu học
+                    </h3>
+                    <p class="curriculum-caption">{{ sample_lesson.tieu_hoc.duration }}</p>
+                    <hr class="curriculum-math-level-divider">
+                    <div class="curriculum-rubric">
+                        {% for step in sample_lesson.tieu_hoc.steps %}
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B{{ forloop.counter }}</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">{{ step.activity }}</p>
+                                {% if step.tool %}<p class="curriculum-timeline-step__tool"><i class="fas fa-tools"></i>
+                                    {{ step.tool }}</p>{% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </article>
+                <article class="curriculum-card curriculum-card--learning">
+                    <h3 class="curriculum-h3 curriculum-math-level-title">
+                        <span class="curriculum-math-level-badge">K6-K9</span> THCS
+                    </h3>
+                    <p class="curriculum-caption">{{ sample_lesson.thcs.duration }}</p>
+                    <hr class="curriculum-math-level-divider">
+                    <div class="curriculum-rubric">
+                        {% for step in sample_lesson.thcs.steps %}
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B{{ forloop.counter }}</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">{{ step.activity }}</p>
+                                {% if step.tool %}<p class="curriculum-timeline-step__tool"><i class="fas fa-tools"></i>
+                                    {{ step.tool }}</p>{% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </article>
+                <article class="curriculum-card curriculum-card--learning">
+                    <h3 class="curriculum-h3 curriculum-math-level-title">
+                        <span class="curriculum-math-level-badge">K10-K12</span> THPT
+                    </h3>
+                    <p class="curriculum-caption">{{ sample_lesson.thpt.duration }}</p>
+                    <hr class="curriculum-math-level-divider">
+                    <div class="curriculum-rubric">
+                        {% for step in sample_lesson.thpt.steps %}
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B{{ forloop.counter }}</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">{{ step.activity }}</p>
+                                {% if step.tool %}<p class="curriculum-timeline-step__tool"><i class="fas fa-tools"></i>
+                                    {{ step.tool }}</p>{% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </article>
+                {% else %}
+                {# ── Fallback: static timeline-style cards ── #}
+                <article class="curriculum-card curriculum-card--learning">
+                    <h3 class="curriculum-h3 curriculum-math-level-title curriculum-math-level-title--accent">
+                        <span class="curriculum-math-level-badge">K1-K5</span> Tiểu học
+                    </h3>
+                    <p class="curriculum-caption">Chu trình 40 phút / tiết</p>
+                    <hr class="curriculum-math-level-divider">
+                    <div class="curriculum-rubric">
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B1</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">Khởi động trò chơi Số học tương tác</p>
+                                <p class="curriculum-timeline-step__tool"><i class="fas fa-gamepad"></i> Trò chơi kỹ
+                                    thuật số</p>
+                            </div>
+                        </div>
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B2</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">Khám phá: Mô hình hóa biểu diễn không gian
+                                </p>
+                                <p class="curriculum-timeline-step__tool"><i class="fas fa-shapes"></i> Khối hình 3D</p>
+                            </div>
+                        </div>
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B3</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">Luyện tập: Giải quyết tình huống thực tiễn
+                                </p>
+                                <p class="curriculum-timeline-step__tool"><i class="fas fa-pencil-alt"></i> Bài tập cá
+                                    nhân hóa</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="curriculum-card curriculum-card--learning">
+                    <h3 class="curriculum-h3 curriculum-math-level-title curriculum-math-level-title--accent">
+                        <span class="curriculum-math-level-badge">K6-K9</span> THCS
+                    </h3>
+                    <p class="curriculum-caption">Chu trình 45 phút / tiết</p>
+                    <hr class="curriculum-math-level-divider">
+                    <div class="curriculum-rubric">
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B1</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">Khảo sát vấn đề mở (VD: Tính lãi suất ngân
+                                    hàng)</p>
+                                <p class="curriculum-timeline-step__tool"><i class="fas fa-chart-line"></i> Nghiên cứu
+                                    tình huống</p>
+                            </div>
+                        </div>
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B2</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">Mô phỏng dữ liệu qua đồ thị</p>
+                                <p class="curriculum-timeline-step__tool"><i class="fas fa-cube"></i> GeoGebra 3D</p>
+                            </div>
+                        </div>
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B3</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">Phản biện chiến lược với AI Tutor &amp;
+                                    Giao bài</p>
+                                <p class="curriculum-timeline-step__tool"><i class="fas fa-robot"></i> AI Tutor</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="curriculum-card curriculum-card--learning">
+                    <h3 class="curriculum-h3 curriculum-math-level-title curriculum-math-level-title--accent">
+                        <span class="curriculum-math-level-badge">K10-K12</span> THPT
+                    </h3>
+                    <p class="curriculum-caption">Phiên nghiên cứu chuyên đề 90 phút (Project)</p>
+                    <hr class="curriculum-math-level-divider">
+                    <div class="curriculum-rubric">
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B1</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">Nêu vấn đề Khoa học dữ liệu (Data Science)
+                                </p>
+                                <p class="curriculum-timeline-step__tool"><i class="fas fa-database"></i> Data Science
+                                    Framework</p>
+                            </div>
+                        </div>
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B2</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">Lập trình xử lý Big Data mô phỏng Toán học
+                                </p>
+                                <p class="curriculum-timeline-step__tool"><i class="fas fa-code"></i> Python / Pandas /
+                                    Matplotlib</p>
+                            </div>
+                        </div>
+                        <div class="curriculum-timeline-step">
+                            <div class="curriculum-timeline-step__marker">B3</div>
+                            <div class="curriculum-timeline-step__content">
+                                <p class="curriculum-timeline-step__activity">Báo cáo dự án, hoàn thiện Portfolio xét
+                                    tuyển</p>
+                                <p class="curriculum-timeline-step__tool"><i class="fas fa-folder-open"></i> STEM
+                                    Portfolio</p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {# ──────────── ASSESSMENT & OUTCOMES ──────────── #}
+    <section id="assessment-outcomes" class="curriculum-section curriculum-section--light curriculum-section--assessment-math">
+        <div class="curriculum-deco curriculum-deco--dot-grid" style="width:140px;height:100px;top:6%;right:2%;"
+            aria-hidden="true"></div>
+
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2 curriculum-h2--decorated curriculum-h2--center">Kiểm tra & Cột mốc Đầu ra</h2>
+                <p class="curriculum-lead">Hệ thống đánh giá đa chiều (Rubrics) thay thế cách chấm điểm một chiều truyền thống. Điểm số dựa trên tư duy quá trình, năng lực vận dụng và chất lượng sản phẩm cuối cùng.</p>
+            </div>
+
+            <div class="curriculum-assessment-layout">
+                <div class="curriculum-assessment-panel curriculum-reveal-delay-150" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Rubrics đánh giá cốt lõi</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--info">3 trụ cột năng lực</span>
+                    </div>
+                    <div class="curriculum-rubric">
+                        {% include 'about/partials/curriculum/_assessment_rubric.html' with icon='fas fa-brain' criterion='Tư duy và Lập luận Toán học' metric='Mức độ hiểu sâu bản chất, khả năng kết nối khái niệm, lập luận mạch lạc và chứng minh.' evidence='Quy trình giải bài, tốc độ phản biện, nhật ký học thuật cá nhân.' %}
+                        {% include 'about/partials/curriculum/_assessment_rubric.html' with icon='fas fa-laptop-code' criterion='Năng lực Công dân số (AI Tooling)' metric='Độ nhạy bén khi chọn công cụ (GeoGebra, Python, AI) vào đúng bài toán và kỹ năng kiểm chứng chéo.' evidence='Log sử dụng nền tảng, mã nguồn sản phẩm số, độ chính xác của biểu đồ mô phỏng.' %}
+                        {% include 'about/partials/curriculum/_assessment_rubric.html' with icon='fas fa-globe-asia' criterion='Ứng dụng thực tiễn & Xã hội' metric='Khả năng chuyển hóa dữ kiện Toán thành thông tin hữu ích giúp ra quyết định dự án.' evidence='Dự án STEM tổng hợp, Portfolio cá nhân được bảo vệ trước Hội đồng.' %}
+                    </div>
+                </div>
+
+                <aside class="curriculum-assessment-panel curriculum-assessment-panel--milestones curriculum-reveal-delay-200" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Cột mốc đầu ra ưu tiên</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--success">Theo dõi theo tuần</span>
+                    </div>
+                    <p class="curriculum-caption">Các mốc này giúp phụ huynh nhìn rõ tiến trình và năng lực ứng dụng thực tế của học sinh.</p>
+
+                    <div class="curriculum-outcome-list curriculum-spacer-top">
+                        {% if math_block.outcomes %}
+                        {% for item in math_block.outcomes %}
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">{{ forloop.counter|stringformat:"02d" }}</span><span>{{ item }}</span></p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">01</span><span>AI-Track theo dõi tiến trình hằng tuần.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">02</span><span>STEM Portfolio cho xét tuyển trong và ngoài nước.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">03</span><span>Định hướng ngành Khoa học dữ liệu, Tài chính, Kỹ thuật, Kinh tế số.</span></p>
+                        {% endif %}
+
+                        {% if math_block.needs_confirm %}
+                        {% for item in math_block.needs_confirm %}
+                        <p class="curriculum-caption curriculum-caption--warning-note"><i class="fas fa-exclamation-circle curriculum-icon curriculum-icon--warning"></i><span>{{ item }}</span></p>
+                        {% endfor %}
+                        {% else %}
+                        <p class="curriculum-caption curriculum-caption--warning-note"><i class="fas fa-exclamation-circle curriculum-icon curriculum-icon--warning"></i><span>Khung đầu ra/liên thông chi tiết theo từng lớp hiện chưa có đủ chi tiết định lượng trong nguồn chuẩn.</span></p>
+                        {% endif %}
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+
+    {# ──────────── STATS STRIP ──────────── #}
+    <section class="curriculum-section curriculum-section--accent">
+        <div class="container">
+            <div class="curriculum-stats-strip curriculum-reveal-delay-100" data-reveal>
+                <div class="curriculum-stat">
+                    <span class="curriculum-stat__number">12+</span>
+                    <span class="curriculum-stat__label">Năm kinh nghiệm đào tạo</span>
+                </div>
+                <div class="curriculum-stat">
+                    <span class="curriculum-stat__number">95%</span>
+                    <span class="curriculum-stat__label">Phụ huynh hài lòng</span>
+                </div>
+                <div class="curriculum-stat">
+                    <span class="curriculum-stat__number">100+</span>
+                    <span class="curriculum-stat__label">Dự án STEM hoàn thành</span>
+                </div>
+                <div class="curriculum-stat">
+                    <span class="curriculum-stat__number">AI</span>
+                    <span class="curriculum-stat__label">Tích hợp toàn diện</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# ──────────── DIFFERENTIATION MATRIX ──────────── #}
+    <div class="curriculum-reveal-delay-100" data-reveal>
+        {% include 'about/partials/curriculum/_differentiation_matrix.html' with matrix_title='Sự khác biệt của Smart Math tại MIS' row_1_label='Kiến trúc chương trình' row_1_mis='Liên thông trọn vẹn K1-K12, tích hợp mũi nhọn Công nghệ & AI ngay từ tiểu học.' row_1_traditional='Rời rạc theo cấp học, ít công cụ công nghệ hiện đại.' row_1_international='Theo chuẩn quốc tế tĩnh, độ bản địa hóa phương pháp giảng dạy khác nhau.' row_2_label='Phương pháp cốt lõi' row_2_mis='Học qua giải quyết Vấn đề (Problem-based), mô hình hóa đồ thị và dự án STEM thực chiến.' row_2_traditional='Thiên về luyện tập thụ động theo mẫu bài cố định phục vụ thi cử.' row_2_international='Đa dạng phương pháp, độ tương thích với học sinh Việt Nam tùy triết lý từng trường.' row_3_label='Ma trận Đánh giá' row_3_mis='Rubric tích hợp tiến trình học + Minh chứng năng lực qua Portfolio số.' row_3_traditional='Đánh giá nặng nề qua bài kiểm tra giữa/cuối kỳ.' row_3_international='Đánh giá linh hoạt nhưng chuẩn mực minh chứng chưa đồng nhất.' row_4_label='Đầu ra thực tế' row_4_mis='Sở hữu Năng lực phân tích sắc bén + Portfolio Khoa học Dữ liệu cạnh tranh quốc tế.' row_4_traditional='Đầu ra đo lường chủ yếu qua Giấy báo điểm thi tốt nghiệp.' row_4_international='Chất lượng tốt, nhưng mức đầu tư chi phí cực kỳ lớn.' %}
+    </div>
+
+    {# ──────────── FINAL CTA ──────────── #}
+    {% include 'about/partials/curriculum/_final_cta_cluster.html' with cta_title='Cùng con bước vào kỷ nguyên Công nghệ' cta_subtitle='Trải nghiệm mô hình giáo dục Smart Math 4.0 - Đặt lịch tư vấn lộ trình phân luồng Toán học phù hợp ngay hôm nay.' visit_url='contact:contact' consult_url='admissions:list' brochure_dialog_id='math-brochure-dialog' brochure_available=pdf_document.pdf_file %}
+
+    {# ──────────── BROCHURE ──────────── #}
+    {% include 'about/partials/curriculum/_brochure_drawer.html' with brochure_dialog_id='math-brochure-dialog' brochure_title='Brochure Hệ Toán Học (Smart Math)' %}
+</main>
+{% endblock %}

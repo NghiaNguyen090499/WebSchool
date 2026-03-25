@@ -1,0 +1,12 @@
+{% comment %}
+Learning Card
+Inputs: title, description, icon_class, meta
+{% endcomment %}
+<article class="curriculum-card curriculum-card--learning curriculum-card--learning-feature">
+    <div class="curriculum-card__icon" aria-hidden="true">
+        <i class="{{ icon_class|default:'fas fa-chalkboard-teacher' }}"></i>
+    </div>
+    <h3 class="curriculum-h3 curriculum-card__title">{{ title }}</h3>
+    <p class="curriculum-text curriculum-card__description">{{ description }}</p>
+    {% if meta %}<p class="curriculum-caption curriculum-card__meta">{{ meta }}</p>{% endif %}
+</article>

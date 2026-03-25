@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layout Spec – MIS Innovation Day 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Sora:wght@300;400;600;700&display=swap');
+
+  :root {
+    --bg: #0d0d14;
+    --surface: #13131f;
+    --border: #2a2a40;
+    --accent: #3b82f6;
+    --accent2: #a855f7;
+    --gold: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #6b7280;
+    --green: #22c55e;
+    --red: #ef4444;
+    --tag-bg: #1e1e30;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 40px 24px;
+  }
+
+  h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+  .subtitle { color: var(--muted); font-size: 12px; margin-bottom: 40px; font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── PAGE SECTION ── */
+  .page-section {
+    margin-bottom: 60px;
+  }
+  .page-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .page-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── CANVAS ── */
+  .canvas {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* ── BLOCK ── */
+  .block {
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 56px;
+  }
+  .block:last-child { border-bottom: none; }
+
+  .block-meta {
+    padding: 14px 16px;
+    border-right: 1px solid var(--border);
+    background: #0f0f1a;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .block-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+  }
+  .block-id {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .block-content {
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ── TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text);
+  }
+  .tag.accent  { border-color: var(--accent);  color: var(--accent); }
+  .tag.gold    { border-color: var(--gold);    color: var(--gold); }
+  .tag.purple  { border-color: var(--accent2); color: var(--accent2); }
+  .tag.green   { border-color: var(--green);   color: var(--green); }
+  .tag.red     { border-color: var(--red);     color: var(--red); }
+
+  /* ── PROP LIST ── */
+  .prop { display: flex; gap: 8px; align-items: baseline; }
+  .prop-key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 100px;
+  }
+  .prop-val { font-size: 13px; color: var(--text); }
+  .prop-val strong { color: #fff; font-weight: 600; }
+  .prop-val em { color: var(--gold); font-style: normal; }
+
+  /* ── ASSET BOX ── */
+  .asset-box {
+    background: #0a0a15;
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .asset-icon { font-size: 18px; }
+  .asset-info { display: flex; flex-direction: column; gap: 2px; }
+  .asset-name { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text); }
+  .asset-hint { font-size: 11px; color: var(--muted); }
+
+  /* ── LAYOUT DIAGRAM ── */
+  .layout-diagram {
+    display: grid;
+    gap: 4px;
+    width: 160px;
+    flex-shrink: 0;
+  }
+  .ld-row { display: flex; gap: 4px; }
+  .ld-cell {
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    height: 24px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--muted);
+  }
+  .ld-cell.hi { background: rgba(59,130,246,.15); border-color: var(--accent); color: var(--accent); }
+  .ld-cell.gold-hi { background: rgba(245,158,11,.12); border-color: var(--gold); color: var(--gold); }
+
+  .block-inner { display: flex; gap: 16px; }
+  .block-inner .block-content { flex: 1; padding: 0; }
+
+  /* ── TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; gap: 6px; }
+  .tl-item { display: flex; gap: 10px; align-items: flex-start; }
+  .tl-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    min-width: 90px;
+    padding-top: 1px;
+  }
+  .tl-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 5px; flex-shrink: 0; }
+  .tl-text { font-size: 12px; color: var(--text); }
+  .tl-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── DIVIDER ── */
+  .spec-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 8px 0;
+  }
+
+  /* ── GLOBAL NOTES ── */
+  .global-notes {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 40px;
+  }
+  .global-notes h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+  .note-item { display: flex; gap: 8px; margin-bottom: 6px; font-size: 13px; }
+  .note-item::before { content: '→'; color: var(--accent2); font-family: monospace; }
+</style>
+</head>
+<body>
+
+<h1>MIS Innovation Day 2026</h1>
+<p class="subtitle">// layout-spec · 2 pages · agent-ready</p>
+
+<!-- ══════════════════════════════════
+     GLOBAL DESIGN SYSTEM NOTES
+══════════════════════════════════ -->
+<div class="global-notes">
+  <h2>Global Design Tokens</h2>
+  <div class="note-item">Background: deep navy-to-indigo radial gradient <strong>#050a1a → #0d1440</strong> (full bleed, both pages)</div>
+  <div class="note-item">Accent glow layer: subtle blue/purple light blobs (CSS radial-gradient, low opacity ~0.15) at top-left and bottom-right corners</div>
+  <div class="note-item">City skyline silhouette at bottom of each page — PNG asset <code>static/city-skyline.png</code>, opacity ~0.3, position: bottom center</div>
+  <div class="note-item">Primary font (headings): <strong>bold white/cyan</strong>, extra-large, with italic or mixed-weight treatment</div>
+  <div class="note-item">Body font: clean sans-serif, white on dark</div>
+  <div class="note-item">Decorative star/sparkle SVG elements scattered left & right edges</div>
+  <div class="note-item">All corners of popup/badge elements use rounded pill shape (border-radius: 999px) or soft rounded rect</div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE 1
+══════════════════════════════════ -->
+<div class="page-section">
+  <p class="page-label">Page 1 — Main Event Poster</p>
+  <div class="canvas">
+
+    <!-- BLOCK 1: HERO HEADER -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">HERO HEADER</span>
+        <span class="block-id">#p1-b1</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag accent">full-width</span>
+          <span class="tag">padding-top: 40px</span>
+          <span class="tag">text-center</span>
+        </div>
+        <div class="prop"><span class="prop-key">logo text</span><span class="prop-val"><strong>MIS</strong> — extra-bold, ~80px, white. Italic cyan arrow icon (↗) between "MIS" and "THE NEW ERA" subtext</span></div>
+        <div class="prop"><span class="prop-key">line 2</span><span class="prop-val"><strong>innovation day</strong> — lowercase, ~68px, white bold italic</span></div>
+        <div class="prop"><span class="prop-key">year badge</span><span class="prop-val"><em>2026</em> — cyan bold, inline with "day" baseline, ~56px</span></div>
+        <div class="prop"><span class="prop-key">tagline</span><span class="prop-val">A NEW ERA OF AI, HEART &amp; GLOBAL MINDS — small caps, muted white, letter-spacing 3px</span></div>
+        <div class="asset-box">
+          <span class="asset-icon">🚀</span>
+          <div class="asset-info">
+            <span class="asset-name">static/rocket.png</span>
+            <span class="asset-hint">Position: absolute top-right of header, ~120px wide, slight rotation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCK 2: DATE/TIME/VENUE -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">DATE & VENUE</span>
+        <span class="block-id">#p1-b2</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag accent">flex-row</span>
+          <span class="tag">gap: 16px</span>
+          <span class="tag">align-center</span>
+          <span class="tag">margin: 20px 0</span>
+        </div>
+        <div class="prop"><span class="prop-key">date pill</span><span class="prop-val">Rounded rect border, <strong>28.03.2026</strong> — white bold ~26px. Border: 2px solid white</span></div>
+        <div class="prop"><span class="prop-key">time badge</span><span class="prop-val">Cyan badge: <em>7:30 – 16:00</em> — small, left of date pill</span></div>
+        <div class="prop"><span class="prop-key">venue text</span><span class="prop-val">Right side: "TRƯỜNG TIỂU HỌC / THCS &amp; THPT ĐA TRÍ TUỆ" bold; below in smaller: "Số 37 Hoàng Quán Chi, Cầu Giấy"</span></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 3: HERO TAGLINE PILL -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">TAGLINE PILL</span>
+        <span class="block-id">#p1-b3</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag accent">full-width pill</span>
+          <span class="tag purple">gradient border</span>
+          <span class="tag">text-center</span>
+        </div>
+        <div class="prop"><span class="prop-key">shape</span><span class="prop-val">Wide pill button, gradient stroke (blue→purple), subtle glass fill</span></div>
+        <div class="prop"><span class="prop-key">text</span><span class="prop-val"><strong>MỘT KỶ NGUYÊN GIÁO DỤC MỚI ĐƯỢC KHAI MỞ.</strong> — 2 lines, bold white, ~22px</span></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 4: PRIVILEGE HEADER -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">PRIVILEGE HEADER</span>
+        <span class="block-id">#p1-b4</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag">text-center</span>
+          <span class="tag">margin-top: 28px</span>
+        </div>
+        <div class="prop"><span class="prop-key">line 1</span><span class="prop-val"><strong>ĐẶC QUYỀN</strong> (white bold) + <em>DUY NHẤT 28.03.2026</em> (cyan bold) — same line ~18px</span></div>
+        <div class="prop"><span class="prop-key">line 2</span><span class="prop-val">DÀNH CHO HỌC SINH (white) + <em>NHẬP HỌC TRONG NGÀY HỘI</em> (cyan) — ~15px</span></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 5: 3-COLUMN BENEFITS -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">BENEFIT CARDS</span>
+        <span class="block-id">#p1-b5</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag accent">3-column grid</span>
+          <span class="tag">gap: 20px</span>
+          <span class="tag">padding: 24px 16px</span>
+        </div>
+        <div class="block-inner" style="flex-direction:column; gap:8px">
+          <!-- Card 1 -->
+          <div class="prop"><span class="prop-key">Card 1 – asset</span><span class="prop-val"><code>static/10percent-gold.png</code> — 3D gold "10%" number, ~100px. Below: "GIẢM 10% HỌC PHÍ / NĂM HỌC ĐẦU TIÊN" white bold</span></div>
+          <div class="spec-divider"></div>
+          <!-- Card 2 -->
+          <div class="prop"><span class="prop-key">Card 2 – asset</span><span class="prop-val"><code>static/uniform-set.png</code> — red polo shirt + backpack photo. Below: "TẶNG 01 SET / ĐỒNG PHỤC NĂM HỌC" white bold</span></div>
+          <div class="spec-divider"></div>
+          <!-- Card 3 -->
+          <div class="prop"><span class="prop-key">Card 3 – asset</span><span class="prop-val"><code>static/voucher.png</code> — yellow "VOUCHER NGÀY HỘI / 50.000 vnd" stamp badge. Below: "VOUCHER NGÀY HỘI / TRỊ GIÁ 50.000 VNĐ" white bold</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCK 6: CTA HEADLINE -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">CTA HEADLINE</span>
+        <span class="block-id">#p1-b6</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag">text-center</span>
+          <span class="tag gold">bold</span>
+        </div>
+        <div class="prop"><span class="prop-key">text</span><span class="prop-val"><strong>MỘT NGÀY – MỘT QUYẾT ĐỊNH / MỘT TƯƠNG LAI KHÁC BIỆT CHO CON</strong> — white bold, ~24px, 2 lines</span></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 7: QR + REGISTER BUTTON -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">QR + REGISTER</span>
+        <span class="block-id">#p1-b7</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag accent">flex-col</span>
+          <span class="tag">align-center</span>
+          <span class="tag">gap: 12px</span>
+        </div>
+        <div class="prop"><span class="prop-key">QR code</span><span class="prop-val"><code>static/qr-code.png</code> — ~140×140px, centered, white border/rounded rect frame</span></div>
+        <div class="prop"><span class="prop-key">button</span><span class="prop-val">Pill CTA: <strong>ĐĂNG KÝ THAM DỰ</strong> — gradient fill (blue→purple), white bold text, ~220px wide</span></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 8: FOOTER LOGOS -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">FOOTER LOGOS</span>
+        <span class="block-id">#p1-b8</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag">2-row layout</span>
+          <span class="tag">padding: 16px</span>
+        </div>
+        <div class="prop"><span class="prop-key">left group</span><span class="prop-val">"Đơn vị tổ chức" label + <code>static/logo-mis.png</code></span></div>
+        <div class="prop"><span class="prop-key">right group</span><span class="prop-val">"Đối tác đồng hành" label + row of partner logos: RBH, Jaxtina, MathExpress, NHA KHOA ĐẠI DƯƠNG, UWE Bristol, Supporter, Crabit, eKidbooks, triviet — all white/grayscale, ~36–48px height</span></div>
+        <div class="prop"><span class="prop-key">assets</span><span class="prop-val"><code>static/partners/*.png</code> — use actual provided logos; render as-is</span></div>
+      </div>
+    </div>
+
+  </div><!-- /canvas -->
+</div><!-- /page 1 -->
+
+
+<!-- ══════════════════════════════════
+     PAGE 2
+══════════════════════════════════ -->
+<div class="page-section">
+  <p class="page-label">Page 2 — Countdown + Schedule</p>
+  <div class="canvas">
+
+    <!-- BLOCK 1: COUNTDOWN HEADER -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">COUNTDOWN HEADER</span>
+        <span class="block-id">#p2-b1</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag accent">flex-row</span>
+          <span class="tag">align-center</span>
+          <span class="tag">gap: 16px</span>
+          <span class="tag">padding: 32px 24px 16px</span>
+        </div>
+        <div class="prop"><span class="prop-key">left text</span><span class="prop-val"><strong>CHỈ CÒN</strong> — bold white, ~48px, baseline-aligned with clock widget</span></div>
+        <div class="prop"><span class="prop-key">center widget</span><span class="prop-val"><code>static/clock-frame.png</code> — gold alarm clock illustration with white square frame (~140px). Inside frame: live countdown timer (days/hours/mins) OR static display. Position: center-inline</span></div>
+        <div class="prop"><span class="prop-key">right badge</span><span class="prop-val">Two-line badge: <em>7:30 – 16:00</em> (cyan small) / <strong>28.03.2026</strong> (white bold ~28px) — rounded rect white border</span></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 2: SCHEDULE TITLE -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">SCHEDULE TITLE</span>
+        <span class="block-id">#p2-b2</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag">text-center</span>
+          <span class="tag gold">heading</span>
+        </div>
+        <div class="prop"><span class="prop-key">text</span><span class="prop-val"><strong>CHƯƠNG TRÌNH NGÀY HỘI</strong> — bold white, ~28px, centered, light underline or glow</span></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 3: TIMELINE LIST -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">TIMELINE LIST</span>
+        <span class="block-id">#p2-b3</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag accent">vertical list</span>
+          <span class="tag">padding: 16px 24px</span>
+          <span class="tag">gap: 14px between items</span>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <span class="tl-time">7:30 – 8:00</span>
+            <span class="tl-dot"></span>
+            <div>
+              <div class="tl-text">Check in &amp; đón tiếp</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-time">8:00 – 8:30</span>
+            <span class="tl-dot"></span>
+            <div>
+              <div class="tl-text">Khai mạc chương trình</div>
+              <div class="tl-sub">THE NEW ERA – MIS Innovation Day 2026</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-time">8:30 – 9:30</span>
+            <span class="tl-dot"></span>
+            <div>
+              <div class="tl-text">Chương trình sân khấu nghệ thuật</div>
+              <div class="tl-sub">"A New Era of AI, Heart &amp; Global Minds – Một kỷ nguyên giáo dục mới được khai mở"</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-time">9:30 – 12:00</span>
+            <span class="tl-dot"></span>
+            <div>
+              <div class="tl-text">Trải nghiệm tại các gian hàng Workshop</div>
+              <div class="tl-sub">Hội thảo tuyển sinh MIS: THE WORLD IS CHANGING · Teambuilding Gắn kết gia đình · Trải nghiệm công nghệ cao · STEAM lập trình &amp; robotics · Ăn trưa, mua sắm</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-time">13:30 – 16:00</span>
+            <span class="tl-dot"></span>
+            <div>
+              <div class="tl-text">Chung kết hội thao Tháng 3</div>
+              <div class="tl-sub">Trận chung kết Giải thể thao CB-GV · Trận chung kết Giải thể thao học sinh · Trận Giao hữu bóng đá PHHS &amp; CBGV · Giao hữu Kéo co, Cầu lông, Pickleball</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <span class="tl-time">16:00</span>
+            <span class="tl-dot" style="background:var(--gold)"></span>
+            <div>
+              <div class="tl-text">Bế mạc ngày hội</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:8px; font-size:11px; color:var(--muted); font-family:'IBM Plex Mono',monospace;">
+          Mỗi timeline item: cyan diamond bullet (◆) ở bên trái · time range: gold/yellow · title: white bold · sub-items: muted white nhỏ hơn
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOCK 4: CTA REGISTER FOOTER -->
+    <div class="block">
+      <div class="block-meta">
+        <span class="block-name">CTA FOOTER</span>
+        <span class="block-id">#p2-b4</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag accent">flex-row</span>
+          <span class="tag">justify-between</span>
+          <span class="tag">align-center</span>
+          <span class="tag">padding: 20px 24px</span>
+        </div>
+        <div class="prop"><span class="prop-key">left – QR</span><span class="prop-val"><code>static/qr-code-p2.png</code> — ~110×110px, white border rounded frame</span></div>
+        <div class="prop"><span class="prop-key">right – text block</span><span class="prop-val">
+          <strong>ĐĂNG KÝ</strong> (white bold large) + <em>THAM DỰ NGÀY HỘI</em> (cyan, same line, smaller) <br>
+          Below: 2 lines of small body text (muted): "Để nhà trường có thể đón tiếp chu đáo nhất xin quý vị vui lòng xác nhận…" <br>
+          Below: hotline number in cyan — 024.6027.8666
+        </span></div>
+      </div>
+    </div>
+
+    <!-- BLOCK 5: BACKGROUND EFFECTS NOTE -->
+    <div class="block" style="border-bottom:none">
+      <div class="block-meta">
+        <span class="block-name">BG EFFECTS</span>
+        <span class="block-id">#p2-bg</span>
+      </div>
+      <div class="block-content">
+        <div class="tags">
+          <span class="tag purple">decorative</span>
+          <span class="tag">absolute positioned</span>
+        </div>
+        <div class="prop"><span class="prop-key">city skyline</span><span class="prop-val"><code>static/city-skyline.png</code> — bottom of page, full-width, opacity 0.25–0.35, z-index: 0</span></div>
+        <div class="prop"><span class="prop-key">star sparks</span><span class="prop-val">4-pointed star SVGs, scattered left &amp; right edges, white/cyan, opacity 0.7, various sizes 12–32px</span></div>
+        <div class="prop"><span class="prop-key">blue glow</span><span class="prop-val">Large radial gradient blob (blue #2563eb, opacity 0.12) at top-right corner, ~400px radius</span></div>
+        <div class="prop"><span class="prop-key">purple glow</span><span class="prop-val">Large radial gradient blob (purple #7c3aed, opacity 0.10) at bottom-right edge</span></div>
+      </div>
+    </div>
+
+  </div><!-- /canvas -->
+</div><!-- /page 2 -->
+
+<!-- ASSET MANIFEST -->
+<div class="page-section" style="margin-bottom:0">
+  <p class="page-label">Static Asset Manifest</p>
+  <div class="canvas">
+    <div class="block" style="grid-template-columns:1fr; border-bottom:none">
+      <div class="block-content" style="padding:20px 24px; display:grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap:10px;">
+        <div class="asset-box"><span class="asset-icon">🖼️</span><div class="asset-info"><span class="asset-name">static/rocket.png</span><span class="asset-hint">3D blue rocket, transparent bg</span></div></div>
+        <div class="asset-box"><span class="asset-icon">🖼️</span><div class="asset-info"><span class="asset-name">static/10percent-gold.png</span><span class="asset-hint">3D gold "10%" text</span></div></div>
+        <div class="asset-box"><span class="asset-icon">🖼️</span><div class="asset-info"><span class="asset-name">static/uniform-set.png</span><span class="asset-hint">Red polo + backpack photo</span></div></div>
+        <div class="asset-box"><span class="asset-icon">🖼️</span><div class="asset-info"><span class="asset-name">static/voucher.png</span><span class="asset-hint">Yellow voucher stamp badge</span></div></div>
+        <div class="asset-box"><span class="asset-icon">🖼️</span><div class="asset-info"><span class="asset-name">static/qr-code.png</span><span class="asset-hint">QR code – registration link</span></div></div>
+        <div class="asset-box"><span class="asset-icon">🖼️</span><div class="asset-info"><span class="asset-name">static/qr-code-p2.png</span><span class="asset-hint">QR code – page 2 (same or variant)</span></div></div>
+        <div class="asset-box"><span class="asset-icon">🖼️</span><div class="asset-info"><span class="asset-name">static/clock-frame.png</span><span class="asset-hint">Gold alarm clock illustration</span></div></div>
+        <div class="asset-box"><span class="asset-icon">🖼️</span><div class="asset-info"><span class="asset-name">static/city-skyline.png</span><span class="asset-hint">Dark city silhouette, wide</span></div></div>
+        <div class="asset-box"><span class="asset-icon">🖼️</span><div class="asset-info"><span class="asset-name">static/logo-mis.png</span><span class="asset-hint">MIS school crest logo</span></div></div>
+        <div class="asset-box"><span class="asset-icon">📁</span><div class="asset-info"><span class="asset-name">static/partners/</span><span class="asset-hint">RBH, Jaxtina, MathExpress, NHA KHOA, UWE, Supporter, Crabit, eKidbooks, triviet</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

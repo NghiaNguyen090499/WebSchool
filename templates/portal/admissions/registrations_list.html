@@ -1,0 +1,89 @@
+{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Đăng ký tuyển sinh{% endblock %}
+{% block header_title %}Đăng ký{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Đăng ký" %}
+
+<div class="portal-toolbar">
+    <div>
+        <h1 class="page-title">Đăng ký tuyển sinh</h1>
+        <p class="portal-subtitle">{{ page_obj.paginator.count|default:object_list.count }} đơn đăng ký</p>
+    </div>
+</div>
+
+<form method="get" class="portal-filters" role="search">
+    <div class="portal-search" style="flex:1;min-width:200px">
+        <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Tìm theo tên..."
+            aria-label="Tìm kiếm">
+    </div>
+    <select name="status" aria-label="Trạng thái" onchange="this.form.submit()">
+        <option value="">Tất cả trạng thái</option>
+        {% for value, label in status_choices %}
+        <option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-search icon-md"></i>
+        Lọc</button>
+</form>
+
+<div class="portal-table-container">
+    <table class="portal-table" aria-label="Danh sách đăng ký">
+        <thead>
+            <tr>
+                <th scope="col">Phụ huynh</th>
+                <th scope="col">Điện thoại</th>
+                <th scope="col">Email</th>
+                <th scope="col">Học sinh</th>
+                <th scope="col">Lớp đăng ký</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Ngày</th>
+                <th scope="col" style="text-align:right">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td class="font-semibold" style="color:var(--p-gray-800)">{{ item.parent_name }}</td>
+                <td>{{ item.parent_phone }}</td>
+                <td>{{ item.parent_email|default:"—" }}</td>
+                <td>{{ item.student_name }}</td>
+                <td>{{ item.grade_applying|default:"—" }}</td>
+                <td>
+                    {% if item.status == "new" %}
+                    <span class="badge badge-info">{{ item.get_status_display }}</span>
+                    {% elif item.status == "contacted" %}
+                    <span class="badge badge-warning">{{ item.get_status_display }}</span>
+                    {% elif item.status == "enrolled" %}
+                    <span class="badge badge-success">{{ item.get_status_display }}</span>
+                    {% else %}
+                    <span class="badge badge-neutral">{{ item.get_status_display }}</span>
+                    {% endif %}
+                </td>
+                <td><time datetime="{{ item.created_at|date:'Y-m-d' }}">{{ item.created_at|date:"d/m/Y" }}</time></td>
+                <td style="text-align:right">
+                    <a href="{% url 'portal:admissions_registrations_detail' item.pk %}" class="btn btn-ghost btn-xs"
+                        data-tooltip="Chi tiết">
+                        <i class="fas fa-eye icon-sm"></i>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">
+                    <div class="portal-empty-state py-8">
+                        <div class="portal-empty-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <p class="portal-empty-title">Chưa có đăng ký nào</p>
+                        <p class="portal-empty-desc">Đơn đăng ký sẽ hiển thị ở đây khi phụ huynh đăng ký.</p>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include "portal/includes/pagination.html" %}
+{% endblock %}

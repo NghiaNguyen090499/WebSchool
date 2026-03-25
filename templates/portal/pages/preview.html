@@ -1,0 +1,26 @@
+﻿{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Preview: {{ object.title }}{% endblock %}
+{% block header_title %}Preview trang{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Trang" breadcrumb_section_url=pages_list_url
+breadcrumb_current="Preview" %}
+
+<div class="portal-toolbar">
+    <h1 class="page-title">Preview: {{ object.title }}</h1>
+    <div style="display:flex;gap:8px">
+        <a href="{% url 'portal:pages_edit' object.pk %}" class="btn btn-secondary btn-sm"><i class="fas fa-pen icon-md"></i> Sửa</a>
+        <a href="{% url 'portal:pages_list' %}" class="btn btn-ghost btn-sm">Quay lại</a>
+    </div>
+</div>
+
+<div class="portal-card">
+    <div class="portal-card-body">
+        <div class="prose max-w-4xl">
+            {{ object.content|safe }}
+        </div>
+    </div>
+</div>
+{% endblock %}

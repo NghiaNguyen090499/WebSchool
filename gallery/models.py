@@ -40,3 +40,7 @@ class Photo(models.Model):
 
 
 
+
+
+
+

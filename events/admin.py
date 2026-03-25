@@ -12,3 +12,7 @@ class EventAdmin(admin.ModelAdmin):
 
 
 
+
+
+
+

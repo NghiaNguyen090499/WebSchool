@@ -1,0 +1,224 @@
+{% extends "core/lowfi/base.html" %}
+
+{% block lowfi_body %}
+<!-- ═══════════════════════════════════════════════════════════
+     LEVEL HERO  –  THPT (High School)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-level-hero thpt mis-reveal" id="thpt-hero">
+    <div class="mis-level-hero-grid">
+        <article>
+            <span class="mis-level-badge">
+                <i class="fas fa-bullseye"></i> Cấp THPT
+            </span>
+            <h2>Mô hình hóa chuyên sâu & Định hướng nghề nghiệp</h2>
+            <p class="mis-subtitle">
+                Toán học là ngôn ngữ của AI — học sinh chuyển từ người học
+                sang người kiến tạo sản phẩm, sẵn sàng cho đại học và thị trường toàn cầu.
+            </p>
+            <div class="mis-cta-row">
+                <a href="{% url 'contact:contact' %}" class="mis-btn mis-btn-primary" id="thpt-cta-consult">
+                    <i class="fas fa-phone-volume"></i> Đăng ký tư vấn
+                </a>
+                <a href="{% url 'admissions:list' %}" class="mis-btn mis-btn-ghost" id="thpt-cta-schedule">
+                    <i class="fas fa-calendar-check"></i> Đặt lịch trải nghiệm
+                </a>
+            </div>
+        </article>
+        <aside class="mis-level-quote">
+            <div class="mis-level-quote-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <p>
+                Năm cuối THPT là giai đoạn tích lũy minh chứng năng lực:
+                hồ sơ dự án AI/STEM, chứng chỉ ngoại ngữ quốc tế và
+                định hướng nghề nghiệp rõ ràng mở ra cơ hội toàn cầu.
+            </p>
+            <div class="mis-level-quote-meta">
+                <strong>Career Lanes</strong>
+                <span>Data Science · Tài chính số · AI Engineering</span>
+            </div>
+        </aside>
+    </div>
+    <div class="mis-level-stats">
+        <div class="mis-level-stat">
+            <strong>15–18</strong>
+            <span>Độ tuổi</span>
+        </div>
+        <div class="mis-level-stat">
+            <strong>IELTS 8.0+</strong>
+            <span>Mục tiêu ngoại ngữ</span>
+        </div>
+        <div class="mis-level-stat">
+            <strong>ML</strong>
+            <span>Machine Learning</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CORE MODULES
+     ═══════════════════════════════════════════════════════════ -->
+<div class="mis-section-header mis-reveal" data-delay="1">
+    <span class="mis-tag"><i class="fas fa-cubes"></i> Chương trình cốt lõi</span>
+    <h2>3 module chuyên sâu cấp THPT</h2>
+    <p class="mis-subtitle">Từ AI & STEM chuyên sâu đến hồ sơ năng lực số và ngoại ngữ ứng dụng.</p>
+</div>
+
+<section class="mis-grid three mis-reveal" data-delay="1" id="thpt-modules">
+    <article class="mis-pillar-card thpt">
+        <span class="mis-pillar-index thpt">01</span>
+        <h3><i class="fas fa-robot"></i> STEM & AI chuyên sâu</h3>
+        <ul>
+            <li>Dự án Khoa học dữ liệu gắn bài toán đời sống và thị trường.</li>
+            <li>Mô phỏng tài chính số, đọc và diễn giải dữ liệu định lượng.</li>
+            <li>Huấn luyện mô hình Machine Learning từ dữ liệu thực tế.</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip"><i class="fab fa-python"></i> Python</span>
+            <span class="mis-chip">ML Workflow</span>
+            <span class="mis-chip">Data Toolkit</span>
+        </div>
+    </article>
+
+    <article class="mis-pillar-card thpt">
+        <span class="mis-pillar-index thpt">02</span>
+        <h3><i class="fas fa-folder-open"></i> Digital Portfolio</h3>
+        <ul>
+            <li>Hồ sơ năng lực số với minh chứng dự án theo từng học kỳ.</li>
+            <li>Lịch sử phản hồi mentor và vòng cải tiến sản phẩm.</li>
+            <li>Sẵn sàng cho xét tuyển đại học và lộ trình du học.</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">STEM Portfolio</span>
+            <span class="mis-chip">Mentor Review</span>
+            <span class="mis-chip">Application Ready</span>
+        </div>
+    </article>
+
+    <article class="mis-pillar-card thpt">
+        <span class="mis-pillar-index thpt">03</span>
+        <h3><i class="fas fa-globe-asia"></i> Ngoại ngữ chuyên sâu</h3>
+        <ul>
+            <li>Academic Writing, thuyết trình học thuật và phản biện.</li>
+            <li>Chiến lược săn học bổng và tối ưu hồ sơ ứng tuyển.</li>
+            <li>Luyện phỏng vấn cho các lộ trình toàn cầu.</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">IELTS 6.5–8.0+</span>
+            <span class="mis-chip">HSK 4–6</span>
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PORTFOLIO LIFECYCLE & CAREER
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-grid two mis-reveal" data-delay="2" id="thpt-portfolio">
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-layer-group"></i> Vòng đời Portfolio</span>
+        <h2>Quy trình xuất bản hồ sơ số</h2>
+        <div class="mis-flow">
+            <div class="mis-flow-step"><i class="fas fa-plus-circle"></i> Khởi tạo</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-upload"></i> Đăng tải</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-user-check"></i> Mentor phản biện</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-paper-plane"></i> Sẵn sàng nộp</div>
+        </div>
+    </article>
+
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-chart-line"></i> Bảng điều hướng nghề nghiệp</span>
+        <h2>Career & University Fit</h2>
+        <div class="mis-feature-row">
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle thpt">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div>
+                    <h4>Mức phù hợp ngành</h4>
+                    <p>Phân tích AI đề xuất ngành học dựa trên năng lực và sở thích.</p>
+                </div>
+            </div>
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle thpt">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <div>
+                    <h4>Lộ trình cá nhân</h4>
+                    <p>Đề xuất lộ trình phát triển dựa trên dữ liệu học tập.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     GLOBAL READINESS
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-section mis-reveal" data-delay="3" id="thpt-global">
+    <span class="mis-tag"><i class="fas fa-graduation-cap"></i> Sẵn sàng toàn cầu</span>
+    <h2>Hỗ trợ học bổng và tuyển sinh quốc tế</h2>
+    <p class="mis-subtitle" style="margin-bottom: 1rem;">
+        Năm cuối kết hợp minh chứng ngoại ngữ, hồ sơ dự án AI/STEM và chiến lược
+        mentor-driven để tăng lợi thế cạnh tranh và mở cánh cửa du học.
+    </p>
+    <div class="mis-feature-row">
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle teal">
+                <i class="fas fa-file-certificate"></i>
+            </div>
+            <div>
+                <h4>Minh chứng ngoại ngữ</h4>
+                <p>IELTS, HSK và các chứng chỉ quốc tế khác.</p>
+            </div>
+        </div>
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle coral">
+                <i class="fas fa-project-diagram"></i>
+            </div>
+            <div>
+                <h4>Hồ sơ dự án AI/STEM</h4>
+                <p>Portfolio kỹ thuật số với minh chứng dự án qua từng học kỳ.</p>
+            </div>
+        </div>
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle thpt">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <div>
+                <h4>Chiến lược Mentor-driven</h4>
+                <p>Mentor đồng hành hỗ trợ phỏng vấn, essay và lộ trình ứng tuyển.</p>
+            </div>
+        </div>
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle primary">
+                <i class="fas fa-university"></i>
+            </div>
+            <div>
+                <h4>Săn học bổng</h4>
+                <p>Tối ưu hồ sơ và chiến lược ứng tuyển các trường đại học hàng đầu.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FINAL CTA
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-level-cta thpt mis-reveal" data-delay="4" id="thpt-final-cta">
+    <div>
+        <p class="mis-kicker">Từ người học đến người kiến tạo</p>
+        <h2>Đặt lịch trải nghiệm lớp THPT tại MIS</h2>
+    </div>
+    <div class="mis-cta-row">
+        <a href="{% url 'contact:contact' %}" class="mis-btn mis-btn-primary" id="thpt-cta-bottom-consult">
+            <i class="fas fa-phone-volume"></i> Nhận tư vấn 1:1
+        </a>
+        <a href="{% url 'admissions:list' %}" class="mis-btn mis-btn-ghost" id="thpt-cta-bottom-admissions">
+            <i class="fas fa-user-graduate"></i> Xem thông tin tuyển sinh
+        </a>
+    </div>
+</section>
+{% endblock %}

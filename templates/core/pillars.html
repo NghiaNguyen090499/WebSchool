@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Triết lý giáo dục{% endblock %}
+{% block meta_description %}6 trụ cột giáo dục MIS: Học làm người, Vững vàng tri thức, Thành thục kỹ năng 5Cs, Thể lực & tinh thần lành mạnh, Học gắn với hành, Công nghệ & AI.{% endblock %}
+
+{% block content %}
+<section class="pillars-hero">
+    <div class="pillars-hero__pattern"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <span class="badge badge-primary eyebrow">Triết lý giáo dục</span>
+        <h1 class="page-title mb-4">Triết lý giáo dục MIS</h1>
+        <p class="lead max-w-3xl">
+            Hệ trụ cột định hướng phương pháp giáo dục và phát triển toàn diện, giúp học sinh hình thành nền tảng học
+            thuật, kỹ năng và nhân cách bền vững.
+        </p>
+        <div class="pillars-hero__stats">
+            <div class="pillars-stat">
+                <span class="pillars-stat__value">{{ pillars|length }}</span>
+                <span class="pillars-stat__label">Trụ cột cốt lõi</span>
+            </div>
+            <div class="pillars-stat">
+                <span class="pillars-stat__value">4.0</span>
+                <span class="pillars-stat__label">Tư duy khai phóng</span>
+            </div>
+            <div class="pillars-stat">
+                <span class="pillars-stat__value">MIS</span>
+                <span class="pillars-stat__label">Giá trị nhân văn</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pillars-section">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="pillars-section__head">
+            <h2 class="type-h2 font-display font-semibold text-primary-600 dark:text-primary-500 uppercase tracking-tighter leading-none mb-2">
+                6 trụ cột giáo dục
+            </h2>
+            <p class="section-subtitle">
+                Mỗi trụ cột là một hướng phát triển trọng tâm, giúp MIS xây dựng môi trường học tập khai phóng, hiện đại
+                và truyền cảm hứng.
+            </p>
+        </div>
+
+        <div class="pillars-grid">
+            {% for pillar in pillars %}
+            <article class="pillars-card">
+                <div class="pillars-card__icon">
+                    <i class="{{ pillar.icon }}"></i>
+                </div>
+                <h3 class="pillars-card__title">{{ pillar.title }}</h3>
+                <p class="pillars-card__desc">{{ pillar.short_description }}</p>
+            </article>
+            {% empty %}
+            <div class="pillars-empty">
+                <p>Chưa có trụ cột giáo dục được cấu hình.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="type-h2 font-display font-semibold text-neutral-900 dark:text-white mb-4">
+            Khám phá các chương trình đào tạo
+        </h2>
+        <p class="text-neutral-600 dark:text-neutral-300 mb-8">
+            Tìm hiểu chi tiết các hệ đào tạo và lộ trình học tập phù hợp cho từng cấp học.
+        </p>
+        <a href="{% url 'core:training_programs' %}" class="btn btn-primary btn-lg">
+            Xem chương trình
+        </a>
+    </div>
+</section>
+{% endblock %}

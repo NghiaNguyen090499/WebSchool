@@ -1,0 +1,82 @@
+{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Tuyển sinh{% endblock %}
+{% block header_title %}Tuyển sinh{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Tuyển sinh" %}
+
+<div class="portal-toolbar">
+    <div>
+        <h1 class="page-title">Quản lý Tuyển sinh</h1>
+        <p class="portal-subtitle">{{ page_obj.paginator.count|default:object_list.count }} đợt tuyển sinh</p>
+    </div>
+    <a href="{% url 'portal:admissions_create' %}" class="btn btn-primary btn-md">
+        <i class="fas fa-plus icon-md"></i> Tạo đợt tuyển sinh
+    </a>
+</div>
+
+<form method="get" class="portal-filters" role="search">
+    <div class="portal-search" style="flex:1;min-width:200px">
+        <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Tìm kiếm..."
+            aria-label="Tìm kiếm">
+    </div>
+    <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-search icon-md"></i>
+        Lọc</button>
+</form>
+
+<div class="portal-table-container">
+    <table class="portal-table" aria-label="Danh sách tuyển sinh">
+        <thead>
+            <tr>
+                <th scope="col">Tiêu đề</th>
+                <th scope="col">Năm học</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col" style="text-align:right">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>
+                    <div class="font-semibold truncate" style="max-width:350px;color:var(--p-gray-800)">{{ item.title }}
+                    </div>
+                </td>
+                <td>{{ item.academic_year|default:"—" }}</td>
+                <td>
+                    {% if item.is_active %}
+                    <span class="badge badge-success">Đang mở</span>
+                    {% else %}
+                    <span class="badge badge-neutral">Đã đóng</span>
+                    {% endif %}
+                </td>
+                <td><time datetime="{{ item.created_at|date:'Y-m-d' }}">{{ item.created_at|date:"d/m/Y" }}</time></td>
+                <td style="text-align:right">
+                    <div style="display:flex;gap:6px;justify-content:flex-end">
+                        <a href="{% url 'portal:admissions_edit' item.pk %}" class="btn btn-ghost btn-xs"
+                            data-tooltip="Sửa"><i class="fas fa-pen icon-sm"></i></a>
+                        <a href="{% url 'portal:admissions_delete' item.pk %}" class="btn btn-ghost btn-xs"
+                            style="color:var(--p-danger)" data-tooltip="Xóa"><i class="fas fa-trash icon-sm"></i></a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">
+                    <div class="portal-empty-state py-8">
+                        <div class="portal-empty-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <p class="portal-empty-title">Chưa có đợt tuyển sinh nào</p>
+                        <a href="{% url 'portal:admissions_create' %}" class="btn btn-primary btn-sm"><i
+                                class="fas fa-plus icon-md"></i> Tạo đợt tuyển sinh</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include "portal/includes/pagination.html" %}
+{% endblock %}

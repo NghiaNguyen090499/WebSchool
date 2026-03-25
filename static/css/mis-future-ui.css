@@ -1,0 +1,1501 @@
+/* ============================================================
+   MIS FUTURE UI  –  International School Premium Design System
+   Inspired by Nord Anglia, ISB, BVIS
+   ============================================================ */
+
+/* ---------- 1. DESIGN TOKENS ---------- */
+.mis-ui {
+    --mis-navy: #0A2540;
+    --mis-navy-light: #1B4B7A;
+    --mis-navy-soft: #2D6AA0;
+    --mis-coral: var(--color-brand-primary);
+    --mis-coral-soft: var(--color-brand-primary-light, #fef2f2);
+    --mis-teal: var(--color-brand-primary-light);
+    --mis-teal-soft: #fff1f2;
+    --mis-gold: var(--color-accent-amber);
+    --mis-gold-soft: #FFF8EB;
+
+    --mis-bg: #F7F9FC;
+    --mis-surface: var(--color-surface-light);
+    --mis-surface-alt: #F0F4F8;
+    --mis-line: var(--color-neutral-200);
+    --mis-line-strong: var(--color-neutral-300);
+    --mis-text: var(--color-text-primary);
+    --mis-text-soft: var(--color-neutral-600, #546B81);
+    --mis-text-muted: var(--color-text-muted);
+
+    /* Level accent colors */
+    --mis-prep: var(--color-accent-emerald);
+    --mis-prep-soft: #D1FAE5;
+    --mis-prep-bg: linear-gradient(135deg, #065F46, #10B981);
+    --mis-primary-lv: var(--color-accent-blue);
+    --mis-primary-soft: #DBEAFE;
+    --mis-primary-bg: linear-gradient(135deg, #1E40AF, #3B82F6);
+    --mis-thcs: var(--color-accent-purple);
+    --mis-thcs-soft: #EDE9FE;
+    --mis-thcs-bg: linear-gradient(135deg, #5B21B6, #8B5CF6);
+    --mis-thpt: var(--color-accent-amber);
+    --mis-thpt-soft: #FEF3C7;
+    --mis-thpt-bg: linear-gradient(135deg, #B45309, #F59E0B);
+
+    --mis-radius: 16px;
+    --mis-radius-lg: 24px;
+    --mis-radius-xl: 32px;
+    --mis-shadow: 0 1px 3px rgba(10, 37, 64, .06), 0 8px 24px rgba(10, 37, 64, .04);
+    --mis-shadow-lg: 0 4px 6px rgba(10, 37, 64, .04), 0 20px 40px rgba(10, 37, 64, .08);
+    --mis-shadow-xl: 0 8px 16px rgba(10, 37, 64, .06), 0 32px 64px rgba(10, 37, 64, .12);
+    --mis-transition: .3s cubic-bezier(.4, 0, .2, 1);
+
+    background: var(--mis-bg);
+    color: var(--mis-text);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+}
+
+/* ---------- 2. LAYOUT ---------- */
+.mis-container {
+    width: min(1240px, 92vw);
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.mis-shell {
+    padding: 2.5rem 0 4rem;
+}
+
+/* Vertical rhythm between top-level content blocks in lowfi pages */
+.mis-shell .mis-container>*+* {
+    margin-top: 1.6rem;
+}
+
+/* ---------- 3. HERO (Global) ---------- */
+.mis-hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(155deg, #450a0a 0%, #7f1d1d 30%, #991b1b 70%, #b91c1c 100%);
+    color: #F8FAFC;
+    padding: 5rem 0 4rem;
+}
+
+.mis-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 600px 400px at 85% 20%, rgba(220, 38, 38, .15) 0%, transparent 60%),
+        radial-gradient(ellipse 500px 500px at 10% 80%, rgba(239, 68, 68, .1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+/* Decorative geometric pattern */
+.mis-hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle 2px at 20% 30%, rgba(255, 255, 255, .08) 100%, transparent 100%),
+        radial-gradient(circle 2px at 60% 50%, rgba(255, 255, 255, .06) 100%, transparent 100%),
+        radial-gradient(circle 2px at 80% 20%, rgba(255, 255, 255, .1) 100%, transparent 100%),
+        radial-gradient(circle 2px at 40% 70%, rgba(255, 255, 255, .05) 100%, transparent 100%),
+        radial-gradient(circle 2px at 90% 80%, rgba(255, 255, 255, .07) 100%, transparent 100%);
+    pointer-events: none;
+}
+
+.mis-hero.has-level-art::after {
+    width: 50%;
+    background:
+        linear-gradient(90deg, rgba(7, 27, 47, 0) 0%, rgba(7, 27, 47, .18) 32%, rgba(7, 27, 47, .62) 100%),
+        linear-gradient(180deg, rgba(10, 37, 64, .12), rgba(10, 37, 64, .55)),
+        var(--mis-hero-image) center / cover no-repeat;
+    opacity: .95;
+    -webkit-mask-image: linear-gradient(to left, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to left, #000 72%, transparent 100%);
+}
+
+.mis-hero-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.mis-hero-grid>.mis-reveal:first-child {
+    max-width: min(760px, 100%);
+}
+
+.mis-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    border: 1px solid rgba(255, 255, 255, .2);
+    background: rgba(255, 255, 255, .08);
+    backdrop-filter: blur(8px);
+    color: #E2E8F0;
+    border-radius: 999px;
+    padding: .4rem 1rem;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-weight: 600;
+}
+
+.mis-hero h1 {
+    margin: 1rem 0 .85rem;
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    line-height: 1.12;
+    font-weight: 800;
+    font-family: var(--font-sans);
+    letter-spacing: -.02em;
+}
+
+.mis-lead {
+    max-width: 56ch;
+    font-size: 1.05rem;
+    color: rgba(248, 250, 252, .85);
+    line-height: 1.65;
+}
+
+/* ---------- 4. CTA BUTTONS ---------- */
+.mis-cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .85rem;
+    margin-top: 1.5rem;
+}
+
+.mis-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    border-radius: 12px;
+    padding: .75rem 1.4rem;
+    font-size: .88rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--mis-transition);
+    border: none;
+    font-family: inherit;
+}
+
+.mis-btn:hover {
+    transform: translateY(-2px);
+}
+
+.mis-btn-primary {
+    color: #fff;
+    background: linear-gradient(135deg, var(--mis-coral), #ef4444);
+    box-shadow: 0 4px 14px rgba(220, 38, 38, .35);
+}
+
+.mis-btn-primary:hover {
+    box-shadow: 0 8px 24px rgba(220, 38, 38, .45);
+}
+
+.mis-btn-ghost {
+    color: #F8FAFC;
+    border: 1.5px solid rgba(255, 255, 255, .3);
+    background: rgba(255, 255, 255, .06);
+    backdrop-filter: blur(6px);
+}
+
+.mis-btn-ghost:hover {
+    background: rgba(255, 255, 255, .12);
+    border-color: rgba(255, 255, 255, .5);
+}
+
+/* Ghost button in light mode (for sections) */
+.mis-btn-outline {
+    color: var(--mis-navy);
+    border: 1.5px solid var(--mis-line-strong);
+    background: transparent;
+}
+
+.mis-btn-outline:hover {
+    border-color: var(--mis-navy-soft);
+    background: var(--mis-surface-alt);
+}
+
+/* ---------- 5. METRIC STACK ---------- */
+.mis-metric-stack {
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: var(--mis-radius-lg);
+    background: rgba(255, 255, 255, .06);
+    backdrop-filter: blur(16px);
+    padding: 1.25rem;
+}
+
+.mis-hero.has-level-art .mis-metric-stack {
+    background: rgba(7, 27, 47, .3);
+    border-color: rgba(255, 255, 255, .22);
+}
+
+.mis-metric-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+}
+
+.mis-metric {
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: var(--mis-radius);
+    padding: .85rem;
+    background: rgba(10, 37, 64, .25);
+    text-align: center;
+    transition: all var(--mis-transition);
+}
+
+.mis-metric:hover {
+    background: rgba(10, 37, 64, .35);
+    transform: translateY(-1px);
+}
+
+.mis-metric strong {
+    display: block;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #F8FAFC;
+    font-family: var(--font-sans);
+}
+
+.mis-metric span {
+    font-size: .72rem;
+    color: rgba(226, 232, 240, .8);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 500;
+}
+
+/* ---------- 6. SUB-NAV ---------- */
+.mis-subnav-wrap {
+    background: rgba(255, 255, 255, .92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mis-line);
+    position: sticky;
+    top: 64px;
+    z-index: 20;
+    transition: box-shadow var(--mis-transition);
+}
+
+.mis-subnav-wrap:hover {
+    box-shadow: 0 4px 12px rgba(10, 37, 64, .06);
+}
+
+.mis-subnav {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    padding: .85rem 0;
+}
+
+.mis-nav-link {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid var(--mis-line);
+    padding: .48rem .95rem;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--mis-text-soft);
+    background: var(--mis-surface);
+    transition: all var(--mis-transition);
+    text-decoration: none;
+}
+
+.mis-nav-link:hover {
+    border-color: var(--mis-navy-soft);
+    color: var(--mis-navy);
+    background: var(--mis-surface-alt);
+    transform: translateY(-1px);
+}
+
+.mis-nav-link.is-active {
+    background: var(--mis-coral);
+    color: #fff;
+    border-color: var(--mis-coral);
+    box-shadow: 0 2px 8px rgba(220, 38, 38, .2);
+}
+
+/* ---------- 7. SECTIONS & CARDS ---------- */
+.mis-section {
+    border: 1px solid var(--mis-line);
+    border-radius: var(--mis-radius-lg);
+    background: var(--mis-surface);
+    padding: 2rem;
+    box-shadow: var(--mis-shadow);
+    transition: all var(--mis-transition);
+}
+
+.mis-section:hover {
+    box-shadow: var(--mis-shadow-lg);
+}
+
+.mis-section+.mis-section {
+    margin-top: 1.25rem;
+}
+
+.mis-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    border-radius: 8px;
+    border: 1px solid var(--mis-line);
+    background: var(--mis-surface-alt);
+    color: var(--mis-navy-soft);
+    padding: .3rem .75rem;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+}
+
+.mis-section h2 {
+    margin-top: .75rem;
+    margin-bottom: .5rem;
+    font-size: clamp(1.4rem, 2vw, 1.95rem);
+    font-weight: 600;
+    font-family: var(--font-sans);
+    color: var(--mis-navy);
+    letter-spacing: -.01em;
+    line-height: 1.2;
+}
+
+.mis-subtitle {
+    color: var(--mis-text-soft);
+    font-size: .95rem;
+    line-height: 1.65;
+    max-width: 72ch;
+}
+
+/* Grid */
+.mis-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.mis-grid.two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.mis-grid.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mis-grid.four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Cards */
+.mis-card {
+    position: relative;
+    border: 1px solid var(--mis-line);
+    border-radius: var(--mis-radius);
+    background: var(--mis-surface);
+    padding: 1.5rem;
+    transition: all var(--mis-transition);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+}
+
+.mis-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--mis-navy-soft), var(--mis-teal));
+    opacity: 0;
+    transition: opacity var(--mis-transition);
+}
+
+.mis-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--mis-line-strong);
+    box-shadow: var(--mis-shadow-lg);
+}
+
+.mis-card:hover::before {
+    opacity: 1;
+}
+
+.mis-card h3 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    color: var(--mis-navy);
+    line-height: 1.3;
+}
+
+.mis-card h3 i {
+    color: var(--mis-teal);
+    margin-right: .35rem;
+}
+
+.mis-card p,
+.mis-card li {
+    color: var(--mis-text-soft);
+    font-size: .9rem;
+    line-height: 1.55;
+}
+
+.mis-card ul {
+    margin-top: .65rem;
+    display: grid;
+    gap: .45rem;
+    padding-left: 0;
+    list-style: none;
+}
+
+.mis-card ul li {
+    position: relative;
+    padding-left: 1.3rem;
+}
+
+.mis-card ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--mis-teal);
+}
+
+/* Chips */
+.mis-chip-lane {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin-top: .85rem;
+}
+
+.mis-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    border: 1px solid var(--mis-line);
+    border-radius: 8px;
+    padding: .25rem .65rem;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--mis-navy-soft);
+    background: var(--mis-surface-alt);
+    transition: all var(--mis-transition);
+}
+
+.mis-chip:hover {
+    background: var(--mis-teal-soft);
+    border-color: var(--mis-teal);
+    color: #991b1b;
+}
+
+/* Wire (placeholder blocks) */
+.mis-wire {
+    border: 1.5px dashed var(--mis-line-strong);
+    border-radius: var(--mis-radius);
+    background: var(--mis-surface-alt);
+    color: var(--mis-text-soft);
+    padding: 1rem 1.2rem;
+    font-size: .88rem;
+    line-height: 1.55;
+}
+
+/* State Grid */
+.mis-state-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem;
+}
+
+.mis-state {
+    border: 1px solid var(--mis-line);
+    border-radius: 12px;
+    padding: .85rem 1rem;
+    background: var(--mis-surface-alt);
+    font-size: .85rem;
+    color: var(--mis-navy);
+    font-weight: 600;
+    text-align: center;
+    transition: all var(--mis-transition);
+}
+
+.mis-state:hover {
+    background: var(--mis-teal-soft);
+    border-color: var(--mis-teal);
+    transform: translateY(-2px);
+}
+
+/* Footer CTA (inline) */
+.mis-footer-cta {
+    margin-top: 1.25rem;
+    padding: 1.1rem 1.3rem;
+    border-radius: var(--mis-radius);
+    border: 1px solid var(--mis-line);
+    background: linear-gradient(120deg, var(--mis-surface-alt), var(--mis-surface));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: all var(--mis-transition);
+}
+
+.mis-footer-cta:hover {
+    box-shadow: var(--mis-shadow);
+}
+
+.mis-footer-cta p {
+    color: var(--mis-text-soft);
+    font-size: .9rem;
+    margin: 0;
+}
+
+/* UL in sections (not in cards) */
+.mis-section>ul {
+    padding-left: 0;
+    list-style: none;
+    display: grid;
+    gap: .5rem;
+    margin-top: .75rem;
+}
+
+.mis-section>ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--mis-text-soft);
+    font-size: .92rem;
+    line-height: 1.55;
+}
+
+.mis-section>ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .55em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mis-teal), var(--mis-navy-soft));
+}
+
+/* ---------- 8. SCROLL REVEAL ANIMATION ---------- */
+.mis-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: mis-rise .6s cubic-bezier(.4, 0, .2, 1) forwards;
+}
+
+.mis-reveal[data-delay="1"] {
+    animation-delay: .1s;
+}
+
+.mis-reveal[data-delay="2"] {
+    animation-delay: .2s;
+}
+
+.mis-reveal[data-delay="3"] {
+    animation-delay: .3s;
+}
+
+.mis-reveal[data-delay="4"] {
+    animation-delay: .4s;
+}
+
+.mis-reveal[data-delay="5"] {
+    animation-delay: .5s;
+}
+
+@keyframes mis-rise {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================================
+   LEVEL PAGES  –  Shared Components
+   ============================================================ */
+
+/* ---------- 9. LEVEL HERO ---------- */
+.mis-level-hero {
+    position: relative;
+    border-radius: var(--mis-radius-xl);
+    padding: 2.5rem 2.5rem 2rem;
+    overflow: hidden;
+    color: #F8FAFC;
+    box-shadow: var(--mis-shadow-xl);
+}
+
+.mis-level-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle 3px at 15% 25%, rgba(255, 255, 255, .08) 100%, transparent 100%),
+        radial-gradient(circle 2px at 45% 60%, rgba(255, 255, 255, .06) 100%, transparent 100%),
+        radial-gradient(circle 3px at 75% 35%, rgba(255, 255, 255, .1) 100%, transparent 100%),
+        radial-gradient(circle 2px at 85% 75%, rgba(255, 255, 255, .05) 100%, transparent 100%),
+        radial-gradient(circle 2px at 25% 85%, rgba(255, 255, 255, .07) 100%, transparent 100%);
+    pointer-events: none;
+}
+
+.mis-level-hero>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* Level-specific backgrounds */
+.mis-level-hero.prep {
+    background: var(--mis-prep-bg);
+}
+
+.mis-level-hero.primary {
+    background: var(--mis-primary-bg);
+}
+
+.mis-level-hero.thcs {
+    background: var(--mis-thcs-bg);
+}
+
+.mis-level-hero.thpt {
+    background: var(--mis-thpt-bg);
+}
+
+.mis-level-hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.mis-level-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .4rem 1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, .2);
+    font-size: .75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: rgba(255, 255, 255, .95);
+}
+
+.mis-level-hero h2 {
+    margin: 1rem 0 .65rem;
+    font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+    font-weight: 600;
+    font-family: var(--font-sans);
+    color: #fff;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+}
+
+.mis-level-hero .mis-subtitle {
+    color: rgba(248, 250, 252, .85);
+    max-width: 50ch;
+    font-size: .98rem;
+}
+
+.mis-level-hero .mis-cta-row {
+    margin-top: 1.25rem;
+}
+
+/* Level Hero Quote Panel */
+.mis-level-quote {
+    border-radius: var(--mis-radius-lg);
+    border: 1px solid rgba(255, 255, 255, .15);
+    background: rgba(255, 255, 255, .08);
+    backdrop-filter: blur(16px);
+    padding: 1.5rem;
+}
+
+.mis-level-quote-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .12);
+    color: rgba(255, 255, 255, .9);
+    font-size: 1rem;
+    margin-bottom: .85rem;
+}
+
+.mis-level-quote p {
+    margin: 0;
+    font-size: .95rem;
+    line-height: 1.65;
+    color: rgba(248, 250, 252, .9);
+    font-style: italic;
+}
+
+.mis-level-quote-meta {
+    margin-top: 1rem;
+    padding-top: .85rem;
+    border-top: 1px solid rgba(255, 255, 255, .15);
+    display: grid;
+    gap: .2rem;
+}
+
+.mis-level-quote-meta strong {
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: rgba(255, 255, 255, .7);
+    font-weight: 600;
+}
+
+.mis-level-quote-meta span {
+    font-size: .88rem;
+    color: rgba(248, 250, 252, .95);
+    font-weight: 600;
+}
+
+/* Level hero stats */
+.mis-level-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .65rem;
+    margin-top: 1.5rem;
+}
+
+.mis-level-stat {
+    text-align: center;
+    padding: .75rem .5rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .12);
+}
+
+.mis-level-stat strong {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-family: var(--font-sans);
+}
+
+.mis-level-stat span {
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: rgba(255, 255, 255, .75);
+    font-weight: 500;
+}
+
+/* ---------- 10. SECTION HEADER ---------- */
+.mis-section-header {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 1.5rem;
+}
+
+.mis-section-header .mis-tag {
+    margin-bottom: .65rem;
+}
+
+.mis-section-header h2 {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.mis-section-header .mis-subtitle {
+    margin: 0 auto;
+}
+
+/* ---------- 11. PILLAR CARDS ---------- */
+.mis-pillar-card {
+    position: relative;
+    border: 1px solid var(--mis-line);
+    border-radius: var(--mis-radius-lg);
+    background: var(--mis-surface);
+    padding: 1.75rem 1.5rem;
+    transition: all var(--mis-transition);
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mis-pillar-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    border-radius: var(--mis-radius-lg) var(--mis-radius-lg) 0 0;
+}
+
+/* Level-specific top border gradients */
+.mis-pillar-card.prep::before {
+    background: linear-gradient(90deg, #065F46, #10B981, #34D399);
+}
+
+.mis-pillar-card.primary::before {
+    background: linear-gradient(90deg, #1E40AF, #3B82F6, #60A5FA);
+}
+
+.mis-pillar-card.thcs::before {
+    background: linear-gradient(90deg, #5B21B6, #8B5CF6, #A78BFA);
+}
+
+.mis-pillar-card.thpt::before {
+    background: linear-gradient(90deg, #B45309, #F59E0B, #FBBF24);
+}
+
+.mis-pillar-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--mis-shadow-xl);
+    border-color: transparent;
+}
+
+.mis-pillar-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: .05em;
+    font-family: var(--font-sans);
+}
+
+.mis-pillar-index.prep {
+    background: var(--mis-prep-soft);
+    color: #065F46;
+}
+
+.mis-pillar-index.primary {
+    background: var(--mis-primary-soft);
+    color: #1E40AF;
+}
+
+.mis-pillar-index.thcs {
+    background: var(--mis-thcs-soft);
+    color: #5B21B6;
+}
+
+.mis-pillar-index.thpt {
+    background: var(--mis-thpt-soft);
+    color: #B45309;
+}
+
+.mis-pillar-card h3 {
+    margin: .75rem 0 .5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    color: var(--mis-navy);
+    line-height: 1.3;
+}
+
+.mis-pillar-card h3 i {
+    margin-right: .35rem;
+    opacity: .7;
+}
+
+.mis-pillar-card ul {
+    margin-top: .5rem;
+    padding-left: 0;
+    list-style: none;
+    display: grid;
+    gap: .45rem;
+    flex: 1;
+}
+
+.mis-pillar-card ul li {
+    position: relative;
+    padding-left: 1.3rem;
+    color: var(--mis-text-soft);
+    font-size: .88rem;
+    line-height: 1.5;
+}
+
+.mis-pillar-card ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.mis-pillar-card.prep ul li::before {
+    background: var(--mis-prep);
+}
+
+.mis-pillar-card.primary ul li::before {
+    background: var(--mis-primary-lv);
+}
+
+.mis-pillar-card.thcs ul li::before {
+    background: var(--mis-thcs);
+}
+
+.mis-pillar-card.thpt ul li::before {
+    background: var(--mis-thpt);
+}
+
+.mis-pillar-card .mis-link-arrow {
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+/* ---------- 12. LINK ARROW ---------- */
+.mis-link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .84rem;
+    font-weight: 700;
+    color: var(--mis-navy-soft);
+    transition: all var(--mis-transition);
+    text-decoration: none;
+}
+
+.mis-link-arrow i {
+    transition: transform var(--mis-transition);
+}
+
+.mis-link-arrow:hover {
+    color: var(--mis-coral);
+}
+
+.mis-link-arrow:hover i {
+    transform: translateX(4px);
+}
+
+/* ---------- 13. TIMELINE ---------- */
+.mis-timeline {
+    position: relative;
+    display: grid;
+    gap: 0;
+    margin-top: 1rem;
+}
+
+.mis-timeline::before {
+    content: "";
+    position: absolute;
+    left: 18px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--mis-line-strong), var(--mis-teal), var(--mis-line-strong));
+}
+
+.mis-timeline-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: .85rem;
+    padding: .85rem 0;
+    align-items: start;
+}
+
+.mis-timeline-dot {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    font-size: .72rem;
+    font-weight: 800;
+    font-family: var(--font-sans);
+    transition: all var(--mis-transition);
+}
+
+.mis-timeline-dot.prep {
+    background: var(--mis-prep-soft);
+    color: #065F46;
+    border: 2px solid var(--mis-prep);
+}
+
+.mis-timeline-dot.primary {
+    background: var(--mis-primary-soft);
+    color: #1E40AF;
+    border: 2px solid var(--mis-primary-lv);
+}
+
+.mis-timeline-dot.thcs {
+    background: var(--mis-thcs-soft);
+    color: #5B21B6;
+    border: 2px solid var(--mis-thcs);
+}
+
+.mis-timeline-dot.thpt {
+    background: var(--mis-thpt-soft);
+    color: #B45309;
+    border: 2px solid var(--mis-thpt);
+}
+
+.mis-timeline-content {
+    border: 1px solid var(--mis-line);
+    border-radius: var(--mis-radius);
+    background: var(--mis-surface);
+    padding: 1rem 1.25rem;
+    transition: all var(--mis-transition);
+}
+
+.mis-timeline-content:hover {
+    box-shadow: var(--mis-shadow);
+    border-color: var(--mis-line-strong);
+}
+
+.mis-timeline-content strong {
+    display: block;
+    font-size: .92rem;
+    font-weight: 700;
+    color: var(--mis-navy);
+    margin-bottom: .3rem;
+    font-family: var(--font-sans);
+}
+
+.mis-timeline-content p {
+    margin: 0;
+    color: var(--mis-text-soft);
+    font-size: .88rem;
+    line-height: 1.5;
+}
+
+/* ---------- 14. EXPERIENCE / SNAPSHOT CARDS ---------- */
+.mis-experience-card {
+    border: 1px solid var(--mis-line);
+    border-radius: var(--mis-radius-lg);
+    background: var(--mis-surface);
+    overflow: hidden;
+    transition: all var(--mis-transition);
+}
+
+.mis-experience-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--mis-shadow-lg);
+}
+
+.mis-experience-media {
+    height: 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mis-experience-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(10, 37, 64, .03) 100%);
+}
+
+.mis-experience-media.media-a {
+    background: linear-gradient(135deg, #DBEAFE 0%, #93C5FD 100%);
+}
+
+.mis-experience-media.media-b {
+    background: linear-gradient(135deg, #FEE2E2 0%, #FCA5A5 100%);
+}
+
+.mis-experience-media.media-c {
+    background: linear-gradient(135deg, #D1FAE5 0%, #6EE7B7 100%);
+}
+
+.mis-experience-media.media-d {
+    background: linear-gradient(135deg, #EDE9FE 0%, #C4B5FD 100%);
+}
+
+/* Decorative icons in media */
+.mis-experience-media i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    color: rgba(10, 37, 64, .1);
+}
+
+.mis-experience-body {
+    padding: 1.25rem;
+}
+
+.mis-experience-label {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .7rem;
+    color: var(--mis-text-muted);
+    font-weight: 700;
+}
+
+.mis-experience-body h3 {
+    margin: .4rem 0 .35rem;
+    font-size: 1.02rem;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    color: var(--mis-navy);
+    line-height: 1.3;
+}
+
+.mis-experience-body p:last-child {
+    margin: 0;
+    color: var(--mis-text-soft);
+    font-size: .88rem;
+    line-height: 1.5;
+}
+
+/* ---------- 15. LOOP / FLOW VISUALIZATION ---------- */
+.mis-flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.mis-flow-step {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .65rem 1rem;
+    border-radius: 12px;
+    background: var(--mis-surface-alt);
+    border: 1px solid var(--mis-line);
+    font-size: .84rem;
+    font-weight: 600;
+    color: var(--mis-navy);
+    transition: all var(--mis-transition);
+    white-space: nowrap;
+}
+
+.mis-flow-step:hover {
+    background: var(--mis-teal-soft);
+    border-color: var(--mis-teal);
+}
+
+.mis-flow-step i {
+    color: var(--mis-teal);
+}
+
+.mis-flow-arrow {
+    padding: 0 .35rem;
+    color: var(--mis-text-muted);
+    font-size: .85rem;
+}
+
+/* ---------- 16. LEVEL CTA BANNER ---------- */
+.mis-level-cta {
+    margin-top: 1.5rem;
+    border-radius: var(--mis-radius-xl);
+    padding: 2.5rem;
+    color: #F8FAFC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--mis-shadow-xl);
+}
+
+.mis-level-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle 3px at 20% 30%, rgba(255, 255, 255, .08) 100%, transparent 100%),
+        radial-gradient(circle 2px at 70% 60%, rgba(255, 255, 255, .06) 100%, transparent 100%),
+        radial-gradient(circle 3px at 90% 20%, rgba(255, 255, 255, .1) 100%, transparent 100%);
+    pointer-events: none;
+}
+
+.mis-level-cta>* {
+    position: relative;
+    z-index: 2;
+}
+
+.mis-level-cta.prep {
+    background: var(--mis-prep-bg);
+}
+
+.mis-level-cta.primary {
+    background: var(--mis-primary-bg);
+}
+
+.mis-level-cta.thcs {
+    background: var(--mis-thcs-bg);
+}
+
+.mis-level-cta.thpt {
+    background: var(--mis-thpt-bg);
+}
+
+.mis-level-cta.navy {
+    background: linear-gradient(135deg, var(--mis-navy), var(--mis-navy-light), var(--mis-navy-soft));
+}
+
+.mis-level-cta .mis-kicker {
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-size: .78rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, .75);
+    margin: 0 0 .4rem;
+}
+
+.mis-level-cta h2 {
+    margin: 0;
+    font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+    font-weight: 600;
+    color: #fff;
+    font-family: var(--font-sans);
+}
+
+.mis-level-cta .mis-btn-ghost {
+    border-color: rgba(255, 255, 255, .35);
+}
+
+/* ---------- 17. ICON CIRCLE ---------- */
+.mis-icon-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 1.15rem;
+    margin-bottom: .75rem;
+}
+
+.mis-icon-circle.prep {
+    background: var(--mis-prep-soft);
+    color: #065F46;
+}
+
+.mis-icon-circle.primary {
+    background: var(--mis-primary-soft);
+    color: #1E40AF;
+}
+
+.mis-icon-circle.thcs {
+    background: var(--mis-thcs-soft);
+    color: #5B21B6;
+}
+
+.mis-icon-circle.thpt {
+    background: var(--mis-thpt-soft);
+    color: #B45309;
+}
+
+.mis-icon-circle.teal {
+    background: var(--mis-teal-soft);
+    color: #0E7490;
+}
+
+.mis-icon-circle.coral {
+    background: var(--mis-coral-soft);
+    color: #C2410C;
+}
+
+/* ---------- 18. FEATURE ROW ---------- */
+.mis-feature-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.mis-feature-item {
+    display: flex;
+    gap: .85rem;
+    align-items: start;
+    padding: 1rem;
+    border-radius: var(--mis-radius);
+    border: 1px solid var(--mis-line);
+    background: var(--mis-surface);
+    transition: all var(--mis-transition);
+}
+
+.mis-feature-item:hover {
+    box-shadow: var(--mis-shadow);
+    border-color: var(--mis-line-strong);
+}
+
+.mis-feature-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    font-size: 1rem;
+}
+
+.mis-feature-item h4 {
+    margin: 0 0 .25rem;
+    font-size: .92rem;
+    font-weight: 700;
+    color: var(--mis-navy);
+    font-family: var(--font-sans);
+}
+
+.mis-feature-item p {
+    margin: 0;
+    font-size: .85rem;
+    color: var(--mis-text-soft);
+    line-height: 1.5;
+}
+
+/* Legacy class names are no longer needed - templates now use new class names directly */
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+    .mis-hero-grid,
+    .mis-level-hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mis-hero.has-level-art::after {
+        width: 100%;
+        opacity: .42;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .mis-hero.has-level-art .mis-metric-stack {
+        background: rgba(7, 27, 47, .5);
+    }
+
+    .mis-grid.four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mis-level-cta {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2rem;
+    }
+
+    .mis-feature-row {
+        grid-template-columns: 1fr;
+    }
+
+    .mis-flow {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .mis-flow-arrow {
+        text-align: center;
+        transform: rotate(90deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .mis-subnav-wrap {
+        top: 56px;
+    }
+
+    .mis-shell .mis-container>*+* {
+        margin-top: 1.25rem;
+    }
+
+    .mis-grid.two,
+    .mis-grid.three,
+    .mis-grid.four {
+        grid-template-columns: 1fr;
+    }
+
+    .mis-state-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mis-footer-cta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mis-level-hero {
+        padding: 2rem 1.5rem 1.5rem;
+        border-radius: var(--mis-radius-lg);
+    }
+
+    .mis-level-hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .mis-level-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .mis-section {
+        padding: 1.5rem;
+    }
+
+    .mis-pillar-card {
+        padding: 1.25rem;
+    }
+
+    .mis-level-cta {
+        padding: 1.5rem;
+        border-radius: var(--mis-radius-lg);
+    }
+
+    .mis-experience-media {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mis-container {
+        width: 96vw;
+    }
+
+    .mis-level-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .mis-cta-row {
+        flex-direction: column;
+    }
+
+    .mis-cta-row .mis-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ============================================================
+   DARK MODE SUPPORT (optional, for future)
+   ============================================================ */
+.dark .mis-ui {
+    --mis-bg: #0F172A;
+    --mis-surface: #1E293B;
+    --mis-surface-alt: #334155;
+    --mis-line: #334155;
+    --mis-line-strong: #475569;
+    --mis-text: #F1F5F9;
+    --mis-text-soft: #94A3B8;
+    --mis-text-muted: #64748B;
+}

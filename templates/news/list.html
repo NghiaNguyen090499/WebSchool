@@ -1,103 +1,222 @@
 {% extends 'base.html' %}
-{% load i18n static %}
+{% load i18n static news_filters %}
 
-{% block title %}{% trans "News" %} - EduSchool{% endblock %}
+{% block title %}Tin tức - MIS Đa Trí Tuệ{% endblock %}
+{% block meta_description %}Tin tức và sự kiện MIS: hoạt động học đường, thành tích học sinh và thông báo tuyển sinh mới nhất.{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="bg-neutral min-h-screen py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Page Header -->
-        <div class="text-center mb-16 animate-fadeInUp">
-            <span class="inline-block px-4 py-2 bg-accent/20 text-primary-700 dark:text-primary-400 rounded-full text-sm font-semibold mb-4">
-                {% trans "Stay Informed" %}
-            </span>
-            <h1 class="section-title font-display text-gray-900 dark:text-white mb-6">{% trans "News & Announcements" %}</h1>
-            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                {% trans "Stay updated with the latest news, events, and announcements from our school" %}
+<div class="news-page">
+
+    <!-- ═══ PAGE HEADER ═══ -->
+    <section class="news-page-header">
+        <div class="news-page-header-bg"></div>
+        <div class="news-page-header-content">
+            <nav class="news-breadcrumb">
+                <a href="/">Trang chủ</a>
+                <span class="news-breadcrumb-sep"><i class="fas fa-chevron-right"></i></span>
+                <span>Tin tức</span>
+            </nav>
+            <h1 class="news-page-title">Tin tức & Sự kiện</h1>
+            <p class="news-page-subtitle">
+                Cập nhật những hoạt động, sự kiện và thông báo mới nhất từ Hệ thống Giáo dục Đa Trí Tuệ MIS
             </p>
-        </div>
-        
-        <!-- Category Filter -->
-        <div class="mb-12 flex flex-wrap gap-3 justify-center animate-fadeInUp">
-            <a href="{% url 'news:list' %}" 
-               class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 {% if not selected_category %}bg-primary-600 text-white shadow-premium hover:scale-105{% else %}bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 shadow-md hover:shadow-lg{% endif %}">
-                {% trans "All" %}
-            </a>
-            {% for category in categories %}
-            <a href="?category={{ category.slug }}" 
-               class="px-6 py-3 rounded-xl font-semibold transition-all duration-300 {% if selected_category == category %}bg-primary-600 text-white shadow-premium hover:scale-105{% else %}bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-600 dark:hover:text-primary-400 shadow-md hover:shadow-lg{% endif %}">
-                {{ category.name }}
-            </a>
-            {% endfor %}
-        </div>
-        
-        <!-- News Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for news in page_obj %}
-            <a href="{{ news.get_absolute_url }}" class="card hover-lift overflow-hidden p-0 group animate-fadeInUp">
-                <div class="relative h-64 overflow-hidden">
-                    {% if news.thumbnail %}
-                    <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}" class="w-full h-full object-cover image-hover">
-                    {% else %}
-                    <div class="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
-                        <i class="fas fa-newspaper text-6xl text-white/30"></i>
-                    </div>
+            <!-- Search Bar -->
+            <form class="news-search-form" action="{% url 'news:list' %}" method="get">
+                <div class="news-search-wrapper">
+                    <i class="fas fa-search news-search-icon"></i>
+                    <input type="text" name="q" class="news-search-input"
+                           placeholder="Tìm kiếm bài viết..."
+                           value="{{ search_query }}"
+                           id="news-search-input">
+                    {% if selected_category %}
+                    <input type="hidden" name="category" value="{{ selected_category.slug }}">
                     {% endif %}
-                    <div class="absolute top-4 left-4">
-                        {% if news.category %}
-                        <span class="px-4 py-2 bg-white/90 backdrop-blur-sm text-primary-600 rounded-xl text-sm font-semibold shadow-lg">
-                            {{ news.category.name }}
-                        </span>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-xl font-display font-bold mb-3 text-gray-900 dark:text-white line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">{{ news.title }}</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-6 line-clamp-3 leading-relaxed">{{ news.excerpt|default:news.content|truncatewords:20 }}</p>
-                    <div class="flex items-center text-sm text-gray-500">
-                        <i class="far fa-calendar-alt mr-2 text-primary-500"></i>
-                        <span>{{ news.created_at|date:"F d, Y" }}</span>
-                    </div>
-                </div>
-            </a>
-            {% empty %}
-            <div class="col-span-3 text-center py-20">
-                <div class="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-newspaper text-4xl text-gray-400"></i>
-                </div>
-                <p class="text-xl text-gray-500 dark:text-gray-400">{% trans "No news articles found" %}</p>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <!-- Pagination -->
-        {% if page_obj.has_other_pages %}
-        <div class="mt-16 flex justify-center animate-fadeInUp">
-            <nav class="flex items-center space-x-2">
-                {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}" class="px-5 py-3 bg-white dark:bg-gray-800 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-700 dark:text-gray-300 font-semibold transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
-                    <i class="fas fa-chevron-left mr-2"></i>{% trans "Previous" %}
-                </a>
-                {% endif %}
-                
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                    <span class="px-5 py-3 bg-primary-600 text-white rounded-xl font-bold shadow-premium">{{ num }}</span>
-                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                    <a href="?page={{ num }}" class="px-5 py-3 bg-white dark:bg-gray-800 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-700 dark:text-gray-300 font-semibold transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
-                        {{ num }}
+                    {% if search_query %}
+                    <a href="{% url 'news:list' %}{% if selected_category %}?category={{ selected_category.slug }}{% endif %}"
+                       class="news-search-clear" title="Xóa tìm kiếm">
+                        <i class="fas fa-times"></i>
                     </a>
                     {% endif %}
-                {% endfor %}
-                
-                {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}" class="px-5 py-3 bg-white dark:bg-gray-800 rounded-xl hover:bg-primary-50 dark:hover:bg-primary-900/20 text-gray-700 dark:text-gray-300 font-semibold transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg">
-                    {% trans "Next" %}<i class="fas fa-chevron-right ml-2"></i>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div class="news-page-body">
+
+        <!-- ═══ CATEGORY FILTER BAR ═══ -->
+        <div class="news-category-bar">
+            <div class="news-category-scroll">
+                <a href="{% url 'news:list' %}{% if search_query %}?q={{ search_query }}{% endif %}"
+                   class="news-cat-chip {% if not selected_category %}active{% endif %}">
+                    <i class="fas fa-th-large"></i> Tất cả
+                    <span class="news-cat-count">{{ total_news }}</span>
                 </a>
-                {% endif %}
-            </nav>
+                {% for cat in categories %}
+                <a href="?category={{ cat.slug }}{% if search_query %}&q={{ search_query }}{% endif %}"
+                   class="news-cat-chip {% if selected_category == cat %}active{% endif %}">
+                    {{ cat.name }}
+                    <span class="news-cat-count">{{ cat.news_count }}</span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% if search_query %}
+        <div class="news-search-result-info">
+            <p>Kết quả tìm kiếm cho "<strong>{{ search_query }}</strong>"
+               — {{ total_news }} bài viết
+            </p>
         </div>
         {% endif %}
-    </div>
-</div>
+
+        <!-- ═══ HERO FEATURED ARTICLE ═══ -->
+        {% if hero_article and not search_query %}
+        <section class="news-hero-section">
+            <a href="{{ hero_article.get_absolute_url }}" class="news-hero-card" id="news-hero">
+                <div class="news-hero-card-image">
+                    {% if hero_article.thumbnail %}
+                    <img src="{{ hero_article.thumbnail.url }}" alt="{{ hero_article.title }}"
+                         loading="eager" width="1200" height="675">
+                    {% else %}
+                    <div class="news-hero-card-placeholder">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    {% endif %}
+                    <div class="news-hero-card-overlay"></div>
+                </div>
+                <div class="news-hero-card-body">
+                    {% if hero_article.category %}
+                    <span class="news-badge news-badge--accent">{{ hero_article.category.name }}</span>
+                    {% endif %}
+                    <h2 class="news-hero-card-title">{{ hero_article.title }}</h2>
+                    <p class="news-hero-card-desc">
+                        {{ hero_article.excerpt|clean_excerpt|truncatewords:35 }}
+                    </p>
+                    <div class="news-hero-card-footer">
+                        <time class="news-meta-date" datetime="{{ hero_article.created_at|date:'Y-m-d' }}">
+                            <i class="far fa-calendar-alt"></i>
+                            {{ hero_article.created_at|date:"d/m/Y" }}
+                        </time>
+                        <span class="news-read-more">
+                            Đọc thêm <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </section>
+        {% endif %}
+
+        <!-- ═══ NEWS GRID ═══ -->
+        <section class="news-grid-section">
+            {% if not search_query and not selected_category %}
+            <div class="news-grid-header">
+                <h2 class="news-grid-heading">
+                    <span class="news-grid-heading-accent"></span>
+                    Bài viết mới nhất
+                </h2>
+            </div>
+            {% elif selected_category %}
+            <div class="news-grid-header">
+                <h2 class="news-grid-heading">
+                    <span class="news-grid-heading-accent"></span>
+                    {{ selected_category.name }}
+                </h2>
+            </div>
+            {% endif %}
+
+            <div class="news-masonry-grid">
+                {% for news in page_obj %}
+                <article class="news-item-card" id="news-card-{{ news.slug }}">
+                    <a href="{{ news.get_absolute_url }}" class="news-item-link">
+                        <div class="news-item-thumb">
+                            {% if news.thumbnail %}
+                            <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}"
+                                 loading="lazy" width="800" height="600">
+                            {% else %}
+                            <div class="news-item-thumb-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            {% endif %}
+                            {% if news.category %}
+                            <span class="news-badge news-badge--overlay">{{ news.category.name }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="news-item-body">
+                            <h3 class="news-item-title">{{ news.title }}</h3>
+                            <p class="news-item-excerpt">{{ news.excerpt|clean_excerpt|truncatewords:20 }}</p>
+                            <div class="news-item-footer">
+                                <time class="news-meta-date" datetime="{{ news.created_at|date:'Y-m-d' }}">
+                                    <i class="far fa-calendar-alt"></i>
+                                    {{ news.created_at|date:"d/m/Y" }}
+                                </time>
+                                <span class="news-item-arrow">
+                                    <i class="fas fa-long-arrow-alt-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                {% empty %}
+                <div class="news-empty-state">
+                    <div class="news-empty-icon">
+                        <i class="far fa-newspaper"></i>
+                    </div>
+                    <h3>Chưa có bài viết nào</h3>
+                    <p>Vui lòng quay lại sau hoặc thử tìm kiếm với từ khóa khác.</p>
+                    <a href="{% url 'news:list' %}" class="news-empty-btn">
+                        <i class="fas fa-arrow-left"></i> Quay lại tất cả
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- ═══ PAGINATION ═══ -->
+        {% if page_obj.has_other_pages %}
+        <nav class="news-pager" aria-label="Phân trang tin tức">
+            <div class="news-pager-info">
+                Trang {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+            </div>
+            <div class="news-pager-controls">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}{% if selected_category %}&category={{ selected_category.slug }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}"
+                   class="news-pager-btn" title="Trang trước">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+                {% else %}
+                <span class="news-pager-btn is-disabled"><i class="fas fa-chevron-left"></i></span>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <span class="news-pager-btn is-active">{{ num }}</span>
+                    {% elif num > page_obj.number|add:'-4' and num < page_obj.number|add:'4' %}
+                    <a href="?page={{ num }}{% if selected_category %}&category={{ selected_category.slug }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}"
+                       class="news-pager-btn">{{ num }}</a>
+                    {% elif num == 1 or num == page_obj.paginator.num_pages %}
+                    <a href="?page={{ num }}{% if selected_category %}&category={{ selected_category.slug }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}"
+                       class="news-pager-btn">{{ num }}</a>
+                    {% elif num == page_obj.number|add:'-4' or num == page_obj.number|add:'4' %}
+                    <span class="news-pager-dots">…</span>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if selected_category %}&category={{ selected_category.slug }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}"
+                   class="news-pager-btn" title="Trang sau">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                {% else %}
+                <span class="news-pager-btn is-disabled"><i class="fas fa-chevron-right"></i></span>
+                {% endif %}
+            </div>
+        </nav>
+        {% endif %}
+
+    </div><!-- .news-page-body -->
+</div><!-- .news-page -->
 {% endblock %}

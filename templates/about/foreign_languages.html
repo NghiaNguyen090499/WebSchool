@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} - MIS{% endblock %}
+
+{% block content %}
+<main class="curriculum">
+    {% include 'about/partials/curriculum/_curriculum_hero.html' with hero_id='hero' hero_theme='curriculum-hero--navy' hero_eyebrow='Chinese Talent Track' hero_title=page.title|default:'Hệ Tiếng Trung Tài Năng' hero_subtitle=program_block.copy.hero_subtitle|default:'Lộ trình tiếng Trung liên thông với định hướng chứng chỉ HSK theo cấp học.' hero_bullet_1=program_block.sections.0|default:'Tiếp cận ngôn ngữ tự nhiên qua môi trường mô phỏng thực tế.' hero_bullet_2=program_block.sections.1|default:'Định hướng nghề nghiệp với năng lực tiếng Trung trong kinh tế số.' hero_bullet_3=program_block.sections.2|default:'Lộ trình liên thông từ Tiểu học đến THPT.' hero_primary_label='Nhận tư vấn chương trình' hero_primary_url='admissions:list' hero_secondary_label='Tải lộ trình chi tiết' hero_secondary_url='#brochure' trust_badge_1='HSK Pathway' trust_badge_2='Academic Chinese' trust_badge_3='Bilingual Advantage' %}
+
+    {% include 'about/partials/curriculum/_trust_signal_strip.html' with signal_1_value=program_targets.talent_thpt.hsk|default:program_targets.talent.hsk|default:'HSK 5-6' signal_1_label='Chuẩn đầu ra tuyến tài năng THPT' signal_2_value='Primary-THPT' signal_2_label='Lộ trình liên thông 3 cấp học' signal_3_value='HSK 3.0' signal_3_label='Khung chuẩn theo chương trình hiện hành' %}
+
+    {% include 'about/partials/curriculum/_roadmap_tabs_accordion.html' with roadmap_id='roadmap' roadmap_title='Curriculum Roadmap' roadmap_subtitle='Lộ trình chứng chỉ và năng lực tiếng Trung theo từng cấp học.' level_1_label='Tiểu học' level_1_badge='Lớp 1-5' level_1_focus='Nền tảng phát âm, chữ Hán cơ bản và giao tiếp theo chủ đề gần gũi.' level_1_tool=program_block.roadmap.primary.label|default:'Tiếng Trung nền tảng' level_1_output=program_block.roadmap.primary.hsk|default:'HSK 1-2' level_2_label='THCS' level_2_badge='Lớp 6-9' level_2_focus='Phát triển ngữ pháp, vốn từ và năng lực giao tiếp học thuật.' level_2_tool=program_block.roadmap.middle.label|default:'Tiếng Trung học thuật' level_2_output=program_block.roadmap.middle.hsk|default:'HSK 3-4' level_3_label='THPT' level_3_badge='Lớp 10-12' level_3_focus='Nâng cao năng lực học thuật, định hướng học bổng và du học.' level_3_tool=program_block.roadmap.high.label|default:'Tiếng Trung nâng cao' level_3_output=program_targets.talent_thpt.hsk|default:program_block.roadmap.high.hsk|default:'HSK 5-6' %}
+
+    <section id="learning-experience" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <h2 class="curriculum-h2">Learning Experience</h2>
+            <p class="curriculum-lead">Chương trình kết hợp lớp học kỹ năng, thực hành giao tiếp và dự án văn hóa để tăng khả năng sử dụng ngôn ngữ trong thực tế.</p>
+            <div class="curriculum-grid curriculum-grid--3">
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-language' title='Giao tiếp học thuật' description='Rèn phản xạ nói - nghe theo chủ đề, tăng tự tin sử dụng tiếng Trung.' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-globe-asia' title='Dự án văn hóa' description='Khám phá văn hóa Trung Hoa qua dự án nhóm và sản phẩm trình bày.' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-robot' title='AI hỗ trợ học tập' description='Khai thác công cụ AI theo hướng dẫn giáo viên để luyện tập có mục tiêu.' %}
+            </div>
+        </div>
+    </section>
+
+    <section id="assessment-outcomes" class="curriculum-section curriculum-section--light curriculum-section--assessment-enhanced">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2">Assessment & Outcomes</h2>
+                <p class="curriculum-lead">Đánh giá theo tiến trình và mốc chứng chỉ nhằm đảm bảo đầu ra phù hợp định hướng học thuật.</p>
+            </div>
+
+            <div class="curriculum-assessment-layout">
+                <div class="curriculum-assessment-panel curriculum-reveal-delay-150" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Core Rubrics</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--info">HSK-oriented</span>
+                    </div>
+                    <div class="curriculum-rubric">
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Năng lực ngôn ngữ' metric='Đánh giá nghe, nói, đọc, viết theo mốc HSK từng cấp.' evidence='Bài kiểm tra chuẩn hóa và bài tập ứng dụng.' %}
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Năng lực ứng dụng' metric='Đo khả năng dùng tiếng Trung trong thảo luận và dự án.' evidence='Sản phẩm dự án, bài thuyết trình, hồ sơ học tập.' %}
+                                </div>
+                </div>
+
+                <aside class="curriculum-assessment-panel curriculum-assessment-panel--milestones curriculum-reveal-delay-200" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Milestones</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--success">Pathway Outputs</span>
+                    </div>
+                    <p class="curriculum-caption">Each level is mapped to practical communication goals and HSK checkpoints.</p>
+                    <div class="curriculum-outcome-list curriculum-spacer-top">
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">01</span><span>Primary: HSK 1-2 communication foundation.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">02</span><span>THCS: HSK 3-4 academic communication.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">03</span><span>THPT: HSK 5-6 pathway for higher education.</span></p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_final_cta_cluster.html' with cta_title='Sẵn sàng bắt đầu lộ trình tiếng Trung tại MIS?' cta_subtitle='Nhận tư vấn theo mục tiêu học tập và chuẩn đầu ra phù hợp cho từng cấp.' visit_url='contact:contact' consult_url='admissions:list' brochure_dialog_id='chinese-brochure-dialog' brochure_available=pdf_document.pdf_file %}
+
+    {% include 'about/partials/curriculum/_brochure_drawer.html' with brochure_dialog_id='chinese-brochure-dialog' brochure_title='Brochure chương trình Tiếng Trung' %}
+</main>
+{% endblock %}

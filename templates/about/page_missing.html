@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_label }} - MIS Đa Trí Tuệ{% endblock %}
+
+{% block content %}
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="bg-white dark:bg-neutral-800 rounded-3xl border border-neutral-200/60 dark:border-neutral-700 p-8 md:p-12">
+            <h1 class="page-title mb-4">{{ page_label }}</h1>
+            <p class="text-neutral-600 dark:text-neutral-300 mb-6">
+                Nội dung đang được cập nhật. Vui lòng quay lại sau hoặc liên hệ để được tư vấn thêm.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="{% url 'admissions:list' %}" class="btn btn-primary btn-md">
+                    Tư vấn tuyển sinh
+                </a>
+                <a href="{% url 'contact:contact' %}" class="btn btn-outline btn-md">
+                    Liên hệ tư vấn
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

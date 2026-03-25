@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIS Innovation Day 2026 – Poster Builder</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;0,800;0,900;1,800&family=Inter:wght@400;500;600&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --navy:#050a1a;
+  --navy2:#0d1440;
+  --cyan:#00d4ff;
+  --cyan2:#38bdf8;
+  --purple:#7c3aed;
+  --gold:#f59e0b;
+  --white:#ffffff;
+  --muted:rgba(255,255,255,0.6);
+  --panel:#111827;
+  --border:rgba(255,255,255,0.12);
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#0f172a;
+  color:#e2e8f0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── TOP TOOLBAR ── */
+.toolbar{
+  background:#1e293b;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:10px 20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.toolbar-title{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;
+  font-size:15px;
+  color:#00d4ff;
+  letter-spacing:1px;
+  margin-right:8px;
+}
+.tab-btn{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.2);
+  color:#94a3b8;
+  padding:6px 16px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+  font-family:'Inter',sans-serif;
+  transition:all .2s;
+}
+.tab-btn.active{
+  background:rgba(0,212,255,0.15);
+  border-color:#00d4ff;
+  color:#00d4ff;
+}
+.toolbar-sep{width:1px;height:28px;background:rgba(255,255,255,0.1);margin:0 4px}
+.export-btn{
+  background:linear-gradient(135deg,#0ea5e9,#7c3aed);
+  border:none;
+  color:#fff;
+  padding:7px 18px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+  font-family:'Inter',sans-serif;
+  margin-left:auto;
+}
+.export-btn:hover{opacity:.9}
+
+/* ── MAIN LAYOUT ── */
+.workspace{
+  display:flex;
+  flex:1;
+  gap:0;
+  overflow:hidden;
+}
+
+/* ── SIDE PANEL ── */
+.side-panel{
+  width:260px;
+  min-width:220px;
+  background:#1e293b;
+  border-right:1px solid rgba(255,255,255,0.08);
+  overflow-y:auto;
+  padding:16px 14px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.panel-section{
+  background:#0f172a;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:10px;
+  overflow:hidden;
+}
+.panel-section-title{
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#64748b;
+  padding:10px 12px 6px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.upload-slot{
+  padding:10px 12px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.upload-slot:last-child{border-bottom:none}
+.slot-label{font-size:11px;color:#94a3b8;font-weight:500}
+.slot-label span{color:#64748b;font-weight:400}
+.upload-drop{
+  border:1.5px dashed rgba(255,255,255,0.15);
+  border-radius:8px;
+  padding:8px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
+  overflow:hidden;
+  min-height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:3px;
+}
+.upload-drop:hover{border-color:#00d4ff;background:rgba(0,212,255,0.05)}
+.upload-drop input[type=file]{
+  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+}
+.upload-drop .drop-icon{font-size:18px}
+.upload-drop .drop-text{font-size:10px;color:#64748b}
+.upload-drop img.preview{
+  max-width:100%;max-height:70px;border-radius:4px;object-fit:contain;
+}
+.upload-drop.has-image .drop-icon,.upload-drop.has-image .drop-text{display:none}
+
+/* ── CANVAS AREA ── */
+.canvas-area{
+  flex:1;
+  overflow:auto;
+  padding:24px;
+  display:flex;
+  justify-content:center;
+  background:#0a0f1e;
+}
+.poster{
+  width:595px;
+  flex-shrink:0;
+  position:relative;
+  overflow:hidden;
+  border-radius:4px;
+  box-shadow:0 0 60px rgba(0,0,0,0.5);
+}
+
+/* ════════════════════════════════
+   PAGE 1 STYLES
+════════════════════════════════ */
+.page{
+  display:none;
+  width:595px;
+  min-height:842px;
+  background:linear-gradient(160deg,#050a1a 0%,#0d1440 50%,#0a0820 100%);
+  position:relative;
+  overflow:hidden;
+}
+.page.active{display:block}
+
+/* BG glows */
+.bg-glow{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+.glow-tl{width:320px;height:320px;top:-80px;left:-60px;
+  background:radial-gradient(circle,rgba(56,189,248,0.18) 0%,transparent 70%)}
+.glow-br{width:400px;height:400px;bottom:-100px;right:-80px;
+  background:radial-gradient(circle,rgba(124,58,237,0.15) 0%,transparent 70%)}
+.glow-mid{width:500px;height:250px;top:40%;left:50%;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(0,212,255,0.06) 0%,transparent 70%)}
+
+/* Stars */
+.stars{position:absolute;inset:0;z-index:1;pointer-events:none}
+.star{position:absolute;background:#fff;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+
+/* Skyline */
+.skyline{position:absolute;bottom:0;left:0;right:0;z-index:1;pointer-events:none;
+  display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.skyline img{width:100%;object-fit:cover;opacity:0.25;mix-blend-mode:screen}
+.skyline-placeholder{
+  width:100%;height:120px;
+  background:linear-gradient(to top,rgba(56,189,248,0.08),transparent);
+}
+
+/* Content z-index */
+.p1-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:32px 32px 24px}
+
+/* Logo / Hero */
+.hero-logo{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:4px;position:relative;width:100%}
+.mis-row{display:flex;align-items:center;gap:6px;line-height:1}
+.mis-text{
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;font-size:72px;color:#fff;letter-spacing:-2px;line-height:1}
+.mis-arrow{
+  width:52px;height:52px;background:#00d4ff;
+  clip-path:polygon(0 100%,100% 0,100% 100%);
+  margin-left:4px;flex-shrink:0}
+.mis-newera{
+  display:flex;flex-direction:column;align-items:flex-start;
+  font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;
+  color:#00d4ff;letter-spacing:2px;line-height:1.2;margin-left:2px}
+.rocket-wrap{position:absolute;right:-8px;top:-16px}
+.rocket-wrap img{width:90px;height:auto;object-fit:contain}
+.rocket-placeholder{
+  width:90px;height:90px;
+  background:rgba(0,212,255,0.1);border:1.5px dashed rgba(0,212,255,0.3);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:rgba(0,212,255,0.5);text-align:center;padding:4px}
+
+.inno-row{display:flex;align-items:baseline;gap:8px;line-height:1;margin-top:-4px}
+.inno-text{
+  font-family:'Montserrat',sans-serif;
+  font-weight:800;font-style:italic;font-size:58px;color:#fff;letter-spacing:-1px}
+.year-text{
+  font-family:'Montserrat',sans-serif;
+  font-weight:900;font-size:52px;color:#00d4ff;letter-spacing:-1px}
+.tagline-small{
+  font-family:'Montserrat',sans-serif;
+  font-size:10px;font-weight:600;letter-spacing:3px;
+  color:rgba(255,255,255,0.5);margin-top:2px;text-align:center}
+
+/* Date venue */
+.date-venue{
+  display:flex;align-items:center;gap:12px;margin:16px 0 12px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px;padding:10px 16px;width:100%}
+.time-badge{
+  background:#00d4ff;color:#050a1a;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:10px;
+  padding:3px 8px;border-radius:4px;letter-spacing:.5px;white-space:nowrap}
+.date-pill{
+  font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;color:#fff;
+  border:2px solid #fff;border-radius:6px;padding:2px 12px;white-space:nowrap}
+.venue-text{flex:1;text-align:right}
+.venue-text .v1{font-weight:700;font-size:11px;color:#fff;line-height:1.3}
+.venue-text .v2{font-size:9.5px;color:rgba(255,255,255,0.5);margin-top:2px}
+
+/* Tagline pill */
+.tagline-pill{
+  border:2px solid;
+  border-image:linear-gradient(135deg,#00d4ff,#7c3aed) 1;
+  background:rgba(255,255,255,0.04);
+  border-radius:999px;padding:10px 24px;text-align:center;
+  margin-bottom:16px;width:100%}
+.tagline-pill p{
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:16px;
+  color:#fff;line-height:1.3;letter-spacing:.5px}
+
+/* Privilege header */
+.privilege-header{text-align:center;margin-bottom:16px}
+.privilege-header .ph1{
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#fff;letter-spacing:.5px}
+.privilege-header .ph1 em{color:#00d4ff;font-style:normal}
+.privilege-header .ph2{
+  font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;color:rgba(255,255,255,0.7);margin-top:2px}
+.privilege-header .ph2 em{color:#00d4ff;font-style:normal}
+
+/* Benefit cards */
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;margin-bottom:16px}
+.benefit-card{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:14px 10px 10px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.benefit-img-wrap{width:88px;height:80px;display:flex;align-items:center;justify-content:center}
+.benefit-img-wrap img{max-width:100%;max-height:100%;object-fit:contain}
+.benefit-img-placeholder{
+  width:80px;height:72px;
+  background:rgba(255,255,255,0.06);border:1.5px dashed rgba(255,255,255,0.15);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:rgba(255,255,255,0.3);text-align:center;padding:4px;line-height:1.3}
+.benefit-label{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;
+  color:#fff;letter-spacing:.3px;line-height:1.3;text-transform:uppercase}
+
+/* CTA headline */
+.cta-headline{
+  text-align:center;margin-bottom:14px;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:20px;
+  color:#fff;line-height:1.25;letter-spacing:.3px}
+
+/* QR section */
+.qr-section{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:16px}
+.qr-frame{
+  border:2px solid rgba(255,255,255,0.3);border-radius:10px;padding:6px;
+  background:rgba(255,255,255,0.05)}
+.qr-frame img{width:100px;height:100px;display:block;border-radius:6px}
+.qr-placeholder{
+  width:100px;height:100px;
+  background:rgba(255,255,255,0.08);border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:rgba(255,255,255,0.3);text-align:center}
+.register-btn{
+  background:linear-gradient(135deg,#0ea5e9,#7c3aed);
+  color:#fff;border:none;border-radius:999px;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;
+  letter-spacing:1px;padding:10px 36px;cursor:default}
+
+/* Footer logos */
+.footer-logos{
+  width:100%;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;
+  display:flex;flex-direction:column;gap:8px}
+.footer-row{display:flex;align-items:center;gap:12px}
+.footer-label{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.4);white-space:nowrap}
+.footer-logos-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.footer-logos-row img{height:28px;width:auto;object-fit:contain;filter:brightness(1.2) saturate(0.8)}
+.logo-placeholder{
+  height:28px;width:40px;
+  background:rgba(255,255,255,0.08);border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:7px;color:rgba(255,255,255,0.3);text-align:center}
+
+
+/* ════════════════════════════════
+   PAGE 2 STYLES
+════════════════════════════════ */
+.p2-content{position:relative;z-index:2;display:flex;flex-direction:column;padding:32px 32px 24px;gap:0}
+
+/* Countdown header */
+.countdown-header{
+  display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.chi-con-text{
+  font-family:'Montserrat',sans-serif;font-weight:900;font-size:52px;
+  color:#fff;letter-spacing:-1px;line-height:1;flex-shrink:0}
+.clock-frame-wrap{
+  flex:1;display:flex;justify-content:center}
+.clock-frame-wrap img{height:110px;width:auto;object-fit:contain}
+.clock-placeholder{
+  width:110px;height:110px;
+  background:rgba(245,158,11,0.1);border:1.5px dashed rgba(245,158,11,0.3);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:rgba(245,158,11,0.5);text-align:center;padding:6px}
+.date-badge-p2{
+  text-align:right;flex-shrink:0}
+.date-badge-p2 .time-sm{
+  font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;
+  color:#00d4ff;background:rgba(0,212,255,0.15);
+  padding:2px 10px;border-radius:4px;letter-spacing:.5px;display:inline-block;margin-bottom:4px}
+.date-badge-p2 .date-big{
+  font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;color:#fff;
+  border:2px solid #fff;border-radius:6px;padding:3px 12px;display:inline-block}
+
+/* Schedule */
+.schedule-title{
+  text-align:center;margin-bottom:20px;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:22px;
+  color:#fff;letter-spacing:1px}
+
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:0;position:relative}
+.tl-item::before{
+  content:'';position:absolute;left:11px;top:20px;bottom:-6px;
+  width:1.5px;background:rgba(56,189,248,0.2)}
+.tl-item:last-child::before{display:none}
+.tl-bullet{
+  width:24px;height:24px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;margin-right:12px;margin-top:2px}
+.tl-diamond{
+  width:12px;height:12px;background:#00d4ff;
+  transform:rotate(45deg);flex-shrink:0}
+.tl-body{flex:1;padding-bottom:14px}
+.tl-time{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;
+  color:#f59e0b;letter-spacing:.3px}
+.tl-main{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;
+  color:#fff;margin-top:1px}
+.tl-subs{
+  margin-top:4px;display:flex;flex-direction:column;gap:2px}
+.tl-sub{font-size:11px;color:rgba(255,255,255,0.55);line-height:1.4;
+  padding-left:8px;border-left:2px solid rgba(56,189,248,0.2)}
+
+/* CTA footer p2 */
+.cta-footer-p2{
+  display:flex;align-items:center;gap:16px;
+  margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08)}
+.qr-sm-wrap{
+  border:2px solid rgba(255,255,255,0.2);border-radius:10px;padding:5px;
+  background:rgba(255,255,255,0.04);flex-shrink:0}
+.qr-sm-wrap img{width:80px;height:80px;display:block;border-radius:5px}
+.qr-sm-placeholder{
+  width:80px;height:80px;
+  background:rgba(255,255,255,0.08);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;color:rgba(255,255,255,0.3);text-align:center}
+.cta-text-block{flex:1}
+.cta-text-block .ct1{
+  font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;
+  color:#fff;line-height:1}
+.cta-text-block .ct1 em{color:#00d4ff;font-style:normal;font-size:16px;font-weight:700}
+.cta-text-block .ct2{font-size:10px;color:rgba(255,255,255,0.5);margin-top:6px;line-height:1.5}
+.cta-text-block .ct3{
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;
+  color:#00d4ff;margin-top:4px}
+
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR -->
+<div class="toolbar">
+  <span class="toolbar-title">MIS POSTER BUILDER</span>
+  <button class="tab-btn active" onclick="switchPage(1,this)">Trang 1 – Main Poster</button>
+  <button class="tab-btn" onclick="switchPage(2,this)">Trang 2 – Lịch chương trình</button>
+  <div class="toolbar-sep"></div>
+  <button class="export-btn" onclick="alert('Nhấn chuột phải → Print → Save as PDF để xuất ảnh')">Xuất PDF</button>
+</div>
+
+<div class="workspace">
+
+  <!-- ── SIDE PANEL ── -->
+  <div class="side-panel" id="side-panel-1">
+
+    <div class="panel-section">
+      <div class="panel-section-title">Trang 1 – Ảnh cần import</div>
+
+      <div class="upload-slot">
+        <div class="slot-label">Rocket <span>· góc phải header</span></div>
+        <div class="upload-drop" id="drop-rocket" onclick="triggerFile('file-rocket')">
+          <input type="file" id="file-rocket" accept="image/*" onchange="loadImage(this,'img-rocket','drop-rocket')">
+          <span class="drop-icon">🚀</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+
+      <div class="upload-slot">
+        <div class="slot-label">10% Gold <span>· benefit card 1</span></div>
+        <div class="upload-drop" id="drop-10pct" onclick="triggerFile('file-10pct')">
+          <input type="file" id="file-10pct" accept="image/*" onchange="loadImage(this,'img-10pct','drop-10pct')">
+          <span class="drop-icon">💰</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+
+      <div class="upload-slot">
+        <div class="slot-label">Đồng phục <span>· benefit card 2</span></div>
+        <div class="upload-drop" id="drop-uniform" onclick="triggerFile('file-uniform')">
+          <input type="file" id="file-uniform" accept="image/*" onchange="loadImage(this,'img-uniform','drop-uniform')">
+          <span class="drop-icon">👕</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+
+      <div class="upload-slot">
+        <div class="slot-label">Voucher <span>· benefit card 3</span></div>
+        <div class="upload-drop" id="drop-voucher" onclick="triggerFile('file-voucher')">
+          <input type="file" id="file-voucher" accept="image/*" onchange="loadImage(this,'img-voucher','drop-voucher')">
+          <span class="drop-icon">🎫</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+
+      <div class="upload-slot">
+        <div class="slot-label">QR Code <span>· đăng ký</span></div>
+        <div class="upload-drop" id="drop-qr1" onclick="triggerFile('file-qr1')">
+          <input type="file" id="file-qr1" accept="image/*" onchange="loadImage(this,'img-qr1','drop-qr1')">
+          <span class="drop-icon">⬛</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+
+      <div class="upload-slot">
+        <div class="slot-label">Logo MIS <span>· footer</span></div>
+        <div class="upload-drop" id="drop-logo-mis" onclick="triggerFile('file-logo-mis')">
+          <input type="file" id="file-logo-mis" accept="image/*" onchange="loadImage(this,'img-logo-mis','drop-logo-mis')">
+          <span class="drop-icon">🏫</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+
+      <div class="upload-slot">
+        <div class="slot-label">Skyline <span>· nền trang 1</span></div>
+        <div class="upload-drop" id="drop-sky1" onclick="triggerFile('file-sky1')">
+          <input type="file" id="file-sky1" accept="image/*" onchange="loadImage(this,'img-sky1','drop-sky1')">
+          <span class="drop-icon">🌆</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">Trang 1 – Logo đối tác</div>
+      <div class="upload-slot">
+        <div class="slot-label">Partner logos <span>· nhiều ảnh</span></div>
+        <div class="upload-drop" id="drop-partners" onclick="triggerFile('file-partners')" style="min-height:60px">
+          <input type="file" id="file-partners" accept="image/*" multiple onchange="loadPartners(this)">
+          <span class="drop-icon">🤝</span>
+          <span class="drop-text">Chọn nhiều ảnh</span>
+        </div>
+        <div id="partner-preview" style="display:flex;flex-wrap:wrap;gap:4px;margin-top:4px"></div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">Trang 2 – Ảnh cần import</div>
+
+      <div class="upload-slot">
+        <div class="slot-label">Clock frame <span>· đồng hồ đếm ngược</span></div>
+        <div class="upload-drop" id="drop-clock" onclick="triggerFile('file-clock')">
+          <input type="file" id="file-clock" accept="image/*" onchange="loadImage(this,'img-clock','drop-clock')">
+          <span class="drop-icon">⏰</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+
+      <div class="upload-slot">
+        <div class="slot-label">QR Code <span>· trang 2</span></div>
+        <div class="upload-drop" id="drop-qr2" onclick="triggerFile('file-qr2')">
+          <input type="file" id="file-qr2" accept="image/*" onchange="loadImage(this,'img-qr2','drop-qr2')">
+          <span class="drop-icon">⬛</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+
+      <div class="upload-slot">
+        <div class="slot-label">Skyline <span>· nền trang 2</span></div>
+        <div class="upload-drop" id="drop-sky2" onclick="triggerFile('file-sky2')">
+          <input type="file" id="file-sky2" accept="image/*" onchange="loadImage(this,'img-sky2','drop-sky2')">
+          <span class="drop-icon">🌆</span>
+          <span class="drop-text">Chọn ảnh</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /side-panel -->
+
+  <!-- ── CANVAS ── -->
+  <div class="canvas-area">
+
+    <!-- ════ PAGE 1 ════ -->
+    <div class="poster">
+
+      <div class="page active" id="page-1">
+        <!-- BG -->
+        <div class="bg-glow glow-tl"></div>
+        <div class="bg-glow glow-br"></div>
+        <div class="bg-glow glow-mid"></div>
+
+        <!-- Stars -->
+        <div class="stars">
+          <div class="star" style="width:14px;height:14px;top:15%;left:4%;opacity:.7"></div>
+          <div class="star" style="width:10px;height:10px;top:28%;left:7%;opacity:.5"></div>
+          <div class="star" style="width:18px;height:18px;top:55%;left:3%;opacity:.6"></div>
+          <div class="star" style="width:12px;height:12px;top:70%;left:5%;opacity:.4"></div>
+          <div class="star" style="width:16px;height:16px;top:18%;right:5%;opacity:.6;background:#00d4ff"></div>
+          <div class="star" style="width:10px;height:10px;top:42%;right:4%;opacity:.5"></div>
+          <div class="star" style="width:20px;height:20px;top:65%;right:3%;opacity:.7;background:#7c3aed"></div>
+          <div class="star" style="width:12px;height:12px;top:80%;right:6%;opacity:.4"></div>
+        </div>
+
+        <!-- Skyline -->
+        <div class="skyline" id="skyline-1">
+          <div class="skyline-placeholder"></div>
+          <img id="img-sky1" style="display:none;position:absolute;bottom:0;left:0;width:100%;opacity:.27;mix-blend-mode:screen">
+        </div>
+
+        <div class="p1-content">
+
+          <!-- HERO LOGO -->
+          <div class="hero-logo">
+            <div class="rocket-wrap">
+              <img id="img-rocket" src="" style="display:none">
+              <div class="rocket-placeholder" id="ph-rocket">🚀<br>rocket.png</div>
+            </div>
+            <div class="mis-row">
+              <span class="mis-text">MIS</span>
+              <div class="mis-arrow"></div>
+              <div class="mis-newera"><span>THE</span><span>NEW ERA</span></div>
+            </div>
+            <div class="inno-row">
+              <span class="inno-text">innovation day</span>
+              <span class="year-text">2026</span>
+            </div>
+            <p class="tagline-small">A NEW ERA OF AI, HEART &amp; GLOBAL MINDS</p>
+          </div>
+
+          <!-- DATE VENUE -->
+          <div class="date-venue">
+            <div class="time-badge">7:30 – 16:00</div>
+            <div class="date-pill">28.03.2026</div>
+            <div class="venue-text">
+              <div class="v1">TRƯỜNG TIỂU HỌC<br>THCS &amp; THPT ĐA TRÍ TUỆ</div>
+              <div class="v2">Số 37 Hoàng Quán Chi, Cầu Giấy</div>
+            </div>
+          </div>
+
+          <!-- TAGLINE PILL -->
+          <div class="tagline-pill">
+            <p>MỘT KỶ NGUYÊN GIÁO DỤC MỚI<br>ĐƯỢC KHAI MỞ.</p>
+          </div>
+
+          <!-- PRIVILEGE HEADER -->
+          <div class="privilege-header">
+            <p class="ph1">ĐẶC QUYỀN <em>DUY NHẤT 28.03.2026</em></p>
+            <p class="ph2">DÀNH CHO HỌC SINH <em>NHẬP HỌC TRONG NGÀY HỘI</em></p>
+          </div>
+
+          <!-- BENEFIT CARDS -->
+          <div class="benefit-grid">
+            <div class="benefit-card">
+              <div class="benefit-img-wrap">
+                <img id="img-10pct" src="" style="display:none">
+                <div class="benefit-img-placeholder" id="ph-10pct">10%<br>gold.png</div>
+              </div>
+              <div class="benefit-label">GIẢM 10% HỌC PHÍ<br>NĂM HỌC ĐẦU TIÊN</div>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-img-wrap">
+                <img id="img-uniform" src="" style="display:none">
+                <div class="benefit-img-placeholder" id="ph-uniform">👕<br>uniform.png</div>
+              </div>
+              <div class="benefit-label">TẶNG 01 SET<br>ĐỒNG PHỤC NĂM HỌC</div>
+            </div>
+            <div class="benefit-card">
+              <div class="benefit-img-wrap">
+                <img id="img-voucher" src="" style="display:none">
+                <div class="benefit-img-placeholder" id="ph-voucher">🎫<br>voucher.png</div>
+              </div>
+              <div class="benefit-label">VOUCHER NGÀY HỘI<br>TRỊ GIÁ 50.000 VNĐ</div>
+            </div>
+          </div>
+
+          <!-- CTA HEADLINE -->
+          <div class="cta-headline">
+            MỘT NGÀY – MỘT QUYẾT ĐỊNH<br>MỘT TƯƠNG LAI KHÁC BIỆT CHO CON
+          </div>
+
+          <!-- QR + BUTTON -->
+          <div class="qr-section">
+            <div class="qr-frame">
+              <img id="img-qr1" src="" style="display:none">
+              <div class="qr-placeholder" id="ph-qr1">QR<br>đăng ký</div>
+            </div>
+            <div class="register-btn">ĐĂNG KÝ THAM DỰ</div>
+          </div>
+
+          <!-- FOOTER LOGOS -->
+          <div class="footer-logos">
+            <div class="footer-row">
+              <span class="footer-label">Đơn vị tổ chức</span>
+              <div class="footer-logos-row">
+                <img id="img-logo-mis" src="" style="display:none">
+                <div class="logo-placeholder" id="ph-logo-mis">MIS</div>
+              </div>
+              <span class="footer-label" style="margin-left:16px">Đối tác đồng hành</span>
+              <div class="footer-logos-row" id="partner-logos-row">
+                <div class="logo-placeholder">P1</div>
+                <div class="logo-placeholder">P2</div>
+                <div class="logo-placeholder">P3</div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /p1-content -->
+      </div><!-- /page-1 -->
+
+      <!-- ════ PAGE 2 ════ -->
+      <div class="page" id="page-2">
+        <div class="bg-glow glow-tl"></div>
+        <div class="bg-glow glow-br"></div>
+
+        <div class="stars">
+          <div class="star" style="width:14px;height:14px;top:12%;left:4%;opacity:.7"></div>
+          <div class="star" style="width:10px;height:10px;top:32%;left:6%;opacity:.5"></div>
+          <div class="star" style="width:16px;height:16px;top:60%;left:3%;opacity:.6"></div>
+          <div class="star" style="width:18px;height:18px;top:20%;right:4%;opacity:.6;background:#00d4ff"></div>
+          <div class="star" style="width:12px;height:12px;top:45%;right:5%;opacity:.5"></div>
+          <div class="star" style="width:20px;height:20px;top:72%;right:3%;opacity:.7;background:#7c3aed"></div>
+        </div>
+
+        <div class="skyline" id="skyline-2">
+          <div class="skyline-placeholder"></div>
+          <img id="img-sky2" style="display:none;position:absolute;bottom:0;left:0;width:100%;opacity:.27;mix-blend-mode:screen">
+        </div>
+
+        <div class="p2-content">
+
+          <!-- COUNTDOWN HEADER -->
+          <div class="countdown-header">
+            <span class="chi-con-text">CHỈ CÒN</span>
+            <div class="clock-frame-wrap">
+              <img id="img-clock" src="" style="display:none">
+              <div class="clock-placeholder" id="ph-clock">⏰<br>clock-frame.png</div>
+            </div>
+            <div class="date-badge-p2">
+              <div class="time-sm">7:30 – 16:00</div>
+              <div class="date-big">28.03.2026</div>
+            </div>
+          </div>
+
+          <!-- SCHEDULE TITLE -->
+          <div class="schedule-title">CHƯƠNG TRÌNH NGÀY HỘI</div>
+
+          <!-- TIMELINE -->
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-bullet"><div class="tl-diamond"></div></div>
+              <div class="tl-body">
+                <div class="tl-time">7:30 – 8:00</div>
+                <div class="tl-main">Check in &amp; đón tiếp</div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-bullet"><div class="tl-diamond"></div></div>
+              <div class="tl-body">
+                <div class="tl-time">8:00 – 8:30</div>
+                <div class="tl-main">Khai mạc chương trình</div>
+                <div class="tl-subs"><div class="tl-sub">THE NEW ERA – MIS Innovation Day 2026</div></div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-bullet"><div class="tl-diamond"></div></div>
+              <div class="tl-body">
+                <div class="tl-time">8:30 – 9:30</div>
+                <div class="tl-main">Chương trình sân khấu nghệ thuật</div>
+                <div class="tl-subs"><div class="tl-sub">"A New Era of AI, Heart &amp; Global Minds – Một kỷ nguyên giáo dục mới được khai mở"</div></div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-bullet"><div class="tl-diamond"></div></div>
+              <div class="tl-body">
+                <div class="tl-time">9:30 – 12:00</div>
+                <div class="tl-main">Trải nghiệm tại các gian hàng Workshop</div>
+                <div class="tl-subs">
+                  <div class="tl-sub">Hội thảo tuyển sinh MIS: THE WORLD IS CHANGING</div>
+                  <div class="tl-sub">Teambuilding Gắn kết gia đình</div>
+                  <div class="tl-sub">Trải nghiệm công nghệ cao · STEAM lập trình &amp; robotics</div>
+                  <div class="tl-sub">Ăn trưa, mua sắm</div>
+                </div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-bullet"><div class="tl-diamond"></div></div>
+              <div class="tl-body">
+                <div class="tl-time">13:30 – 16:00</div>
+                <div class="tl-main">Chung kết hội thao Tháng 3</div>
+                <div class="tl-subs">
+                  <div class="tl-sub">Trận chung kết Giải thể thao CB-GV &amp; Học sinh</div>
+                  <div class="tl-sub">Trận Giao hữu bóng đá PHHS &amp; CBGV</div>
+                  <div class="tl-sub">Giao hữu Kéo co · Cầu lông · Pickleball</div>
+                </div>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-bullet"><div class="tl-diamond" style="background:#f59e0b"></div></div>
+              <div class="tl-body">
+                <div class="tl-time">16:00</div>
+                <div class="tl-main">Bế mạc ngày hội</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA FOOTER -->
+          <div class="cta-footer-p2">
+            <div class="qr-sm-wrap">
+              <img id="img-qr2" src="" style="display:none">
+              <div class="qr-sm-placeholder" id="ph-qr2">QR<br>p2</div>
+            </div>
+            <div class="cta-text-block">
+              <div class="ct1">ĐĂNG KÝ <em>THAM DỰ NGÀY HỘI</em></div>
+              <div class="ct2">Để nhà trường có thể đón tiếp chu đáo nhất xin quý vị vui lòng xác nhận tham dự chương trình. Quét mã QR hoặc liên hệ hotline:</div>
+              <div class="ct3">024.6027.8666</div>
+            </div>
+          </div>
+
+        </div><!-- /p2-content -->
+      </div><!-- /page-2 -->
+
+    </div><!-- /poster -->
+  </div><!-- /canvas-area -->
+</div><!-- /workspace -->
+
+<script>
+function switchPage(n,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function triggerFile(id){
+  event.stopPropagation();
+  document.getElementById(id).click();
+}
+
+function loadImage(input,imgId,dropId){
+  const file=input.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const img=document.getElementById(imgId);
+    const drop=document.getElementById(dropId);
+    img.src=e.target.result;
+    img.style.display='block';
+    // hide placeholder
+    const ph=img.nextElementSibling||img.previousElementSibling;
+    const allPh=drop.parentElement.querySelectorAll('[id^="ph-"]');
+    allPh.forEach(el=>el.style.display='none');
+    // also find by pattern
+    const phId='ph-'+imgId.replace('img-','');
+    const phEl=document.getElementById(phId);
+    if(phEl)phEl.style.display='none';
+    // preview in drop zone
+    drop.classList.add('has-image');
+    let prev=drop.querySelector('img.preview');
+    if(!prev){prev=document.createElement('img');prev.className='preview';drop.appendChild(prev);}
+    prev.src=e.target.result;
+    // skyline special
+    if(imgId==='img-sky1'||imgId==='img-sky2'){
+      const sky=imgId==='img-sky1'?document.getElementById('skyline-1'):document.getElementById('skyline-2');
+      sky.querySelector('.skyline-placeholder').style.display='none';
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function loadPartners(input){
+  const files=Array.from(input.files);
+  const row=document.getElementById('partner-logos-row');
+  const preview=document.getElementById('partner-preview');
+  row.innerHTML='';
+  preview.innerHTML='';
+  files.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=function(e){
+      // poster
+      const img=document.createElement('img');
+      img.src=e.target.result;
+      img.style.cssText='height:28px;width:auto;object-fit:contain;filter:brightness(1.2) saturate(0.8)';
+      row.appendChild(img);
+      // panel preview
+      const p=document.createElement('img');
+      p.src=e.target.result;
+      p.style.cssText='height:24px;width:auto;border-radius:3px;border:1px solid rgba(255,255,255,.1)';
+      preview.appendChild(p);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+{% extends "core/lowfi/base.html" %}
+
+{% block lowfi_body %}
+<!-- ═══════════════════════════════════════════════════════════
+     PARENT PORTAL HERO
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-section mis-reveal" id="parent-overview">
+    <span class="mis-tag"><i class="fas fa-people-roof"></i> Parent Portal</span>
+    <h2>AI-Track theo dõi tiến độ thời gian thực</h2>
+    <p class="mis-subtitle">
+        Báo cáo tập trung vào năng lực, quỹ đạo trưởng thành và minh chứng học tập, không chỉ điểm số.
+    </p>
+    <div class="mis-footer-cta">
+        <p>Đăng ký tài khoản phụ huynh và yêu cầu demo hệ thống.</p>
+        <a href="{% url 'contact:contact' %}" class="mis-btn mis-btn-primary" id="parent-cta-demo">
+            <i class="fas fa-user-plus"></i> Đăng ký demo
+        </a>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TRACKING & SKILLS MAP
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-grid two mis-reveal" data-delay="1" id="parent-tracking">
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-gauge-high"></i> AI-Track Panel</span>
+        <h2>Widget theo dõi trực tiếp</h2>
+        <div class="mis-feature-row">
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle teal">
+                    <i class="fas fa-calendar-week"></i>
+                </div>
+                <div>
+                    <h4>Tần suất học tập tuần</h4>
+                    <p>Mức độ tham gia các hoạt động trong tuần.</p>
+                </div>
+            </div>
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle primary">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div>
+                    <h4>Tiến độ dự án</h4>
+                    <p>Trạng thái hoàn thành từng dự án học tập.</p>
+                </div>
+            </div>
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle thcs">
+                    <i class="fas fa-people-arrows"></i>
+                </div>
+                <div>
+                    <h4>Năng lực hợp tác</h4>
+                    <p>Chỉ số phối hợp nhóm và đóng góp cá nhân.</p>
+                </div>
+            </div>
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle coral">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div>
+                    <h4>Tăng trưởng giải quyết vấn đề</h4>
+                    <p>Xu hướng phát triển tư duy theo thời gian.</p>
+                </div>
+            </div>
+        </div>
+        <div class="mis-wire" style="margin-top:1rem;">
+            Toggle: Xem theo lớp hoặc theo từng học sinh.
+        </div>
+    </article>
+
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-wave-square"></i> Bản đồ năng lực</span>
+        <h2>Báo cáo theo kỹ năng</h2>
+        <div class="mis-flow" style="margin-top:1rem;">
+            <div class="mis-flow-step"><i class="fas fa-brain"></i> Tư duy phản biện</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-comments"></i> Giao tiếp</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-users"></i> Hợp tác</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-lightbulb"></i> Sáng tạo</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-shield-halved"></i> Đạo đức số</div>
+        </div>
+        <div class="mis-chip-lane" style="margin-top:1rem;">
+            <span class="mis-chip"><i class="fas fa-database"></i> Minh chứng dữ liệu</span>
+            <span class="mis-chip"><i class="fas fa-chart-area"></i> Quỹ đạo phát triển</span>
+            <span class="mis-chip"><i class="fas fa-hand-point-right"></i> Gợi ý hành động</span>
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PERSONALIZED REPORTS
+     ═══════════════════════════════════════════════════════════ -->
+<div class="mis-section-header mis-reveal" data-delay="2">
+    <span class="mis-tag"><i class="fas fa-file-lines"></i> Báo cáo cá nhân hóa</span>
+    <h2>Khối báo cáo có thể hành động</h2>
+</div>
+
+<section class="mis-grid three mis-reveal" data-delay="2" id="parent-reports">
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-c">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="mis-experience-body">
+            <h3>Điểm tiến bộ</h3>
+            <p>Tóm tắt tự động từ tín hiệu dự án và hành vi học tập trên lớp.</p>
+        </div>
+    </article>
+
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-b">
+            <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <div class="mis-experience-body">
+            <h3>Điểm cần hỗ trợ</h3>
+            <p>Phân tích khoảng trống năng lực và đề xuất hành động cụ thể tại nhà.</p>
+        </div>
+    </article>
+
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-a">
+            <i class="fas fa-forward-step"></i>
+        </div>
+        <div class="mis-experience-body">
+            <h3>Bước tiếp theo cho phụ huynh</h3>
+            <p>Gợi ý hoạt động đồng hành và lịch hẹn trao đổi nhanh với giáo viên.</p>
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     TRUST LAYER
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-section mis-reveal" data-delay="3" id="parent-trust">
+    <span class="mis-tag"><i class="fas fa-lock"></i> Trust Layer</span>
+    <h2>Minh bạch và kiểm soát</h2>
+    <div class="mis-feature-row" style="margin-top:1rem;">
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle teal">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div>
+                <h4>Giải thích AI</h4>
+                <p>Ghi chú giải thích cho các khuyến nghị được tạo bởi AI.</p>
+            </div>
+        </div>
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle coral">
+                <i class="fas fa-sliders"></i>
+            </div>
+            <div>
+                <h4>Kiểm soát đồng thuận</h4>
+                <p>Kiểm soát mức chia sẻ thông tin và đồng thuận dữ liệu gia đình.</p>
+            </div>
+        </div>
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle primary">
+                <i class="fas fa-clock-rotate-left"></i>
+            </div>
+            <div>
+                <h4>Lưu vết lịch sử</h4>
+                <p>Lịch sử cập nhật, trao đổi và can thiệp học tập có truy vết.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

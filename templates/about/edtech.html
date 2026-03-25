@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Hệ sinh thái EdTech 4.0 - MIS{% endblock %}
+
+{% block meta_description %}
+Danh mục công cụ EdTech tham chiếu trong nội dung chương trình MIS 2026-2027: Azota, iCorrect, VR/AR, Nexta và nhóm công
+cụ Generative AI.
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/about/edtech.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="about-scope">
+    {% include 'about/partials/_hero.html' with hero_variant='gradient-red' hero_eyebrow='EdTech 4.0' hero_title=edtech.title|default:'Hệ sinh thái EdTech 4.0' hero_subtitle=edtech.intro|default:'Công nghệ tiên phong — Nâng tầm tri thức. Các nền tảng EdTech được tham chiếu trong định hướng chương trình và trải nghiệm học tập.' hero_cta_primary='Đăng ký tư vấn' hero_cta_primary_url='admissions:list' hero_cta_secondary='Liên hệ' hero_cta_secondary_url='contact:contact' %}
+
+    <!-- ═══ Key Stats ═══ -->
+    <section
+        class="section bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900 text-white relative overflow-hidden">
+        <div class="deco-dots"></div>
+        <div class="container relative z-10">
+            <div class="stats-banner max-w-4xl mx-auto">
+                <div class="stat-item">
+                    <div class="stat-item__number">5</div>
+                    <div class="stat-item__label">Nền tảng EdTech</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-item__number">6</div>
+                    <div class="stat-item__label">Miền năng lực số</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-item__number">3</div>
+                    <div class="stat-item__label">Cấp học triển khai</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-item__number">K1–12</div>
+                    <div class="stat-item__label">Lộ trình xuyên suốt</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Platforms Grid ═══ -->
+    {% if edtech.platforms %}
+    <section class="section section--neutral">
+        <div class="container">
+            {% include 'about/partials/_section_header.html' with eyebrow='Nền tảng công nghệ' title=edtech.subtitle|default:'Công nghệ tiên phong' subtitle='Nền tảng EdTech được tham chiếu trong định hướng triển khai chương trình' alignment='center' %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                {% for platform in edtech.platforms %}
+                <div class="platform-card platform-card--{{ platform.key }}">
+                    <div class="platform-card__body">
+                        <div class="platform-card__header">
+                            <div class="edtech-icon edtech-icon--{{ platform.key }}">
+                                {% if platform.key == 'azota' %}<i class="fas fa-clipboard-check"></i>
+                                {% elif platform.key == 'icorrect' %}<i class="fas fa-microphone-alt"></i>
+                                {% elif platform.key == 'vr_ar' %}<i class="fas fa-vr-cardboard"></i>
+                                {% elif platform.key == 'nexta' %}<i class="fas fa-chalkboard-teacher"></i>
+                                {% else %}<i class="fas fa-brain"></i>{% endif %}
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-1">{{ platform.name }}</h3>
+                                <p class="text-sm text-neutral-500">{{ platform.tagline }}</p>
+                                {% if platform.award %}
+                                <div class="mt-2">
+                                    <span class="award-badge"><i class="fas fa-trophy"></i>{{ platform.award }}</span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            {% for feature in platform.features %}
+                            <span class="feature-chip"><i class="fas fa-check-circle text-green-500 text-xs"></i>{{
+                                feature }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+    </section>
+    {% endif %}
+
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_title='Trải nghiệm hệ sinh thái EdTech tại MIS' cta_subtitle='Đăng ký để tham quan lớp học thông minh và trải nghiệm công nghệ giáo dục hàng đầu.' cta_primary='Đăng ký tư vấn' cta_primary_url='admissions:list' cta_secondary='Liên hệ' cta_secondary_url='contact:contact' %}
+</main>
+{% endblock %}
+

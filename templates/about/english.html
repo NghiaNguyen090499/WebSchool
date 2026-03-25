@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} - MIS{% endblock %}
+
+{% block content %}
+<main class="curriculum">
+    {% include 'about/partials/curriculum/_curriculum_hero.html' with hero_id='hero' hero_theme='curriculum-hero--navy' hero_eyebrow='English Talent Track' hero_title=page.title|default:'Hệ Tiếng Anh Tài Năng MIS x Jaxtina' hero_subtitle=program_block.copy.hero_subtitle|default:'Chinh phục tiếng Anh học thuật theo lộ trình liên thông từ Tiểu học đến THPT.' hero_bullet_1=program_block.sections.0|default:'Lộ trình chuẩn quốc tế, cá nhân hóa theo năng lực học sinh.' hero_bullet_2=program_block.sections.1|default:'Cam kết đầu ra theo mốc CEFR và IELTS theo cấp học.' hero_bullet_3=program_block.sections.2|default:'Khai thác công cụ AI hỗ trợ luyện ngôn ngữ trong lớp học.' hero_primary_label='Nhận tư vấn chương trình' hero_primary_url='admissions:list' hero_secondary_label='Tải lộ trình chi tiết' hero_secondary_url='#brochure' trust_badge_1='IELTS Pathway' trust_badge_2='CEFR Aligned' trust_badge_3='AI-supported Practice' %}
+
+    {% include 'about/partials/curriculum/_trust_signal_strip.html' with signal_1_value=program_labels.ielts|default:'IELTS' signal_1_label='Chuẩn đầu ra tuyến tài năng đến cuối THPT' signal_2_value=program_targets.talent_thpt.ielts|default:program_targets.talent.ielts|default:'6.5-8.0+' signal_2_label='Mốc năng lực tiếng Anh học thuật' signal_3_value=program_block.copy.ai_tool_name|default:'iCorrect' signal_3_label='Công cụ AI đồng hành luyện phản xạ 1:1' %}
+
+    <section id="philosophy" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <h2 class="curriculum-h2">Academic Philosophy</h2>
+            <p class="curriculum-lead">Chương trình tập trung xây nền năng lực ngôn ngữ học thuật, giao tiếp quốc tế và tư duy phản biện, đồng thời duy trì bản sắc học sinh Việt Nam.</p>
+            <div class="curriculum-grid curriculum-grid--3">
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-globe' title='Immersive Language Environment' description='Tăng cường thời lượng và tần suất sử dụng tiếng Anh trong học tập.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-user-graduate' title='Goal-based Progression' description='Phân tầng lộ trình theo cấp học và mục tiêu chứng chỉ rõ ràng.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-robot' title='AI-assisted Practice' description='Kết hợp AI như trợ lý phản hồi nhanh để củng cố kỹ năng giao tiếp.' %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_roadmap_tabs_accordion.html' with roadmap_id='roadmap' roadmap_title='Curriculum Roadmap' roadmap_subtitle='Lộ trình năng lực tiếng Anh theo Primary - THCS - THPT.' level_1_label='Primary' level_1_badge='Tiểu học (Lớp 1-5)' level_1_focus='Hình thành nền tảng ngữ âm, từ vựng, giao tiếp và đọc hiểu.' level_1_tool=program_curriculum.tieu_hoc.textbooks|join:', ' level_1_output=program_curriculum.tieu_hoc.target|default:'CEFR Pre-A2/A2' level_2_label='THCS' level_2_badge='Lớp 6-9' level_2_focus='Mở rộng học thuật, tăng năng lực đọc - viết - trình bày theo chủ đề.' level_2_tool=program_curriculum.thcs.textbooks|join:', ' level_2_output=program_curriculum.thcs.target|default:'CEFR A2+/B1' level_3_label='THPT' level_3_badge='Lớp 10-12' level_3_focus='Định hướng IELTS, học thuật nâng cao và ứng dụng trong hồ sơ đại học.' level_3_tool=program_curriculum.thpt.textbooks|join:', ' level_3_output=program_curriculum.thpt.target|default:'CEFR B1/C1' %}
+
+    <section id="learning-experience" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <h2 class="curriculum-h2">Learning Experience</h2>
+            <p class="curriculum-lead">Mô hình lớp học kết hợp giáo viên chuyên môn, công cụ phản hồi AI và hoạt động dự án để tăng tốc tiến bộ ngôn ngữ.</p>
+            <div class="curriculum-grid curriculum-grid--3">
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-chalkboard-teacher' title='Teacher-led Academic Instruction' description='Giáo viên xây dựng lộ trình theo mục tiêu học thuật và năng lực từng nhóm học sinh.' meta='Teacher-guided pathways' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-comments' title='Speaking & Writing Clinics' description='Thực hành kỹ năng đầu ra qua hoạt động thảo luận, phản biện và viết học thuật.' meta='Output-focused sessions' %}
+                {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-robot' title='iCorrect & AI Feedback' description='AI hỗ trợ phản hồi nhanh về phát âm, cấu trúc câu và độ lưu loát theo mục tiêu bài học.' meta='AI-assisted formative feedback' %}
+            </div>
+        </div>
+    </section>
+
+    <section id="assessment-outcomes" class="curriculum-section curriculum-section--light curriculum-section--assessment-enhanced">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2">Assessment & Outcomes</h2>
+                <p class="curriculum-lead">Đánh giá đa nguồn, theo tiến trình và minh chứng năng lực để theo dõi mức đạt chuẩn CEFR/IELTS.</p>
+            </div>
+
+            <div class="curriculum-assessment-layout">
+                <div class="curriculum-assessment-panel curriculum-reveal-delay-150" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Core Rubrics</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--info">CEFR + IELTS</span>
+                    </div>
+                    <div class="curriculum-rubric">
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Formative Assessment' metric='Theo dõi tiến bộ theo đơn vị học tập và kỹ năng ngôn ngữ.' evidence='Bài tập lớp, phản hồi giáo viên, phản hồi AI theo phiên học.' %}
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Milestone Assessment' metric='Đánh giá định kỳ theo mốc CEFR và chuẩn đầu ra theo cấp.' evidence='Bài kiểm tra chuẩn hóa và hồ sơ kết quả học kỳ.' %}
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Portfolio Evidence' metric='Đo năng lực ứng dụng ngôn ngữ trong sản phẩm thực tế.' evidence='Bài thuyết trình, bài viết học thuật, dự án ngôn ngữ.' %}
+                                </div>
+                </div>
+
+                <aside class="curriculum-assessment-panel curriculum-assessment-panel--milestones curriculum-reveal-delay-200" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Milestones</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--success">Target Outputs</span>
+                    </div>
+                    <p class="curriculum-caption">Outcome checkpoints are grouped by level so parents can track progress clearly.</p>
+                    <div class="curriculum-outcome-list curriculum-spacer-top">
+                    <div class="curriculum-cta-row">
+                                    {% include 'about/partials/curriculum/_outcome_badge.html' with label='Primary: CEFR nền tảng' tone='info' %}
+                                    {% include 'about/partials/curriculum/_outcome_badge.html' with label='THCS: IELTS 4.0-6.0+' tone='success' %}
+                                    {% include 'about/partials/curriculum/_outcome_badge.html' with label='THPT: IELTS 6.5-8.0+' tone='warning' %}
+                                </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_differentiation_matrix.html' with matrix_title='Differentiation: MIS English vs mô hình thông thường' row_1_label='Lộ trình học tập' row_1_mis='Liên thông từ Tiểu học đến THPT, bám mốc CEFR/IELTS.' row_1_traditional='Thiên về chương trình chung, ít phân tầng theo mục tiêu.' row_1_international='Mạnh chuẩn quốc tế nhưng không luôn tối ưu bối cảnh học sinh Việt.' row_2_label='Theo dõi tiến bộ' row_2_mis='Đa nguồn: giáo viên + đánh giá định kỳ + minh chứng portfolio.' row_2_traditional='Theo dõi chủ yếu theo điểm kiểm tra.' row_2_international='Đánh giá chuẩn hệ, mức minh chứng khác nhau theo trường.' row_3_label='Ứng dụng AI' row_3_mis='AI hỗ trợ luyện nói/viết có kiểm soát học thuật.' row_3_traditional='Ứng dụng AI còn hạn chế trong lớp học.' row_3_international='Có AI nhưng phụ thuộc framework từng trường.' row_4_label='Định hướng đầu ra' row_4_mis='Rõ mốc CEFR/IELTS và hỗ trợ hồ sơ học tập.' row_4_traditional='Ít nhấn mạnh đầu ra chứng chỉ quốc tế.' row_4_international='Chuẩn quốc tế tốt, chi phí và mức cá nhân hóa khác nhau.' %}
+
+    {% include 'about/partials/curriculum/_final_cta_cluster.html' with cta_title='Sẵn sàng xây lộ trình tiếng Anh học thuật cho con?' cta_subtitle='Nhận tư vấn theo cấp học và mục tiêu đầu ra phù hợp trong năm học 2026-2027.' visit_url='contact:contact' consult_url='admissions:list' brochure_dialog_id='english-brochure-dialog' brochure_available=pdf_document.pdf_file %}
+
+    {% include 'about/partials/curriculum/_brochure_drawer.html' with brochure_dialog_id='english-brochure-dialog' brochure_title='Brochure chương trình Tiếng Anh' %}
+</main>
+{% endblock %}

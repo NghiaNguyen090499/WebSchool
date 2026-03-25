@@ -1,0 +1,42 @@
+{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Xóa: {{ object.title }}{% endblock %}
+{% block header_title %}Xóa tin tức{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Tin tức" breadcrumb_section_url=news_list_url
+breadcrumb_current="Xóa" %}
+
+<div class="max-w-xl mx-auto mt-8">
+    <div class="portal-card">
+        <div class="portal-card-body" style="text-align:center;padding:var(--p-space-8) var(--p-space-6)">
+            <div class="portal-delete-icon">
+                <i class="fas fa-triangle-exclamation"></i>
+            </div>
+            <h1 class="page-title mb-2">Xác nhận xóa</h1>
+            <p class="text-muted mb-6">Bạn có chắc chắn muốn xóa bài viết này?</p>
+            <div class="portal-card" style="text-align:left;margin-bottom:24px">
+                <div class="portal-card-body">
+                    <div class="font-semibold" style="color:var(--p-gray-800);font-size:var(--p-fs-md)">{{ object.title
+                        }}</div>
+                    <div class="text-muted text-sm mt-2">Ngày tạo: {{ object.created_at|date:"d/m/Y H:i" }}</div>
+                </div>
+            </div>
+            <div class="portal-alert portal-alert-warning mb-6" style="text-align:left">
+                <i class="fas fa-exclamation-triangle" style="flex-shrink:0"></i>
+                <span>Hành động này không thể hoàn tác. Bài viết sẽ bị xóa vĩnh viễn.</span>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div style="display:flex;gap:12px;justify-content:center">
+                    <a href="{% url 'portal:news_list' %}" class="btn btn-secondary btn-md">Hủy bỏ</a>
+                    <button type="submit" class="btn btn-danger btn-md">
+                        <i class="fas fa-trash icon-md"></i> Xóa vĩnh viễn
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

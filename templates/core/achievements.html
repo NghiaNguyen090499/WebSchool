@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Thành tích nổi bật - MIS{% endblock %}
+
+{% block content %}
+<section class="section bg-neutral-100 dark:bg-neutral-900/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+            <div>
+                <p class="text-sm uppercase tracking-wider text-primary-600 font-semibold">Awards {{ program_year|default:"2026-2027" }}</p>
+                <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white">Thành tích MIS</h1>
+            </div>
+            <a href="{% url 'core:home' %}" class="btn btn-outline btn-sm">
+                <i class="fas fa-arrow-left mr-2"></i>Về trang chủ
+            </a>
+        </div>
+
+        {% if featured_achievement_cards %}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            {% for ach in featured_achievement_cards %}
+            <article class="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-2xl p-6 shadow-sm">
+                <p class="text-4xl font-black text-[#9f2d1f]">{{ ach.title }}</p>
+                <p class="mt-3 text-base md:text-lg font-semibold text-neutral-800 dark:text-neutral-100 uppercase leading-tight">
+                    {{ ach.description }}
+                </p>
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if achievement_media %}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {% for media in achievement_media|slice:":3" %}
+            <figure class="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
+                {% if media.file_webp %}
+                <picture>
+                    <source srcset="{{ media.file_webp.url }}" type="image/webp">
+                    {% if media.file_jpeg %}
+                    <img src="{{ media.file_jpeg.url }}" alt="{{ media.alt_text|default:'Thành tích MIS' }}" class="w-full h-[240px] object-cover" loading="lazy">
+                    {% elif media.file %}
+                    <img src="{{ media.file.url }}" alt="{{ media.alt_text|default:'Thành tích MIS' }}" class="w-full h-[240px] object-cover" loading="lazy">
+                    {% endif %}
+                </picture>
+                {% elif media.file_jpeg %}
+                <img src="{{ media.file_jpeg.url }}" alt="{{ media.alt_text|default:'Thành tích MIS' }}" class="w-full h-[240px] object-cover" loading="lazy">
+                {% elif media.file %}
+                <img src="{{ media.file.url }}" alt="{{ media.alt_text|default:'Thành tích MIS' }}" class="w-full h-[240px] object-cover" loading="lazy">
+                {% endif %}
+            </figure>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if achievement_stats %}
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Số liệu nổi bật</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {% for stat in achievement_stats %}
+                <article class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6">
+                    <p class="text-4xl font-black text-primary-600">{{ stat.stat_value }}</p>
+                    <p class="mt-3 text-neutral-700 dark:text-neutral-300">{{ stat.stat_label }}</p>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if other_achievement_cards %}
+        <div>
+            <h2 class="text-2xl font-bold text-neutral-900 dark:text-white mb-6">Các thành tích khác</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for ach in other_achievement_cards %}
+                <article class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 flex flex-col">
+                    {% if ach.image %}
+                    <img src="{{ ach.image.url }}" alt="{{ ach.title }}" class="w-full h-48 object-cover rounded-xl mb-5" loading="lazy">
+                    {% endif %}
+                    <h3 class="text-xl font-bold text-neutral-900 dark:text-white">{{ ach.title }}</h3>
+                    <p class="mt-3 text-neutral-700 dark:text-neutral-300">{{ ach.description }}</p>
+                    {% if ach.tags %}
+                    <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-primary-600">{{ ach.tags }}</p>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Chi tiết đăng ký{% endblock %}
+{% block header_title %}Chi tiết đăng ký{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Đăng ký"
+breadcrumb_section_url=registrations_list_url breadcrumb_current=object.student_name %}
+
+<div class="portal-actions-sticky">
+    <h1 class="page-title">Chi tiết đăng ký: {{ object.student_name }}</h1>
+    <div style="display:flex;gap:8px">
+        <a href="{% url 'portal:admissions_registrations_list' %}" class="btn btn-secondary btn-sm">Quay lại</a>
+    </div>
+</div>
+
+<form method="post" class="portal-form" novalidate>
+    {% csrf_token %}
+    <div class="portal-card mb-6">
+        <div class="portal-card-header">
+            <h2 class="title-sm"><i class="fas fa-user-graduate"
+                    style="color:var(--p-primary);margin-right:6px;font-size:.85rem"></i>Thông tin đăng ký</h2>
+        </div>
+        <div class="portal-card-body">
+            {% include "portal/includes/form_fields.html" %}
+        </div>
+        <div class="portal-card-footer" style="display:flex;justify-content:flex-end;gap:8px">
+            <button type="submit" class="btn btn-primary btn-md btn-save-trigger">
+                <i class="fas fa-check icon-md"></i>
+                <span class="btn-text">Cập nhật</span>
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}

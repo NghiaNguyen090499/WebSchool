@@ -1,0 +1,88 @@
+{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Sự kiện{% endblock %}
+{% block header_title %}Sự kiện{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Sự kiện" %}
+
+<div class="portal-toolbar">
+    <div>
+        <h1 class="page-title">Quản lý Sự kiện</h1>
+        <p class="portal-subtitle">{{ page_obj.paginator.count|default:object_list.count }} sự kiện</p>
+    </div>
+    <a href="{% url 'portal:event_create' %}" class="btn btn-primary btn-md">
+        <i class="fas fa-plus icon-md"></i> Tạo sự kiện
+    </a>
+</div>
+
+<form method="get" class="portal-filters" role="search" aria-label="Bộ lọc sự kiện">
+    <div class="portal-search" style="flex:1;min-width:200px">
+        <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Tìm kiếm sự kiện..."
+            aria-label="Tìm kiếm">
+    </div>
+    <select name="time" aria-label="Thời gian" onchange="this.form.submit()">
+        <option value="">Tất cả</option>
+        <option value="upcoming" {% if request.GET.time == "upcoming" %}selected{% endif %}>Sắp tới</option>
+        <option value="past" {% if request.GET.time == "past" %}selected{% endif %}>Đã qua</option>
+    </select>
+    <select name="featured" aria-label="Nổi bật" onchange="this.form.submit()">
+        <option value="">Tất cả</option>
+        <option value="1" {% if request.GET.featured == "1" %}selected{% endif %}>Nổi bật</option>
+    </select>
+    <button type="submit" class="btn btn-secondary btn-sm"><i class="fas fa-search icon-md"></i>
+        Lọc</button>
+</form>
+
+<div class="portal-table-container">
+    <table class="portal-table" aria-label="Danh sách sự kiện">
+        <thead>
+            <tr>
+                <th scope="col">Tiêu đề</th>
+                <th scope="col">Ngày</th>
+                <th scope="col">Địa điểm</th>
+                <th scope="col">Nổi bật</th>
+                <th scope="col" style="text-align:right">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>
+                    <div class="font-semibold truncate" style="max-width:350px;color:var(--p-gray-800)">{{ item.title }}
+                    </div>
+                </td>
+                <td><time datetime="{{ item.date|date:'Y-m-d' }}">{{ item.date|date:"d/m/Y" }}</time></td>
+                <td>{{ item.location|default:"—" }}</td>
+                <td>
+                    {% if item.is_featured %}
+                    <span class="badge badge-warning"><i class="fas fa-star icon-xs"></i> Nổi bật</span>
+                    {% else %}<span class="text-muted">—</span>{% endif %}
+                </td>
+                <td style="text-align:right">
+                    <div style="display:flex;gap:6px;justify-content:flex-end">
+                        <a href="{% url 'portal:event_edit' item.pk %}" class="btn btn-ghost btn-xs"
+                            data-tooltip="Sửa"><i class="fas fa-pen icon-sm"></i></a>
+                        <a href="{% url 'portal:event_delete' item.pk %}" class="btn btn-ghost btn-xs"
+                            style="color:var(--p-danger)" data-tooltip="Xóa"><i class="fas fa-trash icon-sm"></i></a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">
+                    <div class="portal-empty-state py-8">
+                        <div class="portal-empty-icon"><i class="fas fa-calendar-days"></i></div>
+                        <p class="portal-empty-title">Chưa có sự kiện nào</p>
+                        <a href="{% url 'portal:event_create' %}" class="btn btn-primary btn-sm"><i class="fas fa-plus icon-md"></i> Tạo sự kiện</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include "portal/includes/pagination.html" %}
+{% endblock %}

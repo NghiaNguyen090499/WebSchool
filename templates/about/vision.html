@@ -1,0 +1,964 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title|default:"Tầm nhìn 2035" }} - MIS Đa Trí Tuệ{% endblock %}
+
+{% block meta_description %}
+{{ page.content|default:"Tầm nhìn 2035 của MIS: Trở thành trường học số hoá cấp độ 5, đào tạo học sinh thành thạo 2
+ngoại ngữ và làm chủ công nghệ AI, hướng tới công dân toàn cầu."|striptags|truncatechars:160 }}
+{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* ====================================== */
+    /* VISION PAGE – Premium Styles           */
+    /* ====================================== */
+
+    /* Reveal Animation */
+    .vision-reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 0.7s cubic-bezier(.16, 1, .3, 1), transform 0.7s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .vision-reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .vision-reveal.delay-1 {
+        transition-delay: 0.1s;
+    }
+
+    .vision-reveal.delay-2 {
+        transition-delay: 0.2s;
+    }
+
+    .vision-reveal.delay-3 {
+        transition-delay: 0.3s;
+    }
+
+    .vision-reveal.delay-4 {
+        transition-delay: 0.4s;
+    }
+
+    .vision-reveal.delay-5 {
+        transition-delay: 0.5s;
+    }
+
+    /* Hero enhancements */
+    .vision-hero__pattern {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, .08) 1px, transparent 0);
+        background-size: 28px 28px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    /* Chapter Card */
+    .chapter-card {
+        position: relative;
+        border-radius: 1.5rem;
+        border: 1px solid var(--color-neutral-200);
+        background: white;
+        padding: 2.5rem 2.5rem 2.5rem 3rem;
+        transition: all .35s cubic-bezier(.16, 1, .3, 1);
+        overflow: hidden;
+    }
+
+    .dark .chapter-card {
+        background: var(--color-neutral-900);
+        border-color: var(--color-neutral-800);
+    }
+
+    .chapter-card::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        background: var(--gradient-red);
+        border-radius: 1.5rem 0 0 1.5rem;
+    }
+
+    .chapter-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -12px rgba(220, 38, 38, .12);
+        border-color: rgba(220, 38, 38, .25);
+    }
+
+    .chapter-card__number {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(220, 38, 38, .08);
+        color: var(--color-brand-primary);
+        font-size: .875rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        letter-spacing: .05em;
+    }
+
+    .dark .chapter-card__number {
+        background: rgba(220, 38, 38, .15);
+        color: #fca5a5;
+    }
+
+    .chapter-card__icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-primary-dark));
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        margin-bottom: 1.25rem;
+        flex-shrink: 0;
+        box-shadow: 0 4px 14px rgba(220, 38, 38, .25);
+    }
+
+    .chapter-card__title {
+        font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+        font-weight: 800;
+        color: var(--color-neutral-900);
+        margin-bottom: 0.75rem;
+        line-height: 1.25;
+        padding-right: 3rem;
+    }
+
+    .dark .chapter-card__title {
+        color: white;
+    }
+
+    .chapter-card__intro {
+        font-size: 1.0625rem;
+        color: var(--color-neutral-600);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .dark .chapter-card__intro {
+        color: var(--color-neutral-300);
+    }
+
+    /* Highlight pill */
+    .highlight-pill {
+        display: flex;
+        align-items: flex-start;
+        gap: .875rem;
+        padding: 1.125rem 1.25rem;
+        border-radius: .875rem;
+        background: var(--color-neutral-50);
+        border: 1px solid var(--color-neutral-100);
+        transition: all .25s ease;
+    }
+
+    .dark .highlight-pill {
+        background: var(--color-neutral-800);
+        border-color: var(--color-neutral-700);
+    }
+
+    .highlight-pill:hover {
+        background: rgba(220, 38, 38, .04);
+        border-color: rgba(220, 38, 38, .15);
+    }
+
+    .dark .highlight-pill:hover {
+        background: rgba(220, 38, 38, .08);
+        border-color: rgba(220, 38, 38, .2);
+    }
+
+    .highlight-pill__dot {
+        flex-shrink: 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--color-brand-primary);
+        margin-top: .5rem;
+    }
+
+    .highlight-pill__label {
+        font-weight: 700;
+        color: var(--color-brand-primary-dark);
+        font-size: .9375rem;
+    }
+
+    .dark .highlight-pill__label {
+        color: #fca5a5;
+    }
+
+    .highlight-pill__text {
+        font-size: .9375rem;
+        color: var(--color-neutral-600);
+        line-height: 1.6;
+    }
+
+    .dark .highlight-pill__text {
+        color: var(--color-neutral-400);
+    }
+
+    /* KPI Card */
+    .kpi-card {
+        position: relative;
+        padding: 2rem 1.75rem;
+        border-radius: 1.25rem;
+        background: white;
+        border: 1px solid var(--color-neutral-100);
+        transition: all .3s ease;
+        overflow: hidden;
+    }
+
+    .dark .kpi-card {
+        background: var(--color-neutral-800);
+        border-color: var(--color-neutral-700);
+    }
+
+    .kpi-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--kpi-accent, var(--color-brand-primary));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .4s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .kpi-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .kpi-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px -8px rgba(0, 0, 0, .1);
+    }
+
+    .kpi-card__icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--kpi-bg, rgba(220, 38, 38, .08));
+        color: var(--kpi-accent, var(--color-brand-primary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .kpi-card__value {
+        font-size: clamp(1.75rem, 3vw, 2.25rem);
+        font-weight: 800;
+        color: var(--kpi-accent, var(--color-brand-primary));
+        margin-bottom: .375rem;
+        line-height: 1.1;
+    }
+
+    .kpi-card__label {
+        font-size: .875rem;
+        color: var(--color-neutral-500);
+        line-height: 1.5;
+    }
+
+    .dark .kpi-card__label {
+        color: var(--color-neutral-400);
+    }
+
+    /* Timeline */
+    .timeline-track {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 0;
+    }
+
+    @media (min-width: 768px) {
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            top: 32px;
+            left: 2rem;
+            right: 2rem;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-brand-primary), var(--color-accent-amber), var(--color-accent-emerald), var(--color-accent-blue));
+            border-radius: 3px;
+            z-index: 0;
+        }
+    }
+
+    .timeline-item {
+        position: relative;
+        text-align: center;
+        padding: 0 1.5rem;
+        z-index: 1;
+    }
+
+    .timeline-item__dot {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--tl-color, var(--color-brand-primary));
+        border: 4px solid white;
+        box-shadow: 0 0 0 3px var(--tl-color, var(--color-brand-primary));
+        margin: 22px auto 1.25rem;
+        position: relative;
+    }
+
+    .dark .timeline-item__dot {
+        border-color: var(--color-neutral-900);
+    }
+
+    .timeline-item__card {
+        border-radius: 1rem;
+        padding: 1.75rem 1.5rem;
+        background: white;
+        border: 1px solid var(--color-neutral-100);
+        transition: all .3s ease;
+    }
+
+    .dark .timeline-item__card {
+        background: var(--color-neutral-900);
+        border-color: var(--color-neutral-800);
+    }
+
+    .timeline-item__card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px -8px rgba(0, 0, 0, .1);
+    }
+
+    .timeline-item__badge {
+        display: inline-flex;
+        padding: .35rem .85rem;
+        border-radius: 999px;
+        background: var(--tl-bg, rgba(220, 38, 38, .08));
+        color: var(--tl-color, var(--color-brand-primary));
+        font-size: .75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+        margin-bottom: .75rem;
+    }
+
+    .timeline-item__title {
+        font-size: 1.0625rem;
+        font-weight: 700;
+        margin-bottom: .5rem;
+        color: var(--color-neutral-900);
+    }
+
+    .dark .timeline-item__title {
+        color: white;
+    }
+
+    .timeline-item__desc {
+        font-size: .875rem;
+        color: var(--color-neutral-500);
+        line-height: 1.6;
+    }
+
+    .dark .timeline-item__desc {
+        color: var(--color-neutral-400);
+    }
+
+    /* Strategic Goal Cards */
+    .goal-card {
+        position: relative;
+        padding: 2.25rem;
+        border-radius: 1.5rem;
+        background: white;
+        border: 1px solid var(--color-neutral-100);
+        transition: all .35s cubic-bezier(.16, 1, .3, 1);
+        overflow: hidden;
+    }
+
+    .dark .goal-card {
+        background: var(--color-neutral-900);
+        border-color: var(--color-neutral-800);
+    }
+
+    .goal-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, .12);
+    }
+
+    .goal-card--primary {
+        background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        color: white;
+        border: none;
+        box-shadow: 0 12px 32px -8px rgba(220, 38, 38, .35);
+    }
+
+    .goal-card--primary:hover {
+        box-shadow: 0 24px 48px -12px rgba(220, 38, 38, .4);
+    }
+
+    .goal-card__icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+        transition: transform .3s ease;
+    }
+
+    .goal-card:hover .goal-card__icon {
+        transform: scale(1.1);
+    }
+
+    .goal-card__icon--default {
+        background: rgba(220, 38, 38, .08);
+        color: var(--color-brand-primary);
+    }
+
+    .dark .goal-card__icon--default {
+        background: rgba(220, 38, 38, .15);
+        color: #fca5a5;
+    }
+
+    .goal-card__icon--primary {
+        background: rgba(255, 255, 255, .2);
+        color: white;
+    }
+
+    /* Section Divider */
+    .section-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--color-neutral-200), transparent);
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+    .dark .section-divider {
+        background: linear-gradient(90deg, transparent, var(--color-neutral-700), transparent);
+    }
+
+    /* Floating badge for "GRACE" section header */
+    .grace-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        padding: .5rem 1.25rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(220, 38, 38, .08), rgba(245, 158, 11, .08));
+        border: 1px solid rgba(220, 38, 38, .12);
+        color: var(--color-brand-primary);
+        font-size: .8125rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .05em;
+    }
+
+    .dark .grace-badge {
+        background: linear-gradient(135deg, rgba(220, 38, 38, .15), rgba(245, 158, 11, .1));
+        border-color: rgba(220, 38, 38, .2);
+        color: #fca5a5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .chapter-card {
+            padding: 1.75rem 1.5rem 1.75rem 1.75rem;
+        }
+
+        .chapter-card__number {
+            width: 36px;
+            height: 36px;
+            font-size: .75rem;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .timeline-track {
+            gap: 1.5rem;
+        }
+
+        .timeline-item {
+            padding: 0;
+        }
+
+        .timeline-item__dot {
+            margin-top: 0;
+        }
+    }
+</style>
+<noscript>
+    <style>
+        .vision-reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    </style>
+</noscript>
+{% endblock %}
+
+{% block content %}
+<main class="about-scope">
+    {% with hero_section=sections|first %}
+    <!-- ========== HERO SECTION ========== -->
+    <section
+        class="hero hero--gradient-red min-h-[60vh] relative flex items-center justify-center text-center px-4 overflow-hidden"
+        role="banner">
+        {% if hero_section and hero_section.image %}
+        <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-20"
+            style="background-image: url('{{ hero_section.image.url }}');"></div>
+        {% elif page.image %}
+        <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-20"
+            style="background-image: url('{{ page.image.url }}');"></div>
+        {% else %}
+        <div class="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-20"
+            style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop');">
+        </div>
+        {% endif %}
+        <div class="absolute inset-0 hero-gradient-overlay"></div>
+        <div class="vision-hero__pattern" aria-hidden="true"></div>
+
+        <!-- Decorative Blobs (reduced for performance) -->
+        <div class="hero__deco hero__deco--blob-1" aria-hidden="true"></div>
+        <div class="hero__deco hero__deco--blob-3" aria-hidden="true"></div>
+
+        <div class="hero__content relative z-10 max-w-4xl mx-auto">
+            <span class="badge badge--hero mb-6">
+                {% if hero_section and hero_section.eyebrow %}
+                {{ hero_section.eyebrow }}
+                {% else %}
+                Chiến lược phát triển
+                {% endif %}
+            </span>
+            <h1 class="hero__title">
+                {% if hero_section and hero_section.highlight_text %}
+                {{ hero_section.title }}
+                {% if hero_section.highlight_text %}
+                <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-red-200">{{
+                    hero_section.highlight_text }}</span>
+                {% endif %}
+                {% else %}
+                Tầm Nhìn 2035: <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-red-200">Trường Học Số Hoá &
+                    Trí Tuệ Nhân Tạo</span>
+                {% endif %}
+            </h1>
+            <p class="hero__subtitle">
+                {% if hero_section and hero_section.subtitle %}
+                {{ hero_section.subtitle }}
+                {% else %}
+                MIS phấn đấu trở thành "Trường học số hoá cấp độ 5" – nơi học sinh không chỉ học kiến thức mà còn làm
+                chủ công nghệ để kiến tạo tương lai.
+                {% endif %}
+            </p>
+            <div class="hero__cta-group">
+                {% if hero_section and hero_section.cta_text %}
+                <a href="{% if hero_section.cta_url %}{{ hero_section.cta_url }}{% else %}{% url 'admissions:list' %}{% endif %}"
+                    class="btn btn--primary btn--lg shadow-xl shadow-red-900/20">
+                    {{ hero_section.cta_text }}
+                </a>
+                {% else %}
+                <a href="{% url 'admissions:list' %}" class="btn btn--primary btn--lg shadow-xl shadow-red-900/20">
+                    Đăng ký tư vấn
+                </a>
+                {% endif %}
+
+                {% if hero_section and hero_section.cta_secondary_text %}
+                <a href="{% if hero_section.cta_secondary_url %}{{ hero_section.cta_secondary_url }}{% else %}#core-vision{% endif %}"
+                    class="btn btn--ghost-light btn--lg backdrop-blur-md">
+                    {{ hero_section.cta_secondary_text }}
+                </a>
+                {% else %}
+                <a href="#core-vision" class="btn btn--ghost-light btn--lg backdrop-blur-md">
+                    Khám phá chi tiết
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endwith %}
+
+    <!-- ========== VISION 2035 CHAPTERS ========== -->
+    {% if vision_2035_block %}
+    <section class="section bg-neutral-50 dark:bg-neutral-950" id="vision-chapters">
+        <div class="container">
+            <div class="section-header section-header--center vision-reveal">
+                <span class="badge badge--primary mb-4">Tầm nhìn 2035</span>
+                <h2 class="section-header__title">{{ vision_2035_block.title|default:"Kỷ Nguyên Của Nền Kinh Tế Sáng Tạo" }}</h2>
+                {% if vision_2035_block.intro %}
+                <p class="section-header__subtitle">{{ vision_2035_block.intro }}</p>
+                {% endif %}
+            </div>
+
+            {% if vision_2035_block.chapters %}
+            <div class="max-w-4xl mx-auto space-y-8">
+                {% for chapter in vision_2035_block.chapters %}
+                <article class="chapter-card vision-reveal delay-{{ forloop.counter }}">
+                    <div class="chapter-card__number">{{ chapter.key|default:forloop.counter }}</div>
+                    <div class="chapter-card__icon">
+                        <i
+                            class="fas {% if forloop.counter == 1 %}fa-rocket{% elif forloop.counter == 2 %}fa-brain{% elif forloop.counter == 3 %}fa-chalkboard-user{% elif forloop.counter == 4 %}fa-cogs{% else %}fa-lightbulb{% endif %}"></i>
+                    </div>
+                    <h3 class="chapter-card__title">{{ chapter.title }}</h3>
+                    {% if chapter.intro %}
+                    <p class="chapter-card__intro">{{ chapter.intro }}</p>
+                    {% endif %}
+
+                    {% if chapter.highlights %}
+                    <div class="space-y-3">
+                        {% for item in chapter.highlights %}
+                        <div class="highlight-pill">
+                            <div class="highlight-pill__dot"></div>
+                            <div>
+                                <span class="highlight-pill__label">{{ item.label }}:</span>
+                                <span class="highlight-pill__text">{{ item.content }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            {# Fallback: single block (no chapters) #}
+            <div class="max-w-4xl mx-auto">
+                <article class="chapter-card vision-reveal">
+                    <div class="chapter-card__icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="chapter-card__title">{{ vision_2035_block.title }}</h3>
+                    <p class="chapter-card__intro">{{ vision_2035_block.intro }}</p>
+                    {% if vision_2035_block.highlights %}
+                    <div class="space-y-3">
+                        {% for item in vision_2035_block.highlights %}
+                        <div class="highlight-pill">
+                            <div class="highlight-pill__dot"></div>
+                            <div>
+                                <span class="highlight-pill__label">{{ item.label }}:</span>
+                                <span class="highlight-pill__text">{{ item.content }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </article>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- ========== STRATEGIC GOALS ========== -->
+    {% with goal_intro=sections|slice:"0:0"|first goal_sections=sections|slice:"1:5" %}
+    <section id="core-vision" class="section bg-white dark:bg-neutral-900">
+        <div class="container">
+            <div class="section-header section-header--center vision-reveal">
+                <span class="badge badge--primary mb-4">
+                    {% if goal_intro and goal_intro.eyebrow %}
+                    {{ goal_intro.eyebrow }}
+                    {% else %}
+                    Mục tiêu chiến lược
+                    {% endif %}
+                </span>
+                <h2 class="section-header__title">
+                    {% if goal_intro and goal_intro.title %}
+                    {{ goal_intro.title }}
+                    {% else %}
+                    Định Hình Tương Lai Giáo Dục
+                    {% endif %}
+                </h2>
+                <p class="section-header__subtitle">
+                    {% if goal_intro and goal_intro.subtitle %}
+                    {{ goal_intro.subtitle }}
+                    {% elif goal_intro and goal_intro.content %}
+                    {{ goal_intro.content|striptags }}
+                    {% else %}
+                    Chuyển dịch từ giáo dục kiến thức sang bồi dưỡng tư duy phản biện, giải quyết vấn đề và năng lực
+                    lãnh đạo trong kỷ nguyên số.
+                    {% endif %}
+                </p>
+            </div>
+
+            {% if goal_sections %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                {% for section in goal_sections %}
+                {% if forloop.counter == 2 %}
+                <div class="goal-card goal-card--primary transform md:-translate-y-4 vision-reveal delay-2">
+                    <div class="goal-card__icon goal-card__icon--primary">
+                        <i class="fas {% if forloop.counter == 2 %}fa-robot{% else %}fa-star{% endif %}"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">{{ section.title }}</h3>
+                    {% if section.get_kpi_list %}
+                    <ul class="space-y-3 text-white/90">
+                        {% for item in section.get_kpi_list %}
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-yellow-400 mt-1 flex-shrink-0"></i>
+                            <span>{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% elif section.get_timeline_list %}
+                    <ul class="space-y-3 text-white/90">
+                        {% for item in section.get_timeline_list %}
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-yellow-400 mt-1 flex-shrink-0"></i>
+                            <span>{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% elif section.subtitle %}
+                    <p class="text-white/90">{{ section.subtitle }}</p>
+                    {% else %}
+                    <p class="text-white/90">{{ section.content|linebreaksbr }}</p>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="goal-card vision-reveal delay-{% if forloop.counter == 1 %}1{% else %}3{% endif %}">
+                    <div class="goal-card__icon goal-card__icon--default">
+                        <i class="fas {% if forloop.counter == 1 %}fa-heart{% else %}fa-language{% endif %}"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-neutral-900 dark:text-white">{{ section.title }}</h3>
+                    {% if section.get_kpi_list %}
+                    <ul class="space-y-3 text-neutral-600 dark:text-neutral-400">
+                        {% for item in section.get_kpi_list %}
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-red-500 mt-1 flex-shrink-0"></i>
+                            <span>{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% elif section.get_timeline_list %}
+                    <ul class="space-y-3 text-neutral-600 dark:text-neutral-400">
+                        {% for item in section.get_timeline_list %}
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-red-500 mt-1 flex-shrink-0"></i>
+                            <span>{{ item }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% elif section.subtitle %}
+                    <p class="text-neutral-600 dark:text-neutral-400">{{ section.subtitle }}</p>
+                    {% else %}
+                    <p class="text-neutral-600 dark:text-neutral-400">{{ section.content|linebreaksbr }}</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% else %}
+            {# Fallback cards with Vietnamese content #}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Card 1: Foreign Languages -->
+                <div class="goal-card vision-reveal delay-1">
+                    <div class="goal-card__icon goal-card__icon--default">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-neutral-900 dark:text-white">Ngoại Ngữ</h3>
+                    <ul class="space-y-3 text-neutral-600 dark:text-neutral-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-red-500 mt-1 flex-shrink-0"></i>
+                            <span>Thành thạo Anh–Trung, giao tiếp học thuật, tư duy đa văn hóa</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: AI -->
+                <div class="goal-card goal-card--primary transform md:-translate-y-4 vision-reveal delay-2">
+                    <div class="goal-card__icon goal-card__icon--primary">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Trí Tuệ Nhân Tạo</h3>
+                    <ul class="space-y-3 text-white/90">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-yellow-400 mt-1 flex-shrink-0"></i>
+                            <span>Năng lực dữ liệu, công nghệ, ứng dụng AI an toàn trong học tập</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Heart -->
+                <div class="goal-card vision-reveal delay-3">
+                    <div class="goal-card__icon goal-card__icon--default"
+                        style="background: rgba(59,130,246,.08); color: #3b82f6;">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-neutral-900 dark:text-white">Nhân Cách</h3>
+                    <ul class="space-y-3 text-neutral-600 dark:text-neutral-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check-circle text-blue-500 mt-1 flex-shrink-0"></i>
+                            <span>Phát triển nhân cách GRACE, bền vững cảm xúc & đạo đức</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    {% endwith %}
+
+    <!-- ========== KPI 2035 ========== -->
+    <section class="section bg-neutral-50 dark:bg-neutral-900">
+        <div class="container">
+            <div class="section-header section-header--center vision-reveal">
+                <span class="grace-badge">
+                    <i class="fas fa-chart-line"></i>
+                    KPI 2035
+                </span>
+                <h2 class="section-header__title mt-4">Chuẩn đầu ra & năng lực công dân số</h2>
+                <p class="section-header__subtitle">
+                    Tập trung vào ngoại ngữ, năng lực số và khả năng làm chủ AI trong học tập – nghiên cứu – công việc.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="kpi-card vision-reveal delay-1"
+                    style="--kpi-accent: #dc2626; --kpi-bg: rgba(220,38,38,.08);">
+                    <div class="kpi-card__icon"><i class="fas fa-users"></i></div>
+                    <div class="kpi-card__value">100%</div>
+                    <p class="kpi-card__label">Học sinh thành thạo 2 ngoại ngữ & làm chủ AI.</p>
+                </div>
+                <div class="kpi-card vision-reveal delay-2"
+                    style="--kpi-accent: #d97706; --kpi-bg: rgba(217,119,6,.08);">
+                    <div class="kpi-card__icon"><i class="fas fa-award"></i></div>
+                    <div class="kpi-card__value">IELTS 5.0–8.5</div>
+                    <p class="kpi-card__label">Chuẩn năng lực tiếng Anh theo lộ trình.</p>
+                </div>
+                <div class="kpi-card vision-reveal delay-3"
+                    style="--kpi-accent: #dc2626; --kpi-bg: rgba(220,38,38,.08);">
+                    <div class="kpi-card__icon"><i class="fas fa-certificate"></i></div>
+                    <div class="kpi-card__value">HSK 4–6</div>
+                    <p class="kpi-card__label">Chuẩn năng lực tiếng Trung theo cấp.</p>
+                </div>
+                <div class="kpi-card vision-reveal delay-1"
+                    style="--kpi-accent: #334155; --kpi-bg: rgba(51,65,85,.08);">
+                    <div class="kpi-card__icon"><i class="fas fa-university"></i></div>
+                    <div class="kpi-card__value">Đại học TOP</div>
+                    <p class="kpi-card__label">Tỷ lệ đỗ các trường hàng đầu trong & ngoài nước.</p>
+                </div>
+                <div class="kpi-card vision-reveal delay-2"
+                    style="--kpi-accent: #059669; --kpi-bg: rgba(5,150,105,.08);">
+                    <div class="kpi-card__icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="kpi-card__value">Học bổng</div>
+                    <p class="kpi-card__label">Du học & học bổng quốc tế cho học sinh nổi trội.</p>
+                </div>
+                <div class="kpi-card vision-reveal delay-3"
+                    style="--kpi-accent: #4f46e5; --kpi-bg: rgba(79,70,229,.08);">
+                    <div class="kpi-card__icon"><i class="fas fa-globe"></i></div>
+                    <div class="kpi-card__value">Công dân số</div>
+                    <p class="kpi-card__label">Chuẩn năng lực số và tư duy toàn cầu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ROADMAP 2025–2028 TIMELINE ========== -->
+    <section class="section bg-white dark:bg-neutral-950">
+        <div class="container">
+            <div class="section-header section-header--center vision-reveal">
+                <span class="badge badge--primary mb-4">Roadmap 2025–2028</span>
+                <h2 class="section-header__title">Chiến lược phát triển trọng tâm</h2>
+                <p class="section-header__subtitle">
+                    Chuẩn hoá – quốc tế hoá chương trình, phát triển đội ngũ và xây dựng hệ sinh thái giáo dục thông
+                    minh – xanh – sáng tạo.
+                </p>
+            </div>
+
+            <div class="timeline-track vision-reveal">
+                <div class="timeline-item" style="--tl-color: #dc2626; --tl-bg: rgba(220,38,38,.08);">
+                    <div class="timeline-item__dot"></div>
+                    <div class="timeline-item__card">
+                        <span class="timeline-item__badge">Giai đoạn 1</span>
+                        <h3 class="timeline-item__title">Chuẩn hoá & quốc tế hoá</h3>
+                        <p class="timeline-item__desc">Nâng chuẩn chương trình, tích hợp phương pháp hiện đại, phát
+                            triển song ngữ.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="--tl-color: #d97706; --tl-bg: rgba(217,119,6,.08);">
+                    <div class="timeline-item__dot"></div>
+                    <div class="timeline-item__card">
+                        <span class="timeline-item__badge">Giai đoạn 2</span>
+                        <h3 class="timeline-item__title">Đội ngũ chất lượng cao</h3>
+                        <p class="timeline-item__desc">Phát triển chuyên môn, năng lực số và vai trò người thiết kế học
+                            tập.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="--tl-color: #059669; --tl-bg: rgba(5,150,105,.08);">
+                    <div class="timeline-item__dot"></div>
+                    <div class="timeline-item__card">
+                        <span class="timeline-item__badge">Giai đoạn 3</span>
+                        <h3 class="timeline-item__title">Smart–Green–Creative</h3>
+                        <p class="timeline-item__desc">Ứng dụng công nghệ trong quản trị, môi trường thân thiện và không
+                            gian sáng tạo.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="--tl-color: #4f46e5; --tl-bg: rgba(79,70,229,.08);">
+                    <div class="timeline-item__dot"></div>
+                    <div class="timeline-item__card">
+                        <span class="timeline-item__badge">Giai đoạn 4</span>
+                        <h3 class="timeline-item__title">Học tập linh hoạt</h3>
+                        <p class="timeline-item__desc">Trải nghiệm học tập hiện đại, hợp tác, bền vững theo từng giai
+                            đoạn.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER CTA ========== -->
+    {% with cta_section=sections|last %}
+    {% if cta_section and cta_section.cta_text %}
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_title=cta_section.title|default:'Đồng hành cùng sự phát triển của con' cta_subtitle=cta_section.subtitle|default:'Hãy để MIS là nơi chắp cánh cho ước mơ và tài năng của con bạn trong kỷ nguyên mới.' cta_primary=cta_section.cta_text|default:'Đăng ký tư vấn ngay' cta_primary_url=cta_section.cta_url|default:'admissions:list' cta_secondary=cta_section.cta_secondary_text cta_secondary_url=cta_section.cta_secondary_url %}
+    {% else %}
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_title='Đồng hành cùng sự phát triển của con' cta_subtitle='Hãy để MIS là nơi chắp cánh cho ước mơ và tài năng của con bạn trong kỷ nguyên mới.' cta_primary='Đăng ký tư vấn ngay' cta_primary_url='admissions:list' %}
+    {% endif %}
+    {% endwith %}
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    /* ========================================= */
+    /* Scroll-Reveal (IntersectionObserver)      */
+    /* ========================================= */
+    (function () {
+        const els = document.querySelectorAll('.vision-reveal');
+        if (!els.length) return;
+
+        const prefersReducedMotion =
+            typeof window.matchMedia === 'function' &&
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (prefersReducedMotion) {
+            els.forEach(el => el.classList.add('is-visible'));
+            return;
+        }
+
+        if (!('IntersectionObserver' in window)) {
+            els.forEach(el => el.classList.add('is-visible'));
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+        els.forEach(el => observer.observe(el));
+    })();
+</script>
+{% endblock %}

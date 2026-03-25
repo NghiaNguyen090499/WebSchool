@@ -1,0 +1,52 @@
+{% extends "core/lowfi/base.html" %}
+
+{% block lowfi_body %}
+{% if lowfi_page.body_html %}
+{{ lowfi_page.body_html|safe }}
+{% else %}
+{% for block in lowfi_blocks %}
+    {% if block.grid %}
+    <section class="mis-grid {{ block.grid }} mis-reveal"{% if block.delay %} data-delay="{{ block.delay }}"{% endif %}>
+        {% for item in block.items %}
+            {% if item.variant == "link-card" %}
+            <a class="mis-card" href="{{ item.href|default:'#' }}">
+                {% include "core/lowfi/partials/panel.html" with panel=item %}
+            </a>
+            {% elif item.variant == "card" %}
+            <div class="mis-card">
+                {% include "core/lowfi/partials/panel.html" with panel=item %}
+            </div>
+            {% else %}
+            <article class="mis-section">
+                {% include "core/lowfi/partials/panel.html" with panel=item %}
+            </article>
+            {% endif %}
+        {% endfor %}
+    </section>
+    {% else %}
+    <section class="{{ block.section_class|default:'mis-section' }} mis-reveal"{% if block.delay %} data-delay="{{ block.delay }}"{% endif %}>
+        {% include "core/lowfi/partials/panel.html" with panel=block %}
+        {% if block.items %}
+        <div class="mis-grid {{ block.items_grid|default:'two' }}"{% if block.items_margin_top %} style="margin-top:{{ block.items_margin_top }};"{% endif %}>
+            {% for item in block.items %}
+                {% if item.variant == "link-card" %}
+                <a class="mis-card" href="{{ item.href|default:'#' }}">
+                    {% include "core/lowfi/partials/panel.html" with panel=item %}
+                </a>
+                {% elif item.variant == "card" %}
+                <div class="mis-card">
+                    {% include "core/lowfi/partials/panel.html" with panel=item %}
+                </div>
+                {% else %}
+                <article class="mis-section">
+                    {% include "core/lowfi/partials/panel.html" with panel=item %}
+                </article>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </section>
+    {% endif %}
+{% endfor %}
+{% endif %}
+{% endblock %}

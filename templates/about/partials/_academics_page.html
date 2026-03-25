@@ -1,0 +1,330 @@
+{% load i18n static %}
+
+<!-- ACADEMICS OVERVIEW PAGE - PROFESSIONAL VERSION -->
+
+<!-- Hero Section - Clean & Professional -->
+<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-neutral-900">
+    {% if page.image %}
+    <div class="absolute inset-0">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-full object-cover opacity-15">
+    </div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-b from-neutral-900/90 via-neutral-900/70 to-neutral-900"></div>
+
+    <!-- Subtle gradient accent -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 right-0 w-[50%] h-[60%] bg-gradient-to-bl from-red-900/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-[40%] h-[50%] bg-gradient-to-tr from-red-900/15 to-transparent"></div>
+    </div>
+
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <!-- Tagline -->
+        <div class="flex items-center justify-center gap-4 mb-8 animate-fadeInUp">
+            <span class="h-px w-12 bg-red-500/50"></span>
+            <p class="text-sm md:text-base font-medium tracking-widest uppercase text-neutral-400">
+                Giáo dục con tim • Kiến tạo giá trị sống
+            </p>
+            <span class="h-px w-12 bg-red-500/50"></span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight animate-fadeInUp"
+            style="animation-delay: 0.1s">
+            Chương trình Giáo dục MIS
+        </h1>
+        <p class="text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto mb-12 leading-relaxed animate-fadeInUp"
+            style="animation-delay: 0.2s">
+            Hệ thống đào tạo liên cấp từ Mầm non đến THPT, tích hợp chương trình Quốc gia với phương pháp giáo dục hiện
+            đại
+        </p>
+
+        <!-- Stats Bar -->
+        <div class="inline-flex flex-wrap justify-center items-center gap-8 md:gap-12 px-8 py-5 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 animate-fadeInUp"
+            style="animation-delay: 0.3s">
+            <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-white">4</div>
+                <div class="text-xs uppercase tracking-wider text-neutral-400 mt-1">Cấp học</div>
+            </div>
+            <div class="w-px h-10 bg-white/20"></div>
+            <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-white">3–18</div>
+                <div class="text-xs uppercase tracking-wider text-neutral-400 mt-1">Tuổi</div>
+            </div>
+            <div class="w-px h-10 bg-white/20"></div>
+            <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-white">2</div>
+                <div class="text-xs uppercase tracking-wider text-neutral-400 mt-1">Ngoại ngữ</div>
+            </div>
+            <div class="w-px h-10 bg-white/20"></div>
+            <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-white">AI</div>
+                <div class="text-xs uppercase tracking-wider text-neutral-400 mt-1">Tích hợp</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Future with AI Section - Clean Design -->
+<section class="py-20 md:py-28 bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Left Content -->
+            <div class="animate-fadeInUp">
+                <div
+                    class="inline-block px-4 py-1.5 rounded-full bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 text-xs font-semibold uppercase tracking-wider mb-6">
+                    Future with AI
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-6 leading-tight">
+                    Định hướng giáo dục<br>
+                    <span class="text-red-600 dark:text-red-500">tích hợp AI</span>
+                </h2>
+                <p class="text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed mb-8">
+                    Future with AI là định hướng tích hợp AI và dữ liệu vào mỗi môn học, chuẩn bị cho học sinh thành
+                    công trong kỷ nguyên số.
+                </p>
+
+                <div class="space-y-5">
+                    <div class="flex gap-4">
+                        <div class="w-1 bg-red-600 rounded-full flex-shrink-0"></div>
+                        <div>
+                            <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Tư duy số</h3>
+                            <p class="text-neutral-600 dark:text-neutral-400 text-sm">Học sinh rèn tư duy số, biết dùng
+                                AI đúng cách và có đạo đức số</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-1 bg-red-600 rounded-full flex-shrink-0"></div>
+                        <div>
+                            <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Cá nhân hóa học tập</h3>
+                            <p class="text-neutral-600 dark:text-neutral-400 text-sm">Giáo viên dùng AI để cá nhân hóa
+                                học tập và theo dõi tiến bộ</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="w-1 bg-red-600 rounded-full flex-shrink-0"></div>
+                        <div>
+                            <h3 class="font-semibold text-neutral-900 dark:text-white mb-1">Học tập suốt đời</h3>
+                            <p class="text-neutral-600 dark:text-neutral-400 text-sm">Mục tiêu là năng lực học tập suốt
+                                đời, không chỉ điểm số</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="animate-fadeInUp" style="animation-delay: 0.15s">
+                <div class="bg-neutral-900 dark:bg-neutral-800 rounded-3xl p-10 text-center">
+                    <div class="text-xs uppercase tracking-widest text-neutral-500 mb-8">Tầm nhìn 2035</div>
+
+                    <div class="grid grid-cols-3 gap-4 mb-10">
+                        <div class="py-4 px-3 rounded-xl bg-neutral-800 dark:bg-neutral-700">
+                            <div class="text-white font-semibold text-sm">Foreign</div>
+                            <div class="text-neutral-400 text-xs mt-1">Languages</div>
+                        </div>
+                        <div class="py-4 px-3 rounded-xl bg-red-600">
+                            <div class="text-white font-semibold text-sm">Heart</div>
+                            <div class="text-red-200 text-xs mt-1">Education</div>
+                        </div>
+                        <div class="py-4 px-3 rounded-xl bg-neutral-800 dark:bg-neutral-700">
+                            <div class="text-white font-semibold text-sm">AI</div>
+                            <div class="text-neutral-400 text-xs mt-1">Integration</div>
+                        </div>
+                    </div>
+
+                    <p class="text-neutral-400 text-sm max-w-sm mx-auto mb-10">
+                        Kết hợp ngoại ngữ, giáo dục con tim và công nghệ AI để tạo nền tảng vững chắc cho tương lai
+                    </p>
+
+                    <div class="grid grid-cols-3 gap-6 pt-8 border-t border-neutral-700">
+                        <div>
+                            <div class="text-2xl font-bold text-white">100%</div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wide mt-1">AI Ready</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">2</div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wide mt-1">Ngôn ngữ</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">GRACE</div>
+                            <div class="text-xs text-neutral-500 uppercase tracking-wide mt-1">Giá trị</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4 Education Levels - Professional Cards -->
+<section class="py-20 md:py-28 bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 animate-fadeInUp">
+            <div
+                class="inline-block px-4 py-1.5 rounded-full bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 text-xs font-semibold uppercase tracking-wider mb-6">
+                4 Cấp học
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+                Lộ trình Phát triển Toàn diện
+            </h2>
+            <p class="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                Mỗi cấp học tại MIS được thiết kế với triết lý "Khai phá khác biệt", phát triển đồng thời trí tuệ, nhân
+                cách và kỹ năng
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Preschool -->
+            <a href="{% url 'about:preschool' %}"
+                class="group bg-white dark:bg-neutral-800 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 hover:border-red-300 dark:hover:border-red-700 transition-all hover:shadow-xl hover:-translate-y-1 animate-fadeInUp"
+                style="animation-delay: 0.05s">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-wider">01</span>
+                    <span class="text-xs text-neutral-400">3–6 tuổi</span>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Mầm Non</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">Song ngữ 50/50</p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-6">
+                    Phương pháp Hands-on Learning, môi trường song ngữ Anh-Việt, khơi dậy trí tò mò và sáng tạo
+                </p>
+                <span class="text-red-600 dark:text-red-500 font-medium text-sm group-hover:underline">
+                    Xem chi tiết →
+                </span>
+            </a>
+
+            <!-- Primary -->
+            <a href="{% url 'about:primary' %}"
+                class="group bg-white dark:bg-neutral-800 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 hover:border-red-300 dark:hover:border-red-700 transition-all hover:shadow-xl hover:-translate-y-1 animate-fadeInUp"
+                style="animation-delay: 0.1s">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-wider">02</span>
+                    <span class="text-xs text-neutral-400">Lớp 1–5</span>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Tiểu Học</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">Cambridge + STEM</p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-6">
+                    Tích hợp STEM/STEAM, Tiếng Anh Cambridge, làm quen Tiếng Trung và các hoạt động trải nghiệm
+                </p>
+                <span class="text-red-600 dark:text-red-500 font-medium text-sm group-hover:underline">
+                    Xem chi tiết →
+                </span>
+            </a>
+
+            <!-- Middle -->
+            <a href="{% url 'about:middle' %}"
+                class="group bg-white dark:bg-neutral-800 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 hover:border-red-300 dark:hover:border-red-700 transition-all hover:shadow-xl hover:-translate-y-1 animate-fadeInUp"
+                style="animation-delay: 0.15s">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-wider">03</span>
+                    <span class="text-xs text-neutral-400">Lớp 6–9</span>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">THCS</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">9 Trí tuệ + Robotics</p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-6">
+                    Phát triển 9 loại hình trí tuệ, Robotics, Debate, AI và các CLB học thuật chuyên sâu
+                </p>
+                <span class="text-red-600 dark:text-red-500 font-medium text-sm group-hover:underline">
+                    Xem chi tiết →
+                </span>
+            </a>
+
+            <!-- High -->
+            <a href="{% url 'about:high' %}"
+                class="group bg-white dark:bg-neutral-800 rounded-2xl p-8 border border-neutral-200 dark:border-neutral-700 hover:border-red-300 dark:hover:border-red-700 transition-all hover:shadow-xl hover:-translate-y-1 animate-fadeInUp"
+                style="animation-delay: 0.2s">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-wider">04</span>
+                    <span class="text-xs text-neutral-400">Lớp 10–12</span>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">THPT</h3>
+                <p class="text-sm text-neutral-500 dark:text-neutral-400 mb-2">Nghề nghiệp 4.0</p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mb-6">
+                    Định hướng nghề nghiệp 4.0, thực tập doanh nghiệp công nghệ, lộ trình cá nhân hóa
+                </p>
+                <span class="text-red-600 dark:text-red-500 font-medium text-sm group-hover:underline">
+                    Xem chi tiết →
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 4 Pillars Section - Minimal Style -->
+<section class="py-20 md:py-28 bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 animate-fadeInUp">
+            <div
+                class="inline-block px-4 py-1.5 rounded-full bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 text-xs font-semibold uppercase tracking-wider mb-6">
+                4 Trụ cột
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+                Phát triển Toàn diện Con người
+            </h2>
+            <p class="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
+                Nền tảng giáo dục khai phóng, phát triển toàn diện trí – đức – thể – mỹ
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-neutral-200 dark:bg-neutral-700 rounded-2xl overflow-hidden animate-fadeInUp"
+            style="animation-delay: 0.1s">
+            <div class="bg-white dark:bg-neutral-800 p-8">
+                <div class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-wider mb-4">01</div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white mb-3">Học Làm Người</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    Năng lực Cảm xúc Xã hội (SEL), mô thức GRACE, giáo dục nhân cách
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-neutral-800 p-8">
+                <div class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-wider mb-4">02</div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white mb-3">Vững Vàng Tri Thức</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    2 Ngoại ngữ (Anh + Trung), AI, Công nghệ, Toán tư duy
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-neutral-800 p-8">
+                <div class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-wider mb-4">03</div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white mb-3">Thành thục Kỹ năng</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    5Cs: Giao tiếp, Tư duy phản biện, Hợp tác, Sáng tạo, Tư duy máy tính
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-neutral-800 p-8">
+                <div class="text-xs font-bold text-red-600 dark:text-red-500 uppercase tracking-wider mb-4">04</div>
+                <h3 class="text-lg font-bold text-neutral-900 dark:text-white mb-3">Thể lực - Tinh thần</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    Rèn luyện thể chất, EQ, sức khỏe tinh thần lành mạnh
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section - Clean -->
+<section class="py-20 md:py-24 bg-neutral-900 relative overflow-hidden">
+    <!-- Subtle accent -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/3 w-[40%] h-[60%] bg-gradient-to-br from-red-900/30 to-transparent"></div>
+    </div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 animate-fadeInUp">
+            Khám phá chi tiết từng cấp học
+        </h2>
+        <p class="text-lg text-neutral-400 mb-10 max-w-2xl mx-auto animate-fadeInUp" style="animation-delay: 0.1s">
+            Tìm hiểu chương trình phù hợp cho con bạn và đăng ký tham quan trường ngay hôm nay
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeInUp"
+            style="animation-delay: 0.2s">
+            <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">
+                Đặt lịch tham quan
+            </a>
+            <a href="{% url 'admissions:list' %}"
+                class="btn btn-ghost-invert btn-lg">
+                Đăng ký tuyển sinh
+            </a>
+        </div>
+    </div>
+</section>

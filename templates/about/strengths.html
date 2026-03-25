@@ -1,0 +1,551 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}8 Điểm Mạnh Khác Biệt - MIS Đa Trí Tuệ{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/pdf-images.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="section relative hero-gradient-bg overflow-hidden">
+    <div class="absolute inset-0 bg-[url('{% static 'images/hero/slide1.jpg' %}')] bg-cover bg-center opacity-20"></div>
+    <div class="absolute inset-0 hero-gradient-overlay"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span
+            class="inline-block px-6 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-bold mb-6 border border-white/30">
+            <i class="fas fa-star mr-2"></i>Điểm khác biệt
+        </span>
+        <h1 class="hero-title mb-6">
+            8 Điểm Mạnh Khác Biệt<br>
+            <span class="text-red-200">Vượt Trội của MIS</span>
+        </h1>
+        <p class="hero-lead max-w-3xl mx-auto mb-8">
+            Những giá trị cốt lõi tạo nên sự khác biệt của Hệ thống Giáo dục Đa Trí Tuệ
+        </p>
+    </div>
+</section>
+
+<!-- 8 Strengths Summary -->
+<section class="section bg-white dark:bg-neutral-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% include 'about/partials/_section_header.html' with title='8 điểm mạnh cốt lõi' subtitle='Tóm lược những điểm khác biệt nổi bật của MIS' alignment='center' %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">Giáo dục con tim</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">GRACE & SEL nuôi dưỡng nhân cách và cảm xúc xã hội.</p>
+            </div>
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">Đa trí tuệ – Đa phương pháp</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Thiết kế học tập theo đa trí tuệ, đa trải nghiệm.</p>
+            </div>
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">Đa ngoại ngữ</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Song hành IELTS & HSK, lợi thế cạnh tranh toàn cầu.</p>
+            </div>
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">Smart Math tích hợp AI</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Tư duy logic, mô hình hóa và ứng dụng công nghệ.</p>
+            </div>
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">STEAM & Robotics</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Học qua dự án, thiết kế và giải quyết vấn đề.</p>
+            </div>
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">AI-Ready Classroom</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Lớp học thông minh, AR/VR, phòng lab hiện đại.</p>
+            </div>
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">Cá nhân hóa lộ trình</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">AI-Track và hồ sơ năng lực xuyên suốt.</p>
+            </div>
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">Chuẩn đầu ra vượt trội</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">IELTS/HSK, học bổng và đại học top.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Awards 2025 Chart -->
+<section class="section bg-neutral-50 dark:bg-neutral-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% include 'about/partials/_section_header.html' with title='Thành tích nổi bật 2025' subtitle='STEAM Cup Quốc tế Malaysia 2025' alignment='center' %}
+        <div class="bg-white dark:bg-neutral-900 p-8 rounded-3xl shadow-lg">
+            <div class="space-y-6">
+                <div>
+                    <div class="flex items-center justify-between text-sm font-semibold mb-2">
+                        <span>Giải Vàng</span>
+                        <span>02</span>
+                    </div>
+                    <div class="h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div class="h-2 bg-yellow-500 w-[40%]"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center justify-between text-sm font-semibold mb-2">
+                        <span>Giải Đồng</span>
+                        <span>04</span>
+                    </div>
+                    <div class="h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div class="h-2 bg-amber-700 w-[80%]"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-neutral-600 dark:text-neutral-400 mt-6">
+                Dẫn đầu đoàn Việt Nam tại STEAM Cup Quốc tế 2025.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Facilities Highlight -->
+<section class="section bg-white dark:bg-neutral-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {% include 'about/partials/_section_header.html' with title='Facilities highlight' subtitle='Không gian học tập hiện đại & trải nghiệm xanh' alignment='center' %}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">100% lớp học thông minh</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Màn hình tương tác, âm thanh – ánh sáng chuẩn cao.</p>
+            </div>
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">Lab AI & AR/VR</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Phòng I-correct AI, trải nghiệm học tập số hóa.</p>
+            </div>
+            <div class="bg-neutral-50 dark:bg-neutral-800 p-6 rounded-2xl">
+                <h3 class="font-semibold mb-2">Pandora Landscape 5ha</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400">Không gian trải nghiệm thực tế về nông nghiệp & sinh thái.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% comment %}
+<!-- Strength 1: Môi trường thân thiện -->
+<section class="section bg-white dark:bg-neutral-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2">
+                <div class="flex items-center gap-4 mb-6">
+                    <div
+                        class="w-16 h-16 bg-accent-100 dark:bg-accent-900/30 rounded-2xl flex items-center justify-center">
+                        <span class="text-3xl font-bold text-accent-600">1</span>
+                    </div>
+                    <h2 class="title-md">
+                        Môi Trường Thân Thiện
+                    </h2>
+                </div>
+                <p class="lead mb-6">
+                    MIS xây dựng môi trường học tập theo nguyên tắc <strong class="text-accent-600">"Thân thiện – Trung
+                        thực – An toàn – Hạnh phúc"</strong>.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-accent-50 dark:bg-accent-900/20 p-4 rounded-xl text-center">
+                        <i class="fas fa-smile text-accent-500 text-2xl mb-2"></i>
+                        <p class="font-semibold text-neutral-800 dark:text-white">Thân thiện</p>
+                    </div>
+                    <div class="bg-accent-50 dark:bg-accent-900/20 p-4 rounded-xl text-center">
+                        <i class="fas fa-handshake text-accent-500 text-2xl mb-2"></i>
+                        <p class="font-semibold text-neutral-800 dark:text-white">Trung thực</p>
+                    </div>
+                    <div class="bg-accent-50 dark:bg-accent-900/20 p-4 rounded-xl text-center">
+                        <i class="fas fa-shield-alt text-accent-500 text-2xl mb-2"></i>
+                        <p class="font-semibold text-neutral-800 dark:text-white">An toàn</p>
+                    </div>
+                    <div class="bg-accent-50 dark:bg-accent-900/20 p-4 rounded-xl text-center">
+                        <i class="fas fa-heart text-accent-500 text-2xl mb-2"></i>
+                        <p class="font-semibold text-neutral-800 dark:text-white">Hạnh phúc</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2">
+                <div class="relative">
+                    <div
+                        class="w-72 h-72 mx-auto bg-gradient-to-br from-accent-400 to-accent-600 rounded-full flex items-center justify-center shadow-2xl">
+                        <div class="text-center text-white">
+                            <i class="fas fa-users text-6xl mb-4"></i>
+                            <p class="font-bold text-xl">Thầy - Trò - Phụ huynh</p>
+                            <p class="text-accent-100">Kết nối bền vững</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Strength 2: Giá trị cốt lõi -->
+<section class="section bg-neutral-50 dark:bg-neutral-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="flex items-center justify-center gap-4 mb-6">
+                <div class="w-16 h-16 bg-accent-100 dark:bg-accent-900/30 rounded-2xl flex items-center justify-center">
+                    <span class="text-3xl font-bold text-accent-600">2</span>
+                </div>
+                <h2 class="title-md">
+                    Giá Trị Cốt Lõi & Văn Hóa MIS
+                </h2>
+            </div>
+        </div>
+
+        <!-- GRACE Values -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
+            {% for value in grace_values %}
+            <div
+                class="bg-white dark:bg-neutral-700 p-6 rounded-2xl text-center shadow-lg hover:shadow-xl transition-shadow relative overflow-hidden group">
+                <div
+                    class="absolute top-2 right-2 text-4xl font-black opacity-10 group-hover:opacity-20 transition-opacity">
+                    {{ value.title|slice:":1" }}
+                </div>
+                <div
+                    class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <i class="{{ value.icon }} text-red-500 text-xl"></i>
+                </div>
+                <!-- Display full title but emphasize the first letter implicitly or just show title -->
+                <p class="font-bold text-neutral-800 dark:text-white">{{ value.title }}</p>
+                <p class="text-sm text-neutral-500 mt-2 leading-relaxed">{{ value.description|truncatewords:10 }}</p>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center text-neutral-500">Đang cập nhật giá trị cốt lõi...</div>
+            {% endfor %}
+        </div>
+
+        <!-- Cultural Rules -->
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- 5 XIN -->
+            <div class="bg-gradient-to-br from-red-500 to-red-600 p-6 rounded-2xl text-white">
+                <h3 class="title-sm title-invert mb-4 flex items-center"><i class="fas fa-hand-paper mr-3"></i>5 XIN
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    {% for item in values_5xin %}
+                    <li>• {{ item.title }}</li>
+                    {% empty %}
+                    <li>• Xin chào</li>
+                    <li>• Xin lỗi</li>
+                    <li>• Xin phép</li>
+                    <li>• Xin cảm ơn</li>
+                    <li>• Xin hỏi</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- 5 BIET -->
+            <div class="bg-gradient-to-br from-accent-500 to-accent-600 p-6 rounded-2xl text-white">
+                <h3 class="title-sm title-invert mb-4 flex items-center"><i class="fas fa-book-reader mr-3"></i>5 BIẾT
+                </h3>
+                <ul class="space-y-2 text-sm">
+                    {% for item in values_5biet %}
+                    <li>• {{ item.title }}</li>
+                    {% empty %}
+                    <li>• Biết ơn</li>
+                    <li>• Biết lắng nghe</li>
+                    <li>• Biết chia sẻ</li>
+                    <li>• Biết nhường nhịn</li>
+                    <li>• Biết tự học</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- 5 KHONG -->
+            <div class="bg-gradient-to-br from-gray-700 to-gray-800 p-6 rounded-2xl text-white">
+                <h3 class="title-sm title-invert mb-4 flex items-center"><i class="fas fa-ban mr-3"></i>5 KHÔNG</h3>
+                <ul class="space-y-2 text-sm">
+                    {% for item in values_5khong %}
+                    <li>• {{ item.title }}</li>
+                    {% empty %}
+                    <li>• Không nói dối</li>
+                    <li>• Không bạo lực</li>
+                    <li>• Không gian lận</li>
+                    <li>• Không vô lễ</li>
+                    <li>• Không lãng phí</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Strength 3: Triết lý giáo dục -->
+<section class="section bg-white dark:bg-neutral-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2 order-2 lg:order-1">
+                <div
+                    class="bg-gradient-to-br from-accent-100 to-accent-100 dark:from-accent-900/30 dark:to-accent-900/30 p-8 rounded-3xl">
+                    <h3 class="title-sm text-accent-800 dark:text-accent-300 mb-6 text-center">Lý thuyết Đa Trí
+                        Tuệ - Howard Gardner</h3>
+                    <div class="grid grid-cols-4 gap-3">
+                        <div class="bg-white dark:bg-neutral-800 p-3 rounded-xl text-center shadow">
+                            <i class="fas fa-calculator text-accent-500 text-xl mb-1"></i>
+                            <p class="text-sm font-medium">Logic</p>
+                        </div>
+                        <div class="bg-white dark:bg-neutral-800 p-3 rounded-xl text-center shadow">
+                            <i class="fas fa-book text-accent-500 text-xl mb-1"></i>
+                            <p class="text-sm font-medium">Ngôn ngữ</p>
+                        </div>
+                        <div class="bg-white dark:bg-neutral-800 p-3 rounded-xl text-center shadow">
+                            <i class="fas fa-music text-accent-500 text-xl mb-1"></i>
+                            <p class="text-sm font-medium">Âm nhạc</p>
+                        </div>
+                        <div class="bg-white dark:bg-neutral-800 p-3 rounded-xl text-center shadow">
+                            <i class="fas fa-running text-accent-500 text-xl mb-1"></i>
+                            <p class="text-sm font-medium">Vận động</p>
+                        </div>
+                        <div class="bg-white dark:bg-neutral-800 p-3 rounded-xl text-center shadow">
+                            <i class="fas fa-image text-accent-500 text-xl mb-1"></i>
+                            <p class="text-sm font-medium">Không gian</p>
+                        </div>
+                        <div class="bg-white dark:bg-neutral-800 p-3 rounded-xl text-center shadow">
+                            <i class="fas fa-users text-orange-500 text-xl mb-1"></i>
+                            <p class="text-sm font-medium">Giao tiếp</p>
+                        </div>
+                        <div class="bg-white dark:bg-neutral-800 p-3 rounded-xl text-center shadow">
+                            <i class="fas fa-brain text-red-500 text-xl mb-1"></i>
+                            <p class="text-sm font-medium">Nội tâm</p>
+                        </div>
+                        <div class="bg-white dark:bg-neutral-800 p-3 rounded-xl text-center shadow">
+                            <i class="fas fa-leaf text-accent-500 text-xl mb-1"></i>
+                            <p class="text-sm font-medium">Tự nhiên</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2 order-1 lg:order-2">
+                <div class="flex items-center gap-4 mb-6">
+                    <div
+                        class="w-16 h-16 bg-accent-100 dark:bg-accent-900/30 rounded-2xl flex items-center justify-center">
+                        <span class="text-3xl font-bold text-accent-600">3</span>
+                    </div>
+                    <h2 class="title-md">
+                        Triết Lý Giáo Dục Đa Trí Tuệ
+                    </h2>
+                </div>
+                <p class="lead mb-6">
+                    MIS áp dụng lý thuyết <strong class="text-accent-600">Đa Trí Tuệ (Multiple Intelligences)</strong>
+                    của Howard Gardner, kết hợp với <strong class="text-accent-600">Trí tuệ cảm xúc (EQ)</strong> của
+                    Daniel Goleman.
+                </p>
+                <p class="text-muted leading-relaxed">
+                    Mỗi học sinh được đánh giá và phát triển toàn diện 8 loại trí tuệ khác nhau, giúp các em khám phá và
+                    phát huy tối đa tiềm năng của bản thân.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Strength 4-8: Quick Cards -->
+<section class="section bg-neutral-50 dark:bg-neutral-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="space-y-8">
+            <!-- Strength 4 -->
+            <div
+                class="bg-white dark:bg-neutral-700 p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-8">
+                <div
+                    class="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-4xl font-bold text-orange-600">4</span>
+                </div>
+                <div>
+                    <h3 class="card-title mb-3">Trải Nghiệm Sáng Tạo & Hướng
+                        Nghiệp</h3>
+                    <p class="text-muted">Học sinh được tham gia các chương trình trải
+                        nghiệm thực tế, định hướng nghề nghiệp từ sớm theo lộ trình: Tự hiểu bản thân → Khám phá nghề
+                        nghiệp → Đặt mục tiêu → Ứng dụng.</p>
+                </div>
+            </div>
+
+            <!-- Strength 5 -->
+            <div
+                class="bg-white dark:bg-neutral-700 p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-8">
+                <div
+                    class="w-20 h-20 bg-accent-100 dark:bg-accent-900/30 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-4xl font-bold text-accent-600">5</span>
+                </div>
+                <div>
+                    <h3 class="card-title mb-3">Dạy Học Phân Hóa</h3>
+                    <p class="text-muted">Chương trình Toán, Ngữ văn, Tiếng Anh được thiết
+                        kế riêng theo năng lực của từng học sinh. Mỗi em được học theo tiến độ phù hợp với khả năng của
+                        mình.</p>
+                </div>
+            </div>
+
+            <!-- Strength 6 -->
+            <div
+                class="bg-white dark:bg-neutral-700 p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-8">
+                <div
+                    class="w-20 h-20 bg-accent-100 dark:bg-accent-900/30 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-4xl font-bold text-accent-600">6</span>
+                </div>
+                <div>
+                    <h3 class="card-title mb-3">Kỹ Năng Học Tập Suốt Đời</h3>
+                    <p class="text-muted">Trang bị cho học sinh năng lực tự học, tự nghiên
+                        cứu, kỹ năng tìm kiếm và xử lý thông tin - những kỹ năng thiết yếu trong thế kỷ 21.</p>
+                </div>
+            </div>
+
+            <!-- Strength 7 -->
+            <div
+                class="bg-white dark:bg-neutral-700 p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-8">
+                <div
+                    class="w-20 h-20 bg-accent-100 dark:bg-accent-900/30 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-4xl font-bold text-accent-600">7</span>
+                </div>
+                <div>
+                    <h3 class="card-title mb-3">STEAM & Chương Trình Quốc Tế
+                    </h3>
+                    <p class="text-muted">Chương trình STEAM xuyên suốt từ Tiểu học đến
+                        THPT, kết hợp với các chương trình song bằng và hợp tác quốc tế giúp học sinh sẵn sàng hội nhập
+                        toàn cầu.</p>
+                </div>
+            </div>
+
+            <!-- Strength 8 -->
+            <div
+                class="bg-white dark:bg-neutral-700 p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-8">
+                <div
+                    class="w-20 h-20 bg-accent-100 dark:bg-accent-900/30 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <span class="text-4xl font-bold text-accent-600">8</span>
+                </div>
+                <div>
+                    <h3 class="card-title mb-3">Cơ Sở Vật Chất Hiện Đại</h3>
+                    <p class="text-muted">Hệ thống phòng học thông minh, phòng Lab STEAM,
+                        thư viện hiện đại, sân thể thao đa năng, và các không gian sáng tạo đạt chuẩn quốc tế.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Achievements 2025 -->
+<section class="section bg-white dark:bg-neutral-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="badge badge--primary mb-4">Dấu ấn xuất sắc 2025</span>
+            <h2 class="section-title mb-6">Bảng Vàng Thành Tích</h2>
+            <p class="section-subtitle">
+                Minh chứng cho chất lượng đào tạo và nỗ lực không ngừng của thầy và trò MIS.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {% for achievement in achievements %}
+            <div
+                class="bg-neutral-50 dark:bg-neutral-800 rounded-3xl p-8 border border-neutral-100 dark:border-neutral-700 relative overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    {% if achievement.category == 'technology' %}
+                    <i class="fas fa-robot text-8xl text-red-600"></i>
+                    {% elif achievement.category == 'academic' %}
+                    <i class="fas fa-medal text-8xl text-blue-600"></i>
+                    {% elif achievement.category == 'language' %}
+                    <i class="fas fa-globe text-8xl text-green-600"></i>
+                    {% else %}
+                    <i class="fas fa-trophy text-8xl text-yellow-500"></i>
+                    {% endif %}
+                </div>
+                <h3 class="text-xl font-bold mb-6 
+                    {% if achievement.category == 'technology' %}text-red-600
+                    {% elif achievement.category == 'academic' %}text-blue-600
+                    {% elif achievement.category == 'language' %}text-green-600
+                    {% else %}text-yellow-600{% endif %}">
+                    {{ achievement.title }}
+                </h3>
+
+                <div class="space-y-4">
+                    <p class="text-neutral-600 mb-4">{{ achievement.description }}</p>
+
+                    <div class="border-t pt-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-full 
+                                {% if achievement.category == 'technology' %}bg-red-100 text-red-600
+                                {% elif achievement.category == 'academic' %}bg-blue-100 text-blue-600
+                                {% elif achievement.category == 'language' %}bg-green-100 text-green-600
+                                {% else %}bg-yellow-100 text-yellow-600{% endif %}
+                                flex items-center justify-center font-bold text-2xl">
+                                {{ achievement.stat_value }}
+                            </div>
+                            <div>
+                                <div class="font-bold border-b border-dashed border-neutral-300 pb-1">{{ achievement.stat_label }}</div>
+                                {% if achievement.tags %}
+                                <div class="mt-2 flex flex-wrap gap-1">
+                                    {% for tag in achievement.get_tags_list %}
+                                    <span
+                                        class="text-xs uppercase font-bold px-2 py-0.5 rounded bg-white border border-neutral-200 text-neutral-500">{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-3 text-center py-12 text-neutral-500">
+                <p>Đang cập nhật dữ liệu thành tích...</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Facilities & Environment -->
+<section class="section bg-neutral-50 dark:bg-neutral-800">
+    <div class="container ">
+        <div class="text-center mb-12">
+            <span class="badge badge--primary mb-4">Hệ sinh thái xanh & thông minh</span>
+            <h2 class="section-title mb-6">Môi trường giáo dục cấp tiến</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {% for facility in facilities %}
+            <div class="group relative rounded-3xl overflow-hidden h-80">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+
+                <div class="absolute inset-0 bg-neutral-800">
+                    {% if facility.image %}
+                    <img src="{{ facility.image.url }}" alt="{{ facility.name }}"
+                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    {% else %}
+                    <!-- Fallback placeholder based on category -->
+                    <img src="{% if facility.category == 'classroom' %}https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=2664&auto=format&fit=crop
+                              {% else %}https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2664&auto=format&fit=crop{% endif %}"
+                        alt="{{ facility.name }}"
+                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 opacity-80">
+                    {% endif %}
+                </div>
+
+                <div class="absolute bottom-0 left-0 p-8 z-20 text-white">
+                    <h3 class="text-2xl font-bold mb-2">{{ facility.name }}</h3>
+                    <p class="text-white/80">{{ facility.description }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-2 text-center py-12 text-neutral-500 bg-white dark:bg-neutral-700 rounded-3xl">
+                <p>Đang cập nhật dữ liệu cơ sở vật chất...</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endcomment %}
+{% include 'about/partials/_pdf_images_section.html' with pdf_section_style="--pdf-accent-1:var(--color-brand-primary); --pdf-accent-2:var(--color-brand-primary-dark); --pdf-bg:var(--color-neutral-50); --pdf-accent-text:var(--color-brand-primary-dark); --pdf-accent-bg:var(--color-neutral-100); --pdf-accent-text-hover:var(--color-brand-primary-dark);" %}
+<!-- CTA Section -->
+<section class="section bg-gradient-to-r from-red-600 to-red-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="section-title title-invert mb-6">
+            Sẵn sàng cho hành trình cùng MIS?
+        </h2>
+        <p class="lead lead-invert mb-8">
+            Đăng ký tư vấn để hiểu thêm về chương trình giáo dục Đa Trí Tuệ
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'admissions:list' %}" class="btn btn-light btn-lg">
+                <i class="fas fa-graduation-cap mr-2"></i>Xem thông tin tuyển sinh
+            </a>
+            <a href="{% url 'contact:contact' %}" class="btn btn-ghost-invert btn-lg">
+                <i class="fas fa-phone mr-2"></i>Liên hệ tư vấn
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

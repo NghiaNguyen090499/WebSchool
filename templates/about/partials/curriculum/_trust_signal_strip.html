@@ -1,0 +1,32 @@
+{% comment %}
+Trust Signal Strip — Enhanced
+Inputs:
+- signal_1_label / signal_1_value
+- signal_2_label / signal_2_value
+- signal_3_label / signal_3_value
+{% endcomment %}
+<section id="trust" class="curriculum-section curriculum-section--light"
+    style="padding-block: clamp(2rem, 4vw, 3.5rem);">
+    <div class="container">
+        <div class="curriculum-trust-strip" role="region" aria-label="Tín hiệu tin cậy học thuật" data-reveal>
+            {% if signal_1_label or signal_1_value %}
+            <article class="curriculum-trust-item">
+                {% if signal_1_value %}<p class="curriculum-trust-item__value">{{ signal_1_value }}</p>{% endif %}
+                {% if signal_1_label %}<p class="curriculum-trust-item__label">{{ signal_1_label }}</p>{% endif %}
+            </article>
+            {% endif %}
+            {% if signal_2_label or signal_2_value %}
+            <article class="curriculum-trust-item">
+                {% if signal_2_value %}<p class="curriculum-trust-item__value">{{ signal_2_value }}</p>{% endif %}
+                {% if signal_2_label %}<p class="curriculum-trust-item__label">{{ signal_2_label }}</p>{% endif %}
+            </article>
+            {% endif %}
+            {% if signal_3_label or signal_3_value %}
+            <article class="curriculum-trust-item">
+                {% if signal_3_value %}<p class="curriculum-trust-item__value">{{ signal_3_value }}</p>{% endif %}
+                {% if signal_3_label %}<p class="curriculum-trust-item__label">{{ signal_3_label }}</p>{% endif %}
+            </article>
+            {% endif %}
+        </div>
+    </div>
+</section>

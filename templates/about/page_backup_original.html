@@ -1,0 +1,2067 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{{ page.title }} - MIS Đa Trí Tuệ{% endblock %}
+
+{% block content %}
+{% if page.page_type == 'steam' %}
+<section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-neutral-900">
+    {% if page.image %}
+    <div class="absolute inset-0">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-full object-cover opacity-25">
+    </div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-br from-red-900/90 via-neutral-900/80 to-neutral-900/70"></div>
+    <div class="pattern-dots"></div>
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-[40rem] h-[40rem] bg-red-500/20 rounded-full blur-3xl animate-blob">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-white/5 rounded-full blur-3xl animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-40 -left-40 w-[40rem] h-[40rem] bg-red-600/20 rounded-full blur-3xl animate-blob animation-delay-4000">
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <span class="badge badge-primary eyebrow mb-5">Chương trình STEAM</span>
+        <h1 class="hero-title mb-6">{{ page.title|default:"Hệ STEAM & Công nghệ sáng tạo" }}</h1>
+        <p class="hero-lead max-w-3xl mx-auto mb-8">
+            Đón đầu kỷ nguyên công nghệ với tư duy sáng tạo, kỹ năng số và năng lực giải quyết vấn đề cho học sinh MIS.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="#steam-pillars" class="btn btn-primary btn-lg group">
+                Khám phá chương trình <i
+                    class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="{% url 'contact:contact' %}" class="btn btn-ghost-invert btn-lg">
+                Tư vấn ngay
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+            <div>
+                <span class="badge badge-primary eyebrow mb-4">Triết lý chương trình</span>
+                <h2 class="section-title mb-6">STEAM tại MIS: học qua dự án, học để giải quyết vấn đề</h2>
+                <p class="section-subtitle text-left mb-6 max-w-none">
+                    Chương trình STEAM được thiết kế theo lộ trình 4 cấp học, kết hợp khoa học - công nghệ - kỹ thuật -
+                    nghệ thuật - toán học. Học sinh được khai mở tư duy, rèn kỹ năng số, tư duy thiết kế và sáng tạo.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div
+                        class="flex items-start gap-3 p-4 rounded-2xl border border-neutral-100 dark:border-neutral-800">
+                        <div
+                            class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-brain text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="title-sm mb-1">Tư duy hệ thống</h3>
+                            <p class="text-sm text-muted">Phân tích vấn đề theo cách tiếp cận logic và sáng tạo.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-start gap-3 p-4 rounded-2xl border border-neutral-100 dark:border-neutral-800">
+                        <div
+                            class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-laptop-code text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="title-sm mb-1">Kỹ năng số</h3>
+                            <p class="text-sm text-muted">Làm quen công cụ, nền tảng số và an toàn số.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-start gap-3 p-4 rounded-2xl border border-neutral-100 dark:border-neutral-800">
+                        <div
+                            class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-users text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="title-sm mb-1">Kỹ năng mềm</h3>
+                            <p class="text-sm text-muted">Làm việc nhóm, trình bày và quản lý dự án.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="flex items-start gap-3 p-4 rounded-2xl border border-neutral-100 dark:border-neutral-800">
+                        <div
+                            class="w-10 h-10 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-rocket text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="title-sm mb-1">Sáng tạo ứng dụng</h3>
+                            <p class="text-sm text-muted">Sản phẩm thật - cảm hứng thật - tác động thật.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div
+                    class="rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-red-600 via-red-700 to-red-800 text-white p-10">
+                    <div class="relative">
+                        <div class="text-sm uppercase tracking-widest text-white/70 mb-6">STEAM là gì?</div>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-lg font-bold">
+                                    S</div>
+                                <div>
+                                    <div class="text-lg font-semibold">Science</div>
+                                    <div class="text-sm text-white/80">Khám phá và quan sát thế giới.</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-lg font-bold">
+                                    T</div>
+                                <div>
+                                    <div class="text-lg font-semibold">Technology</div>
+                                    <div class="text-sm text-white/80">Ứng dụng công cụ số vào bài học.</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-lg font-bold">
+                                    E</div>
+                                <div>
+                                    <div class="text-lg font-semibold">Engineering</div>
+                                    <div class="text-sm text-white/80">Thiết kế, lắp ráp và thử nghiệm.</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-lg font-bold">
+                                    A</div>
+                                <div>
+                                    <div class="text-lg font-semibold">Art</div>
+                                    <div class="text-sm text-white/80">Tư duy thiết kế và thẩm mỹ.</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-lg font-bold">
+                                    M</div>
+                                <div>
+                                    <div class="text-lg font-semibold">Math</div>
+                                    <div class="text-sm text-white/80">Nền tảng logic và đo lường.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="steam-pillars" class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">Nội dung cốt lõi</span>
+            <h2 class="section-title mb-6">6 trục năng lực trong chương trình STEAM</h2>
+            <p class="section-subtitle">
+                Chương trình được xây dựng theo các chủ đề liên kết, phát triển đồng thời kiến thức và kỹ năng.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div
+                    class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-code text-primary-600 dark:text-primary-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Lập trình cơ bản</h3>
+                <p class="text-sm text-muted">Làm quen ngôn ngữ lập trình phù hợp độ tuổi, tư duy logic và cấu trúc
+                    lệnh.</p>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div
+                    class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-project-diagram text-primary-600 dark:text-primary-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Tư duy thuật toán</h3>
+                <p class="text-sm text-muted">Phân tích bài toán, tạo luồng bước giải, tối ưu giải pháp.</p>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div
+                    class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-layer-group text-primary-600 dark:text-primary-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Dự án thực hành</h3>
+                <p class="text-sm text-muted">Học qua dự án cá nhân và nhóm, trình bày sản phẩm và báo cáo.</p>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div
+                    class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-comments text-primary-600 dark:text-primary-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Kỹ năng mềm</h3>
+                <p class="text-sm text-muted">Hợp tác, giao tiếp, tư duy phản biện và trình bày tự tin.</p>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div
+                    class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-microchip text-primary-600 dark:text-primary-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Trí tuệ nhân tạo</h3>
+                <p class="text-sm text-muted">Làm quen dữ liệu, mô hình AI đơn giản và ứng dụng thực tế.</p>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div
+                    class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-pen-nib text-primary-600 dark:text-primary-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Thiết kế đồ họa</h3>
+                <p class="text-sm text-muted">Rèn tư duy thẩm mỹ, bố cục, đồ họa số và sản phẩm truyền thông.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">Lộ trình học tập</span>
+            <h2 class="section-title mb-6">STEAM theo cấp học</h2>
+            <p class="section-subtitle">
+                Nội dung được cá nhân hóa theo độ tuổi, tăng dần độ khó và hướng tới dự án thực tế.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm">
+                <div class="text-xs font-bold uppercase tracking-wide text-primary-600 mb-3">Mầm non (3-5)</div>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Làm quen robot
+                        và khối lệnh.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Trò chơi khoa
+                        học, thực hành sáng tạo.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Phát triển tư
+                        duy hình ảnh.</li>
+                </ul>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm">
+                <div class="text-xs font-bold uppercase tracking-wide text-primary-600 mb-3">Tiểu học (6-10)</div>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Lập trình kéo
+                        thả (Scratch).</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Dự án STEAM nhỏ
+                        theo chủ đề.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Rèn kỹ năng
+                        trình bày.</li>
+                </ul>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm">
+                <div class="text-xs font-bold uppercase tracking-wide text-primary-600 mb-3">THCS (11-14)</div>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Python căn bản,
+                        robotics, IoT.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Thiết kế sản
+                        phẩm và thử nghiệm.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Dự án nhóm theo
+                        vấn đề xã hội.</li>
+                </ul>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm">
+                <div class="text-xs font-bold uppercase tracking-wide text-primary-600 mb-3">THPT (15-18)</div>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>AI/ML nhập môn,
+                        data project.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Ứng dụng
+                        web/app, dự án capstone.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Thuyết trình,
+                        hồ sơ dự án.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">Không gian học tập</span>
+            <h2 class="section-title mb-6">Phòng lab & dự án tiêu biểu</h2>
+            <p class="section-subtitle">
+                Học sinh được trải nghiệm trong không gian sáng tạo, mô phỏng quy trình làm việc thực tế.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+                class="rounded-3xl overflow-hidden border border-neutral-100 dark:border-neutral-700 shadow-lg bg-gradient-to-br from-red-600 to-red-800 text-white p-8">
+                <div class="w-12 h-12 bg-white/15 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-robot text-xl"></i>
+                </div>
+                <h3 class="title-sm title-invert mb-3">Robotics Lab</h3>
+                <p class="text-sm text-white/80">Lắp ráp, lập trình robot, thi đấu và đo lường hiệu suất.</p>
+            </div>
+            <div
+                class="rounded-3xl overflow-hidden border border-neutral-100 dark:border-neutral-700 shadow-lg bg-white dark:bg-neutral-800 p-8">
+                <div
+                    class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-vr-cardboard text-primary-600 dark:text-primary-400 text-xl"></i>
+                </div>
+                <h3 class="title-sm mb-3">Maker Studio</h3>
+                <p class="text-sm text-muted">Mô hình 3D, cảm biến, mạch điện và prototyping.</p>
+            </div>
+            <div
+                class="rounded-3xl overflow-hidden border border-neutral-100 dark:border-neutral-700 shadow-lg bg-neutral-900 text-white p-8">
+                <div class="w-12 h-12 bg-white/15 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-palette text-xl"></i>
+                </div>
+                <h3 class="title-sm title-invert mb-3">Digital Art Studio</h3>
+                <p class="text-sm text-white/80">Thiết kế đồ họa, motion cơ bản, trình bày sản phẩm số.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+            <div>
+                <span class="badge badge-primary eyebrow mb-4">Kết quả đầu ra</span>
+                <h2 class="section-title mb-6">Học sinh làm được gì sau chương trình?</h2>
+                <div class="space-y-4 text-sm text-muted">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Tư duy giải quyết vấn đề, tư duy thiết kế và khả năng sáng tạo.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Tự tin trình bày, làm việc nhóm và quản lý dự án nhỏ.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Có sản phẩm số minh chứng năng lực: game, app, robot, mô hình.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Sẵn sàng cho các cuộc thi khoa học kỹ thuật và dự án xã hội.</div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="rounded-3xl border border-neutral-100 dark:border-neutral-700 p-8 shadow-lg bg-neutral-50 dark:bg-neutral-900">
+                <div class="text-xs uppercase tracking-widest text-primary-600 mb-4">Chuẩn năng lực</div>
+                <h3 class="text-2xl font-semibold mb-4">Năng lực số & tư duy sáng tạo</h3>
+                <p class="text-muted mb-6">
+                    Chương trình hướng tới 3 trục năng lực: kiến thức công nghệ, kỹ năng sáng tạo và thái độ học tập
+                    suốt đời.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div
+                        class="rounded-2xl bg-white dark:bg-neutral-800 p-4 border border-neutral-100 dark:border-neutral-700">
+                        <div class="text-lg font-semibold text-primary-600">6</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Trục năng lực</div>
+                    </div>
+                    <div
+                        class="rounded-2xl bg-white dark:bg-neutral-800 p-4 border border-neutral-100 dark:border-neutral-700">
+                        <div class="text-lg font-semibold text-primary-600">4</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Cấp học</div>
+                    </div>
+                    <div
+                        class="rounded-2xl bg-white dark:bg-neutral-800 p-4 border border-neutral-100 dark:border-neutral-700">
+                        <div class="text-lg font-semibold text-primary-600">12+</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Dự án/năm</div>
+                    </div>
+                    <div
+                        class="rounded-2xl bg-white dark:bg-neutral-800 p-4 border border-neutral-100 dark:border-neutral-700">
+                        <div class="text-lg font-semibold text-primary-600">100%</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Tham gia dự án</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+            <div>
+                <span class="badge badge-primary eyebrow mb-4">Đối tác chương trình</span>
+                <h2 class="section-title mb-6">Liên kết đào tạo công nghệ</h2>
+                <p class="section-subtitle text-left max-w-none">
+                    MIS kết nối với các đơn vị đào tạo công nghệ uy tín, cập nhật nội dung theo xu hướng quốc tế.
+                </p>
+                <div class="flex items-center gap-4 mt-6">
+                    <div class="px-4 py-2 rounded-full bg-neutral-900 text-white text-sm font-semibold">
+                        Aptech Computer Education
+                    </div>
+                    <div class="text-sm text-muted">Đối tác đồng hành chương trình.</div>
+                </div>
+            </div>
+            <div
+                class="rounded-3xl border border-neutral-100 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-8 shadow-lg">
+                <div class="text-xs uppercase tracking-widest text-primary-600 mb-6">Thống kê đối tác</div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="rounded-2xl bg-neutral-50 dark:bg-neutral-900 p-4">
+                        <div class="text-2xl font-semibold text-primary-600">38</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Quốc gia</div>
+                    </div>
+                    <div class="rounded-2xl bg-neutral-50 dark:bg-neutral-900 p-4">
+                        <div class="text-2xl font-semibold text-primary-600">43</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Năm đào tạo</div>
+                    </div>
+                    <div class="rounded-2xl bg-neutral-50 dark:bg-neutral-900 p-4">
+                        <div class="text-2xl font-semibold text-primary-600">1350</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Cơ sở</div>
+                    </div>
+                    <div class="rounded-2xl bg-neutral-50 dark:bg-neutral-900 p-4">
+                        <div class="text-2xl font-semibold text-primary-600">6.8M</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Học viên</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-gradient-to-r from-red-600 via-red-700 to-red-800 relative overflow-hidden">
+    <div class="pattern-dots opacity-10"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <h2 class="section-title title-invert mb-6">
+            Sẵn sàng cho hành trình công nghệ của con?
+        </h2>
+        <p class="lead lead-invert mb-8 max-w-2xl mx-auto">
+            Liên hệ ngay để nhận tư vấn chi tiết và trải nghiệm lớp học STEAM tại MIS.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">
+                Tư vấn ngay
+            </a>
+            <a href="{% url 'admissions:list' %}" class="btn btn-ghost-invert btn-lg">
+                Đăng ký tuyển sinh
+            </a>
+        </div>
+    </div>
+</section>
+
+{% elif page.page_type == 'overview_chinese' or page.page_type == 'chinese' %}
+<section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-neutral-900">
+    {% if page.image %}
+    <div class="absolute inset-0">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-full object-cover opacity-25">
+    </div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-br from-red-900/90 via-neutral-900/80 to-neutral-900/70"></div>
+    <div class="pattern-dots"></div>
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-[40rem] h-[40rem] bg-red-500/20 rounded-full blur-3xl animate-blob">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-white/5 rounded-full blur-3xl animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-40 -left-40 w-[40rem] h-[40rem] bg-red-600/20 rounded-full blur-3xl animate-blob animation-delay-4000">
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <span class="badge badge-primary eyebrow mb-5">Chương trình Tiếng Trung</span>
+        <h1 class="hero-title mb-6">{{ page.title|default:"Hệ Tiếng Trung Tài Năng MIS x Quốc Tế Thời Đại" }}</h1>
+        <p class="hero-lead max-w-3xl mx-auto mb-8">
+            Thông thạo ngoại ngữ thứ hai - xuất sắc để dẫn đầu. Lộ trình HSK chuẩn quốc tế dành riêng cho học sinh THPT.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="#chinese-roadmap" class="btn btn-primary btn-lg group">
+                Xem lộ trình HSK <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="{% url 'contact:contact' %}" class="btn btn-ghost-invert btn-lg">
+                Tư vấn ngay
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="chinese-roadmap" class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">Lộ trình HSK</span>
+            <h2 class="section-title mb-6">Học theo lộ trình 3 năm THPT</h2>
+            <p class="section-subtitle">
+                Học sinh tiến bộ theo từng cấp độ, đủ năng lực thi chứng chỉ và ứng dụng thực tế.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+                class="rounded-3xl border border-neutral-100 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 p-6 shadow-lg">
+                <div class="text-xs font-bold uppercase tracking-wide text-primary-600 mb-3">Lớp 10</div>
+                <h3 class="title-sm mb-4">Tiếng Trung sơ cấp HSK 1-2</h3>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Học phát âm
+                        chuẩn, chữ Hán cơ bản.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Giao tiếp theo
+                        các chủ đề gần gũi.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Thi HSK 1-2,
+                        xây nền vững chắc.</li>
+                </ul>
+            </div>
+            <div
+                class="rounded-3xl border border-neutral-100 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-6 shadow-lg">
+                <div class="text-xs font-bold uppercase tracking-wide text-primary-600 mb-3">Lớp 11</div>
+                <h3 class="title-sm mb-4">Tiếng Trung trung cấp HSK 3-4</h3>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Học giao tiếp
+                        với 8 chủ đề chuyên sâu.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Củng cố ngữ
+                        pháp và vốn từ.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Thi HSK 3-4,
+                        tăng tốc kỹ năng.</li>
+                </ul>
+            </div>
+            <div
+                class="rounded-3xl border border-neutral-100 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900 p-6 shadow-lg">
+                <div class="text-xs font-bold uppercase tracking-wide text-primary-600 mb-3">Lớp 12</div>
+                <h3 class="title-sm mb-4">Tiếng Trung cao cấp HSK 5</h3>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Ôn tập HSK 4,
+                        luyện thi HSK 5.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Đọc - viết học
+                        thuật, phản xạ nâng cao.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-check text-primary-500 mt-1"></i>Thi chứng chỉ
+                        và hoàn thiện hồ sơ.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
+            <div>
+                <span class="badge badge-primary eyebrow mb-4">Giáo trình & đội ngũ</span>
+                <h2 class="section-title mb-6">Chuẩn quốc tế, phù hợp học sinh Việt Nam</h2>
+                <p class="section-subtitle text-left max-w-none mb-6">
+                    Nội dung được nghiên cứu theo chuẩn HSK, cập nhật liên tục để phù hợp mục tiêu du học và hội nhập.
+                </p>
+                <div class="space-y-3 text-sm text-muted">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Định hướng học tập theo mục tiêu thi chứng chỉ.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Phân hóa năng lực, cá nhân hóa lộ trình học.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Đồng hành bởi đội ngũ cố vấn giàu kinh nghiệm.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div
+                    class="rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 p-6 shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i class="fas fa-book text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="title-sm mb-2">Giáo trình</h3>
+                            <p class="text-sm text-muted">Nghiên cứu theo chuẩn quốc tế và được điều chỉnh phù hợp với
+                                học sinh Việt Nam.</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 p-6 shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
+                            <i class="fas fa-user-graduate text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="title-sm mb-2">Đội ngũ cố vấn & giáo viên</h3>
+                            <p class="text-sm text-muted">Cố vấn, giáo viên tốt nghiệp ĐH tại Trung Quốc, giàu kinh
+                                nghiệm luyện thi HSK.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">Hoạt động ngoại khóa</span>
+            <h2 class="section-title mb-6">Trải nghiệm văn hóa & kỹ năng thực tế</h2>
+            <p class="section-subtitle">
+                Mở rộng hiểu biết văn hóa, xây dựng hồ sơ học tập và kỹ năng mềm.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+                class="rounded-3xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-700 p-6 shadow-lg">
+                <h3 class="title-sm mb-4">GALA tài năng</h3>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-primary-500 mt-1"></i>Trình diễn và
+                        thuyết trình dự án.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-primary-500 mt-1"></i>Vinh danh học
+                        sinh nổi bật.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-primary-500 mt-1"></i>Kết nối phụ
+                        huynh và cộng đồng.</li>
+                </ul>
+            </div>
+            <div
+                class="rounded-3xl bg-white dark:bg-neutral-800 border border-neutral-100 dark:border-neutral-700 p-6 shadow-lg">
+                <h3 class="title-sm mb-4">Giao lưu văn hóa</h3>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-primary-500 mt-1"></i>Tìm hiểu nghệ
+                        thuật truyền thống Trung Quốc.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-primary-500 mt-1"></i>Học tập dự án
+                        theo chủ đề.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-primary-500 mt-1"></i>Trại hè và trải
+                        nghiệm thực tế.</li>
+                </ul>
+            </div>
+            <div
+                class="rounded-3xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-700 p-6 shadow-lg">
+                <h3 class="title-sm mb-4">Hội thảo du học</h3>
+                <ul class="space-y-2 text-sm text-muted">
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-primary-500 mt-1"></i>Tư vấn học bổng
+                        và lựa chọn trường.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-primary-500 mt-1"></i>Tham quan doanh
+                        nghiệp Trung Quốc.</li>
+                    <li class="flex items-start gap-2"><i class="fas fa-star text-primary-500 mt-1"></i>Kết nối đại học
+                        và tổ chức uy tín.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+            <div>
+                <span class="badge badge-primary eyebrow mb-4">Cam kết đầu ra</span>
+                <h2 class="section-title mb-6">HSK 4-5+ và lợi thế du học</h2>
+                <p class="section-subtitle text-left max-w-none mb-6">
+                    Học sinh đủ năng lực xét tuyển vào các trường đại học trong và ngoài nước, sẵn sàng học tập bằng
+                    tiếng Trung.
+                </p>
+                <div class="space-y-3 text-sm text-muted">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Miễn thi ngoại ngữ trong kỳ thi tốt nghiệp THPT.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Ưu tiên xét tuyển vào nhiều đại học trong nước.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Đủ điều kiện xét học bổng du học Trung Quốc.</div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="rounded-3xl border border-neutral-100 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-8 shadow-lg">
+                <div class="text-xs uppercase tracking-widest text-primary-600 mb-4">Học bổng du học</div>
+                <h3 class="text-2xl font-semibold mb-4">Hỗ trợ lộ trình học bổng</h3>
+                <p class="text-muted mb-6">
+                    Học sinh đạt điểm cao có thể nhận học bổng toàn phần hoặc bán phần, hỗ trợ chi phí sinh hoạt và bảo
+                    hiểm.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="rounded-2xl bg-neutral-50 dark:bg-neutral-900 p-4">
+                        <div class="text-lg font-semibold text-primary-600">HSK 4-5+</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Chuẩn đầu ra</div>
+                    </div>
+                    <div class="rounded-2xl bg-neutral-50 dark:bg-neutral-900 p-4">
+                        <div class="text-lg font-semibold text-primary-600">3+</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Lộ trình học bổng</div>
+                    </div>
+                    <div class="rounded-2xl bg-neutral-50 dark:bg-neutral-900 p-4">
+                        <div class="text-lg font-semibold text-primary-600">10+</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Đối tác đại học</div>
+                    </div>
+                    <div class="rounded-2xl bg-neutral-50 dark:bg-neutral-900 p-4">
+                        <div class="text-lg font-semibold text-primary-600">100%</div>
+                        <div class="text-xs uppercase tracking-wide text-muted">Hỗ trợ hồ sơ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-gradient-to-r from-red-600 via-red-700 to-red-800 relative overflow-hidden">
+    <div class="pattern-dots opacity-10"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <h2 class="section-title title-invert mb-6">
+            Sẵn sàng chinh phục tiếng Trung?
+        </h2>
+        <p class="lead lead-invert mb-8 max-w-2xl mx-auto">
+            Liên hệ ngay để được tư vấn lộ trình học phù hợp và trải nghiệm lớp học tiếng Trung tại MIS.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">
+                Tư vấn ngay
+            </a>
+            <a href="{% url 'admissions:list' %}" class="btn btn-ghost-invert btn-lg">
+                Đăng ký tuyển sinh
+            </a>
+        </div>
+    </div>
+</section>
+
+{% elif page.page_type == 'overview_english' %}
+<section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-neutral-900">
+    {% if page.image %}
+    <div class="absolute inset-0">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-full object-cover opacity-25">
+    </div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-br from-red-900/90 via-neutral-900/80 to-neutral-900/70"></div>
+    <div class="pattern-dots"></div>
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-[40rem] h-[40rem] bg-red-500/20 rounded-full blur-3xl animate-blob">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-white/5 rounded-full blur-3xl animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-40 -left-40 w-[40rem] h-[40rem] bg-red-600/20 rounded-full blur-3xl animate-blob animation-delay-4000">
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <span class="badge badge-primary eyebrow mb-5">CHƯƠNG TRÌNH TIẾNG ANH</span>
+        <h1 class="hero-title mb-4">{{ page.title|default:"Hệ Tiếng Anh Tài Năng" }}</h1>
+        <p class="hero-lead max-w-3xl mx-auto mb-6">MIS x Jaxtina English</p>
+        <p class="hero-lead max-w-3xl mx-auto mb-8">
+            Chinh phục đỉnh cao ngôn ngữ, sẵn sàng hội nhập toàn cầu với lộ trình chuẩn Cambridge và IELTS.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="{% url 'admissions:list' %}" class="btn btn-primary btn-lg group">
+                Đăng ký tư vấn <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="{% url 'contact:contact' %}" class="btn btn-ghost-invert btn-lg">
+                Tham quan trường
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+            <div>
+                <span class="badge badge-primary eyebrow mb-4">Hệ tiếng Anh tài năng</span>
+                <h2 class="section-title mb-6">Chương trình tích hợp quốc tế, đồng hành cùng Jaxtina English</h2>
+                <p class="section-subtitle text-left max-w-none mb-6">
+                    Chương trình được cố vấn bởi các chuyên gia học thuật, tích hợp chuẩn Cambridge và lộ trình IELTS từ
+                    lớp 6,
+                    giúp học sinh phát triển toàn diện 4 kỹ năng Nghe – Nói – Đọc – Viết.
+                </p>
+                <div class="space-y-3 text-sm text-muted">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Chương trình chuẩn quốc tế, phù hợp học sinh Việt Nam.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Cam kết đầu ra IELTS 6.0–7.5+ khi tốt nghiệp THPT.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-primary-500 mt-1"></i>
+                        <div>Ứng dụng công nghệ AI Icorrect hỗ trợ giao tiếp 1-1.</div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-red-600 via-red-700 to-red-800 text-white p-10">
+                <div class="relative">
+                    <div class="text-sm uppercase tracking-widest text-white/70 mb-6">MIS x Jaxtina</div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-lg font-bold">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div>
+                                <div class="text-lg font-semibold">Chương trình tích hợp quốc tế</div>
+                                <div class="text-sm text-white/80">Định hướng học thuật chuẩn Cambridge.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-lg font-bold">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <div class="text-lg font-semibold">Lộ trình IELTS từ lớp 6</div>
+                                <div class="text-sm text-white/80">Tăng cơ hội vào các trường đại học.</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-lg font-bold">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div>
+                                <div class="text-lg font-semibold">Ứng dụng công nghệ AI</div>
+                                <div class="text-sm text-white/80">Hỗ trợ luyện phản xạ giao tiếp.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">Lợi thế nổi bật</span>
+            <h2 class="section-title mb-6">Hệ Tiếng Anh Tài Năng MIS x Jaxtina</h2>
+            <p class="section-subtitle">
+                Lộ trình chuẩn hóa, phương pháp hiện đại và hỗ trợ học thuật cá nhân hóa giúp học sinh tiến bộ bền vững.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-award text-primary-600 dark:text-primary-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="title-sm mb-2">Chương trình tích hợp quốc tế</h3>
+                        <p class="text-sm text-muted">Đồng hành và cố vấn bởi đội ngũ học thuật, định hướng chuẩn
+                            Cambridge.</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-chart-line text-primary-600 dark:text-primary-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="title-sm mb-2">Cam kết đầu ra IELTS 6.0–7.5+</h3>
+                        <p class="text-sm text-muted">Lộ trình IELTS từ lớp 6, gia tăng cơ hội vào đại học.</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-chalkboard-teacher text-primary-600 dark:text-primary-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="title-sm mb-2">Giáo viên chất lượng</h3>
+                        <p class="text-sm text-muted">100% giáo viên ngôn ngữ Anh, có chứng chỉ TESOL, IELTS 8.0+.</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-robot text-primary-600 dark:text-primary-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="title-sm mb-2">Ứng dụng công nghệ AI</h3>
+                        <p class="text-sm text-muted">Trợ lý học tiếng Anh AI Icorrect hỗ trợ tăng phản xạ giao tiếp
+                            1-1.</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-users text-primary-600 dark:text-primary-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="title-sm mb-2">Mô hình đào tạo 3C</h3>
+                        <p class="text-sm text-muted">Communicative – Giao tiếp; Cooperative – Tương tác; Cognitive – Tư
+                            duy.</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-100 dark:border-neutral-700 p-6 shadow-sm hover:shadow-xl transition-all">
+                <div class="flex items-start gap-4">
+                    <div
+                        class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-hands-helping text-primary-600 dark:text-primary-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="title-sm mb-2">Tăng cường hỗ trợ học thuật</h3>
+                        <p class="text-sm text-muted">Bổ trợ cá nhân/nhóm/lớp đáp ứng yêu cầu đề thi IELTS mới nhất.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-gradient-to-r from-red-600 via-red-700 to-red-800 relative overflow-hidden">
+    <div class="pattern-dots opacity-10"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+            <div>
+                <span class="badge badge-light eyebrow mb-4">Jaxtina English</span>
+                <h2 class="section-title title-invert mb-6">Đối tác đào tạo uy tín</h2>
+                <div class="space-y-3 text-sm text-white/90">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-medal mt-1 text-white/80"></i>
+                        <div>Top 10 Thương hiệu nổi tiếng Quốc gia.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-award mt-1 text-white/80"></i>
+                        <div>Top 10 Thương hiệu Vàng ASEAN tại Singapore.</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-briefcase mt-1 text-white/80"></i>
+                        <div>Đối tác đào tạo của hơn 100 doanh nghiệp và 50 trường đại học, THPT trên cả nước.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="rounded-2xl bg-white/10 border border-white/20 p-6 text-center">
+                    <div class="text-3xl font-bold mb-2">13</div>
+                    <div class="text-sm uppercase tracking-wide text-white/80">Năm kinh nghiệm</div>
+                </div>
+                <div class="rounded-2xl bg-white/10 border border-white/20 p-6 text-center">
+                    <div class="text-3xl font-bold mb-2">14</div>
+                    <div class="text-sm uppercase tracking-wide text-white/80">Trung tâm</div>
+                </div>
+                <div class="rounded-2xl bg-white/10 border border-white/20 p-6 text-center">
+                    <div class="text-3xl font-bold mb-2">50.000+</div>
+                    <div class="text-sm uppercase tracking-wide text-white/80">Học viên</div>
+                </div>
+            </div>
+        </div>
+</section>
+
+{% elif page.page_type == 'academics' %}
+<!-- ACADEMICS OVERVIEW PAGE -->
+<section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-neutral-900">
+    {% if page.image %}
+    <div class="absolute inset-0">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-full object-cover opacity-25">
+    </div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-br from-red-900/90 via-neutral-900/80 to-neutral-900/70"></div>
+    <div class="pattern-dots"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <p class="text-lg md:text-xl font-light text-white/80 tracking-wide mb-4">
+            <span class="text-red-400">Giáo dục con tim</span> – <span class="text-amber-400">Kiến tạo giá trị
+                sống</span>
+        </p>
+        <span class="badge badge-primary eyebrow mb-5">Chương trình Giáo dục</span>
+        <h1 class="hero-title mb-6">Tổng quan Chương trình học MIS</h1>
+        <p class="hero-lead max-w-3xl mx-auto mb-8">
+            Hệ thống đào tạo 4 cấp học từ Mầm non đến THPT, tích hợp chương trình Quốc gia với phương pháp giáo dục hiện
+            đại
+        </p>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">4 Cấp học</span>
+            <h2 class="section-title mb-6">Lộ trình Phát triển Toàn diện</h2>
+            <p class="section-subtitle">
+                Mỗi cấp học tại MIS được thiết kế với triết lý "Khai phá khác biệt", phát triển đồng thời trí tuệ, nhân
+                cách và kỹ năng
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Preschool -->
+            <a href="{% url 'about:preschool' %}"
+                class="group bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 rounded-3xl p-8 border border-pink-200 dark:border-pink-800 hover:shadow-2xl transition-all hover:-translate-y-2">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-baby text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Mầm Non</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">3-6 tuổi • Song ngữ 50/50</p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
+                    Phương pháp Hands-on Learning, môi trường song ngữ Anh-Việt, khơi dậy trí tò mò và sáng tạo
+                </p>
+                <span class="text-pink-600 dark:text-pink-400 font-semibold text-sm flex items-center gap-2">
+                    Xem chi tiết <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </span>
+            </a>
+
+            <!-- Primary -->
+            <a href="{% url 'about:primary' %}"
+                class="group bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-3xl p-8 border border-blue-200 dark:border-blue-800 hover:shadow-2xl transition-all hover:-translate-y-2">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-book-reader text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">Tiểu Học</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Lớp 1-5 • Cambridge + STEM</p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
+                    Tích hợp STEM/STEAM, Tiếng Anh Cambridge, làm quen Tiếng Trung và các hoạt động trải nghiệm
+                </p>
+                <span class="text-blue-600 dark:text-blue-400 font-semibold text-sm flex items-center gap-2">
+                    Xem chi tiết <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </span>
+            </a>
+
+            <!-- Middle -->
+            <a href="{% url 'about:middle' %}"
+                class="group bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-3xl p-8 border border-green-200 dark:border-green-800 hover:shadow-2xl transition-all hover:-translate-y-2">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-flask text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">THCS</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Lớp 6-9 • 9 Trí tuệ + Robotics</p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
+                    Phát triển 9 loại hình trí tuệ, Robotics, Debate, AI và các CLB học thuật chuyên sâu
+                </p>
+                <span class="text-green-600 dark:text-green-400 font-semibold text-sm flex items-center gap-2">
+                    Xem chi tiết <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </span>
+            </a>
+
+            <!-- High -->
+            <a href="{% url 'about:high' %}"
+                class="group bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-3xl p-8 border border-purple-200 dark:border-purple-800 hover:shadow-2xl transition-all hover:-translate-y-2">
+                <div
+                    class="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-3">THPT</h3>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">Lớp 10-12 • Nghề nghiệp 4.0</p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm mb-4">
+                    Định hướng nghề nghiệp 4.0, thực tập doanh nghiệp công nghệ, lộ trình cá nhân hóa
+                </p>
+                <span class="text-purple-600 dark:text-purple-400 font-semibold text-sm flex items-center gap-2">
+                    Xem chi tiết <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- 4 Pillars Section -->
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">4 Trụ cột Giáo dục</span>
+            <h2 class="section-title mb-6">Phát triển Toàn diện Con người</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-heart text-red-600 dark:text-red-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Học Làm Người</h3>
+                <p class="text-sm text-muted">Năng lực Cảm xúc Xã hội (SEL), mô thức GRACE, giáo dục nhân cách</p>
+            </div>
+            <div class="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-brain text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Vững Vàng Tri Thức</h3>
+                <p class="text-sm text-muted">2 Ngoại ngữ (Anh + Trung), AI, Công nghệ, Toán tư duy</p>
+            </div>
+            <div class="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div
+                    class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-lightbulb text-green-600 dark:text-green-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Thành thục Kỹ năng</h3>
+                <p class="text-sm text-muted">5Cs: Giao tiếp, Tư duy phản biện, Hợp tác, Sáng tạo, Tư duy máy tính</p>
+            </div>
+            <div class="bg-white dark:bg-neutral-800 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div
+                    class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-heartbeat text-purple-600 dark:text-purple-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Thể lực - Tinh thần</h3>
+                <p class="text-sm text-muted">Rèn luyện thể chất, EQ, sức khỏe tinh thần lành mạnh</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section bg-gradient-to-r from-red-600 via-red-700 to-red-800 relative overflow-hidden">
+    <div class="pattern-dots opacity-10"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <h2 class="section-title title-invert mb-6">Khám phá chi tiết từng cấp học</h2>
+        <p class="lead lead-invert mb-8 max-w-2xl mx-auto">
+            Tìm hiểu chương trình phù hợp cho con bạn và đăng ký tham quan trường ngay hôm nay
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">Đặt lịch tham quan</a>
+            <a href="{% url 'admissions:list' %}" class="btn btn-ghost-invert btn-lg">Đăng ký tuyển sinh</a>
+        </div>
+    </div>
+</section>
+
+{% elif page.page_type == 'preschool' %}
+<!-- PRESCHOOL PAGE -->
+<section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-neutral-900">
+    {% if page.image %}
+    <div class="absolute inset-0">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-full object-cover opacity-25">
+    </div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-900/90 via-neutral-900/80 to-neutral-900/70"></div>
+    <div class="pattern-dots"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <span class="badge badge-primary eyebrow mb-5">Mầm non & Tiền Tiểu học</span>
+        <h1 class="hero-title mb-6">Chương trình Mầm Non MIS</h1>
+        <p class="hero-lead max-w-3xl mx-auto mb-4">3 - 6 tuổi</p>
+        <p class="hero-lead max-w-3xl mx-auto mb-8">
+            Môi trường song ngữ 50/50, phương pháp Hands-on Learning, khơi dậy tiềm năng sáng tạo
+        </p>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="badge badge-primary eyebrow mb-4">Triết lý Giáo dục</span>
+                <h2 class="section-title mb-6">Hands-on Learning: Học qua Trải nghiệm</h2>
+                <p class="section-subtitle text-left max-w-none mb-6">
+                    Trẻ học tốt nhất khi được trực tiếp quan sát, chạm, thao tác và khám phá. MIS tạo môi trường học tập
+                    nơi trẻ là nhà khám phá, giáo viên là người dẫn dắt.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-pink-500 mt-1"></i>
+                        <div><strong>Song ngữ 50/50:</strong> Tiếng Anh và Tiếng Việt xen kẽ trong ngày</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-pink-500 mt-1"></i>
+                        <div><strong>Góc học tập:</strong> Góc nghệ thuật, khoa học, ngôn ngữ, vận động</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-pink-500 mt-1"></i>
+                        <div><strong>Dự án thực hành:</strong> Học qua các dự án nhỏ theo chủ đề</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-pink-500 mt-1"></i>
+                        <div><strong>Làm quen Robot:</strong> Khám phá công nghệ và khối lệnh đơn giản</div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-pink-500 to-rose-600 text-white p-10">
+                <div class="text-sm uppercase tracking-widest text-white/70 mb-6">Đặc điểm nổi bật</div>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center">
+                            <i class="fas fa-language text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold">Song ngữ 50/50</div>
+                            <div class="text-sm text-white/80">Anh - Việt xen kẽ mỗi ngày</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center">
+                            <i class="fas fa-hands text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold">Hands-on Learning</div>
+                            <div class="text-sm text-white/80">Học qua thực hành và khám phá</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center">
+                            <i class="fas fa-palette text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold">Sáng tạo & Nghệ thuật</div>
+                            <div class="text-sm text-white/80">Phát triển tư duy hình ảnh</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center">
+                            <i class="fas fa-robot text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold">Làm quen Robot</div>
+                            <div class="text-sm text-white/80">Trò chơi khoa học công nghệ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-gradient-to-r from-red-600 via-red-700 to-red-800 relative overflow-hidden">
+    <div class="pattern-dots opacity-10"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <h2 class="section-title title-invert mb-6">Đăng ký Mầm Non MIS</h2>
+        <p class="lead lead-invert mb-8">Tham quan môi trường học tập và đăng ký cho bé ngay hôm nay</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">Đặt lịch tham quan</a>
+            <a href="{% url 'admissions:list' %}" class="btn btn-ghost-invert btn-lg">Đăng ký tuyển sinh</a>
+        </div>
+    </div>
+</section>
+
+{% elif page.page_type == 'primary' %}
+<!-- PRIMARY SCHOOL PAGE -->
+<section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-neutral-900">
+    {% if page.image %}
+    <div class="absolute inset-0">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-full object-cover opacity-25">
+    </div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-neutral-900/80 to-neutral-900/70"></div>
+    <div class="pattern-dots"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <span class="badge badge-primary eyebrow mb-5">Tiểu Học</span>
+        <h1 class="hero-title mb-6">Chương trình Tiểu Học MIS</h1>
+        <p class="hero-lead max-w-3xl mx-auto mb-4">Lớp 1 - 5</p>
+        <p class="hero-lead max-w-3xl mx-auto mb-8">
+            Tích hợp STEM/STEAM, Tiếng Anh Cambridge, làm quen Tiếng Trung, xây dựng nền tảng vững chắc
+        </p>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">Chương trình tích hợp</span>
+            <h2 class="section-title mb-6">Nền tảng Tri thức Vững chắc</h2>
+            <p class="section-subtitle">
+                Chương trình Quốc gia tích hợp với phương pháp giáo dục quốc tế, phát triển toàn diện học sinh
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-flask text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">STEM/STEAM</h3>
+                <p class="text-sm text-muted">Khoa học, Công nghệ, Kỹ thuật, Nghệ thuật và Toán học tích hợp trong dự án
+                    thực hành</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div
+                    class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-globe-americas text-purple-600 dark:text-purple-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Tiếng Anh Cambridge</h3>
+                <p class="text-sm text-muted">Chương trình chuẩn quốc tế, phát triển 4 kỹ năng Nghe - Nói - Đọc - Viết
+                </p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-language text-red-600 dark:text-red-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Làm quen Tiếng Trung</h3>
+                <p class="text-sm text-muted">Giới thiệu ngôn ngữ thứ 3, xây dựng nền tảng cho HSK</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div
+                    class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-code text-green-600 dark:text-green-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Lập trình Scratch</h3>
+                <p class="text-sm text-muted">Tư duy logic và thuật toán qua lập trình kéo thả</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div
+                    class="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-hiking text-amber-600 dark:text-amber-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">Hoạt động Trải nghiệm</h3>
+                <p class="text-sm text-muted">Dã ngoại, tham quan, dự án cộng đồng, phát triển kỹ năng sống</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700">
+                <div class="w-12 h-12 bg-cyan-100 dark:bg-cyan-900/30 rounded-xl flex items-center justify-center mb-4">
+                    <i class="fas fa-theater-masks text-cyan-600 dark:text-cyan-400"></i>
+                </div>
+                <h3 class="title-sm mb-2">CLB & Năng khiếu</h3>
+                <p class="text-sm text-muted">Âm nhạc, Mỹ thuật, Thể thao, Nhảy, Võ thuật và nhiều hoạt động ngoại khóa
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-gradient-to-r from-red-600 via-red-700 to-red-800 relative overflow-hidden">
+    <div class="pattern-dots opacity-10"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <h2 class="section-title title-invert mb-6">Đăng ký Tiểu Học MIS</h2>
+        <p class="lead lead-invert mb-8">Nền tảng vững chắc cho hành trình học tập suốt đời</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">Đặt lịch tham quan</a>
+            <a href="{% url 'admissions:list' %}" class="btn btn-ghost-invert btn-lg">Đăng ký tuyển sinh</a>
+        </div>
+    </div>
+</section>
+
+{% elif page.page_type == 'middle' %}
+<!-- MIDDLE SCHOOL PAGE -->
+<section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-neutral-900">
+    {% if page.image %}
+    <div class="absolute inset-0">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-full object-cover opacity-25">
+    </div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-br from-green-900/90 via-neutral-900/80 to-neutral-900/70"></div>
+    <div class="pattern-dots"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <span class="badge badge-primary eyebrow mb-5">Trung học Cơ sở</span>
+        <h1 class="hero-title mb-6">Chương trình THCS MIS</h1>
+        <p class="hero-lead max-w-3xl mx-auto mb-4">Lớp 6 - 9</p>
+        <p class="hero-lead max-w-3xl mx-auto mb-8">
+            Phát triển 9 loại hình trí tuệ, Robotics, Debate, AI - Khám phá tiềm năng và định hướng tương lai
+        </p>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">9 Loại hình Trí tuệ</span>
+            <h2 class="section-title mb-6">Khai phá Đa Trí Tuệ theo Howard Gardner</h2>
+            <p class="section-subtitle">
+                Mỗi học sinh là một "hạt giống độc bản" với tổ hợp trí tuệ riêng biệt cần được khám phá và phát triển
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 text-center border border-neutral-100 dark:border-neutral-700">
+                <i class="fas fa-book text-2xl text-red-500 mb-2"></i>
+                <p class="text-sm font-medium">Ngôn ngữ</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 text-center border border-neutral-100 dark:border-neutral-700">
+                <i class="fas fa-calculator text-2xl text-blue-500 mb-2"></i>
+                <p class="text-sm font-medium">Logic - Toán</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 text-center border border-neutral-100 dark:border-neutral-700">
+                <i class="fas fa-cube text-2xl text-green-500 mb-2"></i>
+                <p class="text-sm font-medium">Không gian</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 text-center border border-neutral-100 dark:border-neutral-700">
+                <i class="fas fa-running text-2xl text-amber-500 mb-2"></i>
+                <p class="text-sm font-medium">Vận động</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 text-center border border-neutral-100 dark:border-neutral-700">
+                <i class="fas fa-music text-2xl text-purple-500 mb-2"></i>
+                <p class="text-sm font-medium">Âm nhạc</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 text-center border border-neutral-100 dark:border-neutral-700">
+                <i class="fas fa-users text-2xl text-pink-500 mb-2"></i>
+                <p class="text-sm font-medium">Giao tiếp XH</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 text-center border border-neutral-100 dark:border-neutral-700">
+                <i class="fas fa-user text-2xl text-cyan-500 mb-2"></i>
+                <p class="text-sm font-medium">Nội tâm</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 text-center border border-neutral-100 dark:border-neutral-700">
+                <i class="fas fa-leaf text-2xl text-emerald-500 mb-2"></i>
+                <p class="text-sm font-medium">Tự nhiên</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-xl p-4 text-center border border-neutral-100 dark:border-neutral-700 md:col-span-1 lg:col-span-1">
+                <i class="fas fa-infinity text-2xl text-indigo-500 mb-2"></i>
+                <p class="text-sm font-medium">Hiện sinh</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl p-8 text-white">
+                <i class="fas fa-robot text-3xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Robotics & AI</h3>
+                <p class="text-sm text-white/80">Python, IoT, thiết kế robot, dự án AI và tham gia các cuộc thi quốc tế
+                </p>
+            </div>
+            <div class="bg-gradient-to-br from-blue-500 to-cyan-600 rounded-3xl p-8 text-white">
+                <i class="fas fa-microphone-alt text-3xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Debate & Public Speaking</h3>
+                <p class="text-sm text-white/80">CLB Tranh biện, kỹ năng thuyết trình, tư duy phản biện</p>
+            </div>
+            <div class="bg-gradient-to-br from-purple-500 to-violet-600 rounded-3xl p-8 text-white">
+                <i class="fas fa-globe text-3xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">IELTS & HSK</h3>
+                <p class="text-sm text-white/80">Lộ trình IELTS từ lớp 6, tăng cường Tiếng Trung HSK 3-4</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-gradient-to-r from-red-600 via-red-700 to-red-800 relative overflow-hidden">
+    <div class="pattern-dots opacity-10"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <h2 class="section-title title-invert mb-6">Đăng ký THCS MIS</h2>
+        <p class="lead lead-invert mb-8">Khám phá tiềm năng và định hướng tương lai cho con</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">Đặt lịch tham quan</a>
+            <a href="{% url 'admissions:list' %}" class="btn btn-ghost-invert btn-lg">Đăng ký tuyển sinh</a>
+        </div>
+    </div>
+</section>
+
+{% elif page.page_type == 'robotics' %}
+<!-- ROBOTICS PAGE -->
+{% with hero=page.sections.all|first %}
+{% if hero and hero.layout == 'hero' %}
+<section class="about-section about-section-{{ hero.background }} about-hero">
+    {% if hero.image %}
+    <img src="{{ hero.image.url }}" alt="{{ hero.title }}" class="about-hero-image">
+    {% endif %}
+    <div class="about-hero-overlay"></div>
+
+    <div class="about-hero-deco about-hero-deco-circle top-left"></div>
+    <div class="about-hero-deco about-hero-deco-circle bottom-right"></div>
+
+    <div class="about-hero-content animate-fadeInUp">
+        {% if hero.eyebrow %}
+        <span class="about-eyebrow">{{ hero.eyebrow }}</span>
+        {% endif %}
+        <h1 class="about-heading">
+            {% if hero.highlight_text %}
+            {{ hero.title|default:page.title }} <span class="highlight">{{ hero.highlight_text }}</span>
+            {% else %}
+            {{ hero.title|default:page.title }}
+            {% endif %}
+        </h1>
+        {% if hero.subtitle %}
+        <p class="about-subtitle">{{ hero.subtitle }}</p>
+        {% endif %}
+        {% if hero.cta_text %}
+        <div class="about-cta-buttons">
+            <a href="{{ hero.cta_url }}" class="about-btn about-btn-primary">
+                {{ hero.cta_text }} <i class="fas fa-arrow-right"></i>
+            </a>
+            {% if hero.cta_secondary_text %}
+            <a href="{{ hero.cta_secondary_url }}" class="about-btn about-btn-outline">
+                {{ hero.cta_secondary_text }}
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+{% endwith %}
+
+<section class="robotics-overview">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="robotics-overview-topbar">
+            <div class="robotics-overview-logos">
+                <img src="{% static 'images/robotics/robotics_logo_mis.png' %}" alt="MIS">
+                <img src="{% static 'images/robotics/robotics_logo_robohub.png' %}" alt="RoboHub">
+            </div>
+        </div>
+
+        <div class="robotics-grid">
+            <div class="robotics-left">
+                <div class="robotics-card">
+                    {% for section in page.sections.all %}
+                    {% if section.order == 1 %}
+                    {{ section.content|linebreaks }}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="robotics-pill">Tổng quan về môn học Robotics</div>
+
+                <div class="robotics-mini-grid">
+                    <img src="{% static 'images/robotics/robotics_track.png' %}" alt="Mô hình lắp ráp robot">
+                    <ul class="robotics-list">
+                        <li>Đối với mô hình, chương trình và phương pháp đào tạo</li>
+                        <li>Thay đổi tư duy và học theo phương pháp mới</li>
+                    </ul>
+                </div>
+
+                <div class="robotics-mini-grid robotics-mini-grid-reverse">
+                    <ul class="robotics-list">
+                        <li>Đón đầu và áp dụng các công nghệ mới</li>
+                        <li>Tiếp cận kiến thức về lắp ráp robot, chuyển động cơ học và vật lý ứng dụng</li>
+                    </ul>
+                    <img src="{% static 'images/robotics/robotics_soccer.png' %}" alt="Hoạt động Robotics">
+                </div>
+            </div>
+
+            <div class="robotics-right">
+                <div class="robotics-learning">
+                    <img src="{% static 'images/robotics/robotics_learning_photo.jpg' %}" alt="Learning by Doing">
+                    <div class="robotics-learning-overlay">
+                        <div class="robotics-learning-title">Learning by Doing</div>
+                        <ul class="robotics-learning-list">
+                            <li>Kích thích tò mò</li>
+                            <li>Thỏa sức khám phá</li>
+                            <li>Tự do sáng tạo</li>
+                        </ul>
+                    </div>
+                </div>
+                <img class="robotics-wheel" src="{% static 'images/robotics/robotics_wheel.png' %}"
+                    alt="Chu trình học Robotics">
+            </div>
+        </div>
+    </div>
+</section>
+
+{% for section in page.sections.all %}
+{% if section.order == 0 or section.order == 1 or section.order == 3 %}
+{% elif section.layout == 'text_left' %}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-container">
+        <div class="about-split animate-fadeInUp">
+            <div class="about-split-content">
+                {% if section.eyebrow %}
+                <span class="about-eyebrow">{{ section.eyebrow }}</span>
+                {% endif %}
+                <h2 class="about-heading">
+                    {% if section.highlight_text %}
+                    {{ section.title }} <span class="highlight">{{ section.highlight_text }}</span>
+                    {% else %}
+                    {{ section.title }}
+                    {% endif %}
+                </h2>
+                <div class="about-body">{{ section.content|linebreaks }}</div>
+                {% if section.cta_text %}
+                <div class="about-cta-buttons" style="justify-content: flex-start; margin-top: 2rem;">
+                    <a href="{{ section.cta_url }}" class="about-btn about-btn-primary">
+                        {{ section.cta_text }} <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="about-split-image">
+                {% if section.image %}
+                <img src="{{ section.image.url }}" alt="{{ section.title }}">
+                {% else %}
+                <div class="about-split-image-placeholder">
+                    <i class="fas fa-image"></i>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% elif section.layout == 'text_right' %}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-container">
+        <div class="about-split about-split-reverse animate-fadeInUp">
+            <div class="about-split-content">
+                {% if section.eyebrow %}
+                <span class="about-eyebrow">{{ section.eyebrow }}</span>
+                {% endif %}
+                <h2 class="about-heading">
+                    {% if section.highlight_text %}
+                    {{ section.title }} <span class="highlight">{{ section.highlight_text }}</span>
+                    {% else %}
+                    {{ section.title }}
+                    {% endif %}
+                </h2>
+                <div class="about-body">{{ section.content|linebreaks }}</div>
+                {% if section.cta_text %}
+                <div class="about-cta-buttons" style="justify-content: flex-start; margin-top: 2rem;">
+                    <a href="{{ section.cta_url }}" class="about-btn about-btn-primary">
+                        {{ section.cta_text }} <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="about-split-image">
+                {% if section.image %}
+                <img src="{{ section.image.url }}" alt="{{ section.title }}">
+                {% else %}
+                <div class="about-split-image-placeholder">
+                    <i class="fas fa-image"></i>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% elif section.layout == 'stats' %}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-container">
+        <div class="about-stats animate-fadeInUp">
+            <div class="about-stat-item">
+                <div class="about-stat-number">{{ section.stat_number }}</div>
+                <div class="about-stat-label">{{ section.stat_label }}</div>
+            </div>
+            {% if section.title %}
+            <div class="about-stat-item">
+                <div class="about-stat-number">{{ section.title }}</div>
+                <div class="about-stat-label">{{ section.subtitle }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% elif section.layout == 'cta' %}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-cta animate-fadeInUp">
+        {% if section.eyebrow %}
+        <span class="about-eyebrow">{{ section.eyebrow }}</span>
+        {% endif %}
+        <h2 class="about-heading">{{ section.title }}</h2>
+        {% if section.subtitle %}
+        <p class="about-body" style="max-width: 600px; margin: 0 auto;">{{ section.subtitle }}</p>
+        {% endif %}
+        <div class="about-cta-buttons">
+            {% if section.cta_text %}
+            <a href="{{ section.cta_url }}" class="about-btn about-btn-primary">
+                {{ section.cta_text }} <i class="fas fa-arrow-right"></i>
+            </a>
+            {% endif %}
+            {% if section.cta_secondary_text %}
+            <a href="{{ section.cta_secondary_url }}" class="about-btn about-btn-outline">
+                {{ section.cta_secondary_text }}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% else %}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-full-text animate-fadeInUp">
+        {% if section.eyebrow %}
+        <span class="about-eyebrow">{{ section.eyebrow }}</span>
+        {% endif %}
+        {% if section.title %}
+        <h2 class="about-heading">{{ section.title }}</h2>
+        {% endif %}
+        <div class="about-body">{{ section.content|linebreaks }}</div>
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+
+{% elif page.page_type == 'high' %}
+<!-- HIGH SCHOOL PAGE -->
+<section class="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-neutral-900">
+    {% if page.image %}
+    <div class="absolute inset-0">
+        <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-full object-cover opacity-25">
+    </div>
+    {% endif %}
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-900/90 via-neutral-900/80 to-neutral-900/70"></div>
+    <div class="pattern-dots"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center z-10">
+        <span class="badge badge-primary eyebrow mb-5">Trung học Phổ thông</span>
+        <h1 class="hero-title mb-6">Chương trình THPT MIS</h1>
+        <p class="hero-lead max-w-3xl mx-auto mb-4">Lớp 10 - 12</p>
+        <p class="hero-lead max-w-3xl mx-auto mb-8">
+            Định hướng nghề nghiệp 4.0, thực tập doanh nghiệp công nghệ, lộ trình cá nhân hóa - Sẵn sàng cho Đại học
+        </p>
+    </div>
+</section>
+
+<section class="section bg-white dark:bg-neutral-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <span class="badge badge-primary eyebrow mb-4">Nghề nghiệp 4.0</span>
+            <h2 class="section-title mb-6">Lộ trình Cá nhân hóa cho Tương lai</h2>
+            <p class="section-subtitle">
+                Học sinh được định hướng theo năng lực và đam mê, sẵn sàng cho Đại học và Nghề nghiệp
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div
+                class="bg-gradient-to-br from-purple-50 to-violet-50 dark:from-purple-900/20 dark:to-violet-900/20 rounded-3xl p-8 border border-purple-200 dark:border-purple-800">
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-6">Định hướng Nghề nghiệp 4.0</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-purple-500 mt-1"></i>
+                        <div><strong>Thực tập Doanh nghiệp:</strong> Trải nghiệm tại các công ty công nghệ</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-purple-500 mt-1"></i>
+                        <div><strong>Dự án Capstone:</strong> Nghiên cứu và triển khai dự án cá nhân</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-purple-500 mt-1"></i>
+                        <div><strong>AI/ML Nhập môn:</strong> Data project và ứng dụng web/app</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-purple-500 mt-1"></i>
+                        <div><strong>Hồ sơ Portfolio:</strong> Xây dựng hồ sơ năng lực cá nhân</div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-3xl p-8 border border-amber-200 dark:border-amber-800">
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white mb-6">Cam kết Đầu ra</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl p-4 text-center">
+                        <div class="text-2xl font-bold text-purple-600">IELTS 6.0-7.5+</div>
+                        <div class="text-sm text-muted">Chứng chỉ Tiếng Anh</div>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl p-4 text-center">
+                        <div class="text-2xl font-bold text-red-600">HSK 4-6</div>
+                        <div class="text-sm text-muted">Chứng chỉ Tiếng Trung</div>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl p-4 text-center">
+                        <div class="text-2xl font-bold text-green-600">98%</div>
+                        <div class="text-sm text-muted">Đậu Đại học</div>
+                    </div>
+                    <div class="bg-white dark:bg-neutral-800 rounded-2xl p-4 text-center">
+                        <div class="text-2xl font-bold text-blue-600">50+</div>
+                        <div class="text-sm text-muted">Học bổng/năm</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700 text-center">
+                <i class="fas fa-university text-3xl text-purple-500 mb-3"></i>
+                <h4 class="font-semibold mb-2">Hướng Đại học</h4>
+                <p class="text-sm text-muted">Luyện thi, hồ sơ, phỏng vấn</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700 text-center">
+                <i class="fas fa-plane-departure text-3xl text-blue-500 mb-3"></i>
+                <h4 class="font-semibold mb-2">Du học Quốc tế</h4>
+                <p class="text-sm text-muted">Học bổng, SAT, Application</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700 text-center">
+                <i class="fas fa-laptop-code text-3xl text-green-500 mb-3"></i>
+                <h4 class="font-semibold mb-2">Công nghệ & Khởi nghiệp</h4>
+                <p class="text-sm text-muted">Startup, coding bootcamp</p>
+            </div>
+            <div
+                class="bg-neutral-50 dark:bg-neutral-900 rounded-2xl p-6 border border-neutral-100 dark:border-neutral-700 text-center">
+                <i class="fas fa-briefcase text-3xl text-amber-500 mb-3"></i>
+                <h4 class="font-semibold mb-2">Nghề nghiệp 4.0</h4>
+                <p class="text-sm text-muted">AI, Data, Digital Marketing</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-gradient-to-r from-red-600 via-red-700 to-red-800 relative overflow-hidden">
+    <div class="pattern-dots opacity-10"></div>
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+        <h2 class="section-title title-invert mb-6">Đăng ký THPT MIS</h2>
+        <p class="lead lead-invert mb-8">Chuẩn bị tương lai vững chắc cho con - Sẵn sàng cho Đại học và Nghề nghiệp 4.0
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="{% url 'contact:contact' %}" class="btn btn-light btn-lg">Đặt lịch tham quan</a>
+            <a href="{% url 'admissions:list' %}" class="btn btn-ghost-invert btn-lg">Đăng ký tuyển sinh</a>
+        </div>
+    </div>
+</section>
+
+{% elif page.sections.exists %}
+{# New Nord Anglia Style with Sections #}
+{% for section in page.sections.all %}
+{% if section.layout == 'hero' %}
+{# Hero Section #}
+<section class="about-section about-section-{{ section.background }} about-hero">
+    {% if section.image %}
+    <img src="{{ section.image.url }}" alt="{{ section.title }}" class="about-hero-image">
+    {% endif %}
+    <div class="about-hero-overlay"></div>
+
+    {# Decorative circles #}
+    <div class="about-hero-deco about-hero-deco-circle top-left"></div>
+    <div class="about-hero-deco about-hero-deco-circle bottom-right"></div>
+
+    <div class="about-hero-content animate-fadeInUp">
+        {% if section.eyebrow %}
+        <span class="about-eyebrow">{{ section.eyebrow }}</span>
+        {% endif %}
+        <h1 class="about-heading">
+            {% if section.highlight_text %}
+            {{ section.title|default:page.title }} <span class="highlight">{{ section.highlight_text }}</span>
+            {% else %}
+            {{ section.title|default:page.title }}
+            {% endif %}
+        </h1>
+        {% if section.subtitle %}
+        <p class="about-subtitle">{{ section.subtitle }}</p>
+        {% endif %}
+        {% if section.cta_text %}
+        <div class="about-cta-buttons">
+            <a href="{{ section.cta_url }}" class="about-btn about-btn-primary">
+                {{ section.cta_text }} <i class="fas fa-arrow-right"></i>
+            </a>
+            {% if section.cta_secondary_text %}
+            <a href="{{ section.cta_secondary_url }}" class="about-btn about-btn-outline">
+                {{ section.cta_secondary_text }}
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% elif section.layout == 'text_left' %}
+{# Split Layout: Text Left, Image Right #}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-container">
+        <div class="about-split animate-fadeInUp">
+            <div class="about-split-content">
+                {% if section.eyebrow %}
+                <span class="about-eyebrow">{{ section.eyebrow }}</span>
+                {% endif %}
+                <h2 class="about-heading">
+                    {% if section.highlight_text %}
+                    {{ section.title }} <span class="highlight">{{ section.highlight_text }}</span>
+                    {% else %}
+                    {{ section.title }}
+                    {% endif %}
+                </h2>
+                <div class="about-body">{{ section.content|linebreaks }}</div>
+                {% if section.cta_text %}
+                <div class="about-cta-buttons" style="justify-content: flex-start; margin-top: 2rem;">
+                    <a href="{{ section.cta_url }}" class="about-btn about-btn-primary">
+                        {{ section.cta_text }} <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="about-split-image">
+                {% if section.image %}
+                <img src="{{ section.image.url }}" alt="{{ section.title }}">
+                {% else %}
+                <div class="about-split-image-placeholder">
+                    <i class="fas fa-image"></i>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% elif section.layout == 'text_right' %}
+{# Split Layout: Image Left, Text Right #}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-container">
+        <div class="about-split about-split-reverse animate-fadeInUp">
+            <div class="about-split-content">
+                {% if section.eyebrow %}
+                <span class="about-eyebrow">{{ section.eyebrow }}</span>
+                {% endif %}
+                <h2 class="about-heading">
+                    {% if section.highlight_text %}
+                    {{ section.title }} <span class="highlight">{{ section.highlight_text }}</span>
+                    {% else %}
+                    {{ section.title }}
+                    {% endif %}
+                </h2>
+                <div class="about-body">{{ section.content|linebreaks }}</div>
+                {% if section.cta_text %}
+                <div class="about-cta-buttons" style="justify-content: flex-start; margin-top: 2rem;">
+                    <a href="{{ section.cta_url }}" class="about-btn about-btn-primary">
+                        {{ section.cta_text }} <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="about-split-image">
+                {% if section.image %}
+                <img src="{{ section.image.url }}" alt="{{ section.title }}">
+                {% else %}
+                <div class="about-split-image-placeholder">
+                    <i class="fas fa-image"></i>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% elif section.layout == 'stats' %}
+{# Statistics Section #}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-container">
+        <div class="about-stats animate-fadeInUp">
+            <div class="about-stat-item">
+                <div class="about-stat-number">{{ section.stat_number }}</div>
+                <div class="about-stat-label">{{ section.stat_label }}</div>
+            </div>
+            {% if section.title %}
+            <div class="about-stat-item">
+                <div class="about-stat-number">{{ section.title }}</div>
+                <div class="about-stat-label">{{ section.subtitle }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% elif section.layout == 'quote' %}
+{# Quote Section #}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-quote animate-fadeInUp">
+        <blockquote class="about-quote-text">{{ section.content }}</blockquote>
+        {% if section.title %}
+        <cite class="about-quote-author">— {{ section.title }}</cite>
+        {% endif %}
+    </div>
+</section>
+
+{% elif section.layout == 'cta' %}
+{# Call to Action Section #}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-cta animate-fadeInUp">
+        {% if section.eyebrow %}
+        <span class="about-eyebrow">{{ section.eyebrow }}</span>
+        {% endif %}
+        <h2 class="about-heading">{{ section.title }}</h2>
+        {% if section.subtitle %}
+        <p class="about-body" style="max-width: 600px; margin: 0 auto;">{{ section.subtitle }}</p>
+        {% endif %}
+        <div class="about-cta-buttons">
+            {% if section.cta_text %}
+            <a href="{{ section.cta_url }}" class="about-btn about-btn-primary">
+                {{ section.cta_text }} <i class="fas fa-arrow-right"></i>
+            </a>
+            {% endif %}
+            {% if section.cta_secondary_text %}
+            <a href="{{ section.cta_secondary_url }}" class="about-btn about-btn-outline">
+                {{ section.cta_secondary_text }}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% elif section.layout == 'features' %}
+{# Feature Grid Section #}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-container">
+        {% if section.title %}
+        <div class="text-center mb-12 animate-fadeInUp">
+            {% if section.eyebrow %}
+            <span class="about-eyebrow">{{ section.eyebrow }}</span>
+            {% endif %}
+            <h2 class="about-heading">{{ section.title }}</h2>
+        </div>
+        {% endif %}
+        <div class="about-body animate-fadeInUp">{{ section.content|linebreaks }}</div>
+    </div>
+</section>
+
+{% else %}
+{# Full Width Text (default) #}
+<section class="about-section about-section-{{ section.background }}">
+    <div class="about-full-text animate-fadeInUp">
+        {% if section.eyebrow %}
+        <span class="about-eyebrow">{{ section.eyebrow }}</span>
+        {% endif %}
+        {% if section.title %}
+        <h2 class="about-heading">{{ section.title }}</h2>
+        {% endif %}
+        <div class="about-body">{{ section.content|linebreaks }}</div>
+    </div>
+</section>
+{% endif %}
+{% endfor %}
+
+{% else %}
+{# Legacy Layout for pages without sections #}
+<div class="bg-neutral-50 dark:bg-neutral-900 min-h-screen section">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb -->
+        <nav class="mb-8 text-sm text-muted animate-fadeInUp">
+            <a href="{% url 'core:home' %}"
+                class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Trang chủ</a>
+            <span class="mx-2">/</span>
+            <a href="{% url 'about:mission' %}"
+                class="hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Về chúng tôi</a>
+            <span class="mx-2">/</span>
+            <span class="text-strong font-semibold">{{ page.get_page_type_display }}</span>
+        </nav>
+
+        <!-- Page Header -->
+        <header class="mb-12 text-center animate-fadeInUp">
+            <span class="badge badge-accent eyebrow mb-6">
+                {{ page.get_page_type_display }}
+            </span>
+            <h1 class="page-title mb-8">{{ page.title }}</h1>
+            {% if page.image %}
+            <div class="mb-12 rounded-3xl overflow-hidden shadow-premium-lg">
+                <img src="{{ page.image.url }}" alt="{{ page.title }}" class="w-full h-auto object-cover image-hover">
+            </div>
+            {% endif %}
+        </header>
+
+        <!-- Page Content -->
+        <div class="prose dark:prose-invert max-w-none mb-16 animate-fadeInUp">
+            {{ page.content|linebreaks }}
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="mt-16 pt-12 border-t border-neutral-200 dark:border-neutral-700 animate-fadeInUp">
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="{% url 'about:mission' %}"
+                    class="btn btn-md {% if page.page_type == 'mission' %}btn-primary{% else %}btn-outline{% endif %}">
+                    <i class="fas fa-users mr-2"></i>Về chúng tôi
+                </a>
+                <a href="{% url 'about:vision' %}"
+                    class="btn btn-md {% if page.page_type == 'vision' %}btn-primary{% else %}btn-outline{% endif %}">
+                    <i class="fas fa-gem mr-2"></i>Giá trị cốt lõi
+                </a>
+                <a href="{% url 'about:principal' %}"
+                    class="btn btn-md {% if page.page_type == 'principal' %}btn-primary{% else %}btn-outline{% endif %}">
+                    <i class="fas fa-history mr-2"></i>Lịch sử hình thành
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

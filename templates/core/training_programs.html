@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}Các Hệ Đào Tạo Chuyên Sâu - MIS{% endblock %}
+{% block meta_description %}Các hệ đào tạo chuyên sâu MIS 2026-2027: Hệ STEAM Chuẩn/CLC, Hệ Tài năng Toán – Công nghệ
+mới, Hệ Tài năng Ngôn ngữ. Tích hợp AI, mô hình Hợp tác – Sáng tạo – Giải quyết vấn đề.{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="section relative hero-gradient-bg overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0"
+            style="background-image: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 80 80&quot;><circle cx=&quot;40&quot; cy=&quot;40&quot; r=&quot;2&quot; fill=&quot;white&quot; /></svg>'); background-size: 40px 40px;">
+        </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {% if training_program_group %}
+        <span
+            class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium mb-6 animate-fadeInUp">
+            <i class="fas fa-graduation-cap mr-2"></i>{{ training_program_group.eyebrow }}
+        </span>
+        <h1 class="hero-title mb-6 animate-fadeInUp">
+            {{ training_program_group.title }}
+        </h1>
+        {% if training_program_group.subtitle %}
+        <p class="text-lg text-white/80 max-w-3xl mx-auto animate-fadeInUp">
+            {{ training_program_group.subtitle }}
+        </p>
+        {% endif %}
+        <p class="text-xl text-white/80 max-w-3xl mx-auto animate-fadeInUp">
+            {{ training_program_group.description }}
+        </p>
+        {% else %}
+        <span
+            class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium mb-6 animate-fadeInUp">
+            <i class="fas fa-graduation-cap mr-2"></i>CHƯƠNG TRÌNH ĐÀO TẠO CHUYÊN BIỆT
+        </span>
+        <h1 class="hero-title mb-6 animate-fadeInUp">
+            CÁC HỆ ĐÀO TẠO CHUYÊN SÂU
+        </h1>
+        <p class="text-xl text-white/80 max-w-3xl mx-auto animate-fadeInUp">
+            MIS mang đến các hệ đào tạo chuyên biệt dành riêng cho học sinh, tích hợp AI trong thời đại trí tuệ nhân tạo.
+            Chương trình kết hợp Chương trình giáo dục phổ thông quốc gia với mô hình Hợp tác – Sáng tạo – Giải quyết vấn đề.
+        </p>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Programs Grid -->
+<section class="section bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {% for program in programs %}
+            <div class="group relative bg-white dark:bg-neutral-800 rounded-3xl overflow-hidden shadow-premium hover:shadow-premium-lg transition-all duration-500 animate-fadeInUp"
+                style="animation-delay: {{ forloop.counter0 }}00ms;">
+                <!-- Color accent bar -->
+                <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r 
+                    {% if program.color == 'blue' %}from-blue-500 to-blue-600
+                    {% elif program.color == 'purple' %}from-purple-500 to-purple-600
+                    {% elif program.color == 'green' %}from-green-500 to-green-600
+                    {% elif program.color == 'orange' %}from-orange-500 to-orange-600
+                    {% else %}from-primary-500 to-primary-600{% endif %}">
+                </div>
+
+                <div class="p-8">
+                    <!-- Header -->
+                    <div class="flex items-start gap-4 mb-6">
+                        <div
+                            class="w-16 h-16 rounded-2xl flex items-center justify-center 
+                            {% if program.color == 'blue' %}bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400
+                            {% elif program.color == 'purple' %}bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400
+                            {% elif program.color == 'green' %}bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400
+                            {% elif program.color == 'orange' %}bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400
+                            {% else %}bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400{% endif %}">
+                            <i class="{{ program.icon }} text-2xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-muted">{{
+                                program.grade_levels }}</span>
+                            <h3 class="type-h3 font-bold text-strong mt-1">{{ program.short_name }}</h3>
+                        </div>
+                    </div>
+
+                    <!-- Tagline -->
+                    <p class="text-muted mb-6 leading-relaxed">{{ program.tagline }}</p>
+
+                    <!-- Partner Badge -->
+                    <div class="flex items-center gap-3 p-4 bg-neutral-50 dark:bg-neutral-700/50 rounded-xl mb-6">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-white dark:bg-neutral-600 flex items-center justify-center shadow-sm">
+                            <i class="fas fa-handshake text-accent-500"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-muted uppercase tracking-wider">Đối tác đào tạo</span>
+                            <p class="font-semibold text-strong">{{ program.partner_name }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Highlights Preview -->
+                    <ul class="space-y-2 mb-6">
+                        {% for highlight in program.get_highlights_list|slice:":3" %}
+                        <li class="flex items-start gap-2 text-sm text-muted">
+                            <i class="fas fa-check-circle text-green-500 mt-0.5 flex-shrink-0"></i>
+                            <span>{{ highlight }}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    {% if program.updated_at or program.created_at %}
+                    <p class="text-xs text-neutral-500 dark:text-neutral-400 mb-4">
+                        Cập nhật lần cuối:
+                        {% if program.updated_at %}
+                        {{ program.updated_at|date:"d/m/Y" }}
+                        {% else %}
+                        {{ program.created_at|date:"d/m/Y" }}
+                        {% endif %}
+                    </p>
+                    {% endif %}
+
+                    <!-- CTA Button -->
+                    <a href="{{ program.get_absolute_url }}" class="btn btn-primary btn-md w-full">
+                        Tìm hiểu chi tiết
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="{% url 'contact:contact' %}" class="btn btn-outline btn-md w-full mt-3">
+                        Tư vấn tuyển sinh
+                        <i class="fas fa-headset ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-2 text-center py-12">
+                <p class="text-muted">Chưa có thông tin các hệ đào tạo.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="section bg-gradient-to-r from-accent-600 to-accent-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2
+            class="type-h2 font-display font-semibold text-primary-600 dark:text-primary-500 uppercase tracking-tighter leading-none mb-2">
+            Sẵn sàng khám phá tiềm năng của con bạn?
+        </h2>
+        <p class="text-xl text-white/90 mb-8">
+            Liên hệ ngay để được tư vấn chương trình phù hợp nhất
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'admissions:list' %}" class="btn btn-light btn-lg">
+                <i class="fas fa-user-plus mr-2"></i>Đăng ký tư vấn
+            </a>
+            <a href="{% url 'contact:contact' %}" class="btn btn-ghost-invert btn-lg">
+                <i class="fas fa-phone mr-2"></i>Đặt lịch tham quan
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

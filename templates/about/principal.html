@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title|default:"Thông điệp Tổng Giám đốc" }} - MIS{% endblock %}
+{% block meta_description %}{% if founder_message %}{{ founder_message.main_quote|default:founder_message.full_message|striptags|truncatechars:160 }}{% else %}{{ page.content|striptags|truncatechars:160|default:"Thông điệp từ Tổng Giám đốc Hệ thống Giáo dục Đa Trí Tuệ MIS." }}{% endif %}{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/about/principal.css' %}?v=6">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": "{{ request.build_absolute_uri|escapejs }}#principal-message",
+    "url": "{{ request.build_absolute_uri|escapejs }}",
+    "name": "{{ page.title|default:'Thông điệp Tổng Giám đốc'|escapejs }}",
+    "description": "{{ founder_message.main_quote|default:page.content|default:'Thông điệp từ Tổng Giám đốc Hệ thống Giáo dục Đa Trí Tuệ MIS.'|striptags|truncatechars:160|escapejs }}",
+    "inLanguage": "vi"
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<main class="history-page principal-page">
+
+    <!-- ═══ HERO — compact, no redundant quote ═══ -->
+    <section class="history-hero principal-hero">
+        <div class="history-hero__media" aria-hidden="true">
+            {% if founder_message and founder_message.founder_photo %}
+            <img src="{{ founder_message.founder_photo.url }}" alt="">
+            {% elif page.image %}
+            <img src="{{ page.image.url }}" alt="">
+            {% else %}
+            <img src="{% static 'images/founder/MIS01560.jpg' %}" alt="">
+            {% endif %}
+        </div>
+        <div class="history-shell history-hero__grid principal-hero__grid">
+            <div class="history-hero__content principal-hero__content">
+                <span class="history-eyebrow"><i class="fas fa-quote-left" style="font-size:.7em;opacity:.7"></i> Thông điệp từ ban lãnh đạo</span>
+                <div class="principal-hero__accent-line" aria-hidden="true"></div>
+                <h1 class="principal-hero__headline">Triết lý điều hành, định hướng phát triển và cam kết đồng hành lâu dài của MIS với phụ huynh và học sinh.</h1>
+                <p class="principal-hero__subtext">Hệ thống Giáo dục Đa Trí Tuệ MIS — Nơi nuôi dưỡng tài năng, kiến tạo tương lai.</p>
+
+                {% if founder_message %}
+                <div class="history-badges principal-hero-badges">
+                    {% if founder_message.updated_at %}<span><i class="far fa-calendar-check"></i> Cập nhật {{ founder_message.updated_at|date:"d/m/Y" }}</span>{% endif %}
+                </div>
+                {% endif %}
+            </div>
+
+            <aside class="history-hero__aside principal-hero__aside">
+                {% if founder_message %}
+                <article class="principal-profile-card">
+                    <div class="principal-profile-card__avatar-ring">
+                        <div class="principal-profile-card__avatar">
+                            {% if founder_message.founder_photo %}
+                            <img src="{{ founder_message.founder_photo.url }}" alt="{{ founder_message.founder_name|default:page.title }}">
+                            {% elif page.image %}
+                            <img src="{{ page.image.url }}" alt="{{ page.title|default:'Thông điệp Tổng Giám đốc' }}">
+                            {% else %}
+                            <img src="{% static 'images/founder/MIS01560.jpg' %}" alt="{{ page.title|default:'Thông điệp Tổng Giám đốc' }}">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="principal-profile-card__info">
+                        <h2>{{ founder_message.founder_name|default:"Hệ thống Giáo dục Đa Trí Tuệ MIS" }}</h2>
+                        {% if founder_message.founder_title %}
+                        <p class="principal-profile-card__role">{{ founder_message.founder_title|linebreaksbr }}</p>
+                        {% endif %}
+                        {% if founder_message.main_quote %}
+                        <blockquote class="principal-profile-card__quote">
+                            <i class="fas fa-quote-left"></i>
+                            {{ founder_message.main_quote|truncatewords:12 }}
+                        </blockquote>
+                        {% endif %}
+                    </div>
+                </article>
+                {% elif page.content %}
+                <div class="history-quote">
+                    <p>{{ page.content|striptags|truncatewords:40 }}</p>
+                </div>
+                {% endif %}
+            </aside>
+        </div>
+    </section>
+
+    <!-- ═══ MESSAGE BODY — direct into content, no redundant section header ═══ -->
+    <section class="history-section principal-message-section">
+        <div class="history-shell principal-message-shell">
+
+            <article class="history-card principal-message-card principal-message-card--full">
+
+                {% if founder_message and founder_message.main_quote %}
+                <div class="principal-message-callout">
+                    <span class="principal-message-callout__label">Tinh thần cốt lõi</span>
+                    <p>"{{ founder_message.main_quote }}"</p>
+                </div>
+                {% endif %}
+
+                {% if founder_message and founder_message.greeting %}
+                <p class="principal-message-greeting">{{ founder_message.greeting }}</p>
+                {% endif %}
+
+                <div class="principal-message-copy">
+                    {% if founder_message and founder_message.full_message %}
+                    {{ founder_message.full_message|linebreaks }}
+                    {% elif page.content %}
+                    {{ page.content|linebreaks }}
+                    {% else %}
+                    <p>Nội dung thông điệp đang được cập nhật.</p>
+                    {% endif %}
+                </div>
+
+                {% if founder_message and founder_message.closing_message %}
+                <div class="principal-message-closing">
+                    {{ founder_message.closing_message|linebreaks }}
+                </div>
+                {% endif %}
+
+                {% if founder_message %}
+                <footer class="principal-signature">
+                    <div class="principal-signature__line" aria-hidden="true"></div>
+                    <strong>{{ founder_message.founder_name }}</strong>
+                    {% if founder_message.founder_title %}
+                    <span>{{ founder_message.founder_title|linebreaksbr }}</span>
+                    {% endif %}
+                </footer>
+                {% endif %}
+            </article>
+        </div>
+    </section>
+
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_eyebrow='MIS' cta_title='Kết nối cùng MIS để hiểu rõ hơn về định hướng giáo dục của nhà trường' cta_subtitle='Đặt lịch tham quan hoặc nhận tư vấn để tìm lộ trình phù hợp cho con.' cta_primary='Đăng ký tư vấn' cta_primary_url='admissions:list' cta_secondary='Đặt lịch tham quan' cta_secondary_url='contact:contact' %}
+</main>
+{% endblock %}

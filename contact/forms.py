@@ -5,24 +5,39 @@ from .models import ContactMessage
 class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
-        fields = ['name', 'email', 'subject', 'message']
+        fields = [
+            'name', 'phone', 'email',
+            'grade_level', 'message',
+            'interest_visit', 'interest_curriculum', 'interest_admission_process',
+        ]
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': 'w-full px-5 py-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200',
-                'placeholder': 'Your Name'
+                'class': 'form-input',
+                'placeholder': 'Nguyễn Văn A'
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-input',
+                'placeholder': '0912 345 678'
             }),
             'email': forms.EmailInput(attrs={
-                'class': 'w-full px-5 py-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200',
-                'placeholder': 'your.email@example.com'
+                'class': 'form-input',
+                'placeholder': 'email@example.com'
             }),
-            'subject': forms.TextInput(attrs={
-                'class': 'w-full px-5 py-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200',
-                'placeholder': 'Subject'
+            'grade_level': forms.Select(attrs={
+                'class': 'form-select',
             }),
             'message': forms.Textarea(attrs={
-                'class': 'w-full px-5 py-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 resize-none',
-                'rows': 6,
-                'placeholder': 'Your Message'
+                'class': 'form-textarea resize-none',
+                'rows': 3,
+                'placeholder': 'Nhập nội dung bạn muốn liên hệ...'
+            }),
+            'interest_visit': forms.CheckboxInput(attrs={
+                'class': 'w-4 h-4 rounded border-neutral-300 text-red-600 focus:ring-red-500 cursor-pointer',
+            }),
+            'interest_curriculum': forms.CheckboxInput(attrs={
+                'class': 'w-4 h-4 rounded border-neutral-300 text-red-600 focus:ring-red-500 cursor-pointer',
+            }),
+            'interest_admission_process': forms.CheckboxInput(attrs={
+                'class': 'w-4 h-4 rounded border-neutral-300 text-red-600 focus:ring-red-500 cursor-pointer',
             }),
         }
-

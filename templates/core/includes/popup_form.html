@@ -1,0 +1,102 @@
+<!-- Popup Form - Đăng ký tư vấn -->
+<div x-data="{ showPopup: false, submitted: false }"
+    x-init="setTimeout(() => { if(!sessionStorage.getItem('popupShown')) { showPopup = true; sessionStorage.setItem('popupShown', 'true'); } }, 5000)"
+    @scroll.window="if(window.scrollY > document.body.scrollHeight * 0.5 && !sessionStorage.getItem('popupShown')) { showPopup = true; sessionStorage.setItem('popupShown', 'true'); }">
+
+    <!-- Backdrop -->
+    <div x-show="showPopup" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50" @click="showPopup = false"></div>
+
+    <!-- Modal -->
+    <div x-show="showPopup" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95" class="fixed inset-0 z-50 flex items-center justify-center p-4">
+
+        <div class="relative bg-white dark:bg-neutral-800 rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden">
+            <!-- Close button -->
+            <button @click="showPopup = false"
+                class="absolute top-4 right-4 w-10 h-10 bg-neutral-100 dark:bg-neutral-700 rounded-full flex items-center justify-center text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-600 transition-colors z-10">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <!-- Header with gradient -->
+            <div class="bg-gradient-to-r from-red-600 via-red-700 to-red-800 text-white p-8 pb-12">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-2xl"></i>
+                    </div>
+                    <span class="text-white/80 font-medium">MIS Đa Trí Tuệ</span>
+                </div>
+                <h3 class="type-h3 title-invert mb-2">Đăng ký tư vấn miễn phí</h3>
+                <p class="text-white/80">Nhận thông tin tuyển sinh và học bổng ngay hôm nay!</p>
+            </div>
+
+            <!-- Form -->
+            <div class="p-8 -mt-6">
+                <div
+                    class="bg-white dark:bg-neutral-800 rounded-2xl shadow-lg p-6 border border-neutral-100 dark:border-neutral-700">
+                    <template x-if="!submitted">
+                        <form @submit.prevent="submitted = true" class="space-y-4">
+                            <div>
+                                <label class="form-label">
+                                    Họ và tên phụ huynh *
+                                </label>
+                                <input type="text" required
+                                    class="form-input"
+                                    placeholder="Nhập họ và tên">
+                            </div>
+                            <div>
+                                <label class="form-label">
+                                    Số điện thoại *
+                                </label>
+                                <input type="tel" required
+                                    class="form-input"
+                                    placeholder="0xxx xxx xxx">
+                            </div>
+                            <div>
+                                <label class="form-label">
+                                    Cấp học quan tâm
+                                </label>
+                                <select
+                                    class="form-select">
+                                    <option value="">-- Chọn cấp học --</option>
+                                    <option value="mam_non">Mầm non - Tiền tiểu học</option>
+                                    <option value="tieu_hoc">Tiểu học</option>
+                                    <option value="thcs">Trung học cơ sở</option>
+                                    <option value="thpt">Trung học phổ thông</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg w-full">
+                                <i class="fas fa-paper-plane mr-2"></i> Đăng ký ngay
+                            </button>
+                        </form>
+                    </template>
+
+                    <template x-if="submitted">
+                        <div class="text-center py-8">
+                            <div
+                                class="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check text-4xl text-green-600 dark:text-green-400"></i>
+                            </div>
+                            <h4 class="title-sm mb-2">Đăng ký thành công!</h4>
+                            <p class="text-muted">Chúng tôi sẽ liên hệ với bạn trong vòng
+                                24h.</p>
+                            <button @click="showPopup = false"
+                                class="btn btn-outline btn-md mt-6">
+                                Đóng
+                            </button>
+                        </div>
+                    </template>
+                </div>
+
+                <p class="text-center text-sm text-muted mt-4">
+                    <i class="fas fa-lock mr-1"></i> Thông tin của bạn được bảo mật tuyệt đối
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

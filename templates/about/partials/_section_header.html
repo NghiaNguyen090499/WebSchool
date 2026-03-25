@@ -1,0 +1,17 @@
+{% comment %}
+===========================================
+SECTION HEADER COMPONENT
+Usage: {% include 'about/partials/_section_header.html' with eyebrow='...' (optional) title='...' subtitle='...' (optional) alignment='center|left' (default: left) %}
+===========================================
+{% endcomment %}
+<div class="section-header section-header--{{ alignment|default:'left' }}">
+    {% if eyebrow %}
+    <span class="badge badge--primary eyebrow">{{ eyebrow }}</span>
+    {% endif %}
+
+    <h2 class="section-header__title">{{ title }}</h2>
+
+    {% if subtitle %}
+    <p class="section-header__subtitle">{{ subtitle }}</p>
+    {% endif %}
+</div>

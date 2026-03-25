@@ -1,0 +1,70 @@
+{% comment %}
+Curriculum Hero — Premium Edition
+Inputs:
+- hero_id
+- hero_theme
+- hero_eyebrow
+- hero_title
+- hero_subtitle
+- hero_bullet_1/2/3
+- hero_primary_label + hero_primary_url
+- hero_secondary_label + hero_secondary_url
+- trust_badge_1/2/3 (short labels)
+{% endcomment %}
+<section id="{{ hero_id|default:'hero' }}" class="curriculum-hero {{ hero_theme|default:'curriculum-hero--navy' }}">
+    <div class="curriculum-hero__shapes" aria-hidden="true"></div>
+    <!-- Floating decorative shapes -->
+    <div class="curriculum-hero__shape curriculum-hero__shape--1" aria-hidden="true"></div>
+    <div class="curriculum-hero__shape curriculum-hero__shape--2" aria-hidden="true"></div>
+    <div class="curriculum-hero__shape curriculum-hero__shape--3" aria-hidden="true"></div>
+
+    <div class="container">
+        <div class="curriculum-hero__content">
+            {% if hero_eyebrow %}
+            <p class="curriculum-eyebrow"><i class="fas fa-star" aria-hidden="true"></i> {{ hero_eyebrow }}</p>
+            {% endif %}
+            <h1 class="curriculum-h1">{{ hero_title }}</h1>
+            {% if hero_subtitle %}
+            <p class="curriculum-lead">{{ hero_subtitle }}</p>
+            {% endif %}
+
+            <ul class="curriculum-hero__bullets" aria-label="Điểm nổi bật chương trình">
+                {% if hero_bullet_1 %}<li>{{ hero_bullet_1 }}</li>{% endif %}
+                {% if hero_bullet_2 %}<li>{{ hero_bullet_2 }}</li>{% endif %}
+                {% if hero_bullet_3 %}<li>{{ hero_bullet_3 }}</li>{% endif %}
+            </ul>
+
+            <div class="curriculum-cta-row">
+                {% if hero_primary_label and hero_primary_url %}
+                {% if '#' in hero_primary_url or '/' in hero_primary_url %}
+                <a class="curriculum-btn curriculum-btn--primary" href="{{ hero_primary_url }}"><i
+                        class="fas fa-calendar-check"></i> {{ hero_primary_label }}</a>
+                {% else %}
+                <a class="curriculum-btn curriculum-btn--primary" href="{% url hero_primary_url %}"><i
+                        class="fas fa-calendar-check"></i> {{ hero_primary_label }}</a>
+                {% endif %}
+                {% endif %}
+                {% if hero_secondary_label and hero_secondary_url %}
+                {% if '#' in hero_secondary_url or '/' in hero_secondary_url %}
+                <a class="curriculum-btn curriculum-btn--secondary" href="{{ hero_secondary_url }}"><i
+                        class="fas fa-download"></i> {{ hero_secondary_label }}</a>
+                {% else %}
+                <a class="curriculum-btn curriculum-btn--secondary" href="{% url hero_secondary_url %}"><i
+                        class="fas fa-download"></i> {{ hero_secondary_label }}</a>
+                {% endif %}
+                {% endif %}
+            </div>
+
+            {% if trust_badge_1 or trust_badge_2 or trust_badge_3 %}
+            <div class="curriculum-hero__badges" aria-label="Chuẩn đầu ra và tín hiệu tin cậy">
+                {% if trust_badge_1 %}<span class="curriculum-badge"><i class="fas fa-shield-alt"
+                        aria-hidden="true"></i> {{ trust_badge_1 }}</span>{% endif %}
+                {% if trust_badge_2 %}<span class="curriculum-badge"><i class="fas fa-microchip" aria-hidden="true"></i>
+                    {{ trust_badge_2 }}</span>{% endif %}
+                {% if trust_badge_3 %}<span class="curriculum-badge"><i class="fas fa-briefcase" aria-hidden="true"></i>
+                    {{ trust_badge_3 }}</span>{% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

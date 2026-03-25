@@ -23,3 +23,7 @@ class PhotoAdmin(admin.ModelAdmin):
 
 
 
+
+
+
+

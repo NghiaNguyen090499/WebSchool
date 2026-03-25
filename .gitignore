@@ -30,8 +30,19 @@ env/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+db.sqlite3.bak
 /media
 /staticfiles
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
 
 # IDE
 .vscode/
@@ -48,5 +59,35 @@ Thumbs.db
 .env
 .env.local
 
+# Logs
+logs/
+*.log
 
+# Temp & backup files
+tmp_*
+*.bak
+*.tmp
 
+# Production env variants
+.env.production
+.env.staging
+
+# Compiled translations
+*.mo
+
+# Node
+node_modules/
+
+# Temporary and Large Media Files
+*.docx
+*.pdf
+*.pptx
+*.mp4
+*.diff
+*_extracted.txt
+.gemini/
+.tmp_docx_*/
+Xem/
+WEBSITE 2026 MIS&ARAR/
+Bài viết website/
+Data_TrachNhiemXaHoi/

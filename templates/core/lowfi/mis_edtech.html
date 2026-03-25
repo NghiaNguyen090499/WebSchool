@@ -1,0 +1,152 @@
+{% extends "core/lowfi/base.html" %}
+
+{% block lowfi_body %}
+<!-- ═══════════════════════════════════════════════════════════
+     EDTECH HERO
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-level-hero navy mis-reveal" id="edtech-hero"
+    style="background: linear-gradient(135deg, #0A2540, #1B4B7A, #00B4D8);">
+    <div class="mis-level-hero-grid">
+        <article>
+            <span class="mis-level-badge">
+                <i class="fas fa-cubes-stacked"></i> EdTech Ecosystem
+            </span>
+            <h2>Hệ sinh thái công nghệ giáo dục MIS</h2>
+            <p class="mis-subtitle">
+                Khung công cụ tham chiếu cho Nhà trường – Giáo viên – Học sinh – Phụ huynh,
+                định hướng cá nhân hóa và sáng tạo trong hoạt động học tập.
+            </p>
+        </article>
+        <aside class="mis-level-quote">
+            <div class="mis-level-quote-icon">
+                <i class="fas fa-network-wired"></i>
+            </div>
+            <p>
+                Mỗi công cụ được lựa chọn theo mục tiêu học thuật và dùng như nguồn tham chiếu
+                cho thiết kế hoạt động học tập, theo dõi tiến trình và điều chỉnh hỗ trợ.
+            </p>
+            <div class="mis-level-quote-meta">
+                <strong>Nguyên tắc</strong>
+                <span>Tham chiếu · Cá nhân hóa · An toàn · Minh bạch</span>
+            </div>
+        </aside>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CORE TOOLS & TOOLCHAIN
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-grid two mis-reveal" data-delay="1" id="edtech-tools">
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-toolbox"></i> Core Tools</span>
+        <h2>Nền tảng tham chiếu theo chương trình</h2>
+        <div class="mis-grid two" style="margin-top:.85rem;">
+            <div class="mis-card">
+                <div class="mis-icon-circle teal" style="margin-bottom:.5rem;">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <h3>Azota</h3>
+                <p>Định hướng ứng dụng cho quản lý kiểm tra, ngân hàng đề và phản hồi tự động.</p>
+            </div>
+            <div class="mis-card">
+                <div class="mis-icon-circle primary" style="margin-bottom:.5rem;">
+                    <i class="fas fa-tablet-screen-button"></i>
+                </div>
+                <h3>Nexta</h3>
+                <p>Định hướng lớp học 1:1 với tablet cá nhân hóa theo năng lực.</p>
+            </div>
+            <div class="mis-card">
+                <div class="mis-icon-circle coral" style="margin-bottom:.5rem;">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>iCorrect + Doubao</h3>
+                <p>Tham chiếu công cụ luyện nói ngoại ngữ và phản hồi phát âm theo bài học.</p>
+            </div>
+            <div class="mis-card">
+                <div class="mis-icon-circle thcs" style="margin-bottom:.5rem;">
+                    <i class="fas fa-vr-cardboard"></i>
+                </div>
+                <h3>VR/AR Labs</h3>
+                <p>Phòng thí nghiệm ảo, mô hình 3D đa giác quan và trải nghiệm du hành vũ trụ.</p>
+            </div>
+        </div>
+    </article>
+
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-icons"></i> Toolchain AI học thuật</span>
+        <h2>Công cụ theo cấp học</h2>
+        <div class="mis-chip-lane" style="margin-top:.85rem;">
+            <span class="mis-chip"><i class="fas fa-clipboard-check"></i> Azota</span>
+            <span class="mis-chip"><i class="fas fa-tablet-screen-button"></i> Nexta</span>
+            <span class="mis-chip"><i class="fas fa-headset"></i> iCorrect</span>
+            <span class="mis-chip"><i class="fas fa-robot"></i> Doubao</span>
+            <span class="mis-chip"><i class="fas fa-vr-cardboard"></i> VR</span>
+            <span class="mis-chip"><i class="fas fa-cube"></i> AR</span>
+            <span class="mis-chip"><i class="fab fa-python"></i> Python</span>
+            <span class="mis-chip"><i class="fas fa-compass-drafting"></i> GeoGebra</span>
+            <span class="mis-chip"><i class="fas fa-brain"></i> DeepSeek</span>
+            <span class="mis-chip"><i class="fas fa-sparkles"></i> Gemini</span>
+            <span class="mis-chip"><i class="fas fa-message-bot"></i> ChatGPT</span>
+        </div>
+        <div class="mis-wire" style="margin-top:1rem;">
+            Mỗi chip hiển thị use-case cụ thể theo Tiểu học, THCS, THPT khi hover.
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     DATA FLOW
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-section mis-reveal" data-delay="2" id="edtech-dataflow">
+    <span class="mis-tag"><i class="fas fa-share-nodes"></i> Data Flow Map</span>
+    <h2>Luồng học tập tham chiếu</h2>
+    <div class="mis-flow" style="margin-top:1rem;">
+        <div class="mis-flow-step"><i class="fas fa-user-graduate"></i> Hoạt động học sinh</div>
+        <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+        <div class="mis-flow-step"><i class="fas fa-brain"></i> Mô phỏng phân tích AI</div>
+        <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+        <div class="mis-flow-step"><i class="fas fa-chalkboard-teacher"></i> Báo cáo giáo viên</div>
+        <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+        <div class="mis-flow-step"><i class="fas fa-people-roof"></i> Insight phụ huynh</div>
+        <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+        <div class="mis-flow-step"><i class="fas fa-bullseye"></i> Can thiệp cá nhân hóa</div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SAFETY & ETHICS
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-section mis-reveal" data-delay="3" id="edtech-safety">
+    <span class="mis-tag"><i class="fas fa-shield-halved"></i> Safety & Ethics</span>
+    <h2>Lớp an toàn và đạo đức số</h2>
+    <div class="mis-feature-row" style="margin-top:1rem;">
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle teal">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div>
+                <h4>Bảo vệ dữ liệu</h4>
+                <p>Dữ liệu học sinh được bảo vệ theo nguyên tắc ưu tiên quyền riêng tư.</p>
+            </div>
+        </div>
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle coral">
+                <i class="fas fa-magnifying-glass"></i>
+            </div>
+            <div>
+                <h4>Kiểm chứng nguồn</h4>
+                <p>Rèn thói quen kiểm chứng, giải thích đầu ra AI và tôn trọng bản quyền.</p>
+            </div>
+        </div>
+        <div class="mis-feature-item">
+            <div class="mis-feature-icon mis-icon-circle primary">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <div>
+                <h4>Minh bạch</h4>
+                <p>Minh bạch với phụ huynh về theo dõi tiến độ và cơ chế đồng thuận dữ liệu.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

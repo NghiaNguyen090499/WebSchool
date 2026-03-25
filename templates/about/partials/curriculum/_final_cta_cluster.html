@@ -1,0 +1,45 @@
+{% comment %}
+Final CTA Cluster
+Inputs:
+- cta_title
+- cta_subtitle
+- visit_url (url name or href)
+- consult_url (url name or href)
+- brochure_dialog_id
+- brochure_available
+{% endcomment %}
+<section id="final-cta" class="curriculum-section curriculum-section--dark">
+    <div class="container">
+        <div class="curriculum-final-cta">
+            <h2 class="curriculum-h2">{{ cta_title|default:'Sẵn sàng khám phá lộ trình học tập phù hợp cho con?' }}</h2>
+            <p class="curriculum-lead">{{ cta_subtitle|default:'Đội ngũ học thuật MIS sẵn sàng tư vấn theo mục tiêu học tập của từng học sinh.' }}</p>
+            <div class="curriculum-cta-row curriculum-cta-row--center">
+                {% if visit_url %}
+                    {% if '#' in visit_url or '/' in visit_url %}
+                    <a class="curriculum-btn curriculum-btn--secondary" href="{{ visit_url }}">Đặt lịch tham quan trường</a>
+                    {% else %}
+                    <a class="curriculum-btn curriculum-btn--secondary" href="{% url visit_url %}">Đặt lịch tham quan trường</a>
+                    {% endif %}
+                {% else %}
+                    <a class="curriculum-btn curriculum-btn--secondary" href="{% url 'contact:contact' %}">Đặt lịch tham quan trường</a>
+                {% endif %}
+
+                {% if consult_url %}
+                    {% if '#' in consult_url or '/' in consult_url %}
+                    <a class="curriculum-btn curriculum-btn--primary" href="{{ consult_url }}">Nhận tư vấn chương trình</a>
+                    {% else %}
+                    <a class="curriculum-btn curriculum-btn--primary" href="{% url consult_url %}">Nhận tư vấn chương trình</a>
+                    {% endif %}
+                {% else %}
+                    <a class="curriculum-btn curriculum-btn--primary" href="{% url 'admissions:list' %}">Nhận tư vấn chương trình</a>
+                {% endif %}
+
+                <button type="button"
+                        class="curriculum-btn curriculum-btn--outline-light"
+                        {% if brochure_available %}data-open-dialog="{{ brochure_dialog_id|default:'brochure-dialog' }}"{% else %}disabled aria-disabled="true"{% endif %}>
+                    Tải brochure
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

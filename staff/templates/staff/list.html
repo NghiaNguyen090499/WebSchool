@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Đội ngũ giáo viên & quản trị số{% endblock %}
+
+{% block content %}
+<section class="pt-28 pb-16 bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header class="mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white">
+                Đội ngũ giáo viên & quản trị số
+            </h1>
+            <p class="mt-2 text-neutral-600 dark:text-neutral-300 max-w-2xl">
+                Danh sách nhân sự theo vai trò, chuyên môn và năng lực công nghệ.
+            </p>
+        </header>
+
+        <nav aria-label="Bộ lọc vai trò" class="flex flex-wrap gap-2 mb-10">
+            <a href="{% url 'staff:list' %}"
+                class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors {% if not role_selected %}bg-red-600 text-white border-red-600{% else %}border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:border-red-500 hover:text-red-600{% endif %}">
+                Tất cả
+            </a>
+            {% for value, label in roles %}
+            <a href="{% url 'staff:list' %}?role={{ value }}"
+                class="px-4 py-2 rounded-full text-sm font-semibold border transition-colors {% if role_selected == value %}bg-red-600 text-white border-red-600{% else %}border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 hover:border-red-500 hover:text-red-600{% endif %}">
+                {{ label }}
+            </a>
+            {% endfor %}
+        </nav>
+
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {% for staff in staff_list %}
+            <article class="bg-white dark:bg-neutral-800 rounded-2xl shadow-sm border border-neutral-200/60 dark:border-neutral-700 overflow-hidden">
+                <div class="p-6 flex items-start gap-4">
+                    <div class="shrink-0">
+                        {% if staff.avatar %}
+                        <img src="{{ staff.avatar.url }}" alt="{{ staff.name }}"
+                            class="w-16 h-16 rounded-xl object-cover border border-neutral-200/60 dark:border-neutral-700">
+                        {% else %}
+                        <div class="w-16 h-16 rounded-xl bg-red-600 text-white flex items-center justify-center text-xl font-bold">
+                            {{ staff.name|slice:":1" }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="min-w-0">
+                        <h2 class="text-lg font-bold text-neutral-900 dark:text-white">
+                            <a href="{% url 'staff:detail' staff.slug %}" class="hover:text-red-600 transition-colors">
+                                {{ staff.name }}
+                            </a>
+                        </h2>
+                        <p class="text-sm text-red-600 font-semibold">{{ staff.get_role_display }}</p>
+                        {% if staff.degree %}
+                        <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">Học vị: {{ staff.degree }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="px-6 pb-6 space-y-3">
+                    {% if staff.get_languages_list %}
+                    <div>
+                        <p class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Ngôn ngữ</p>
+                        <div class="mt-1 flex flex-wrap gap-2">
+                            {% for lang in staff.get_languages_list %}
+                            <span class="text-xs font-semibold px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200">
+                                {{ lang }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if staff.specialties %}
+                    <div>
+                        <p class="text-xs uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Chuyên môn / AI</p>
+                        <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
+                            {{ staff.specialties|truncatechars:140 }}
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    <a href="{% url 'staff:detail' staff.slug %}"
+                        class="inline-flex items-center text-sm font-semibold text-red-600 hover:text-red-700">
+                        Xem chi tiết
+                        <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+            </article>
+            {% empty %}
+            <div class="col-span-full bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200/60 dark:border-neutral-700 p-8 text-center">
+                <p class="text-neutral-600 dark:text-neutral-300">Chưa có nhân sự phù hợp với bộ lọc hiện tại.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if page_obj and page_obj.has_other_pages %}
+        <nav class="news-pagination mt-10">
+            {% if page_obj.has_previous %}
+            <a href="?page=1{% if role_selected %}&role={{ role_selected }}{% endif %}" class="news-pagination-btn" title="Trang đầu">
+                <i class="fas fa-angle-double-left"></i>
+            </a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if role_selected %}&role={{ role_selected }}{% endif %}" class="news-pagination-btn" title="Trang trước">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            {% else %}
+            <span class="news-pagination-btn disabled"><i class="fas fa-angle-double-left"></i></span>
+            <span class="news-pagination-btn disabled"><i class="fas fa-angle-left"></i></span>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <span class="news-pagination-btn active">{{ num }}</span>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}{% if role_selected %}&role={{ role_selected }}{% endif %}" class="news-pagination-btn">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if role_selected %}&role={{ role_selected }}{% endif %}" class="news-pagination-btn" title="Trang sau">
+                <i class="fas fa-angle-right"></i>
+            </a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if role_selected %}&role={{ role_selected }}{% endif %}" class="news-pagination-btn" title="Trang cuối">
+                <i class="fas fa-angle-double-right"></i>
+            </a>
+            {% else %}
+            <span class="news-pagination-btn disabled"><i class="fas fa-angle-right"></i></span>
+            <span class="news-pagination-btn disabled"><i class="fas fa-angle-double-right"></i></span>
+            {% endif %}
+        </nav>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

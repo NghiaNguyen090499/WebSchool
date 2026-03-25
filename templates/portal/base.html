@@ -1,0 +1,140 @@
+{% extends "portal/layout.html" %}
+{% load static %}
+
+{% block extra_head %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="portal-scope">
+    {% if request.user.is_authenticated %}
+    <div class="portal-app-shell min-h-screen flex relative">
+        <div class="portal-sidebar-overlay" aria-hidden="true"></div>
+
+        <aside id="portal-sidebar" role="navigation" aria-label="Menu chính">
+            <div class="portal-sidebar-brand">
+                <div>
+                    <div class="brand-title">MIS Portal</div>
+                    <div class="brand-subtitle">Content Management</div>
+                </div>
+                <button class="md:hidden"
+                    style="color:var(--color-text-muted);background:none;border:none;cursor:pointer;font-size:1.2rem"
+                    aria-label="Đóng menu" onclick="Portal.closeSidebar()">✕</button>
+            </div>
+
+            <nav class="portal-sidebar-nav" aria-label="Điều hướng chính">
+                <a href="{% url 'portal:dashboard' %}"
+                    class="portal-nav-item {% if '/portal/dashboard/' in request.path or request.path == '/portal/' %}active{% endif %}">
+                    <i class="nav-icon fas fa-th-large" aria-hidden="true"></i> Dashboard
+                </a>
+                <a href="{% url 'portal:news_list' %}"
+                    class="portal-nav-item {% if '/portal/news/' in request.path %}active{% endif %}">
+                    <i class="nav-icon fas fa-newspaper" aria-hidden="true"></i> Tin tức
+                </a>
+                <a href="{% url 'portal:event_list' %}"
+                    class="portal-nav-item {% if '/portal/events/' in request.path %}active{% endif %}">
+                    <i class="nav-icon fas fa-calendar-days" aria-hidden="true"></i> Sự kiện
+                </a>
+                <a href="{% url 'portal:admissions_list' %}"
+                    class="portal-nav-item {% if '/portal/admissions/' in request.path and '/portal/admissions/registrations/' not in request.path %}active{% endif %}">
+                    <i class="nav-icon fas fa-graduation-cap" aria-hidden="true"></i> Tuyển sinh
+                </a>
+                <a href="{% url 'portal:admissions_registrations_list' %}"
+                    class="portal-nav-item {% if '/portal/admissions/registrations/' in request.path %}active{% endif %}">
+                    <i class="nav-icon fas fa-clipboard-list" aria-hidden="true"></i> Đăng ký
+                </a>
+                <a href="{% url 'portal:pages_list' %}"
+                    class="portal-nav-item {% if '/portal/pages/' in request.path %}active{% endif %}">
+                    <i class="nav-icon fas fa-file-lines" aria-hidden="true"></i> Trang
+                </a>
+                <a href="{% url 'portal:media_list' %}"
+                    class="portal-nav-item {% if '/portal/media/' in request.path %}active{% endif %}">
+                    <i class="nav-icon fas fa-image" aria-hidden="true"></i> Media
+                </a>
+            </nav>
+
+            <div class="portal-sidebar-user">
+                <div class="portal-sidebar-user-avatar">
+                    {{ request.user.first_name|default:request.user.username|make_list|first|upper }}
+                </div>
+                <div style="flex:1;min-width:0">
+                    <div class="portal-sidebar-user-name truncate">{{
+                        request.user.get_full_name|default:request.user.username }}</div>
+                    <div class="portal-sidebar-user-role">
+                        {% if portal_is_admin %}Admin{% elif portal_is_editor %}Editor{% else %}User{% endif %}
+                    </div>
+                </div>
+                <form method="post" action="{% url 'portal:logout' %}" style="margin:0">
+                    {% csrf_token %}
+                    <button type="submit" style="background:none;border:none;color:var(--color-text-muted);cursor:pointer;padding:4px"
+                        aria-label="Đăng xuất" data-tooltip="Đăng xuất">
+                        <i class="fas fa-right-from-bracket"></i>
+                    </button>
+                </form>
+            </div>
+        </aside>
+
+        <div class="portal-main flex-1 min-w-0 flex flex-col min-h-screen">
+            <header class="portal-header" role="banner">
+                <div class="portal-header-left">
+                    <button id="portal-sidebar-toggle" class="md:hidden btn btn-ghost btn-sm" style="padding:4px"
+                        aria-label="Mở menu" aria-expanded="false" aria-controls="portal-sidebar">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            style="width:22px;height:22px" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <div>
+                        <div class="portal-header-subtitle">Portal</div>
+                        <h1 class="portal-header-title">{% block header_title %}Quản trị nội dung{% endblock %}</h1>
+                    </div>
+                </div>
+                <div class="portal-header-right">
+                    <div class="portal-user-info hidden sm:block" style="text-align:right">
+                        <div class="portal-user-name">
+                            {{ request.user.get_full_name|default:request.user.username }}
+                        </div>
+                        <div class="portal-user-role">
+                            {% if portal_is_admin %}Admin{% elif portal_is_editor %}Editor{% else %}User{% endif %}
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main id="main-content" class="portal-content" role="main">
+                {% else %}
+                <div class="min-h-screen">
+                    <main id="main-content" role="main">
+                        {% endif %}
+
+                        {% block portal_content %}{% endblock %}
+
+                        {% if request.user.is_authenticated %}
+                    </main>
+                </div>
+        </div>
+        {% else %}
+        </main>
+    </div>
+    {% endif %}
+
+    <div class="portal-toast-container" role="region" aria-label="Thông báo" aria-live="polite"></div>
+</div>
+
+<script src="{% static 'portal/portal.js' %}"></script>
+{% if messages %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (!window.Portal || typeof window.Portal.showToast !== "function") return;
+        {% for message in messages %}
+        window.Portal.showToast(
+            "{{ message|escapejs }}",
+            "{% if message.level_tag == 'error' %}error{% elif message.level_tag == 'warning' %}warning{% elif message.level_tag == 'success' %}success{% else %}info{% endif %}"
+        );
+        {% endfor %}
+    });
+</script>
+{% endif %}
+{% block extra_js %}{% endblock %}
+{% endblock %}

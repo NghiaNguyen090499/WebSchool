@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} - MIS{% endblock %}
+{% block meta_description %}
+Chương trình Trải nghiệm Sáng tạo (TNST) tại MIS - Học qua dự án thực tế, hình thành bộ kỹ năng 5Cs thiết yếu cho học
+sinh toàn cầu.
+{% endblock %}
+
+{% block content %}
+<main class="curriculum">
+    {% include 'about/partials/curriculum/_curriculum_hero.html' with hero_id='hero' hero_theme='curriculum-hero--navy' hero_eyebrow='Chương trình Trải nghiệm Sáng tạo' hero_title=page.title|default:'Trải Nghiệm Sáng Tạo (TNST)' hero_subtitle='Mô hình giáo dục thực chứng, kết hợp học thuật và dự án thực tế giúp học sinh kiến tạo thế giới, rèn dũa tài năng cá nhân.' hero_bullet_1='Phát triển trọn vẹn bộ kỹ năng 5Cs (Hợp tác, Giao tiếp, Tư duy phản biện, Sáng tạo, Tư duy quản lý).' hero_bullet_2='Lộ trình dự án cá nhân hóa, từ hình thành ý tưởng đến giải quyết tình huống thực tế.' hero_bullet_3='100% học sinh tham gia tổ chức sự kiện, thực hành ngoại khóa chuyên sâu.' hero_primary_label='Đăng ký tư vấn' hero_primary_url='admissions:list' hero_secondary_label='Tải brochure' hero_secondary_url='#brochure' trust_badge_1='Học qua dự án' trust_badge_2='STEM & Nghệ thuật' trust_badge_3='Kỹ năng thế kỷ 21' %}
+
+    {% include 'about/partials/curriculum/_trust_signal_strip.html' with signal_1_value='K1-K12' signal_1_label='Đồng bộ từ Tiểu học tới THPT' signal_2_value='5 Kỹ năng 5Cs' signal_2_label='Trọng tâm rèn luyện xuyên suốt' signal_3_value='Project-based' signal_3_label='Hoạt động đánh giá thực tiễn' %}
+
+    <section id="philosophy" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <h2 class="curriculum-h2">Mô hình kiến tạo tri thức</h2>
+            <p class="curriculum-lead">Trải nghiệm Sáng tạo không chỉ là ngoại khóa, mà là quá trình học tập thực tế
+                (Experiential Learning). Tại MIS, chúng tôi thiết kế mỗi sự kiện và bài giảng như một không gian nuôi
+                dưỡng trọn vẹn 5 nhóm kỹ năng cốt lõi (5Cs).</p>
+            <div class="curriculum-grid curriculum-grid--3">
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-comments' title='Giao tiếp (Communication)' description='Giao tiếp cởi mở, lắng nghe đa dạng quan điểm và thuyết phục người khác qua các dự án hùng biện.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-brain' title='Tư duy phản biện (Critical Thinking)' description='Kỹ năng phân tích thông tin, đặt câu hỏi đúng bản chất và đánh giá tính logic của vấn đề.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-users' title='Hợp tác (Collaboration)' description='Xây dựng văn hóa làm việc nhóm, chia sẻ trách nhiệm và tôn trọng năng lực khác biệt của đồng đội.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-lightbulb' title='Giải quyết vấn đề (Creative Problem Solving)' description='Nghĩ khác biệt, sáng tạo trong cách tiếp cận và không giới hạn giải pháp từ nhiều góc độ.' %}
+                {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-microchip' title='Tư duy hệ thống (Computational Thinking)' description='Áp dụng cấu trúc tư duy máy tính, phân rã vấn đề lớn thành các bước xử lý nhỏ để dễ dàng thực hiện.' %}
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_roadmap_tabs_accordion.html' with roadmap_id='roadmap' roadmap_title='Lộ trình Trải nghiệm & Dự án' roadmap_subtitle='Tổng quan định hướng hoạt động, sự kiện và kỹ năng trọng điểm qua từng lứa tuổi.' level_1_label='Tiểu học' level_1_badge='Khám phá' level_1_focus='Đánh thức giác quan, trải nghiệm văn hóa nghệ thuật và làm quen dự án nhỏ lẻ.' level_1_tool='Nghệ thuật tạo hình, kịch nghệ, tìm kiếm thông tin cơ bản.' level_1_output='Tự tin trước đám đông, biết đặt câu hỏi quan sát sự vật xung quanh.' level_2_label='THCS' level_2_badge='Hình thành' level_2_focus='Xây dựng kịch bản sự kiện, kỹ năng làm việc/lãnh đạo nhóm, thực hành nghiên cứu giải pháp.' level_2_tool='Sử dụng công cụ thiết kế, trình bày, lập kế hoạch trực tuyến.' level_2_output='Triển khai thành công nhóm dự án xã hội cộng đồng vừa và nhỏ.' level_3_label='THPT' level_3_badge='Hoàn thiện' level_3_focus='Lãnh đạo dự án (Project Management), tổ chức sự kiện quy mô lớn, xây dựng định vị cá nhân.' level_3_tool='Quản lý rủi ro dự án, AI để phân tích dữ liệu và media production.' level_3_output='Hoàn thiện hồ sơ portfolio chuẩn đa lĩnh vực (Nghệ thuật, Xã hội, STEAM).' %}
+
+    <section id="assessment-outcomes" class="curriculum-section curriculum-section--light curriculum-section--assessment-enhanced">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2">Kiểm tra & Đánh giá năng lực</h2>
+                <p class="curriculum-lead">Không chấm điểm bằng bài kiểm tra giấy, năng lực TNST được định lượng rõ ràng qua
+                                sự trưởng thành của hệ thống kỹ năng sống thực tiễn.</p>
+            </div>
+
+            <div class="curriculum-assessment-layout">
+                <div class="curriculum-assessment-panel curriculum-reveal-delay-150" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Core Rubrics</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--info">5Cs Framework</span>
+                    </div>
+                    <div class="curriculum-rubric">
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Năng lực lập kế hoạch' metric='Mức độ bao quát chi tiết, dự phòng rủi ro và điều phối nhân sự.' evidence='Bản thảo kịch bản, bảng phân công nhiệm vụ, timeline dự án.' %}
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Cường độ tham gia' metric='Mức độ chủ động, tinh thần trách nhiệm với sản phẩm chung.' evidence='Đánh giá 360 độ từ bạn bè và quan sát của giáo viên.' %}
+                                    {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Chất lượng sản phẩm đầu ra' metric='Tính khả thi, tính sáng tạo và khả năng gây hiệu ứng truyền thông hoặc lợi ích cộng đồng.' evidence='Portfolio sự kiện, mô hình thực thể, hoặc dự án phục vụ nhà trường.' %}
+                                </div>
+                </div>
+
+                <aside class="curriculum-assessment-panel curriculum-assessment-panel--milestones curriculum-reveal-delay-200" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Milestones</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--success">Practical Outputs</span>
+                    </div>
+                    <p class="curriculum-caption">The program tracks growth through observable behaviors and real project artifacts.</p>
+                    <div class="curriculum-outcome-list curriculum-spacer-top">
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">01</span><span>5Cs competency growth by project phase.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">02</span><span>Event portfolio with concrete role evidence.</span></p>
+                        <p class="curriculum-text"><span class="curriculum-outcome-order">03</span><span>Leadership and collaboration progression records.</span></p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_differentiation_matrix.html' with matrix_title='Sự khác biệt của TNST tại MIS' row_1_label='Tính thực tiễn' row_1_mis='90% học sinh tự vận hành sự kiện lớn.' row_1_traditional='Chủ yếu mang tính phong trào học sinh thụ động.' row_1_international='100% vận hành thực tiễn.' row_2_label='Khung đánh giá' row_2_mis='Rubric 5Cs rõ ràng trên từng giai đoạn dự án.' row_2_traditional='Chỉ đánh giá qua thái độ hoặc tích tắc tham gia.' row_2_international='Portfolio theo chuẩn Tú tài (IB/A-Level).' row_3_label='Sự hỗ trợ của công nghệ' row_3_mis='Sử dụng AI & công cụ số hóa vào thiết kế, tổ chức trải nghiệm.' row_3_traditional='Tổ chức thủ công, ít kết nối với kĩ thuật số.' row_3_international='Sự cộng hưởng toàn diện trong EdTech tools.' %}
+
+    {% include 'about/partials/curriculum/_final_cta_cluster.html' with cta_title='Cùng con kiến tạo tương lai' cta_subtitle='Giáo dục toàn diện bằng thực nghiệm - nơi mỗi học sinh đều có thể tỏa sáng.' visit_url='contact:contact' consult_url='admissions:list' brochure_dialog_id='tnst-brochure-dialog' brochure_available=pdf_document.pdf_file %}
+
+    {% include 'about/partials/curriculum/_brochure_drawer.html' with brochure_dialog_id='tnst-brochure-dialog' brochure_title='Brochure Trải nghiệm Sáng tạo (TNST)' %}
+</main>
+{% endblock %}

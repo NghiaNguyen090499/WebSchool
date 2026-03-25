@@ -1,0 +1,253 @@
+{% extends "core/lowfi/base.html" %}
+
+{% block lowfi_body %}
+<!-- ═══════════════════════════════════════════════════════════
+     LEVEL HERO  –  The Preparation (Mầm non & Tiền Tiểu học)
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-level-hero prep mis-reveal" id="prep-hero">
+    <div class="mis-level-hero-grid">
+        <article>
+            <span class="mis-level-badge">
+                <i class="fas fa-seedling"></i> The Preparation
+            </span>
+            <h2>Bước đệm vào kỷ nguyên AI bằng trải nghiệm học tập nhân bản</h2>
+            <p class="mis-subtitle">
+                Trẻ hình thành nhận thức đúng về công nghệ, phát triển tư duy logic nền tảng
+                và nuôi dưỡng cảm xúc sáng tạo thông qua các hoạt động học tập an toàn, trực quan, giàu tương tác.
+            </p>
+            <div class="mis-cta-row">
+                <a href="{% url 'contact:contact' %}" class="mis-btn mis-btn-primary" id="prep-cta-consult">
+                    <i class="fas fa-phone-volume"></i> Đăng ký tư vấn
+                </a>
+                <a href="{% url 'admissions:list' %}" class="mis-btn mis-btn-ghost" id="prep-cta-schedule">
+                    <i class="fas fa-calendar-check"></i> Đặt lịch trải nghiệm
+                </a>
+            </div>
+        </article>
+        <aside class="mis-level-quote">
+            <div class="mis-level-quote-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            <p>
+                "AI là công cụ, không phải mục tiêu". Ở giai đoạn Preparation, trẻ được hướng dẫn
+                dùng công nghệ đúng cách để mở rộng trí tưởng tượng, thay vì lệ thuộc màn hình.
+            </p>
+            <div class="mis-level-quote-meta">
+                <strong>Trọng tâm giai đoạn</strong>
+                <span>An toàn số · Tư duy nền · Sáng tạo cảm xúc</span>
+            </div>
+        </aside>
+    </div>
+    <div class="mis-level-stats">
+        <div class="mis-level-stat">
+            <strong>3–6</strong>
+            <span>Độ tuổi</span>
+        </div>
+        <div class="mis-level-stat">
+            <strong>3</strong>
+            <span>Trụ cột năng lực</span>
+        </div>
+        <div class="mis-level-stat">
+            <strong>100%</strong>
+            <span>Học qua trải nghiệm</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CORE PILLARS  –  3 trụ cột năng lực
+     ═══════════════════════════════════════════════════════════ -->
+<div class="mis-section-header mis-reveal" data-delay="1">
+    <span class="mis-tag"><i class="fas fa-cubes"></i> Chương trình cốt lõi</span>
+    <h2>3 trụ cột năng lực trong The Preparation</h2>
+    <p class="mis-subtitle">Mỗi trụ cột là một khối hoạt động ngắn, trực quan, giàu phản hồi tích cực cho trẻ.</p>
+</div>
+
+<section class="mis-grid three mis-reveal" data-delay="2" id="prep-pillars">
+    <article class="mis-pillar-card prep">
+        <span class="mis-pillar-index prep">01</span>
+        <h3><i class="fas fa-tablet-screen-button"></i> Làm quen công nghệ an toàn</h3>
+        <ul>
+            <li>Phân biệt vật sống và máy móc qua tình huống gần gũi.</li>
+            <li>Rèn thói quen an toàn khi sử dụng thiết bị thông minh.</li>
+            <li>Bảo vệ sức khỏe số và giữ nhịp sinh hoạt cân bằng.</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">Safety First</span>
+            <span class="mis-chip">Human-centric</span>
+        </div>
+        <span class="mis-link-arrow">Khám phá module <i class="fas fa-arrow-right"></i></span>
+    </article>
+
+    <article class="mis-pillar-card prep">
+        <span class="mis-pillar-index prep">02</span>
+        <h3><i class="fas fa-shapes"></i> Nền tảng tư duy số</h3>
+        <ul>
+            <li>Nhận diện số, hình khối và quan hệ trực quan.</li>
+            <li>Làm quen quy luật qua trò chơi logic kéo thả.</li>
+            <li>Hình thành năng lực giải quyết vấn đề đơn giản.</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">Logic Play</span>
+            <span class="mis-chip">Pattern Thinking</span>
+        </div>
+        <span class="mis-link-arrow">Khám phá module <i class="fas fa-arrow-right"></i></span>
+    </article>
+
+    <article class="mis-pillar-card prep">
+        <span class="mis-pillar-index prep">03</span>
+        <h3><i class="fas fa-palette"></i> Sáng tạo cùng AI</h3>
+        <ul>
+            <li>Vẽ tranh cùng AI với AutoDraw theo chủ đề cảm xúc.</li>
+            <li>Kể chuyện, âm nhạc và diễn đạt ý tưởng cá nhân.</li>
+            <li>Nhận biết sớm tin giả ở mức độ phù hợp lứa tuổi.</li>
+        </ul>
+        <div class="mis-chip-lane">
+            <span class="mis-chip">AutoDraw</span>
+            <span class="mis-chip">AI Discovery</span>
+        </div>
+        <span class="mis-link-arrow">Khám phá module <i class="fas fa-arrow-right"></i></span>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PROGRESSION & WEEKLY LOOP
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-grid two mis-reveal" data-delay="3" id="prep-progression">
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-route"></i> Lộ trình theo độ tuổi</span>
+        <h2>Progression rõ ràng qua từng năm</h2>
+        <div class="mis-timeline">
+            <div class="mis-timeline-item">
+                <div class="mis-timeline-dot prep">1-2</div>
+                <div class="mis-timeline-content">
+                    <strong>Lớp 1–2</strong>
+                    <p>Làm quen số học, hình khối và nhận biết sự khác biệt giữa con người – máy móc.</p>
+                </div>
+            </div>
+            <div class="mis-timeline-item">
+                <div class="mis-timeline-dot prep">3</div>
+                <div class="mis-timeline-content">
+                    <strong>Lớp 3</strong>
+                    <p>Tăng cường tư duy thuật toán qua quy luật và thao tác logic trực quan.</p>
+                </div>
+            </div>
+            <div class="mis-timeline-item">
+                <div class="mis-timeline-dot prep">4-5</div>
+                <div class="mis-timeline-content">
+                    <strong>Lớp 4–5</strong>
+                    <p>Ứng dụng toán vào bối cảnh đời sống, sáng tạo sản phẩm số đơn giản.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <article class="mis-section">
+        <span class="mis-tag"><i class="fas fa-arrows-spin"></i> Weekly Learning Loop</span>
+        <h2>Vòng lặp trải nghiệm hàng tuần</h2>
+        <div class="mis-flow">
+            <div class="mis-flow-step"><i class="fas fa-heart"></i> Khởi động cảm xúc</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-search"></i> Nhiệm vụ khám phá</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-users"></i> Hoạt động nhóm</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-presentation-screen"></i> Trình bày sản phẩm</div>
+            <span class="mis-flow-arrow"><i class="fas fa-chevron-right"></i></span>
+            <div class="mis-flow-step"><i class="fas fa-chart-line"></i> Phản hồi cá nhân hóa</div>
+        </div>
+        <div class="mis-feature-row" style="margin-top:1rem;">
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle teal">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div>
+                    <h4>Realtime Feedback</h4>
+                    <p>Phản hồi tức thì giúp trẻ điều chỉnh và phát triển liên tục.</p>
+                </div>
+            </div>
+            <div class="mis-feature-item">
+                <div class="mis-feature-icon mis-icon-circle coral">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div>
+                    <h4>Parent Insight</h4>
+                    <p>Phụ huynh cập nhật tín hiệu thích nghi, mức tham gia và sự tiến bộ.</p>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CLASSROOM SNAPSHOT
+     ═══════════════════════════════════════════════════════════ -->
+<div class="mis-section-header mis-reveal" data-delay="4">
+    <span class="mis-tag"><i class="fas fa-image"></i> Classroom Snapshot</span>
+    <h2>Một tuần điển hình tại lớp Preparation</h2>
+</div>
+
+<section class="mis-grid two mis-reveal" data-delay="4" id="prep-snapshots">
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-a">
+            <i class="fas fa-shield-halved"></i>
+        </div>
+        <div class="mis-experience-body">
+            <p class="mis-experience-label"><i class="fas fa-calendar-day"></i> Thứ 2 – Tech Safety</p>
+            <h3>Con hiểu công nghệ là công cụ của con người</h3>
+            <p>Trẻ thực hành quy tắc an toàn thiết bị và nhận diện tình huống cần trợ giúp.</p>
+        </div>
+    </article>
+
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-b">
+            <i class="fas fa-calculator"></i>
+        </div>
+        <div class="mis-experience-body">
+            <p class="mis-experience-label"><i class="fas fa-calendar-day"></i> Thứ 4 – Logic & Number</p>
+            <h3>Học qua trò chơi mô phỏng</h3>
+            <p>Hoạt động số học, hình khối và quy luật được gamification theo nhịp độ lớp.</p>
+        </div>
+    </article>
+
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-c">
+            <i class="fas fa-palette"></i>
+        </div>
+        <div class="mis-experience-body">
+            <p class="mis-experience-label"><i class="fas fa-calendar-day"></i> Thứ 6 – Creative Studio</p>
+            <h3>Sáng tạo tranh và kể chuyện cùng AI</h3>
+            <p>AutoDraw và âm nhạc giúp trẻ biểu đạt cảm xúc tích cực, tăng tự tin giao tiếp.</p>
+        </div>
+    </article>
+
+    <article class="mis-experience-card">
+        <div class="mis-experience-media media-d">
+            <i class="fas fa-chart-pie"></i>
+        </div>
+        <div class="mis-experience-body">
+            <p class="mis-experience-label"><i class="fas fa-calendar-day"></i> Tổng kết tuần</p>
+            <h3>Báo cáo ngắn cho gia đình</h3>
+            <p>Phụ huynh nhận insight trọng tâm và gợi ý đồng hành tại nhà theo từng trẻ.</p>
+        </div>
+    </article>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FINAL CTA
+     ═══════════════════════════════════════════════════════════ -->
+<section class="mis-level-cta prep mis-reveal" data-delay="5" id="prep-final-cta">
+    <div>
+        <p class="mis-kicker">Sẵn sàng cho hành trình đầu đời cùng AI?</p>
+        <h2>Đặt lịch trải nghiệm lớp Preparation tại MIS</h2>
+    </div>
+    <div class="mis-cta-row">
+        <a href="{% url 'contact:contact' %}" class="mis-btn mis-btn-primary" id="prep-cta-bottom-consult">
+            <i class="fas fa-phone-volume"></i> Nhận tư vấn 1:1
+        </a>
+        <a href="{% url 'admissions:list' %}" class="mis-btn mis-btn-ghost" id="prep-cta-bottom-admissions">
+            <i class="fas fa-user-graduate"></i> Xem thông tin tuyển sinh
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gương mặt MISers - Học sinh nổi bật | MIS{% endblock %}
+
+{% block meta_description %}Tôn vinh những gương mặt học sinh xuất sắc của Trường Đa Trí Tuệ MIS với các thành tích nổi
+bật trong học thuật, cuộc thi và hoạt động ngoại khóa.{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative py-20 lg:py-28 overflow-hidden hero-gradient-bg">
+    <!-- Decorative Elements -->
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-500/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px]"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 text-center">
+        <span
+            class="inline-block px-4 py-1.5 bg-white/10 backdrop-blur-sm text-primary-300 rounded-full text-sm font-semibold border border-white/20 mb-6">
+            <i class="fas fa-star mr-2"></i>{{ total_count }} học sinh nổi bật
+        </span>
+        <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+            Gương mặt
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-pink-400">MISers</span>
+        </h1>
+        <p class="text-xl text-white/70 max-w-2xl mx-auto">
+            Tôn vinh hành trình nỗ lực và thành tích xuất sắc của học sinh MIS
+        </p>
+    </div>
+</section>
+
+<!-- Filter & Content Section -->
+<section  class="py-16 lg:py-20 bg-neutral-50 dark:bg-neutral-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Category Filter -->
+        <div class="flex flex-wrap justify-center gap-3 mb-12">
+            <a href="{% url 'core:student_spotlight' %}"
+                class="btn btn-sm {% if not current_category %}btn-primary{% else %}btn-outline{% endif %}">
+                Tất cả
+            </a>
+            {% for cat_value, cat_label in categories %}
+            <a href="{% url 'core:student_spotlight' %}?category={{ cat_value }}"
+                class="btn btn-sm {% if current_category == cat_value %}btn-primary{% else %}btn-outline{% endif %}">
+                {{ cat_label }}
+            </a>
+            {% endfor %}
+        </div>
+
+        <!-- Spotlights Grid -->
+        {% if spotlights %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {% for spotlight in spotlights %}
+            <div
+                class="group bg-white dark:bg-neutral-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                <!-- Image -->
+                <div class="relative h-[240px] overflow-hidden">
+                    <img src="{{ spotlight.photo.url }}" alt="{{ spotlight.student_name }}"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <!-- Category Badge -->
+                    <span
+                        class="absolute top-3 left-3 px-2.5 py-1 bg-primary-500 text-white text-xs font-semibold rounded-lg">
+                        {{ spotlight.get_category_display }}
+                    </span>
+                    <!-- Student Info -->
+                    <div class="absolute bottom-3 left-3 right-3">
+                        <h3 class="text-xl font-bold text-white mb-0.5">{{ spotlight.student_name }}</h3>
+                        
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="p-5">
+                    <h4 class="font-semibold text-neutral-800 dark:text-white mb-2 line-clamp-2">{{ spotlight.title }}
+                    </h4>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm line-clamp-3 mb-4">{{ spotlight.achievement}}</p>
+
+                    <!-- Tags -->
+                    {% if spotlight.tags %}
+                    <div class="flex flex-wrap gap-1.5">
+                        {% for tag in spotlight.get_tags_list|slice:":3" %}
+                        <span
+                            class="px-2 py-0.5 bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-400 text-xs rounded-full">{{tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if page_obj and page_obj.has_other_pages %}
+        <nav class="news-pagination mt-10">
+            {% if page_obj.has_previous %}
+            <a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}" class="news-pagination-btn"
+                title="Trang đầu">
+                <i class="fas fa-angle-double-left"></i>
+            </a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}"
+                class="news-pagination-btn" title="Trang trước">
+                <i class="fas fa-angle-left"></i>
+            </a>
+            {% else %}
+            <span class="news-pagination-btn disabled"><i class="fas fa-angle-double-left"></i></span>
+            <span class="news-pagination-btn disabled"><i class="fas fa-angle-left"></i></span>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <span class="news-pagination-btn active">{{ num }}</span>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}"
+                class="news-pagination-btn">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}"
+                class="news-pagination-btn" title="Trang sau">
+                <i class="fas fa-angle-right"></i>
+            </a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}"
+                class="news-pagination-btn" title="Trang cuối">
+                <i class="fas fa-angle-double-right"></i>
+            </a>
+            {% else %}
+            <span class="news-pagination-btn disabled"><i class="fas fa-angle-right"></i></span>
+            <span class="news-pagination-btn disabled"><i class="fas fa-angle-double-right"></i></span>
+            {% endif %}
+        </nav>
+        {% endif %}
+        {% else %}
+        <!-- Empty State -->
+        <div class="text-center py-20">
+            <div
+                class="w-24 h-24 mx-auto bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center mb-6">
+                <i class="fas fa-user-graduate text-4xl text-neutral-400"></i>
+            </div>
+            <h3 class="text-2xl font-semibold text-neutral-800 dark:text-white mb-3">Chưa có học sinh nào</h3>
+            <p class="text-neutral-600 dark:text-neutral-400 mb-6">
+                {% if current_category %}
+                Không tìm thấy học sinh trong danh mục này.
+                {% else %}
+                Thông tin học sinh sẽ được cập nhật sớm.
+                {% endif %}
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                {% if current_category %}
+                <a href="{% url 'core:student_spotlight' %}" class="btn btn-primary btn-md">
+                    <i class="fas fa-arrow-left"></i>
+                    Xem tất cả
+                </a>
+                {% endif %}
+                <a href="{% url 'contact:contact' %}" class="btn btn-outline btn-md">
+                    <i class="fas fa-headset"></i>
+                    Liên hệ tư vấn
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 bg-white dark:bg-neutral-950">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-2xl lg:text-3xl font-bold text-neutral-800 dark:text-white mb-4">
+            Bạn muốn con trở thành MISer?
+        </h2>
+        <p class="text-neutral-600 dark:text-neutral-400 mb-8">
+            Đăng ký tham quan trường và tìm hiểu chương trình giáo dục đa trí tuệ của MIS
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="{% url 'admissions:list' %}" class="btn btn-primary btn-lg">
+                <i class="fas fa-user-plus"></i>
+                Đăng ký tư vấn
+            </a>
+            <a href="{% url 'admissions:list' %}" class="btn btn-outline btn-lg">
+                <i class="fas fa-info-circle"></i>
+                Thông tin tuyển sinh
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

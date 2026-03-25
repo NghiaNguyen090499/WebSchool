@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} - MIS{% endblock %}
+
+{% block meta_description %}
+Chương trình Tâm vận động tại MIS - Phát triển thể chất, kỹ năng vận động và khả năng phối hợp linh hoạt.
+{% endblock %}
+
+{% block extra_head %}
+
+<link rel="stylesheet" href="{% static 'css/pdf-images.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="about-scope">
+    {% include 'about/partials/_hero.html' with hero_variant='gradient-red' hero_eyebrow='Chương trình Tâm vận động' hero_title=page.title hero_subtitle='Chương trình Tâm vận động tại MIS - Phát triển thể chất, kỹ năng vận động và khả năng phối hợp linh hoạt.' hero_cta_primary='Đăng ký tư vấn' hero_cta_primary_url='admissions:list' hero_cta_secondary='Đặt lịch tham quan' hero_cta_secondary_url='contact:contact' hero_image=pdf_document.hero_image|default:page.image %}
+
+    <section class="section section--neutral">
+        <div class="container container--narrow">
+            <div class="prose">
+                {{ page.content|safe }}
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section section--light">
+        <div class="container">
+            <div class="card-grid card-grid--3col">
+                <div class="feature-card">
+                    <div class="feature-card__icon feature-card__icon--primary">
+                        <i class="fas fa-running" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h3 class="feature-card__title">Chương trình Tâm vận động</h3>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon feature-card__icon--primary">
+                        <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h3 class="feature-card__title">Thể chất & Tinh thần</h3>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon feature-card__icon--primary">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h3 class="feature-card__title">Từ Mầm non đến Tiểu học</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section--neutral">
+        <div class="container">
+            {% include 'about/partials/_section_header.html' with title='Điểm nổi bật của Chương trình Tâm vận động' subtitle='Phát triển toàn diện thể chất, tinh thần và kỹ năng vận động' alignment='center' %}
+
+            <div class="card-grid card-grid--3col">
+                <div class="pillar-card">
+                    <div class="pillar-card__icon">
+                        <i class="fas fa-child" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="pillar-card__title">Vận động cơ bản</h3>
+                    <p class="pillar-card__description">
+                        Phát triển các kỹ năng vận động cơ bản như chạy, nhảy, leo trèo và cân bằng.
+                    </p>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-card__icon">
+                        <i class="fas fa-hands" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="pillar-card__title">Phối hợp vận động</h3>
+                    <p class="pillar-card__description">
+                        Rèn luyện khả năng phối hợp giữa tay, chân, mắt và toàn thân một cách linh hoạt.
+                    </p>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-card__icon">
+                        <i class="fas fa-dumbbell" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="pillar-card__title">Thể lực & Sức bền</h3>
+                    <p class="pillar-card__description">
+                        Tăng cường sức khỏe, thể lực và sức bền qua các hoạt động thể chất đa dạng.
+                    </p>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-card__icon">
+                        <i class="fas fa-smile" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="pillar-card__title">Tinh thần lạc quan</h3>
+                    <p class="pillar-card__description">
+                        Xây dựng tinh thần tích cực, tự tin và niềm vui trong vận động.
+                    </p>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-card__icon">
+                        <i class="fas fa-music" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="pillar-card__title">Nhịp điệu & Âm nhạc</h3>
+                    <p class="pillar-card__description">
+                        Kết hợp vận động với âm nhạc, phát triển cảm nhận nhịp điệu và thẩm mỹ.
+                    </p>
+                </div>
+
+                <div class="pillar-card">
+                    <div class="pillar-card__icon">
+                        <i class="fas fa-users" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="pillar-card__title">Hoạt động nhóm</h3>
+                    <p class="pillar-card__description">
+                        Tham gia các trò chơi và hoạt động tập thể, rèn luyện tinh thần đồng đội.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/_pdf_images_section.html' with pdf_section_style="--pdf-accent-1:var(--color-brand-primary); --pdf-accent-2:var(--color-brand-primary-dark); --pdf-bg:var(--color-neutral-50); --pdf-accent-text:var(--color-brand-primary-dark); --pdf-accent-bg:var(--color-neutral-100); --pdf-accent-text-hover:var(--color-brand-primary-dark);" %}
+
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_title='Vận động để phát triển' cta_subtitle='Đăng ký tư vấn ngay hôm nay để tìm hiểu thêm về chương trình Tâm vận động tại MIS' cta_primary='Đăng ký tư vấn' cta_primary_url='admissions:list' cta_secondary='Đặt lịch tham quan' cta_secondary_url='contact:contact' %}
+</main>
+
+{% endblock %}

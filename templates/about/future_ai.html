@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title|default:"Future With AI" }} - MIS Đa Trí Tuệ{% endblock %}
+{% block meta_description %}
+{{ page.content|default:"MIS định hướng năng lực số và AI Literacy qua các hoạt động học tập, sử dụng danh mục công cụ tham chiếu phù hợp theo từng cấp học."|striptags|truncatechars:160 }}
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/pdf-images.css' %}">
+<link rel="stylesheet" href="{% static 'css/about/future_ai.css' %}">
+{% endblock %}
+
+{% block content %}
+{% with ai=future_ai_block %}
+<main class="about-scope">
+    <!-- ═══ Hero ═══ -->
+    <section class="hero hero--gradient-red relative overflow-hidden">
+        {% if hero_section and hero_section.image %}
+        <div class="absolute inset-0 bg-cover bg-center opacity-20"
+            style="background-image: url('{{ hero_section.image.url }}');"></div>
+        {% elif page.image %}
+        <div class="absolute inset-0 bg-cover bg-center opacity-20"
+            style="background-image: url('{{ page.image.url }}');"></div>
+        {% else %}
+        <div class="absolute inset-0 bg-cover bg-center opacity-20"
+            style="background-image: url('{% static 'images/hero/slide1.jpg' %}');"></div>
+        {% endif %}
+        <div class="absolute inset-0 hero-gradient-overlay"></div>
+        <div class="hero__deco hero__deco--blob-1" aria-hidden="true"></div>
+        <div class="hero__deco hero__deco--blob-3" aria-hidden="true"></div>
+        <div class="hero__pattern" aria-hidden="true"></div>
+
+        <div class="hero__content">
+            <div class="container">
+                <span class="badge badge--hero mb-6">{{ hero_section.eyebrow|default:ai.title|default:"Future With AI" }}</span>
+                <h1 class="hero__title">{{ hero_section.title|default:page.title|default:ai.title|default:"Future With AI" }}</h1>
+                <p class="hero__subtitle">
+                    {% if hero_section and hero_section.subtitle %}
+                    {{ hero_section.subtitle }}
+                    {% elif ai.sections %}
+                    {{ ai.sections.0 }}
+                    {% else %}
+                    {{ page.content|striptags|truncatewords:40 }}
+                    {% endif %}
+                </p>
+                <div class="hero__cta-group">
+                    <a href="#ai-framework" class="btn btn--primary btn--lg">Khám phá chương trình <i
+                            class="fas fa-arrow-right btn__icon"></i></a>
+                    <a href="#ai-pdf" class="btn btn--ghost-light btn--lg">Xem tài liệu</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Digital Competency Framework ═══ -->
+    <section id="ai-framework" class="section section--neutral">
+        <div class="container">
+            {% include 'about/partials/_section_header.html' with eyebrow='Khung năng lực số' title=ai.metadata.regulation|default:'TT 02/2025/TT-BGDĐT' subtitle=future_ai_copy.framework_subtitle|default:'Mô hình triển khai bám sát 6 miền năng lực số theo nguồn chuẩn 2026-2027.' alignment='center' %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                {% if future_ai_domains %}
+                {% for domain in future_ai_domains %}
+                <div class="domain-card">
+                    <div class="domain-card__num">{{ forloop.counter }}</div>
+                    <div class="domain-card__text">{{ domain }}</div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="domain-card">
+                    <div class="domain-card__num">—</div>
+                    <div class="domain-card__text">Nội dung đang cập nhật.</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ 3-Level Roadmap ═══ -->
+    <section id="ai-roadmap" class="section section--light relative overflow-hidden">
+        <div class="deco-dots"></div>
+        <div class="container relative z-10">
+            {% include 'about/partials/_section_header.html' with eyebrow='Lộ trình 3 cấp' title=future_ai_copy.roadmap_title|default:'Tiểu học → THCS → THPT' subtitle=future_ai_copy.roadmap_subtitle|default:'Làm quen, thực hành và định hướng nghề nghiệp theo cấp học.' alignment='center' %}
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                {% if future_ai_roadmap %}
+                {% for item in future_ai_roadmap %}
+                <div class="roadmap-card-v2">
+                    <div class="mb-4">
+                        <span class="level-pill">{{ item.level|default:"Đang cập nhật" }}</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">{{ item.focus|default:"Nội dung trọng tâm" }}</h3>
+                    <p class="text-sm text-neutral-500 leading-relaxed">
+                        <i class="fas fa-shield-alt text-red-400 mr-1"></i>Đáp ứng năng lực số: <span
+                            class="font-semibold text-neutral-700">{{ item.compliance|default:"Đang cập nhật" }}</span>
+                    </p>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="roadmap-card-v2">
+                    <p class="text-sm text-neutral-600">Nội dung đang cập nhật.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Core Pillars ═══ -->
+    <section id="ai-core-pillars" class="section section--neutral">
+        <div class="container">
+            {% include 'about/partials/_section_header.html' with eyebrow='Trụ cột cốt lõi' title=future_ai_copy.core_pillars_title|default:'AI Literacy · Prompt Engineering · Data Science · Đạo đức số' subtitle=future_ai_copy.core_pillars_subtitle|default:'4 trụ cột cốt lõi được triển khai xuyên suốt theo chương trình 2026-2027.' alignment='center' %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+                {% if future_ai_core_pillars %}
+                {% for item in future_ai_core_pillars %}
+                <div class="pillar-v2">
+                    <div class="pillar-v2__icon">
+                        {% if forloop.counter == 1 %}<i class="fas fa-brain"></i>
+                        {% elif forloop.counter == 2 %}<i class="fas fa-terminal"></i>
+                        {% elif forloop.counter == 3 %}<i class="fas fa-chart-line"></i>
+                        {% else %}<i class="fas fa-shield-alt"></i>{% endif %}
+                    </div>
+                    <p class="pillar-v2__text">{{ item }}</p>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="pillar-v2">
+                    <div class="pillar-v2__icon"><i class="fas fa-circle"></i></div>
+                    <p class="pillar-v2__text">Nội dung đang cập nhật.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Toolchain ═══ -->
+    <section id="ai-toolchain" class="section section--light">
+        <div class="container">
+            {% include 'about/partials/_section_header.html' with eyebrow='Toolchain' title='Hệ sinh thái công cụ' subtitle=future_ai_copy.toolchain_subtitle|default:'Azota, iCorrect, VR/AR, Nexta và nhóm công cụ GenAI.' alignment='center' %}
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-4xl mx-auto">
+                {% if future_ai_tools %}
+                {% for tool in future_ai_tools %}
+                <div class="tool-chip">
+                    <div class="tool-chip__icon">
+                        {% if 'Azota' in tool %}<i class="fas fa-clipboard-check"></i>
+                        {% elif 'iCorrect' in tool %}<i class="fas fa-microphone-alt"></i>
+                        {% elif 'VR' in tool %}<i class="fas fa-vr-cardboard"></i>
+                        {% elif 'Nexta' in tool %}<i class="fas fa-chalkboard-teacher"></i>
+                        {% else %}<i class="fas fa-brain"></i>{% endif %}
+                    </div>
+                    <div class="tool-chip__name">{{ tool }}</div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="tool-chip">
+                    <div class="tool-chip__icon"><i class="fas fa-circle"></i></div>
+                    <div class="tool-chip__name">Đang cập nhật</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Outcomes ═══ -->
+    <section id="ai-outcomes" class="section section--neutral relative overflow-hidden">
+        <div class="deco-dots"></div>
+        <div class="container relative z-10">
+            {% include 'about/partials/_section_header.html' with eyebrow='Mục tiêu đầu ra' title=future_ai_copy.outcomes_title|default:ai.sections.2|default:'Năng lực đầu ra' subtitle='Học sinh MIS sẽ đạt được sau chương trình Công nghệ mới & AI' alignment='center' %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                {% if future_ai_outcomes %}
+                {% for outcome in future_ai_outcomes %}
+                <div class="outcome-v2">
+                    <div class="outcome-v2__num">{{ forloop.counter }}</div>
+                    <p class="outcome-v2__text">{{ outcome }}</p>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="outcome-v2">
+                    <div class="outcome-v2__num">—</div>
+                    <p class="outcome-v2__text">Nội dung đang cập nhật.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <div id="ai-pdf">
+        {% include 'about/partials/_pdf_images_section.html' with pdf_section_style="--pdf-accent-1:var(--color-brand-primary); --pdf-accent-2:var(--color-brand-primary-dark); --pdf-bg:var(--color-neutral-50); --pdf-accent-text:var(--color-brand-primary-dark); --pdf-accent-bg:var(--color-neutral-100); --pdf-accent-text-hover:var(--color-brand-primary-dark);" %}
+    </div>
+
+    {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta_title=page.title|default:'Future With AI' cta_subtitle='Đăng ký để nhận tư vấn về chương trình AI tại MIS.' cta_primary='Đăng ký tư vấn' cta_primary_url='admissions:list' cta_secondary='Liên hệ' cta_secondary_url='contact:contact' %}
+</main>
+{% endwith %}
+{% endblock %}
+

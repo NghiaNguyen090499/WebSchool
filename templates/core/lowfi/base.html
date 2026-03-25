@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ lowfi_title }}{% endblock %}
+{% block meta_description %}{{ lowfi_meta_description }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/mis-future-ui.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="mis-ui">
+    <section class="mis-hero{% if lowfi_hero_image %} has-level-art{% endif %}"{% if lowfi_hero_image %} style="--mis-hero-image: url('{% static lowfi_hero_image %}');"{% endif %}>
+        <div class="mis-container mis-hero-grid">
+            <div class="mis-reveal">
+                <span class="mis-pill">
+                    <i class="fas fa-satellite-dish"></i>
+                    {{ lowfi_site.badge|default:"AI-integrated | Creative Economy | Global Citizen" }}
+                </span>
+                <h1>{{ lowfi_site.title|default:"Hệ thống giáo dục MIS" }}</h1>
+                <p class="mis-lead">
+                    {{ lowfi_site.lead|default:"Chuyển dịch từ nền kinh tế tri thức sang nền kinh tế sáng tạo." }}
+                </p>
+                <div class="mis-cta-row">
+                    <a href="{{ lowfi_site.cta_primary_href|default:'#' }}" class="mis-btn mis-btn-primary">
+                        <i class="{{ lowfi_site.cta_primary_icon|default:'fas fa-calendar-check' }}"></i>
+                        {{ lowfi_site.cta_primary_label|default:"Đăng ký tư vấn" }}
+                    </a>
+                    <a href="{{ lowfi_site.cta_secondary_href|default:'#' }}" class="mis-btn mis-btn-ghost">
+                        <i class="{{ lowfi_site.cta_secondary_icon|default:'fas fa-map-marked-alt' }}"></i>
+                        {{ lowfi_site.cta_secondary_label|default:"Tham quan trường" }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mis-subnav-wrap">
+        <div class="mis-container">
+            <nav class="mis-subnav" aria-label="MIS prototype pages">
+                {% for item in lowfi_nav %}
+                <a href="{{ item.href }}" class="mis-nav-link{% if item.key == lowfi_page_key %} is-active{% endif %}">
+                    {{ item.label }}
+                </a>
+                {% endfor %}
+            </nav>
+        </div>
+    </section>
+
+    <main class="mis-shell">
+        <div class="mis-container">
+            {% block lowfi_body %}{% endblock %}
+        </div>
+    </main>
+</div>
+{% endblock %}

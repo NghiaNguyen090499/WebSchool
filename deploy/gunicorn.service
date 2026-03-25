@@ -1,0 +1,32 @@
+[Unit]
+Description=MIS Website Gunicorn Daemon
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/mis-website
+EnvironmentFile=/opt/mis-website/.env
+Environment=DJANGO_SETTINGS_MODULE=school_website.settings
+Environment=PYTHONUNBUFFERED=1
+RuntimeDirectory=gunicorn
+RuntimeDirectoryMode=0755
+ExecStartPre=/usr/bin/install -d -o www-data -g www-data /opt/mis-website/logs
+ExecStart=/opt/mis-website/venv/bin/gunicorn \
+    school_website.wsgi:application \
+    --bind unix:/run/gunicorn/mis-website.sock \
+    --workers 3 \
+    --timeout 120 \
+    --max-requests 1000 \
+    --max-requests-jitter 50 \
+    --access-logfile /opt/mis-website/logs/gunicorn-access.log \
+    --error-logfile /opt/mis-website/logs/gunicorn-error.log
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=always
+RestartSec=3
+KillMode=mixed
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow admin and portal
+Disallow: /admin/
+Disallow: /portal/
+
+# Sitemap
+Sitemap: https://misvn.edu.vn/sitemap.xml
+
+# Crawl-delay for politeness
+Crawl-delay: 1

@@ -1,0 +1,7 @@
+*.py text eol=lf encoding=utf-8
+*.html text eol=lf encoding=utf-8
+*.css text eol=lf encoding=utf-8
+*.js text eol=lf encoding=utf-8
+*.md text eol=lf encoding=utf-8
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.webm filter=lfs diff=lfs merge=lfs -text

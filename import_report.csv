@@ -1,0 +1,63 @@
+source_path,action,file_type,category,page_target,block_target,primary_path,webp_path,jpeg_path,poster_path,needs_consent,is_approved,db_id,message
+Cover video MIS .mp4,duplicate,video,home,home.html,hero_video,,,,,False,False,,checksum_duplicate
+FB mẹ Đức Minh .mp4,duplicate,video,unmapped,,,,,,,False,False,,checksum_duplicate
+Hoàng Sơn 3S2 .mp4,duplicate,video,unmapped,,,,,,,False,False,,checksum_duplicate
+IMG_7580.jpg,skipped,image,,,,,,,,,,,only_videos
+MIS01560.jpg,skipped,image,,,,,,,,,,,only_videos
+PVPH Bảo Linh 2.mp4,duplicate,video,admissions,admission_list.html,testimonial_slider,,,,,True,False,,checksum_duplicate
+PVPH TRẦN ANH KHOA .mp4,duplicate,video,admissions,admission_list.html,testimonial_slider,,,,,True,False,,checksum_duplicate
+testimonials/Bản sao IMG_3830.jpg,skipped,image,,,,,,,,,,,only_videos
+testimonials/PH Mỹ Cầm 12A5-1.mp4,duplicate,video,admissions,admission_list.html,testimonial_slider,,,,,True,False,,checksum_duplicate
+testimonials/Ph Y Lăng -1.mp4,duplicate,video,admissions,admission_list.html,testimonial_slider,,,,,True,False,,checksum_duplicate
+testimonials/PH Đức Minh 2S2.mp4,duplicate,video,admissions,admission_list.html,testimonial_slider,,,,,True,False,,checksum_duplicate
+testimonials/PHHS Mỹ Cầm.png,skipped,image,,,,,,,,,,,only_videos
+testimonials/PHHS Y Lăng.png,skipped,image,,,,,,,,,,,only_videos
+testimonials/PHHS Đức Minh.png,skipped,image,,,,,,,,,,,only_videos
+testimonials/Testimonials.docx,skipped,doc,,,,,,,,,,,only_videos
+testimonials/Untitled design.png,skipped,image,,,,,,,,,,,only_videos
+testimonials/z5546000456325_c5d7b95ae08fa8232add8e71179fdc27.jpg,skipped,image,,,,,,,,,,,only_videos
+testimonials/z5546000456446_ff717a8811feeb9a74ccf5bc87ccbf12.jpg,skipped,image,,,,,,,,,,,only_videos
+testimonials/z5546000456447_e128aecd785f7d18c54a3cd96d4e9059.jpg,skipped,image,,,,,,,,,,,only_videos
+testimonials/z5546000456448_9070295f923eb73dc00cf63244d37ed5.jpg,skipped,image,,,,,,,,,,,only_videos
+testimonials/z5546000476319_fa59ac1f34c3c6fb9ec9dcd8d825fb5e.jpg,skipped,image,,,,,,,,,,,only_videos
+testimonials/z5546000476332_812b15de37d9e2546731dbbfd9b50b7a.jpg,skipped,image,,,,,,,,,,,only_videos
+testimonials/z5755311996160_ec6bd79e68528780c1bdd11ec40412b2.jpg,skipped,image,,,,,,,,,,,only_videos
+testimonials/z5755312001923_de1d01576b6730fe5f7b500e5a6a839e.jpg,skipped,image,,,,,,,,,,,only_videos
+VID QC tuyển sinh MIS Kiddy  .mp4,duplicate,video,unmapped,,,,,,,False,False,,checksum_duplicate
+vinh danh/ASMO/dang khoi.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/diep chi.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/duc anh.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/hai minh.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/Hoang nguyen.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/huy bao.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/khoi nguyen.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/linh thao.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/minh quan.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/minh son.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/ngan an.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/quang anh.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/TH.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/thcs.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/thpt.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/tran quang.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/v1.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/vd linh giang.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ASMO/vu anh.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/ba nguyen.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/bao ngoc.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/hong nam.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/lam phong.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/my cam.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/nam anh.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/phuc lam.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/bao khang.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/duy anh.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/minh anh.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/minh dũng.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/minh khôi.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/minh quân.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/phúc luân.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/quang vinh.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/quoc viet.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/đình anh.png,skipped,image,,,,,,,,,,,only_videos
+vinh danh/vòng thành phố/đức dũng.png,skipped,image,,,,,,,,,,,only_videos

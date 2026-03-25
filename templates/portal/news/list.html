@@ -1,0 +1,99 @@
+{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Tin tức{% endblock %}
+{% block header_title %}Tin tức{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Tin tức" %}
+
+<div class="portal-toolbar">
+    <div>
+        <h1 class="page-title">Quản lý Tin tức</h1>
+        <p class="portal-subtitle">{{ page_obj.paginator.count|default:object_list.count }} bài viết</p>
+    </div>
+    <a href="{% url 'portal:news_create' %}" class="btn btn-primary btn-md">
+        <i class="fas fa-plus icon-md"></i> Tạo bài viết
+    </a>
+</div>
+
+<form method="get" class="portal-filters" role="search" aria-label="Bộ lọc tin tức">
+    <div class="portal-search" style="flex:1;min-width:200px">
+        <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Tìm kiếm tin tức..."
+            aria-label="Tìm kiếm">
+    </div>
+    <select name="category" aria-label="Danh mục" onchange="this.form.submit()">
+        <option value="">Tất cả danh mục</option>
+        {% for value, label in category_choices %}
+        <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    <select name="featured" aria-label="Nổi bật" onchange="this.form.submit()">
+        <option value="">Tất cả</option>
+        <option value="1" {% if request.GET.featured == "1" %}selected{% endif %}>Nổi bật</option>
+        <option value="0" {% if request.GET.featured == "0" %}selected{% endif %}>Thường</option>
+    </select>
+    <button type="submit" class="btn btn-secondary btn-sm">
+        <i class="fas fa-search icon-md"></i> Lọc
+    </button>
+</form>
+
+<div class="portal-table-container">
+    <table class="portal-table" aria-label="Danh sách tin tức">
+        <thead>
+            <tr>
+                <th scope="col">Tiêu đề</th>
+                <th scope="col">Danh mục</th>
+                <th scope="col">Nổi bật</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col" style="text-align:right">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in object_list %}
+            <tr>
+                <td>
+                    <div class="font-semibold truncate" style="max-width:400px;color:var(--p-gray-800)">{{ item.title }}
+                    </div>
+                </td>
+                <td><span class="badge badge-neutral">{{ item.get_category_display|default:"—" }}</span></td>
+                <td>
+                    {% if item.is_featured %}
+                    <span class="badge badge-warning"><i class="fas fa-star icon-xs"></i> Nổi bật</span>
+                    {% else %}
+                    <span class="text-muted">—</span>
+                    {% endif %}
+                </td>
+                <td><time datetime="{{ item.created_at|date:'Y-m-d' }}">{{ item.created_at|date:"d/m/Y" }}</time></td>
+                <td style="text-align:right">
+                    <div style="display:flex;gap:6px;justify-content:flex-end">
+                        <a href="{% url 'portal:news_edit' item.pk %}" class="btn btn-ghost btn-xs" data-tooltip="Sửa">
+                            <i class="fas fa-pen icon-sm"></i>
+                        </a>
+                        <a href="{% url 'portal:news_delete' item.pk %}" class="btn btn-ghost btn-xs"
+                            style="color:var(--p-danger)" data-tooltip="Xóa">
+                            <i class="fas fa-trash icon-sm"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">
+                    <div class="portal-empty-state py-8">
+                        <div class="portal-empty-icon"><i class="fas fa-newspaper"></i></div>
+                        <p class="portal-empty-title">Chưa có tin tức nào</p>
+                        <p class="portal-empty-desc">Bắt đầu tạo bài viết để chia sẻ thông tin.</p>
+                        <a href="{% url 'portal:news_create' %}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus icon-md"></i> Tạo bài viết
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% include "portal/includes/pagination.html" %}
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ page.title }} - MIS{% endblock %}
+
+{% block content %}
+<main class="curriculum">
+    {% include 'about/partials/curriculum/_curriculum_hero.html' with hero_id='hero' hero_theme='curriculum-hero--navy' hero_eyebrow='Ngữ Văn Thế Hệ Mới' hero_title=page.title hero_subtitle='Giữ hồn nhân bản, mở rộng tư duy, làm chủ ngôn từ từ cảm thụ văn học đến kiến tạo nội dung số.' hero_bullet_1=literature_block.sections.0|default:'Tư duy phản biện, ngữ văn ứng dụng, cộng tác cùng AI.' hero_bullet_2=literature_block.sections.1|default:'Vai trò người thầy: dẫn dắt học thuật và chuẩn mực liêm chính số.' hero_bullet_3='Sản phẩm đầu ra đa dạng: podcast, video phê bình, tập san điện tử.' hero_primary_label='Nhận tư vấn chương trình' hero_primary_url='admissions:list' hero_secondary_label='Tải lộ trình chi tiết' hero_secondary_url='#brochure' trust_badge_1='Critical Thinking' trust_badge_2='Digital Literacy' trust_badge_3='Portfolio-based Learning' %}
+
+    {% include 'about/partials/curriculum/_trust_signal_strip.html' with signal_1_value='4S Framework' signal_1_label='Quy trình học tập từ input đến output số' signal_2_value='3 cấp học' signal_2_label='Lộ trình liên thông Tiểu học - THCS - THPT' signal_3_value='Project Assessment' signal_3_label='Đánh giá quá trình và sản phẩm thực tế' %}
+
+    <section id="philosophy" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <h2 class="curriculum-h2">Academic Philosophy</h2>
+            <p class="curriculum-lead">Ngữ văn tại MIS định hướng phát triển năng lực tư duy, bản lĩnh biểu đạt và khả năng ứng dụng ngôn ngữ trong bối cảnh số.</p>
+            <div class="curriculum-grid curriculum-grid--3">
+                {% if literature_block.pillars %}
+                    {% for pillar in literature_block.pillars|slice:":3" %}
+                        {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class=pillar.icon title=pillar.title description=pillar.description %}
+                    {% endfor %}
+                {% else %}
+                    {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-comments' title='Tư duy phản biện' description='Đọc hiểu đa chiều, đối thoại với văn bản và lập luận có căn cứ.' %}
+                    {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-pen-nib' title='Ngữ văn ứng dụng' description='Chuyển hóa kiến thức thành bài viết, thuyết trình, nội dung số.' %}
+                    {% include 'about/partials/curriculum/_academic_pillar_card.html' with icon_class='fas fa-user-shield' title='Liêm chính học thuật' description='Khai thác AI có đạo đức, giữ bản sắc cá nhân trong sản phẩm.' %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    {% with primary=lit_articulation.0 middle=lit_articulation.1 high=lit_articulation.2 %}
+    {% include 'about/partials/curriculum/_roadmap_tabs_accordion.html' with roadmap_id='roadmap' roadmap_title='Curriculum Roadmap' roadmap_subtitle='Lộ trình phát triển năng lực ngữ văn theo từng cấp học.' level_1_label=primary.level|default:'Tiểu học' level_1_badge='Giai đoạn nền tảng' level_1_focus=primary.focus|default:'Khơi gợi cảm xúc ngôn ngữ và năng lực kể chuyện.' level_1_tool='Story map, đọc hiểu guided reading, AI minh họa nội dung.' level_1_output=primary.output|default:'Podcast kể chuyện, sách tranh tự sáng tác.' level_2_label=middle.level|default:'THCS' level_2_badge='Giai đoạn phát triển' level_2_focus=middle.focus|default:'Rèn tư duy hệ thống, phân tích nhân vật và lập luận.' level_2_tool='Mind-map, phản biện nhóm, AI gợi ý cấu trúc bài viết.' level_2_output=middle.output|default:'Tạp chí nội bộ, kịch bản video ngắn.' level_3_label=high.level|default:'THPT' level_3_badge='Giai đoạn nâng cao' level_3_focus=high.focus|default:'Viết luận chuyên sâu, phê bình văn học và kết nối liên ngành.' level_3_tool='Writing workshop, phản biện học thuật, AI feedback có kiểm soát.' level_3_output=high.output|default:'Dự án nghiên cứu văn hóa và hồ sơ năng lực ngôn ngữ.' %}
+    {% endwith %}
+
+    <section id="learning-experience" class="curriculum-section curriculum-section--neutral">
+        <div class="container">
+            <h2 class="curriculum-h2">Learning Experience</h2>
+            <p class="curriculum-lead">Mô hình lớp học theo quy trình 4S giúp học sinh chuyển từ tiếp nhận thụ động sang kiến tạo sản phẩm ngôn ngữ số.</p>
+            <div class="curriculum-grid curriculum-grid--2">
+                {% if literature_block.process_4s %}
+                    {% for item in literature_block.process_4s %}
+                    {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-layer-group' title='4S Learning Flow' description=item meta='Sàng lọc - Sơ đồ hóa - Sáng tạo - Số hóa' %}
+                    {% endfor %}
+                {% else %}
+                    {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-filter' title='Sàng lọc' description='Giải mã văn bản và bối cảnh bằng công cụ hỗ trợ phù hợp.' %}
+                    {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-sitemap' title='Sơ đồ hóa' description='Tổ chức ý tưởng và mạch lập luận qua mind-map.' %}
+                    {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-lightbulb' title='Sáng tạo' description='Viết và trình bày nội dung giữ bản sắc cá nhân.' %}
+                    {% include 'about/partials/curriculum/_learning_card.html' with icon_class='fas fa-file-video' title='Số hóa' description='Xuất bản sản phẩm dưới dạng podcast, video, tập san điện tử.' %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section id="assessment-outcomes" class="curriculum-section curriculum-section--light curriculum-section--assessment-enhanced">
+        <div class="container">
+            <div class="curriculum-section-intro" data-reveal>
+                <h2 class="curriculum-h2">Assessment & Outcomes</h2>
+                <p class="curriculum-lead">Đánh giá theo tiến trình, dự án và phản hồi giúp đo chính xác năng lực ngôn ngữ học thuật của học sinh.</p>
+            </div>
+
+            <div class="curriculum-assessment-layout">
+                <div class="curriculum-assessment-panel curriculum-reveal-delay-150" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Core Rubrics</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--info">Process + Integrity</span>
+                    </div>
+                    <div class="curriculum-rubric">
+                                    {% if literature_block.evaluation %}
+                                        {% for item in literature_block.evaluation %}
+                                            {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Đánh giá học thuật' metric=item evidence='Bài nộp, bản thảo, phản hồi theo rubric.' %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if literature_block.digital_ethics %}
+                                        {% for item in literature_block.digital_ethics %}
+                                            {% include 'about/partials/curriculum/_assessment_rubric.html' with criterion='Liêm chính số' metric=item evidence='Nhật ký nguồn tham chiếu và phản tư học tập.' %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                </div>
+
+                <aside class="curriculum-assessment-panel curriculum-assessment-panel--milestones curriculum-reveal-delay-200" data-reveal>
+                    <div class="curriculum-assessment-panel__head">
+                        <h3 class="curriculum-h3">Milestones</h3>
+                        <span class="curriculum-outcome-badge curriculum-outcome-badge--success">Portfolio Outputs</span>
+                    </div>
+                    <p class="curriculum-caption">Students are evaluated not only by scores, but also by evidence-rich language products.</p>
+                    <div class="curriculum-outcome-list curriculum-spacer-top">
+                        {% if literature_block.outcomes %}
+                            {% for item in literature_block.outcomes %}
+                            <p class="curriculum-text"><span class="curriculum-outcome-order">{{ forloop.counter|stringformat:"02d" }}</span><span>{{ item }}</span></p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    {% include 'about/partials/curriculum/_differentiation_matrix.html' with matrix_title='Differentiation: MIS Literature vs mô hình thông thường' row_1_label='Mục tiêu môn học' row_1_mis='Phát triển tư duy, năng lực biểu đạt và sản phẩm ngôn ngữ số.' row_1_traditional='Trọng tâm ghi nhớ tác phẩm và trả bài theo khuôn mẫu.' row_1_international='Khung kỹ năng mạnh nhưng không luôn bám sát ngữ cảnh Việt.' row_2_label='Phương pháp dạy - học' row_2_mis='Quy trình 4S, kết hợp phản biện, dự án và AI hỗ trợ.' row_2_traditional='Thiên về giảng giải một chiều.' row_2_international='Đa phương pháp, độ phù hợp văn hóa tùy chương trình.' row_3_label='Đánh giá' row_3_mis='Đánh giá quá trình + sản phẩm + liêm chính số.' row_3_traditional='Đánh giá chủ yếu theo bài kiểm tra viết.' row_3_international='Đánh giá theo chuẩn hệ, mức cá nhân hóa khác nhau.' row_4_label='Đầu ra' row_4_mis='Podcast, video phê bình, tập san điện tử, hồ sơ năng lực.' row_4_traditional='Đầu ra chủ yếu là điểm số và bài thi.' row_4_international='Đầu ra mạnh kỹ năng, không luôn tối ưu cho kỳ thi nội địa.' %}
+
+    {% include 'about/partials/curriculum/_final_cta_cluster.html' with cta_title='Khơi dậy đam mê văn học và năng lực biểu đạt cho con' cta_subtitle='Đặt lịch tham quan để trải nghiệm lớp học Ngữ văn thế hệ mới tại MIS.' visit_url='contact:contact' consult_url='admissions:list' brochure_dialog_id='literature-brochure-dialog' brochure_available=pdf_document.pdf_file %}
+
+    {% include 'about/partials/curriculum/_brochure_drawer.html' with brochure_dialog_id='literature-brochure-dialog' brochure_title='Brochure chương trình Ngữ văn' %}
+</main>
+{% endblock %}

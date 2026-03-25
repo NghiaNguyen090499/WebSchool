@@ -1,0 +1,36 @@
+﻿{% if is_paginated %}
+<nav class="portal-pagination" role="navigation" aria-label="Phân trang">
+    <div class="portal-pagination-summary">
+        Trang {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        <span class="text-muted">({{ page_obj.paginator.count }} kết quả)</span>
+    </div>
+    <div class="portal-pagination-links">
+        {% if page_obj.has_previous %}
+        <a href="?{{ query_string }}&page=1" class="portal-page" aria-label="Trang đầu">&laquo;</a>
+        <a href="?{{ query_string }}&page={{ page_obj.previous_page_number }}" class="portal-page"
+            aria-label="Trang trước">&lsaquo;</a>
+        {% else %}
+        <span class="portal-page disabled">&laquo;</span>
+        <span class="portal-page disabled">&lsaquo;</span>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <span class="portal-page active" aria-current="page">{{ num }}</span>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <a
+            href="?{{ query_string }}&page={{ num }}" class="portal-page">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <a href="?{{ query_string }}&page={{ page_obj.next_page_number }}" class="portal-page"
+                aria-label="Trang sau">&rsaquo;</a>
+            <a href="?{{ query_string }}&page={{ page_obj.paginator.num_pages }}" class="portal-page"
+                aria-label="Trang cuối">&raquo;</a>
+            {% else %}
+            <span class="portal-page disabled">&rsaquo;</span>
+            <span class="portal-page disabled">&raquo;</span>
+            {% endif %}
+    </div>
+</nav>
+{% endif %}
