@@ -5,44 +5,65 @@
 {% block meta_description %}{{ news.excerpt|default:news.content|striptags|truncatechars:160 }}{% endblock %}
 
 {% block content %}
-<article class="section bg-neutral-50 dark:bg-neutral-900 min-h-screen">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Back Button -->
-        <a href="{% url 'news:list' %}"
-            class="inline-flex items-center text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 mb-8 font-semibold transition-all duration-200 hover:translate-x-[-4px] animate-fadeInUp">
-            <i class="fas fa-arrow-left mr-3"></i> Quay lại Tin tức
-        </a>
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+<div class="news-page news-detail-page">
+    
+    <!-- Reading Progress Indicator -->
+    <div class="news-progress-container">
+        <div class="news-progress-bar" id="readingProgress"></div>
+    </div>
 
-        <!-- Header -->
-        <header class="mb-12 animate-fadeInUp">
-            {% if news.category %}
-            <span class="badge badge-primary eyebrow mb-6">
-                {{ news.category.name }}
-            </span>
-            {% endif %}
-            <h1 class="page-title mb-6">{{ news.title }}</h1>
-            <div class="flex items-center text-muted">
-                <div class="flex items-center mr-6">
-                    <i class="far fa-calendar-alt mr-2 text-primary-500"></i>
-                    <span>{{ news.created_at|date:"d/m/Y" }}</span>
+    <!-- Article Header Hero -->
+    <section class="news-detail-header">
+        <div class="news-detail-header-bg"></div>
+        <div class="news-detail-header-content">
+            <div class="news-breadcrumb animate-fadeInUp">
+                <a href="{% url 'core:home' %}"><i class="fas fa-home"></i> Trang chủ</a>
+                <span class="news-breadcrumb-sep">/</span>
+                <a href="{% url 'news:list' %}">Tin tức</a>
+                {% if news.category %}
+                <span class="news-breadcrumb-sep">/</span>
+                <a href="{% url 'news:list' %}?category={{ news.category.slug }}">{{ news.category.name }}</a>
+                {% endif %}
+            </div>
+            
+            <h1 class="news-detail-title animate-fadeInUp" style="animation-delay: 0.1s;">{{ news.title }}</h1>
+            
+            <div class="news-detail-meta animate-fadeInUp" style="animation-delay: 0.2s;">
+                <div class="news-meta-item">
+                    <i class="far fa-calendar-alt"></i> {{ news.created_at|date:"d/m/Y" }}
                 </div>
-                <div class="flex items-center">
-                    <i class="far fa-clock mr-2 text-primary-500"></i>
-                    <span>{{ news.created_at|date:"H:i" }}</span>
+                <div class="news-meta-item">
+                    <i class="far fa-clock"></i> {{ news.created_at|date:"H:i" }}
+                </div>
+                <div class="news-meta-item">
+                    <i class="fas fa-book-reader"></i> 3 phút đọc
                 </div>
             </div>
-        </header>
-
-        <!-- Featured Image -->
-        {% if news.thumbnail %}
-        <div class="mb-12 rounded-3xl overflow-hidden shadow-premium-lg animate-fadeInUp">
-            <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}" class="w-full h-auto object-cover image-hover"
-                width="1200" height="675">
+            
+            {% if news.thumbnail %}
+            <div class="news-detail-hero-image animate-fadeInUp" style="animation-delay: 0.3s;">
+                <img src="{{ news.thumbnail.url }}" alt="{{ news.title }}" width="1200" height="675">
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
+    </section>
 
-        <!-- Content -->
-        <div class="prose dark:prose-invert max-w-none mb-16 animate-fadeInUp">
+    <!-- Article Body Container -->
+    <div class="news-detail-body">
+        
+        <!-- Floating Social Share -->
+        <aside class="news-detail-share">
+            <div class="news-share-sticky animate-fadeInUp" style="animation-delay: 0.4s;">
+                <span class="news-share-label">Chia sẻ</span>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri|urlencode }}" target="_blank" class="news-share-btn fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri|urlencode }}&text={{ news.title|urlencode }}" target="_blank" class="news-share-btn tw" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <button class="news-share-btn cp" onclick="copyLink()" title="Sao chép liên kết"><i class="fas fa-link"></i></button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <article class="news-detail-content prose-premium animate-fadeInUp" style="animation-delay: 0.5s;">
             {% if news.content|contains_html %}
                 {% if news.thumbnail %}
                 {{ news.content|strip_first_image|sanitize_html|safe }}
@@ -50,39 +71,78 @@
                 {{ news.content|sanitize_html|safe }}
                 {% endif %}
             {% else %}
-            {{ news.content|linebreaks }}
+                {{ news.content|linebreaks }}
             {% endif %}
-        </div>
+        </article>
+        
+    </div>
 
-        <!-- Related News -->
-        {% if related_news %}
-        <div class="mt-20 pt-12 border-t border-neutral-200 dark:border-neutral-700 animate-fadeInUp">
-            <h2 class="title-md mb-8">Tin tức liên quan</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Related News -->
+    {% if related_news %}
+    <section class="news-detail-related">
+        <div class="news-detail-related-inner">
+            <div class="news-grid-header animate-fadeInUp">
+                <h2 class="news-grid-heading">
+                    <span class="news-grid-heading-accent"></span>
+                    Bài viết liên quan
+                </h2>
+            </div>
+            <div class="news-masonry-grid animate-fadeInUp" style="animation-delay: 0.1s;">
                 {% for related in related_news %}
-                <a href="{{ related.get_absolute_url }}" class="card overflow-hidden p-0 group">
-                    <div class="relative h-40 overflow-hidden">
-                        {% if related.thumbnail %}
-                        <img src="{{ related.thumbnail.url }}" alt="{{ related.title }}"
-                            class="w-full h-full object-cover image-hover" width="600" height="400">
-                        {% else %}
-                        <div class="w-full h-full bg-gradient-to-br from-primary-400 to-primary-600"></div>
-                        {% endif %}
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="card-title mb-2 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">
-                            {{ related.title }}</h3>
-                        <div class="flex items-center text-sm text-muted">
-                            <i class="far fa-calendar-alt mr-2 text-primary-500"></i>
-                            <span>{{ related.created_at|date:"d/m/Y" }}</span>
+                <div class="news-item-card">
+                    <a href="{{ related.get_absolute_url }}" class="news-item-link">
+                        <div class="news-item-thumb">
+                            {% if related.thumbnail %}
+                            <img src="{{ related.thumbnail.url }}" alt="{{ related.title }}" loading="lazy" width="600" height="400">
+                            {% else %}
+                            <div class="news-item-thumb-placeholder">
+                                <i class="far fa-newspaper"></i>
+                            </div>
+                            {% endif %}
+                            {% if related.category %}
+                            <span class="news-badge news-badge--accent news-badge--overlay">{{ related.category.name }}</span>
+                            {% endif %}
                         </div>
-                    </div>
-                </a>
+                        <div class="news-item-body">
+                            <h3 class="news-item-title">{{ related.title }}</h3>
+                            <div class="news-item-footer">
+                                <span class="news-meta-date">
+                                    <i class="far fa-calendar-alt"></i> {{ related.created_at|date:"d/m/Y" }}
+                                </span>
+                                <span class="news-item-arrow"><i class="fas fa-chevron-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
                 {% endfor %}
             </div>
         </div>
-        {% endif %}
-    </div>
-</article>
+    </section>
+    {% endif %}
+
+</div>
+
+<script>
+    // Reading Progress Bar
+    window.addEventListener('scroll', () => {
+        const docElem = document.documentElement;
+        const docBody = document.body;
+        const scrollTop = docElem['scrollTop'] || docBody['scrollTop'];
+        const scrollBottom = (docElem['scrollHeight'] || docBody['scrollHeight']) - window.innerHeight;
+        const scrollPercent = scrollTop / scrollBottom * 100 + '%';
+        const progressEl = document.getElementById('readingProgress');
+        if (progressEl) {
+            progressEl.style.width = scrollPercent;
+        }
+    });
+
+    // Copy Link function
+    function copyLink() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            alert("Đã sao chép liên kết vào khay nhớ tạm!");
+        }).catch(() => {
+            alert("Trình duyệt không hỗ trợ copy tự động.");
+        });
+    }
+</script>
 {% endblock %}
