@@ -1,35 +1,35 @@
 # Core Django
-Django>=4.2,<6.0
-asgiref==3.11.0
-sqlparse==0.5.3
+Django>=4.2,<5.3
+asgiref
+sqlparse
 
 # Django REST Framework
-djangorestframework==3.16.1
-django-cors-headers==4.9.0
+djangorestframework
+django-cors-headers
 
 # Database
-psycopg2-binary==2.9.11
-dj-database-url==3.0.1
+psycopg2-binary
+dj-database-url
 
 # Image handling
-pillow==12.0.0
+pillow
 
 # Static files
-whitenoise==6.11.0
+whitenoise
 
 # Environment variables
-python-decouple==3.8
+python-decouple
 
 # HTTP requests
-requests==2.32.5
+requests
 
 # Rate limiting
-django-ratelimit==4.1.0
+django-ratelimit
 
 # Production server
-gunicorn==21.2.0
+gunicorn
 
 # Channels (WebSocket support - optional)
-# channels==4.3.2
-# daphne==4.2.1
+# channels
+# daphne
 
