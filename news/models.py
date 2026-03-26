@@ -30,7 +30,7 @@ class ActiveNewsManager(models.Manager):
 class News(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
-    thumbnail = models.ImageField(upload_to='news/thumbnails/', blank=True, null=True)
+    thumbnail = models.ImageField(upload_to='news/thumbnails/', max_length=255, blank=True, null=True)
     content = models.TextField()
     excerpt = models.TextField(max_length=300, blank=True, help_text="Short summary for listing pages")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
