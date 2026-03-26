@@ -28,7 +28,7 @@ class PortalPage(models.Model):
     content = models.TextField(blank=True)
     seo_title = models.CharField(max_length=200, blank=True)
     seo_description = models.CharField(max_length=300, blank=True)
-    og_image = models.ImageField(upload_to="portal/og/", blank=True, null=True)
+    og_image = models.ImageField(max_length=255, upload_to="portal/og/", blank=True, null=True)
 
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -90,7 +90,7 @@ class PortalMediaAsset(models.Model):
         ("other", "Other"),
     ]
 
-    file = models.FileField(
+    file = models.FileField(max_length=255, 
         upload_to="portal/media/",
         validators=[validate_upload_extension, validate_upload_file_size],
     )

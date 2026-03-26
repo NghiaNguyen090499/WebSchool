@@ -4,12 +4,12 @@ from django.urls import reverse
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     date = models.DateField()
     time = models.TimeField(blank=True, null=True)
     location = models.CharField(max_length=200)
     description = models.TextField()
-    image = models.ImageField(upload_to='events/', blank=True, null=True)
+    image = models.ImageField(max_length=255, upload_to='events/', blank=True, null=True)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     

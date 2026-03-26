@@ -10,7 +10,7 @@ class Staff(models.Model):
     ]
 
     name = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="teacher")
     degree = models.CharField(max_length=100, blank=True)
     languages = models.CharField(
@@ -19,7 +19,7 @@ class Staff(models.Model):
         help_text="Danh sách ngôn ngữ, phân tách bằng dấu phẩy.",
     )
     specialties = models.TextField(blank=True)
-    avatar = models.ImageField(upload_to="staff/", blank=True, null=True)
+    avatar = models.ImageField(max_length=255, upload_to="staff/", blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     class Meta:

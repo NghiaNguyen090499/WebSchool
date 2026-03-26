@@ -10,7 +10,7 @@ class Activity(models.Model):
     ]
 
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default="extracurricular")
     start_date = models.DateField()
     end_date = models.DateField(blank=True, null=True)

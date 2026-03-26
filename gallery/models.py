@@ -4,8 +4,8 @@ from django.urls import reverse
 
 class Album(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
-    cover_image = models.ImageField(upload_to='gallery/albums/')
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
+    cover_image = models.ImageField(max_length=255, upload_to='gallery/albums/')
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
@@ -27,7 +27,7 @@ class Album(models.Model):
 
 class Photo(models.Model):
     album = models.ForeignKey(Album, related_name='photos', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='gallery/photos/')
+    image = models.ImageField(max_length=255, upload_to='gallery/photos/')
     caption = models.CharField(max_length=200, blank=True)
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

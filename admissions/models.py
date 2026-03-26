@@ -35,8 +35,8 @@ class AdmissionInfo(models.Model):
     facilities = models.TextField(blank=True, verbose_name="Cơ sở vật chất")
     curriculum = models.TextField(blank=True, verbose_name="Chương trình học")
     deadline = models.DateField(null=True, blank=True, verbose_name="Hạn đăng ký")
-    image = models.ImageField(upload_to='admissions/', blank=True, verbose_name="Ảnh đại diện")
-    banner_image = models.ImageField(upload_to='admissions/banners/', blank=True, verbose_name="Ảnh banner")
+    image = models.ImageField(max_length=255, upload_to='admissions/', blank=True, verbose_name="Ảnh đại diện")
+    banner_image = models.ImageField(max_length=255, upload_to='admissions/banners/', blank=True, verbose_name="Ảnh banner")
     icon = models.CharField(max_length=100, default="fas fa-graduation-cap", verbose_name="Icon class")
     color = models.CharField(max_length=50, default="red", verbose_name="Màu chủ đạo", help_text="VD: red, blue, green, purple")
     is_active = models.BooleanField(default=True, verbose_name="Đang tuyển sinh")
@@ -172,7 +172,7 @@ class AdmissionDocument(models.Model):
         default='other',
         verbose_name="Loại tài liệu"
     )
-    file = models.FileField(
+    file = models.FileField(max_length=255, 
         upload_to='admissions/documents/%Y/',
         validators=[validate_upload_extension, validate_upload_file_size],
         verbose_name="File tài liệu"

@@ -38,7 +38,7 @@ class CoreValuesPage(models.Model):
     social_title = models.CharField(max_length=200, default="Trách nhiệm xã hội")
     social_content = models.TextField(blank=True)
 
-    image = models.ImageField(upload_to="core_values/", blank=True, null=True)
+    image = models.ImageField(max_length=255, upload_to="core_values/", blank=True, null=True)
     image_heading = models.CharField(max_length=200, blank=True, default="MIS hỗ trợ xây mới")
     image_title = models.CharField(max_length=200, blank=True, default="Trường Mầm non Háng Phù Loa")
     image_location = models.CharField(max_length=200, blank=True, default="Mồ Dề - Mù Cang Chải - Yên Bái")
@@ -171,7 +171,7 @@ class TrainingProgram(models.Model):
     # Partner information
     partner_name = models.CharField(max_length=200, verbose_name="Tên đối tác")
     partner_description = models.TextField(verbose_name="Giới thiệu đối tác")
-    partner_logo = models.ImageField(upload_to='training_programs/partners/', blank=True, null=True, verbose_name="Logo đối tác")
+    partner_logo = models.ImageField(max_length=255, upload_to='training_programs/partners/', blank=True, null=True, verbose_name="Logo đối tác")
     
     # Program content
     highlights = models.TextField(verbose_name="Điểm nổi bật", help_text="Mỗi dòng là một điểm nổi bật")
@@ -186,7 +186,7 @@ class TrainingProgram(models.Model):
     icon = models.CharField(max_length=50, default="fas fa-graduation-cap", verbose_name="Icon class")
     color = models.CharField(max_length=20, default="primary", verbose_name="Màu chủ đạo", 
                             help_text="primary, accent, blue, green, purple, orange")
-    image = models.ImageField(upload_to='training_programs/', blank=True, null=True, verbose_name="Ảnh đại diện")
+    image = models.ImageField(max_length=255, upload_to='training_programs/', blank=True, null=True, verbose_name="Ảnh đại diện")
     
     # Display settings
     order = models.IntegerField(default=0, verbose_name="Thứ tự hiển thị")
@@ -253,8 +253,8 @@ class SchoolInfo(models.Model):
     linkedin_url = models.URLField(verbose_name="LinkedIn", blank=True)
     
     # Logo và branding
-    logo = models.ImageField(upload_to='school_info/', blank=True, null=True, verbose_name="Logo trường")
-    favicon = models.ImageField(upload_to='school_info/', blank=True, null=True, verbose_name="Favicon")
+    logo = models.ImageField(max_length=255, upload_to='school_info/', blank=True, null=True, verbose_name="Logo trường")
+    favicon = models.ImageField(max_length=255, upload_to='school_info/', blank=True, null=True, verbose_name="Favicon")
     
     # Email chung
     general_email = models.EmailField(verbose_name="Email chung", blank=True)
@@ -347,7 +347,7 @@ class StudentLifePage(models.Model):
     content = models.TextField(verbose_name="Nội dung chi tiết", blank=True)
     
     # Banner
-    banner_image = models.ImageField(upload_to='student_life/', blank=True, null=True, verbose_name="Ảnh banner")
+    banner_image = models.ImageField(max_length=255, upload_to='student_life/', blank=True, null=True, verbose_name="Ảnh banner")
     
     # Các phần nội dung
     activities = models.TextField(verbose_name="Hoạt động", blank=True, help_text="Mỗi dòng là một hoạt động")
@@ -423,7 +423,7 @@ class HeroSlide(models.Model):
     cta_secondary_url = models.CharField(max_length=200, blank=True, verbose_name="Nút phụ - URL")
     
     # Image
-    image = models.ImageField(upload_to='hero/', verbose_name="Ảnh nền", 
+    image = models.ImageField(max_length=255, upload_to='hero/', verbose_name="Ảnh nền", 
                               help_text="Kích thước khuyến nghị: 1920x1080px")
     
     # Display settings
@@ -477,7 +477,7 @@ class Achievement(models.Model):
     description = models.TextField(verbose_name="Mô tả chi tiết")
     icon = models.CharField(max_length=50, default="fas fa-trophy", verbose_name="Icon",
                             help_text="FontAwesome class")
-    image = models.ImageField(
+    image = models.ImageField(max_length=255, 
         upload_to="achiement/",
         blank=True,
         null=True,
@@ -533,7 +533,7 @@ class ParentTestimonial(models.Model):
                                    help_text="VD: 'PHHS Đức Minh'")
     student_class = models.CharField(max_length=50, verbose_name="Lớp học sinh",
                                      help_text="VD: '2S2', '12A5'")
-    photo = models.ImageField(upload_to='testimonials/', verbose_name="Ảnh phụ huynh",
+    photo = models.ImageField(max_length=255, upload_to='testimonials/', verbose_name="Ảnh phụ huynh",
                               help_text="Ảnh khổ dọc, tỉ lệ 2:3")
     
     # Content
@@ -585,7 +585,7 @@ class Partner(models.Model):
     ]
     
     name = models.CharField(max_length=100, verbose_name="Tên đối tác")
-    logo = models.ImageField(upload_to='partners/', blank=True, null=True, verbose_name="Logo",
+    logo = models.ImageField(max_length=255, upload_to='partners/', blank=True, null=True, verbose_name="Logo",
                              help_text="Kích thước khuyến nghị: 200x100px, nền trong suốt")
     url = models.URLField(verbose_name="Website đối tác", blank=True)
     description = models.TextField(blank=True, verbose_name="Mô tả ngắn")
@@ -616,7 +616,7 @@ class FounderMessage(models.Model):
     """
     founder_name = models.CharField(max_length=100, verbose_name="Tên người sáng lập")
     founder_title = models.CharField(max_length=200, verbose_name="Chức danh")
-    founder_photo = models.ImageField(upload_to='founder/', blank=True, null=True,
+    founder_photo = models.ImageField(max_length=255, upload_to='founder/', blank=True, null=True,
                                       verbose_name="Ảnh chân dung",
                                       help_text="Ảnh tròn, tỉ lệ 1:1")
     
@@ -665,7 +665,7 @@ class StudentSpotlight(models.Model):
     student_name = models.CharField(max_length=100, verbose_name="Tên học sinh")
     student_class = models.CharField(max_length=50, verbose_name="Lớp",
                                      help_text="VD: '12A5', '9S1', 'Khóa 2022-2025'",null=True, blank=True)
-    photo = models.ImageField(upload_to='student_spotlight/', verbose_name="Ảnh học sinh",
+    photo = models.ImageField(max_length=255, upload_to='student_spotlight/', verbose_name="Ảnh học sinh",
                               help_text="Ảnh chân dung hoặc ảnh nhận giải, tỉ lệ 4:3 hoặc 16:9")
     
     # Achievement
@@ -723,7 +723,7 @@ class Podcast(models.Model):
         help_text="VD: https://youtu.be/Q6C89WUHoNg",
         validators=[validate_youtube_url],
     )
-    thumbnail = models.ImageField(upload_to='podcasts/', blank=True, null=True,
+    thumbnail = models.ImageField(max_length=255, upload_to='podcasts/', blank=True, null=True,
                                   verbose_name="Ảnh thumbnail",
                                   help_text="Nếu để trống sẽ tự động lấy từ YouTube")
     
@@ -804,7 +804,7 @@ class Facility(models.Model):
     name = models.CharField(max_length=200)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to="facilities/", blank=True, null=True)
+    image = models.ImageField(max_length=255, upload_to="facilities/", blank=True, null=True)
     map_embed = models.TextField(blank=True, help_text="Google Maps embed iframe hoặc URL.")
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
@@ -846,10 +846,10 @@ class MediaAsset(models.Model):
         ("rejected", "Rejected"),
     ]
 
-    file = models.FileField(upload_to="mis/2026/", blank=True, null=True)
-    file_webp = models.ImageField(upload_to="mis/2026/", blank=True, null=True)
-    file_jpeg = models.ImageField(upload_to="mis/2026/", blank=True, null=True)
-    poster = models.ImageField(upload_to="mis/2026/", blank=True, null=True)
+    file = models.FileField(max_length=255, upload_to="mis/2026/", blank=True, null=True)
+    file_webp = models.ImageField(max_length=255, upload_to="mis/2026/", blank=True, null=True)
+    file_jpeg = models.ImageField(max_length=255, upload_to="mis/2026/", blank=True, null=True)
+    poster = models.ImageField(max_length=255, upload_to="mis/2026/", blank=True, null=True)
 
     file_type = models.CharField(max_length=20, choices=FILE_TYPE_CHOICES, default="image")
     original_name = models.CharField(max_length=255)
@@ -908,7 +908,7 @@ class ProgramOverviewPage(models.Model):
     description = models.TextField(blank=True)
     source_url = models.URLField(blank=True)
     hero_image_url = models.URLField(blank=True)
-    hero_image = models.ImageField(upload_to="program_overview/hero/", blank=True, null=True)
+    hero_image = models.ImageField(max_length=255, upload_to="program_overview/hero/", blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -930,7 +930,7 @@ class ProgramOverviewImage(models.Model):
         on_delete=models.CASCADE,
     )
     image_url = models.URLField()
-    image = models.ImageField(upload_to="program_overview/pages/", blank=True, null=True)
+    image = models.ImageField(max_length=255, upload_to="program_overview/pages/", blank=True, null=True)
     alt_text = models.CharField(max_length=300, blank=True)
     caption = models.CharField(max_length=300, blank=True)
     order = models.PositiveIntegerField(default=0)

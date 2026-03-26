@@ -54,7 +54,7 @@ class AboutPage(models.Model):
     page_type = models.CharField(max_length=30, choices=PAGE_CHOICES, unique=True)
     title = models.CharField(max_length=200)
     content = models.TextField(blank=True, help_text="Legacy content field - use sections for new pages")
-    image = models.ImageField(upload_to='about/', blank=True, null=True)
+    image = models.ImageField(max_length=255, upload_to='about/', blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
@@ -110,13 +110,13 @@ class AboutSection(models.Model):
     )
     
     # Visual fields
-    image = models.ImageField(upload_to='about/sections/', blank=True, null=True)
-    feature_image_1 = models.ImageField(upload_to='about/feature_cards/', blank=True, null=True)
-    feature_image_2 = models.ImageField(upload_to='about/feature_cards/', blank=True, null=True)
-    feature_image_3 = models.ImageField(upload_to='about/feature_cards/', blank=True, null=True)
-    feature_image_4 = models.ImageField(upload_to='about/feature_cards/', blank=True, null=True)
-    feature_image_5 = models.ImageField(upload_to='about/feature_cards/', blank=True, null=True)
-    feature_image_6 = models.ImageField(upload_to='about/feature_cards/', blank=True, null=True)
+    image = models.ImageField(max_length=255, upload_to='about/sections/', blank=True, null=True)
+    feature_image_1 = models.ImageField(max_length=255, upload_to='about/feature_cards/', blank=True, null=True)
+    feature_image_2 = models.ImageField(max_length=255, upload_to='about/feature_cards/', blank=True, null=True)
+    feature_image_3 = models.ImageField(max_length=255, upload_to='about/feature_cards/', blank=True, null=True)
+    feature_image_4 = models.ImageField(max_length=255, upload_to='about/feature_cards/', blank=True, null=True)
+    feature_image_5 = models.ImageField(max_length=255, upload_to='about/feature_cards/', blank=True, null=True)
+    feature_image_6 = models.ImageField(max_length=255, upload_to='about/feature_cards/', blank=True, null=True)
     highlight_text = models.CharField(max_length=100, blank=True, help_text="Text to highlight in accent color")
     stat_number = models.CharField(max_length=50, blank=True, help_text="Large number for stats (e.g., '84%')")
     stat_label = models.CharField(max_length=100, blank=True, help_text="Label below stat number")
@@ -157,12 +157,12 @@ class AboutPdfDocument(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=300, blank=True)
     page_type = models.SlugField(
-        max_length=50,
+        max_length=255,
         unique=True,
         help_text="Slug or page_type used to map the PDF to a page",
     )
-    pdf_file = models.FileField(upload_to='about/pdfs/')
-    hero_image = models.ImageField(upload_to='about/pdfs/hero/', blank=True, null=True)
+    pdf_file = models.FileField(max_length=255, upload_to='about/pdfs/')
+    hero_image = models.ImageField(max_length=255, upload_to='about/pdfs/hero/', blank=True, null=True)
 
     class Meta:
         verbose_name = 'About PDF Document'
@@ -181,11 +181,11 @@ class AboutPdfPageImage(models.Model):
         on_delete=models.CASCADE,
         related_name='pages',
     )
-    image = models.ImageField(upload_to='about/pdfs/pages/')
+    image = models.ImageField(max_length=255, upload_to='about/pdfs/pages/')
     image_width = models.PositiveIntegerField(null=True, blank=True, editable=False)
     image_height = models.PositiveIntegerField(null=True, blank=True, editable=False)
-    image_webp = models.ImageField(upload_to='about/pdfs/pages/', null=True, blank=True, editable=False)
-    image_avif = models.ImageField(upload_to='about/pdfs/pages/', null=True, blank=True, editable=False)
+    image_webp = models.ImageField(max_length=255, upload_to='about/pdfs/pages/', null=True, blank=True, editable=False)
+    image_avif = models.ImageField(max_length=255, upload_to='about/pdfs/pages/', null=True, blank=True, editable=False)
     alt_text = models.CharField(max_length=200, blank=True)
     order = models.PositiveIntegerField(default=0)
 

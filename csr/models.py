@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 class CSRProject(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     description = models.TextField()
     impact_metrics = models.TextField(
         blank=True,
@@ -45,7 +45,7 @@ class CSRImage(models.Model):
         on_delete=models.CASCADE,
         related_name="images",
     )
-    image = models.ImageField(upload_to="csr/")
+    image = models.ImageField(max_length=255, upload_to="csr/")
     caption = models.CharField(max_length=200, blank=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
@@ -67,7 +67,7 @@ class JourneyProgram(models.Model):
     """Một chương trình trong hành trình thiện nguyện 15+ năm của MIS."""
 
     title = models.CharField("Tên chương trình", max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=255, unique=True, blank=True)
     period = models.CharField(
         "Giai đoạn",
         max_length=50,
@@ -89,6 +89,7 @@ class JourneyProgram(models.Model):
     )
     cover_image = models.ImageField(
         "Ảnh bìa",
+        max_length=255,
         upload_to="csr/journey/covers/",
         blank=True,
         null=True,
@@ -149,7 +150,7 @@ class JourneyImage(models.Model):
         on_delete=models.CASCADE,
         related_name="gallery_images",
     )
-    image = models.ImageField("Ảnh", upload_to="csr/journey/gallery/")
+    image = models.ImageField("Ảnh", max_length=255, upload_to="csr/journey/gallery/")
     caption = models.CharField("Chú thích", max_length=200, blank=True)
     order = models.PositiveIntegerField("Thứ tự", default=0)
     is_active = models.BooleanField("Hiển thị", default=True)
