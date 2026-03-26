@@ -41,20 +41,23 @@ def news_list(request):
             | Q(excerpt__icontains=query)
         )
 
-    # Separate featured and regular news
-    featured_news = all_news.filter(is_featured=True)[:3]
-    featured_ids = list(featured_news.values_list('id', flat=True))
+    # Get hero article: first featured or first regular
+    hero_article = all_news.filter(is_featured=True).first()
+    if not hero_article:
+        hero_article = all_news.first()
 
-    # Regular news excludes featured ones
-    regular_news = all_news.exclude(id__in=featured_ids)
+    # The template 'list.html' displays the hero article separately ONLY if there is no search query.
+    # Therefore, we only exclude the hero article from the grid when there is no search query.
+    # Other featured articles should just appear in the regular grid instead of being hidden.
+    if hero_article and not query:
+        regular_news = all_news.exclude(id=hero_article.id)
+    else:
+        regular_news = all_news
 
     # Paginate regular news
     paginator = Paginator(regular_news, 12)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
-    # Get hero article (first featured or first regular)
-    hero_article = featured_news.first() if featured_news.exists() else all_news.first()
 
     # Get popular categories (with article count, top 8)
     popular_categories = Category.objects.annotate(
@@ -63,7 +66,6 @@ def news_list(request):
 
     context = {
         'hero_article': hero_article,
-        'featured_news': featured_news,
         'page_obj': page_obj,
         'categories': popular_categories,
         'all_categories': Category.objects.all(),
