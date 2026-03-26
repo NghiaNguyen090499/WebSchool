@@ -9,7 +9,7 @@ django-cors-headers
 
 # Database
 psycopg2-binary
-dj-database-url
+dj-database-url<2.0
 
 # Image handling
 pillow
