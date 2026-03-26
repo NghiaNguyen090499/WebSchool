@@ -346,12 +346,6 @@
                 {% endif %}
                 {% endfor %}
 
-                <!-- THỜI KHÓA BIỂU Link -->
-                <a href="/media/tkb/index.htm" target="_blank"
-                    class="px-2.5 xl:px-3 py-2 text-sm xl:text-sm font-semibold text-neutral-700 dark:text-neutral-300 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 uppercase whitespace-nowrap">
-                    THỜI KHÓA BIỂU
-                </a>
-
                 <!-- LIÊN HỆ Link -->
                 <a href="{{ contact_url }}" {% if is_contact_active %}aria-current="page"{% endif %}
                     class="px-2.5 xl:px-3 py-2 text-sm xl:text-sm font-semibold rounded-lg transition-all duration-200 uppercase whitespace-nowrap {% if is_contact_active %}text-red-700 bg-red-50 dark:text-red-300 dark:bg-red-900/30{% else %}text-neutral-700 dark:text-neutral-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20{% endif %}">
@@ -605,11 +599,6 @@
             <a href="{% url 'admissions:list' %}"
                 class="btn btn-primary btn-md w-full justify-center mt-4">
                 TUYỂN SINH
-            </a>
-
-            <!-- Thời khóa biểu Link -->
-            <a href="/media/tkb/index.htm" target="_blank" class="btn btn-outline btn-sm w-full justify-center mt-3 border-neutral-200 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-colors">
-                <i class="fas fa-calendar-week mr-2"></i>Thời khóa biểu
             </a>
 
             <!-- Secondary Link - Liên hệ -->
