@@ -66,4 +66,5 @@ urlpatterns = [
     path('tieng-noi-misers/', views.podcast_list, name='podcasts'),
     path('healthz/', views.healthz, name='healthz'),
     path('readyz/', views.readyz, name='readyz'),
+    path('cap-nhat-tkb/', views.upload_timetable, name='upload_timetable'),
 ]

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cập nhật Thời khóa biểu{% endblock %}
+
+{% block content %}
+<div class="min-h-[80vh] bg-neutral-50 dark:bg-neutral-900 py-16">
+    <div class="container mx-auto px-4 animate-fade-in-up">
+        <div class="max-w-2xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 rounded-full mb-4 shadow-sm">
+                    <i class="fas fa-calendar-alt text-2xl"></i>
+                </div>
+                <h1 class="text-3xl lg:text-4xl font-bold text-neutral-900 dark:text-white mb-3">
+                    Cập nhật Thời khóa biểu
+                </h1>
+                <p class="text-neutral-600 dark:text-neutral-400 text-lg">
+                    Chỉ dành riêng cho Cán bộ Quản trị Hệ thống
+                </p>
+            </div>
+
+            <!-- Main Form Card -->
+            <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-xl overflow-hidden border border-neutral-100 dark:border-neutral-700">
+                
+                {% if messages %}
+                <div class="bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 p-4 mb-2">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                        </div>
+                        <div class="ml-3">
+                            {% for message in messages %}
+                                <p class="text-sm font-medium text-green-800 dark:text-green-300">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="p-8 md:p-10">
+                    <form method="post" enctype="multipart/form-data" class="space-y-6">
+                        {% csrf_token %}
+                        
+                        <!-- Title Field -->
+                        <div>
+                            <label for="{{ form.title.id_for_label }}" class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+                                Tên Phiên bản TKB <span class="text-red-500">*</span>
+                            </label>
+                            {{ form.title }}
+                            <p class="text-xs text-neutral-500 mt-2">{{ form.title.help_text }}</p>
+                        </div>
+
+                        <!-- ZIP File Field -->
+                        <div>
+                            <label class="block text-sm font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+                                File TKB Định dạng ZIP <span class="text-red-500">*</span>
+                            </label>
+                            
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-dashed border-neutral-300 dark:border-neutral-600 rounded-xl hover:border-red-400 transition-colors bg-neutral-50 dark:bg-neutral-900/50">
+                                <div class="space-y-2 text-center w-full">
+                                    <i class="fas fa-file-archive text-4xl text-neutral-400 mb-2"></i>
+                                    <div class="flex text-sm text-neutral-600 dark:text-neutral-400 justify-center">
+                                        <label for="{{ form.zip_file.id_for_label }}" class="relative cursor-pointer bg-white dark:bg-neutral-800 rounded-md font-medium text-red-600 hover:text-red-500 px-3 py-1 border border-red-200">
+                                            <span>Upload a file</span>
+                                            {{ form.zip_file }}
+                                        </label>
+                                    </div>
+                                    <p class="text-xs text-neutral-500 mt-2">
+                                        Nén thư mục TKB thành file đuôi <strong class="text-neutral-700 dark:text-neutral-300">.zip</strong> trước khi đăng tải. Dung lượng tối đa 10MB.
+                                    </p>
+                                </div>
+                            </div>
+                            {% if form.zip_file.errors %}
+                            <p class="text-sm text-red-600 mt-2">{{ form.zip_file.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Instructions Check -->
+                        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 flex items-start border border-blue-100 dark:border-blue-800">
+                            <i class="fas fa-info-circle text-blue-500 mt-0.5 mr-3"></i>
+                            <div class="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
+                                <strong>Lưu ý quan trọng:</strong> Hệ thống sẽ tự động giải nén đè lên trang TKB hiện tại ngay sau khi upload thành công. Mọi người dùng sẽ lập tức nhìn thấy TKB mới.
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="pt-4">
+                            <button type="submit" class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-md text-base font-semibold text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200">
+                                <i class="fas fa-cloud-upload-alt mr-2"></i> Xác nhận & Cập nhật ngay
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="text-center mt-6">
+                <a href="http://tkb.misvn.edu.vn" target="_blank" class="text-sm text-neutral-500 hover:text-red-600 transition-colors font-medium">
+                    <i class="fas fa-external-link-alt mr-1"></i> Xem Thời khóa biểu Hiện tại
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

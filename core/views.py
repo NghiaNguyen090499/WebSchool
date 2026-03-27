@@ -18,6 +18,10 @@ from .models import (
     StudentSpotlight, Pillar, Facility, Podcast, ProgramOverviewPage, MediaAsset,
     MISPrototypeSiteContent, MISPrototypePage,
 )
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib import messages
+from .forms import TimetableUploadForm
+
 
 
 def home(request):
@@ -489,3 +493,16 @@ def readyz(request):
     except OperationalError:
         return HttpResponse("db unavailable", status=503, content_type="text/plain")
     return HttpResponse("ok", content_type="text/plain")
+
+@staff_member_required
+def upload_timetable(request):
+    if request.method == 'POST':
+        form = TimetableUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Đã cập nhật Thời khóa biểu thành công!')
+            return redirect('core:upload_timetable')
+    else:
+        form = TimetableUploadForm()
+        
+    return render(request, 'core/upload_timetable.html', {'form': form})
