@@ -1034,3 +1034,47 @@ class ProgramContentSource(models.Model):
 
     def __str__(self):
         return f"{self.year} - {self.version}"
+
+class TimetableUpload(models.Model):
+    """
+    Model để upload và tự động giải nén Thời khóa biểu (ZIP)
+    """
+    title = models.CharField(max_length=200, verbose_name="Tên Phiên bản TKB", help_text="VD: TKB Mới Nhất 30/04/2026")
+    zip_file = models.FileField(upload_to='tkb_uploads/', verbose_name="File ZIP Thời khóa biểu", help_text="Nén toàn bộ file TKB thành file .zip rồi tải lên đây.")
+    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name="Ngày đăng")
+    is_active = models.BooleanField(default=True, verbose_name="Đang áp dụng (Giải nén)")
+
+    class Meta:
+        ordering = ['-uploaded_at']
+        verbose_name = "Cập nhật Thời khóa biểu"
+        verbose_name_plural = "Cập nhật Thời khóa biểu (ZIP)"
+    
+    def __str__(self):
+        return self.title
+        
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.zip_file and self.is_active:
+            import zipfile
+            import os
+            import shutil
+            from django.conf import settings
+            
+            tkb_target_dir = os.path.join(settings.MEDIA_ROOT, 'tkb')
+            zip_path = self.zip_file.path
+            
+            try:
+                os.makedirs(tkb_target_dir, exist_ok=True)
+                with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                    for member in zip_ref.namelist():
+                        filename = os.path.basename(member)
+                        if not filename:
+                            continue
+                        source = zip_ref.open(member)
+                        target_path = os.path.join(tkb_target_dir, filename)
+                        with open(target_path, "wb") as target:
+                            with source:
+                                shutil.copyfileobj(source, target)
+            except Exception as e:
+                pass
+

@@ -5,7 +5,8 @@ from .models import (
     WebsiteGoal, StudentLifePage, HeroSlide, Achievement, ParentTestimonial,
     Partner, FounderMessage, StudentSpotlight, Pillar, Facility, Podcast, ProgramContentSource,
     MISPrototypeSiteContent, MISPrototypePage,
-    ProgramOverviewPage, ProgramOverviewImage, MediaAsset
+    ProgramOverviewPage, ProgramOverviewImage, MediaAsset,
+    TimetableUpload
 )
 
 
@@ -556,3 +557,10 @@ class MediaAssetAdmin(admin.ModelAdmin):
         return "-"
 
     preview.short_description = "Preview"
+
+@admin.register(TimetableUpload)
+class TimetableUploadAdmin(admin.ModelAdmin):
+    list_display = ['title', 'uploaded_at', 'is_active']
+    list_filter = ['is_active']
+    search_fields = ['title']
+    readonly_fields = ['uploaded_at']
