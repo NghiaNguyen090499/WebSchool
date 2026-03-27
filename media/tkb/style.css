@@ -1,0 +1,151 @@
+/* COMMON */
+*
+{
+	font-family: Verdana, Arial; 
+	font-size: 10px;
+	text-align: justify;
+	white-space: nowrap;	
+	color: #004080;
+}
+
+body
+{
+	margin: 0;
+}
+
+table
+{
+	border-collapse: collapse;
+}
+
+caption
+{
+	text-align: left;
+}
+
+th, td
+{
+	vertical-align: middle;
+	empty-cells: show;
+	border: solid 1px #95b3de; 
+}
+
+th
+{
+	text-align: center;
+	font-weight: bold;
+	background-color: #def;
+}
+
+/* DANH SACH LOP HOC VA GIAO VIEN */
+
+.danhsach ul
+{
+	list-style: none;
+	padding: .5em 0 .5em .5em;
+	margin: 0;
+}
+
+.danhsach ul li
+{
+	list-style: none;
+}
+
+.danhsach ul li a
+{
+	line-height: 2em;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.danhsach ul li a:hover
+{
+	color: red;
+}
+
+/* TKB LOP HOC VA GIAO VIEN */
+
+.tkb
+{
+	margin: 5px 5px 0 5px;
+}
+
+.tkb h1
+{
+	margin: 0 0 5px 0;
+	padding: .2em .2em .2em .2em;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: #eaeaea;
+}
+
+.tkb caption
+{
+	margin: 0;
+	padding: 0 0 3px 0;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.tkb table
+{
+	width: 100%;
+	margin: 0 0 5px 0;
+	border: double 3px #95b3de; 
+	table-layout: fixed;
+}
+
+.tkb tr
+{
+	height: 23px;
+}
+
+.tkb th, .tkb td
+{
+	width: 16.5%;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	border: solid 1px #95b3de; 
+}
+
+/* TKB TOAN TRUONG */
+
+.toantruong caption
+{
+	margin: .5em 0 0 .5em;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.toantruong table
+{
+	margin: .5em 0 0 0;
+	border: solid 2px #95b3de; 
+	border-left-style: none;
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.toantruong th, .toantruong td
+{
+	width: 110px;
+	padding: 5px 3px 5px 3px;
+	margin: 0;
+	text-align: center;
+	border: solid 1px #95b3de; 
+	border-left-style: none;
+}
+
+.toantruong td.thu
+{
+	font-size: 30px;
+	font-weight: bold;
+	border-top: solid 2px #95b3de; 
+}
+
+.toantruong td.vien
+{
+	border-top: solid 2px #95b3de; 
+}
