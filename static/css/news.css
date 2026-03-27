@@ -962,7 +962,8 @@
 }
 
 /* First paragraph dropcap */
-.prose-premium > p:first-of-type::first-letter {
+.prose-premium > p:first-of-type::first-letter,
+.prose-premium .content-inner > p:first-of-type::first-letter {
     font-size: 4rem;
     font-weight: 900;
     float: left;
