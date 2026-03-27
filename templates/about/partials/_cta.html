@@ -8,7 +8,7 @@ Usage: {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta
     <div class="cta__pattern" aria-hidden="true"></div>
 
     <div class="cta__content">
-        <div class="container container--narrow">
+        <div class="container" style="max-width: 800px;">
             {% if cta_eyebrow %}
             <span class="badge badge--light">{{ cta_eyebrow }}</span>
             {% endif %}

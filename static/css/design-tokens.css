@@ -843,6 +843,7 @@ h6 {
     font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
     font-weight: var(--font-bold);
     margin-bottom: var(--space-md);
+    text-wrap: balance;
 }
 
 .cta__subtitle {
