@@ -1240,7 +1240,7 @@ chương trình STEAM, ngoại ngữ và hoạt động học đường.{% endbl
 </section>
 
 <!-- Exceptional Learning Experiences Section - Carousel -->
-<section class="section bg-white dark:bg-neutral-950 program-showcase" x-data="programCarousel()" x-init="init()"
+<section class="section bg-white dark:bg-neutral-950 program-showcase" x-data="{ activeModal: null }"
     @keydown.escape.window="activeModal = null">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header with Nav -->
@@ -1280,41 +1280,14 @@ chương trình STEAM, ngoại ngữ và hoạt động học đường.{% endbl
                 {% endif %}
             </div>
 
-            <!-- Navigation Controls -->
-            <div class="flex items-center justify-center gap-3">
-                <button @click="scrollPrev()" type="button" aria-label="Trượt trái"
-                    :class="canScrollLeft ? 'opacity-100' : 'opacity-30 cursor-default'"
-                    class="w-11 h-11 rounded-full border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 flex items-center justify-center hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-neutral-900 transition-all duration-300">
-                    <i class="fas fa-arrow-left text-sm"></i>
-                </button>
-                <!-- Dot Indicators -->
-                <div class="flex items-center gap-2.5 mx-3">
-                    {% for program in training_programs %}
-                    <button @click="scrollToCard({{ forloop.counter0 }})" type="button"
-                        aria-label="Chuyển đến {{ program.short_name }}"
-                        :class="activeCardIndex === {{ forloop.counter0 }} ? 'w-8 bg-primary-600 dark:bg-primary-400 shadow-sm' : 'w-3 bg-neutral-400/60 dark:bg-neutral-500 hover:bg-neutral-500'"
-                        class="h-3 rounded-full transition-all duration-300 shrink-0"></button>
-                    {% endfor %}
-                </div>
-                <button @click="scrollNext()" type="button" aria-label="Trượt phải"
-                    :class="canScrollRight ? 'opacity-100' : 'opacity-30 cursor-default'"
-                    class="w-11 h-11 rounded-full border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 flex items-center justify-center hover:bg-primary-600 hover:text-white dark:hover:bg-primary-400 dark:hover:text-neutral-900 transition-all duration-300">
-                    <i class="fas fa-arrow-right text-sm"></i>
-                </button>
-            </div>
         </div>
 
-        <!-- Cards Carousel -->
+        <!-- Cards Grid -->
         {% if training_programs %}
-        <div class="relative group/carousel">
-            <div x-ref="carouselTrack"
-                @scroll.debounce.80="updateScrollState()"
-                class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 -mx-1 px-1"
-                style="scrollbar-width: none; -ms-overflow-style: none;"
-                @mousedown="startDrag($event)" @mousemove="onDrag($event)" @mouseup="endDrag()" @mouseleave="endDrag()">
-                {% for program in training_programs %}
-                <article class="group flex-shrink-0 w-[340px] sm:w-[360px] bg-white dark:bg-neutral-800 rounded-2xl shadow-lg overflow-hidden program-card snap-start select-none flex flex-col"
-                    style="scroll-snap-align: start;">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-4">
+            {% for program in training_programs %}
+            <article class="group bg-white dark:bg-neutral-800 rounded-2xl shadow-lg overflow-hidden program-card flex flex-col h-full transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer"
+                @click="activeModal = '{{ program.slug }}'">
                     <div class="relative program-card__media">
                         {% if program.image %}
                         <img src="{{ program.image.url }}" alt="{{ program.name }}"
@@ -1346,20 +1319,14 @@ chương trình STEAM, ngoại ngữ và hoạt động học đường.{% endbl
                             Chương trình đào tạo chuyên sâu được thiết kế phù hợp theo từng năng lực học sinh.
                             {% endif %}
                         </p>
-                        <button type="button" @click="if(!didDrag) activeModal = '{{ program.slug }}'"
-                            class="btn btn-primary btn-sm w-full program-card__action mt-auto">
+                        <button type="button" @click.stop="activeModal = '{{ program.slug }}'"
+                            class="btn btn-primary btn-sm w-full program-card__action mt-auto pointer-events-none">
                             <i class="fas fa-info-circle"></i>
                             <span>Xem chi tiết</span>
                         </button>
                     </div>
                 </article>
                 {% endfor %}
-            </div>
-            <!-- Fade edges -->
-            <div class="absolute top-0 left-0 bottom-4 w-8 bg-gradient-to-r from-white dark:from-neutral-950 to-transparent pointer-events-none z-10 transition-opacity duration-300"
-                :class="canScrollLeft ? 'opacity-100' : 'opacity-0'"></div>
-            <div class="absolute top-0 right-0 bottom-4 w-8 bg-gradient-to-l from-white dark:from-neutral-950 to-transparent pointer-events-none z-10 transition-opacity duration-300"
-                :class="canScrollRight ? 'opacity-100' : 'opacity-0'"></div>
         </div>
         {% endif %}
     </div>
@@ -1471,97 +1438,6 @@ chương trình STEAM, ngoại ngữ và hoạt động học đường.{% endbl
     {% endif %}
 </section>
 
-<script>
-function programCarousel() {
-    return {
-        activeModal: null,
-        canScrollLeft: false,
-        canScrollRight: true,
-        activeCardIndex: 0,
-        totalCards: {{ training_programs|length|default:"5" }},
-        // Drag state
-        isDragging: false,
-        startX: 0,
-        scrollLeftStart: 0,
-        didDrag: false,
-        dragThreshold: 8,
-
-        init() {
-            this.$nextTick(() => {
-                this.updateScrollState();
-                // Also observe resize
-                if (window.ResizeObserver) {
-                    new ResizeObserver(() => this.updateScrollState()).observe(this.$refs.carouselTrack);
-                }
-            });
-        },
-
-        updateScrollState() {
-            const track = this.$refs.carouselTrack;
-            if (!track) return;
-            this.canScrollLeft = track.scrollLeft > 10;
-            this.canScrollRight = track.scrollLeft < (track.scrollWidth - track.clientWidth - 10);
-            // Calculate active card index
-            const cards = track.querySelectorAll('.program-card');
-            if (!cards.length) return;
-            const cardWidth = cards[0].offsetWidth + 24; // gap-6 = 24px
-            this.activeCardIndex = Math.round(track.scrollLeft / cardWidth);
-            this.activeCardIndex = Math.max(0, Math.min(this.activeCardIndex, cards.length - 1));
-        },
-
-        scrollPrev() {
-            const track = this.$refs.carouselTrack;
-            if (!track) return;
-            const cardWidth = track.querySelector('.program-card')?.offsetWidth || 320;
-            track.scrollBy({ left: -(cardWidth + 24), behavior: 'smooth' });
-        },
-
-        scrollNext() {
-            const track = this.$refs.carouselTrack;
-            if (!track) return;
-            const cardWidth = track.querySelector('.program-card')?.offsetWidth || 320;
-            track.scrollBy({ left: cardWidth + 24, behavior: 'smooth' });
-        },
-
-        scrollToCard(index) {
-            const track = this.$refs.carouselTrack;
-            if (!track) return;
-            const cards = track.querySelectorAll('.program-card');
-            if (cards[index]) {
-                cards[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-            }
-        },
-
-        // Drag-to-scroll
-        startDrag(e) {
-            this.isDragging = true;
-            this.didDrag = false;
-            this.startX = e.pageX;
-            this.scrollLeftStart = this.$refs.carouselTrack.scrollLeft;
-            this.$refs.carouselTrack.style.cursor = 'grabbing';
-            this.$refs.carouselTrack.style.scrollBehavior = 'auto';
-        },
-
-        onDrag(e) {
-            if (!this.isDragging) return;
-            e.preventDefault();
-            const dx = e.pageX - this.startX;
-            if (Math.abs(dx) > this.dragThreshold) {
-                this.didDrag = true;
-            }
-            this.$refs.carouselTrack.scrollLeft = this.scrollLeftStart - dx;
-        },
-
-        endDrag() {
-            if (!this.isDragging) return;
-            this.isDragging = false;
-            this.$refs.carouselTrack.style.cursor = 'grab';
-            this.$refs.carouselTrack.style.scrollBehavior = 'smooth';
-            // Reset didDrag after a tick so click handlers can check
-            setTimeout(() => { this.didDrag = false; }, 50);
-        }
-    }
-}
 </script>
 
 {% with t0=testimonials.0 t1=testimonials.1 t2=testimonials.2 %}
