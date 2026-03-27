@@ -2220,7 +2220,7 @@ function programCarousel() {
                                     </h3>
                                     <p
                                         class="text-white/90 text-base lg:text-lg line-clamp-2 mb-6 max-w-2xl leading-relaxed drop-shadow-md">
-                                        {{ featured_news.excerpt|default:featured_news.content|truncatewords:25 }}
+                                        {{ featured_news.excerpt|default:featured_news.content|striptags|truncatewords:25 }}
                                     </p>
                                     <span class="btn btn-ghost-invert btn-sm">
                                         Đọc chi tiết
@@ -2283,7 +2283,7 @@ function programCarousel() {
                                                 {{ news.title }}
                                             </h4>
                                             <p class="text-muted text-sm line-clamp-2 mb-4 leading-relaxed">
-                                                {{ news.excerpt|default:news.content|truncatewords:15 }}
+                                                {{ news.excerpt|default:news.content|striptags|truncatewords:15 }}
                                             </p>
                                             <div
                                                 class="flex items-center text-red-600 dark:text-red-400 font-semibold text-sm group-hover:text-red-700 dark:group-hover:text-red-300 mt-auto flex-shrink-0">
