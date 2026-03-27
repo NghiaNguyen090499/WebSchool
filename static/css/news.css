@@ -955,6 +955,11 @@
 .prose-premium .aligncenter { text-align: center; margin: 0 auto; clear: both; display: block; }
 .prose-premium .alignright { float: right; margin: 0 0 1rem 1rem; }
 .prose-premium .alignleft { float: left; margin: 0 1rem 1rem 0; }
+.prose-premium .jeg_share_button,
+.prose-premium .share-secondary,
+.prose-premium .jeg_sharelist {
+    display: none !important;
+}
 
 /* First paragraph dropcap */
 .prose-premium > p:first-of-type::first-letter {
