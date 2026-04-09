@@ -10,7 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'is_featured', 'is_archived', 'created_at']
+    list_display = ['title', 'category', 'has_source_document', 'is_featured', 'is_archived', 'created_at']
     list_filter = ['is_archived', 'category', 'is_featured', 'created_at']
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
@@ -29,6 +29,9 @@ class NewsAdmin(admin.ModelAdmin):
         queryset.update(is_archived=False)
     unarchive_selected.short_description = "Unarchive selected news"
 
+    @admin.display(boolean=True, description="Có file Word")
+    def has_source_document(self, obj):
+        return bool(obj.source_document)
 
 
 

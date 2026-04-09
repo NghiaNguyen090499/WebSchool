@@ -30,6 +30,13 @@ class PublicRoutesTests(TestCase):
         response = self.client.get("/robots.txt", HTTP_HOST="localhost")
         self.assertEqual(response.status_code, 200)
 
+    def test_home_footer_uses_unified_admissions_cta_instead_of_old_form(self):
+        response = self.client.get(reverse("core:home"), HTTP_HOST="localhost")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'href="/tuyen-sinh/#tu-van"')
+        self.assertContains(response, 'href="/tuyen-sinh/#du-tuyen"')
+        self.assertNotContains(response, 'id="consultationForm"')
+
 
 class NewsSearchTests(TestCase):
     def test_news_search_filters_by_query(self):
@@ -122,7 +129,7 @@ class StudentSpotlightCtaTests(TestCase):
 
         response = self.client.get(spotlight_url, HTTP_HOST="localhost")
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, f'href="{admissions_url}"')
+        self.assertContains(response, f'href="{admissions_url}#tu-van"')
         self.assertNotContains(response, 'action="/tuyen-sinh/dang-ky/"')
 
 

@@ -1,5 +1,5 @@
-<!-- Popup Form - Đăng ký tư vấn -->
-<div x-data="{ showPopup: false, submitted: false }"
+<!-- Popup tuyển sinh -->
+<div x-data="{ showPopup: false }"
     x-init="setTimeout(() => { if(!sessionStorage.getItem('popupShown')) { showPopup = true; sessionStorage.setItem('popupShown', 'true'); } }, 5000)"
     @scroll.window="if(window.scrollY > document.body.scrollHeight * 0.5 && !sessionStorage.getItem('popupShown')) { showPopup = true; sessionStorage.setItem('popupShown', 'true'); }">
 
@@ -35,62 +35,32 @@
                 <p class="text-white/80">Nhận thông tin tuyển sinh và học bổng ngay hôm nay!</p>
             </div>
 
-            <!-- Form -->
+            <!-- Content -->
             <div class="p-8 -mt-6">
                 <div
-                    class="bg-white dark:bg-neutral-800 rounded-2xl shadow-lg p-6 border border-neutral-100 dark:border-neutral-700">
-                    <template x-if="!submitted">
-                        <form @submit.prevent="submitted = true" class="space-y-4">
-                            <div>
-                                <label class="form-label">
-                                    Họ và tên phụ huynh *
-                                </label>
-                                <input type="text" required
-                                    class="form-input"
-                                    placeholder="Nhập họ và tên">
-                            </div>
-                            <div>
-                                <label class="form-label">
-                                    Số điện thoại *
-                                </label>
-                                <input type="tel" required
-                                    class="form-input"
-                                    placeholder="0xxx xxx xxx">
-                            </div>
-                            <div>
-                                <label class="form-label">
-                                    Cấp học quan tâm
-                                </label>
-                                <select
-                                    class="form-select">
-                                    <option value="">-- Chọn cấp học --</option>
-                                    <option value="mam_non">Mầm non - Tiền tiểu học</option>
-                                    <option value="tieu_hoc">Tiểu học</option>
-                                    <option value="thcs">Trung học cơ sở</option>
-                                    <option value="thpt">Trung học phổ thông</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-lg w-full">
-                                <i class="fas fa-paper-plane mr-2"></i> Đăng ký ngay
-                            </button>
-                        </form>
-                    </template>
-
-                    <template x-if="submitted">
-                        <div class="text-center py-8">
-                            <div
-                                class="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-check text-4xl text-green-600 dark:text-green-400"></i>
-                            </div>
-                            <h4 class="title-sm mb-2">Đăng ký thành công!</h4>
-                            <p class="text-muted">Chúng tôi sẽ liên hệ với bạn trong vòng
-                                24h.</p>
-                            <button @click="showPopup = false"
-                                class="btn btn-outline btn-md mt-6">
-                                Đóng
-                            </button>
-                        </div>
-                    </template>
+                    class="bg-white dark:bg-neutral-800 rounded-2xl shadow-lg p-6 border border-neutral-100 dark:border-neutral-700 text-center space-y-5">
+                    <div
+                        class="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto">
+                        <i class="fas fa-file-signature text-2xl text-red-600 dark:text-red-400"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="title-sm">Đăng ký tuyển sinh</h4>
+                        <p class="text-muted">
+                            Phụ huynh có thể để lại thông tin để được tư vấn, hẹn lịch tham quan hoặc hoàn tất hồ sơ dự tuyển.
+                        </p>
+                    </div>
+                    <div class="grid gap-3">
+                        <a href="{% url 'admissions:list' %}#tu-van"
+                            @click="showPopup = false"
+                            class="btn btn-primary btn-lg w-full">
+                            <i class="fas fa-headset mr-2"></i> Đăng ký tư vấn tuyển sinh
+                        </a>
+                        <a href="{% url 'admissions:list' %}#du-tuyen"
+                            @click="showPopup = false"
+                            class="btn btn-outline btn-lg w-full">
+                            <i class="fas fa-user-plus mr-2"></i> Điền form dự tuyển
+                        </a>
+                    </div>
                 </div>
 
                 <p class="text-center text-sm text-muted mt-4">

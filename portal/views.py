@@ -3,19 +3,21 @@ import csv
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import ValidationError
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView, FormView
 from django.utils import timezone
 
 from admissions.models import AdmissionInfo, AdmissionRegistration
 from events.models import Event
 from news.models import News, Category
 
-from .forms import PortalPageForm, PortalMediaAssetForm, NewsForm, EventForm
+from .forms import PortalPageForm, PortalMediaAssetForm, NewsForm, EventForm, NewsImportForm
+from .news_import import import_news_from_upload
 from .models import PortalPage, PortalPageRevision, PortalMediaAsset, PortalAuditLog
 from .mixins import (
     PortalEditorRequiredMixin,
@@ -65,7 +67,7 @@ class NewsCreateView(SuccessMessageMixin, PortalEditorRequiredMixin, PortalFormL
     template_name = "portal/news/form.html"
     success_url = reverse_lazy("portal:news_list")
     success_message = "News item has been created."
-    full_width_fields = ("thumbnail", "content", "excerpt")
+    full_width_fields = ("thumbnail", "source_document", "content", "excerpt")
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -79,13 +81,48 @@ class NewsCreateView(SuccessMessageMixin, PortalEditorRequiredMixin, PortalFormL
         return response
 
 
+class NewsImportView(PortalEditorRequiredMixin, PortalFormLayoutMixin, FormView):
+    form_class = NewsImportForm
+    template_name = "portal/news/import.html"
+    success_url = reverse_lazy("portal:news_list")
+    full_width_fields = ("source_file", "extra_images_zip", "title_override")
+
+    def form_valid(self, form):
+        try:
+            result = import_news_from_upload(
+                form.cleaned_data["source_file"],
+                category=form.cleaned_data["category"],
+                is_featured=form.cleaned_data["is_featured"],
+                overwrite_existing=form.cleaned_data["overwrite_existing"],
+                title_override=form.cleaned_data.get("title_override", ""),
+                extra_images_zip=form.cleaned_data.get("extra_images_zip"),
+            )
+        except ValidationError as exc:
+            form.add_error(None, exc)
+            return self.form_invalid(form)
+
+        verb = "cập nhật" if result.action == "update" else "tạo mới"
+        messages.success(
+            self.request,
+            'Đã {} bài "{}" với {} ảnh.'.format(verb, result.news.title, result.image_count),
+        )
+        _portal_log(
+            self.request.user,
+            "create",
+            None,
+            'Imported news via portal: {}'.format(result.news.title),
+            target=result.news,
+        )
+        return super().form_valid(form)
+
+
 class NewsUpdateView(SuccessMessageMixin, PortalEditorRequiredMixin, PortalFormLayoutMixin, UpdateView):
     model = News
     form_class = NewsForm
     template_name = "portal/news/form.html"
     success_url = reverse_lazy("portal:news_list")
     success_message = "News item has been updated."
-    full_width_fields = ("thumbnail", "content", "excerpt")
+    full_width_fields = ("thumbnail", "source_document", "content", "excerpt")
 
     def form_valid(self, form):
         response = super().form_valid(form)

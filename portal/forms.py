@@ -8,7 +8,7 @@ from core.validators import (
     validate_upload_file_type,
 )
 from events.models import Event
-from news.models import News
+from news.models import Category, News
 
 from .models import PortalPage, PortalMediaAsset
 
@@ -81,7 +81,63 @@ class NewsForm(forms.ModelForm):
 
     class Meta:
         model = News
-        fields = ["title", "slug", "thumbnail", "content", "excerpt", "category", "is_featured"]
+        fields = ["title", "slug", "thumbnail", "source_document", "content", "excerpt", "category", "is_featured"]
+
+
+class NewsImportForm(forms.Form):
+    source_file = forms.FileField(
+        label="File bài viết (.docx)",
+        help_text="Dòng đầu tiên trong file sẽ được dùng làm tiêu đề nếu bạn không nhập tiêu đề thay thế. File Word gốc cũng sẽ được lưu lại trong bài tin.",
+    )
+    extra_images_zip = forms.FileField(
+        label="Ảnh phụ (.zip)",
+        required=False,
+        help_text="Tuỳ chọn. Dùng khi bài có thêm ảnh ngoài file Word.",
+    )
+    title_override = forms.CharField(
+        label="Tiêu đề thay thế",
+        required=False,
+        help_text="Tuỳ chọn. Nếu để trống, portal sẽ lấy tiêu đề từ dòng đầu tiên của file Word.",
+    )
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.none(),
+        label="Danh mục",
+        empty_label=None,
+    )
+    is_featured = forms.BooleanField(
+        label="Đánh dấu nổi bật",
+        required=False,
+    )
+    overwrite_existing = forms.BooleanField(
+        label="Ghi đè nếu bài đã tồn tại",
+        required=False,
+        initial=True,
+        help_text="Portal sẽ tìm bài theo tiêu đề hoặc slug và cập nhật lại nội dung thay vì tạo bản sao.",
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["category"].queryset = Category.objects.order_by("name")
+
+    def clean_source_file(self):
+        uploaded_file = self.cleaned_data.get("source_file")
+        if not uploaded_file:
+            return uploaded_file
+        validate_upload_file_size(uploaded_file)
+        ext = uploaded_file.name.rsplit(".", 1)[-1].lower() if "." in uploaded_file.name else ""
+        if ext != "docx":
+            raise forms.ValidationError("Chỉ hỗ trợ import file .docx.")
+        return uploaded_file
+
+    def clean_extra_images_zip(self):
+        uploaded_file = self.cleaned_data.get("extra_images_zip")
+        if not uploaded_file:
+            return uploaded_file
+        validate_upload_file_size(uploaded_file)
+        ext = uploaded_file.name.rsplit(".", 1)[-1].lower() if "." in uploaded_file.name else ""
+        if ext != "zip":
+            raise forms.ValidationError("Ảnh phụ phải là file .zip.")
+        return uploaded_file
 
 
 class EventForm(forms.ModelForm):

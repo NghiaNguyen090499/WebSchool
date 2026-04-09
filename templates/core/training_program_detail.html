@@ -50,7 +50,7 @@
                     {% endif %}
                 </p>
                 {% endif %}
-                <a href="{% url 'admissions:list' %}" class="btn btn-lg bg-white 
+                <a href="{% url 'admissions:list' %}#tu-van" class="btn btn-lg bg-white 
                     {% if program.color == 'blue' %}text-blue-700 hover:bg-blue-50
                     {% elif program.color == 'purple' %}text-purple-700 hover:bg-purple-50
                     {% elif program.color == 'green' %}text-green-700 hover:bg-green-50
@@ -260,7 +260,7 @@
                     <h3 class="type-h3 font-bold text-strong mb-3">Bạn quan tâm chương trình này?</h3>
                     <p class="text-sm text-muted mb-4">Đăng ký ngay để nhận tư vấn miễn phí từ chuyên gia giáo dục của
                         chúng tôi.</p>
-                    <a href="{% url 'admissions:list' %}" class="btn btn-md w-full
+                    <a href="{% url 'admissions:list' %}#tu-van" class="btn btn-md w-full
                         {% if program.color == 'blue' %}bg-blue-600 hover:bg-blue-700 text-white
                         {% elif program.color == 'purple' %}bg-purple-600 hover:bg-purple-700 text-white
                         {% elif program.color == 'green' %}bg-green-600 hover:bg-green-700 text-white

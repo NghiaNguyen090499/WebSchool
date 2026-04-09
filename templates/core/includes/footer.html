@@ -42,8 +42,9 @@
                     </div>
                 </div>
 
-                <!-- Right: Form -->
+                <!-- Right: Unified Admissions CTA -->
                 <div class="bg-white rounded-2xl p-5 sm:p-6 md:p-8 shadow-2xl">
+                    {% comment %}
                     <form id="consultationForm" class="space-y-4"
                         x-data="{ submitted: false, loading: false, message: '', formError: '' }" @submit.prevent="
                             loading = true;
@@ -161,6 +162,36 @@
                             </p>
                         </div>
                     </form>
+                    {% endcomment %}
+                    <div class="space-y-5">
+                        <div class="inline-flex items-center rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-700">
+                            <i class="fas fa-file-signature mr-2"></i>
+                            Đăng ký tuyển sinh
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-2xl font-bold text-neutral-900">Đăng ký tuyển sinh tại MIS</h3>
+                            <p class="text-neutral-600">
+                                Phụ huynh có thể để lại thông tin để được tư vấn chương trình học, hẹn lịch tham quan hoặc hoàn tất hồ sơ dự tuyển.
+                            </p>
+                        </div>
+                      
+                        <div class="grid gap-3">
+                            <a href="{% url 'admissions:list' %}#tu-van"
+                                class="btn btn-primary btn-lg w-full flex items-center justify-center gap-2">
+                                <i class="fas fa-headset"></i>
+                                Đăng ký tư vấn tuyển sinh
+                            </a>
+                            <a href="{% url 'admissions:list' %}#du-tuyen"
+                                class="btn btn-outline btn-lg w-full flex items-center justify-center gap-2">
+                                <i class="fas fa-user-plus"></i>
+                                Điền form dự tuyển
+                            </a>
+                        </div>
+                        <p class="text-sm text-muted text-center">
+                            <i class="fas fa-shield-alt mr-1 text-accent-500"></i>
+                            Bộ phận tuyển sinh sẽ liên hệ lại theo thông tin phụ huynh đã đăng ký
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -602,7 +602,7 @@
             </a>
 
             <!-- Secondary Link - Liên hệ -->
-            <a href="{{ contact_url }}" {% if is_contact_active %}aria-current="page"{% endif %}
+            <a href="{% url 'admissions:list' %}#tu-van"
                 class="btn {% if is_contact_active %}btn-primary{% else %}btn-outline{% endif %} btn-sm w-full justify-center mt-3">
                 <i class="fas fa-envelope mr-2"></i>Đăng ký tư vấn
             </a>

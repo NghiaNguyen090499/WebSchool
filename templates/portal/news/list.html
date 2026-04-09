@@ -9,29 +9,34 @@
 
 <div class="portal-toolbar">
     <div>
-        <h1 class="page-title">Quản lý Tin tức</h1>
+        <h1 class="page-title">Quản lý tin tức</h1>
         <p class="portal-subtitle">{{ page_obj.paginator.count|default:object_list.count }} bài viết</p>
     </div>
-    <a href="{% url 'portal:news_create' %}" class="btn btn-primary btn-md">
-        <i class="fas fa-plus icon-md"></i> Tạo bài viết
-    </a>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a href="{% url 'portal:news_import' %}" class="btn btn-secondary btn-md">
+            <i class="fas fa-file-import icon-md"></i> Import bài viết
+        </a>
+        <a href="{% url 'portal:news_create' %}" class="btn btn-primary btn-md">
+            <i class="fas fa-plus icon-md"></i> Tạo bài viết
+        </a>
+    </div>
 </div>
 
 <form method="get" class="portal-filters" role="search" aria-label="Bộ lọc tin tức">
     <div class="portal-search" style="flex:1;min-width:200px">
-        <input type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Tìm kiếm tin tức..."
+        <input type="text" name="q" value="{{ search_query|default:'' }}" placeholder="Tìm kiếm tin tức..."
             aria-label="Tìm kiếm">
     </div>
     <select name="category" aria-label="Danh mục" onchange="this.form.submit()">
         <option value="">Tất cả danh mục</option>
-        {% for value, label in category_choices %}
-        <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>{{ label }}</option>
+        {% for cat in categories %}
+        <option value="{{ cat.slug }}" {% if selected_category == cat.slug %}selected{% endif %}>{{ cat.name }}</option>
         {% endfor %}
     </select>
     <select name="featured" aria-label="Nổi bật" onchange="this.form.submit()">
         <option value="">Tất cả</option>
-        <option value="1" {% if request.GET.featured == "1" %}selected{% endif %}>Nổi bật</option>
-        <option value="0" {% if request.GET.featured == "0" %}selected{% endif %}>Thường</option>
+        <option value="yes" {% if selected_featured == "yes" %}selected{% endif %}>Nổi bật</option>
+        <option value="no" {% if selected_featured == "no" %}selected{% endif %}>Thường</option>
     </select>
     <button type="submit" class="btn btn-secondary btn-sm">
         <i class="fas fa-search icon-md"></i> Lọc
@@ -44,6 +49,7 @@
             <tr>
                 <th scope="col">Tiêu đề</th>
                 <th scope="col">Danh mục</th>
+                <th scope="col">Word</th>
                 <th scope="col">Nổi bật</th>
                 <th scope="col">Ngày tạo</th>
                 <th scope="col" style="text-align:right">Thao tác</th>
@@ -53,13 +59,23 @@
             {% for item in object_list %}
             <tr>
                 <td>
-                    <div class="font-semibold truncate" style="max-width:400px;color:var(--p-gray-800)">{{ item.title }}
-                    </div>
+                    <div class="font-semibold truncate" style="max-width:400px;color:var(--p-gray-800)">{{ item.title }}</div>
                 </td>
-                <td><span class="badge badge-neutral">{{ item.get_category_display|default:"—" }}</span></td>
+                <td>
+                    <span class="badge badge-neutral">{{ item.category.name|default:"—" }}</span>
+                </td>
+                <td>
+                    {% if item.source_document %}
+                    <a href="{{ item.source_document.url }}" class="btn btn-ghost btn-xs" target="_blank" rel="noopener">
+                        <i class="fas fa-file-word icon-sm"></i>
+                    </a>
+                    {% else %}
+                    <span class="text-muted">—</span>
+                    {% endif %}
+                </td>
                 <td>
                     {% if item.is_featured %}
-                    <span class="badge badge-warning"><i class="fas fa-star icon-xs"></i> Nổi bật</span>
+                        <span class="badge badge-warning"><i class="fas fa-star icon-xs"></i> Nổi bật</span>
                     {% else %}
                     <span class="text-muted">—</span>
                     {% endif %}
@@ -79,14 +95,19 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="5">
+                <td colspan="6">
                     <div class="portal-empty-state py-8">
                         <div class="portal-empty-icon"><i class="fas fa-newspaper"></i></div>
                         <p class="portal-empty-title">Chưa có tin tức nào</p>
-                        <p class="portal-empty-desc">Bắt đầu tạo bài viết để chia sẻ thông tin.</p>
-                        <a href="{% url 'portal:news_create' %}" class="btn btn-primary btn-sm">
-                            <i class="fas fa-plus icon-md"></i> Tạo bài viết
-                        </a>
+                        <p class="portal-empty-desc">Bạn có thể tạo thủ công hoặc import trực tiếp từ file Word.</p>
+                        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+                            <a href="{% url 'portal:news_import' %}" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-file-import icon-md"></i> Import bài viết
+                            </a>
+                            <a href="{% url 'portal:news_create' %}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus icon-md"></i> Tạo bài viết
+                            </a>
+                        </div>
                     </div>
                 </td>
             </tr>

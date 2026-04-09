@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 
+from core.validators import validate_upload_extension, validate_upload_file_size
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -31,6 +33,14 @@ class News(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     thumbnail = models.ImageField(upload_to='news/thumbnails/', max_length=255, blank=True, null=True)
+    source_document = models.FileField(
+        upload_to='news/source-documents/',
+        max_length=255,
+        blank=True,
+        null=True,
+        validators=[validate_upload_extension, validate_upload_file_size],
+        help_text="File Word gốc của bài viết để lưu trữ và truy xuất sau này.",
+    )
     content = models.TextField()
     excerpt = models.TextField(max_length=300, blank=True, help_text="Short summary for listing pages")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)

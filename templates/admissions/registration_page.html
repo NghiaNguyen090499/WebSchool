@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}Đang chuyển hướng đăng ký tuyển sinh - MIS Đa Trí Tuệ{% endblock %}
+{% block meta_description %}Trang đăng ký tuyển sinh đã được chuyển về /tuyen-sinh/.{% endblock %}
+
+{% block content %}
+<section class="section relative overflow-hidden bg-gradient-to-r from-red-600 via-red-700 to-red-800">
+    <div class="pattern-dots opacity-10"></div>
+    <div class="relative mx-auto max-w-4xl px-4 text-center text-white sm:px-6 lg:px-8">
+        <h1 class="section-title title-invert mb-4">Biểu mẫu tuyển sinh đã được chuyển</h1>
+        <p class="lead lead-invert mb-8">
+            Phụ huynh có thể tiếp tục đăng ký tư vấn hoặc điền hồ sơ dự tuyển trực tiếp tại trang tuyển sinh.
+        </p>
+        <a id="legacy-registration-link" href="{% url 'admissions:list' %}#du-tuyen" class="btn btn-light btn-lg">
+            Tiếp tục tới trang tuyển sinh
+        </a>
+        <p class="mt-4 font-medium text-white/85">
+            Hotline: <a class="underline underline-offset-2 hover:text-white" href="tel:02460278666">024 60 278 666</a>
+        </p>
+        <noscript>
+            <p class="mt-4 text-sm text-white/75">Nếu trình duyệt không tự chuyển, vui lòng chọn nút ở trên.</p>
+        </noscript>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(() => {
+    const destination = "{% url 'admissions:list' %}" + (window.location.hash || '#du-tuyen');
+    const link = document.getElementById('legacy-registration-link');
+    if (link) {
+        link.href = destination;
+    }
+    window.location.replace(destination);
+})();
+</script>
+{% endblock %}

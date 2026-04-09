@@ -5,15 +5,6 @@
 {% block meta_description %}{{ admission.subtitle|default:admission.description|striptags|truncatechars:160 }}{% endblock %}
 
 {% block content %}
-<div class="sr-only" aria-hidden="true">
-    <span x-text="errors.parent_name"></span>
-    <span x-text="errors.parent_phone"></span>
-    <span x-text="errors.student_name"></span>
-    <span x-text="errors.student_dob"></span>
-    <span x-text="errors.student_gender"></span>
-    <span x-text="errors.address"></span>
-    <span x-show="formError"></span>
-</div>
 <!-- Hero Banner -->
 <section class="relative min-h-[45vh] flex items-center justify-center overflow-hidden bg-neutral-900">
 
@@ -61,7 +52,7 @@
 
         <div class="mt-8 flex flex-wrap justify-center gap-3">
             <a href="#admission-content" class="btn btn-light btn-sm">Xem thông tin chi tiết</a>
-            <a href="{% url 'contact:contact' %}" class="btn btn-ghost-invert btn-sm">Liên hệ tư vấn</a>
+            <a href="{% url 'admissions:list' %}#tu-van" class="btn btn-ghost-invert btn-sm">Đăng ký tư vấn</a>
         </div>
 
         {% if admission.age_range %}
@@ -115,7 +106,7 @@
                     <div>
                         <h3 class="title-sm mb-2">Hỗ trợ tuyển sinh</h3>
                         <p class="text-muted text-sm">Đội ngũ MIS luôn sẵn sàng hỗ trợ hồ sơ và giải đáp quy trình.</p>
-                        <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-sm mt-3">Gửi yêu cầu tư vấn</a>
+                        <a href="{% url 'admissions:list' %}#tu-van" class="btn btn-primary btn-sm mt-3">Gửi yêu cầu tư vấn</a>
                     </div>
                 </div>
             </article>
@@ -394,9 +385,9 @@
                                 <i class="fas fa-folder-open text-2xl text-neutral-400 dark:text-neutral-500"></i>
                             </div>
                             <p class="text-muted font-medium">Chưa có tài liệu tuyển sinh</p>
-                            <p class="text-sm text-muted mt-1">Vui lòng liên hệ để nhận tài liệu trực tiếp</p>
-                            <a href="{% url 'contact:contact' %}" class="btn btn-primary btn-sm mt-4">
-                                <i class="fas fa-envelope mr-2"></i>Liên hệ ngay
+                            <p class="text-sm text-muted mt-1">Vui lòng để lại thông tin để bộ phận tuyển sinh hỗ trợ trực tiếp</p>
+                            <a href="{% url 'admissions:list' %}#tu-van" class="btn btn-primary btn-sm mt-4">
+                                <i class="fas fa-envelope mr-2"></i>Đăng ký tư vấn
                             </a>
                         </div>
                         {% endif %}
@@ -436,4 +427,3 @@
 </section>
 {% endif %}
 {% endblock %}
-

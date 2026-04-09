@@ -23,6 +23,9 @@ python-decouple
 # HTTP requests
 requests
 
+# Word document import
+python-docx
+
 # Rate limiting
 django-ratelimit
 

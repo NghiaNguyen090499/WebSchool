@@ -17,21 +17,25 @@ Inputs:
                 {% if visit_url %}
                     {% if '#' in visit_url or '/' in visit_url %}
                     <a class="curriculum-btn curriculum-btn--secondary" href="{{ visit_url }}">Đặt lịch tham quan trường</a>
+                    {% elif visit_url == 'contact:contact' %}
+                    <a class="curriculum-btn curriculum-btn--secondary" href="{% url 'admissions:list' %}#tu-van">Đặt lịch tham quan trường</a>
                     {% else %}
                     <a class="curriculum-btn curriculum-btn--secondary" href="{% url visit_url %}">Đặt lịch tham quan trường</a>
                     {% endif %}
                 {% else %}
-                    <a class="curriculum-btn curriculum-btn--secondary" href="{% url 'contact:contact' %}">Đặt lịch tham quan trường</a>
+                    <a class="curriculum-btn curriculum-btn--secondary" href="{% url 'admissions:list' %}#tu-van">Đặt lịch tham quan trường</a>
                 {% endif %}
 
                 {% if consult_url %}
                     {% if '#' in consult_url or '/' in consult_url %}
                     <a class="curriculum-btn curriculum-btn--primary" href="{{ consult_url }}">Nhận tư vấn chương trình</a>
+                    {% elif consult_url == 'admissions:list' %}
+                    <a class="curriculum-btn curriculum-btn--primary" href="{% url 'admissions:list' %}#tu-van">Nhận tư vấn chương trình</a>
                     {% else %}
                     <a class="curriculum-btn curriculum-btn--primary" href="{% url consult_url %}">Nhận tư vấn chương trình</a>
                     {% endif %}
                 {% else %}
-                    <a class="curriculum-btn curriculum-btn--primary" href="{% url 'admissions:list' %}">Nhận tư vấn chương trình</a>
+                    <a class="curriculum-btn curriculum-btn--primary" href="{% url 'admissions:list' %}#tu-van">Nhận tư vấn chương trình</a>
                 {% endif %}
 
                 <button type="button"

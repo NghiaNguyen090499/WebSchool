@@ -74,6 +74,14 @@
                 {{ news.content|linebreaks }}
             {% endif %}
         </article>
+
+        {% if news.source_document %}
+        <div class="animate-fadeInUp" style="animation-delay: 0.55s; margin: 24px 0 0;">
+            <a href="{{ news.source_document.url }}" class="btn btn-outline btn-md" download>
+                <i class="fas fa-file-word"></i> Tải file Word gốc
+            </a>
+        </div>
+        {% endif %}
         
     </div>
 

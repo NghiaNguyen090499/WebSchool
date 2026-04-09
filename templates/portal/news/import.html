@@ -1,0 +1,48 @@
+{% extends "portal/base.html" %}
+{% load i18n %}
+
+{% block title %}Import tin tức{% endblock %}
+{% block header_title %}Import tin tức{% endblock %}
+
+{% block portal_content %}
+{% include "portal/includes/breadcrumb.html" with breadcrumb_section="Tin tức" breadcrumb_current="Import bài viết" %}
+
+<form method="post" enctype="multipart/form-data" class="portal-form" novalidate>
+    {% csrf_token %}
+
+    <div class="portal-actions-sticky">
+        <div>
+            <h1 class="page-title">Import bài viết từ file Word</h1>
+            <p class="portal-subtitle">MVP: 1 bài / lần, hỗ trợ .docx, lưu file Word gốc và .zip ảnh phụ.</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+            <a href="{% url 'portal:news_list' %}" class="btn btn-secondary btn-sm">Hủy</a>
+            <button type="submit" class="btn btn-primary btn-md">
+                <i class="fas fa-file-import icon-md"></i>
+                <span>Import ngay</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="portal-card mb-6">
+        <div class="portal-card-header">
+            <h2 class="portal-card-title">Cách hoạt động</h2>
+        </div>
+        <div class="portal-card-body">
+            <ul style="margin:0;padding-left:18px;display:grid;gap:8px;color:var(--p-gray-600)">
+                <li>Dòng đầu tiên trong file Word được dùng làm tiêu đề nếu bạn không nhập tiêu đề thay thế.</li>
+                <li>File Word gốc sẽ được lưu vào bài tin để có thể tải lại sau này trong mục tin tức.</li>
+                <li>Ảnh nhúng trong file Word sẽ được đưa vào nội dung và ảnh đầu tiên sẽ làm thumbnail.</li>
+                <li>Nếu có ảnh rời, bạn nén thành một file <code>.zip</code> và upload vào ô ảnh phụ.</li>
+                <li>Nếu bật ghi đè, portal sẽ cập nhật bài cũ theo tiêu đề hoặc slug thay vì tạo bản sao.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="portal-card">
+        <div class="portal-card-body">
+            {% include "portal/includes/form_fields.html" with full_width_fields=portal_full_width_fields %}
+        </div>
+    </div>
+</form>
+{% endblock %}

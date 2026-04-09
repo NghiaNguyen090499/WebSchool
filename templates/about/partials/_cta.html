@@ -27,6 +27,18 @@ Usage: {% include 'about/partials/_cta.html' with cta_variant='gradient-red' cta
                 <a href="{{ cta_primary_url }}" class="btn btn--light btn--lg" aria-label="{{ cta_primary }}">
                     {{ cta_primary }}
                 </a>
+                {% elif cta_primary_url == 'admissions:list' %}
+                {% with cta_primary_lower=cta_primary|default:''|lower %}
+                    {% if 'tư vấn' in cta_primary_lower or 'consult' in cta_primary_lower %}
+                    <a href="{% url 'admissions:list' %}#tu-van" class="btn btn--light btn--lg" aria-label="{{ cta_primary }}">
+                        {{ cta_primary }}
+                    </a>
+                    {% else %}
+                    <a href="{% url 'admissions:list' %}#du-tuyen" class="btn btn--light btn--lg" aria-label="{{ cta_primary }}">
+                        {{ cta_primary }}
+                    </a>
+                    {% endif %}
+                {% endwith %}
                 {% else %}
                 <a href="{% url cta_primary_url %}" class="btn btn--light btn--lg" aria-label="{{ cta_primary }}">
                     {{ cta_primary }}

@@ -45,11 +45,13 @@ Usage: {% include 'about/partials/_hero.html' with hero_variant='gradient-red' h
 
             {% if hero_cta_primary %}
             <div class="hero__cta-group">
-                <a href="{% if '#' in hero_cta_primary_url %}{{ hero_cta_primary_url }}{% else %}{% url hero_cta_primary_url %}{% endif %}"
+                {% with hero_primary_lower=hero_cta_primary|default:''|lower %}
+                <a href="{% if '#' in hero_cta_primary_url %}{{ hero_cta_primary_url }}{% elif hero_cta_primary_url == 'admissions:list' and 'tư vấn' in hero_primary_lower %}{% url 'admissions:list' %}#tu-van{% elif hero_cta_primary_url == 'admissions:list' and 'consult' in hero_primary_lower %}{% url 'admissions:list' %}#tu-van{% elif hero_cta_primary_url == 'admissions:list' %}{% url 'admissions:list' %}#du-tuyen{% else %}{% url hero_cta_primary_url %}{% endif %}"
                     class="btn btn--primary btn--lg" aria-label="{{ hero_cta_primary }} - {{ hero_title }}">
                     {{ hero_cta_primary }}
                     <i class="fas fa-arrow-right btn__icon" aria-hidden="true"></i>
                 </a>
+                {% endwith %}
 
                 {% if hero_cta_secondary %}
                 <a href="{% if '#' in hero_cta_secondary_url %}{{ hero_cta_secondary_url }}{% else %}{% url hero_cta_secondary_url %}{% endif %}"
