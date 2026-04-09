@@ -287,6 +287,7 @@ def submit_registration(request):
             transcript_file=cleaned.get('transcript_file'),
             # 3. Thông tin bổ sung
             study_abroad_plan=cleaned.get('study_abroad_plan', 'false') == 'true',
+            study_abroad_country=cleaned.get('study_abroad_country', ''),
             favorite_subjects=cleaned.get('favorite_subjects', '').strip(),
             best_subject=cleaned.get('best_subject', '').strip(),
             achievements=cleaned.get('achievements', '').strip(),

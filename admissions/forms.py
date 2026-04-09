@@ -97,6 +97,10 @@ class AdmissionRegistrationForm(forms.Form):
         required=False,
         initial='false',
     )
+    study_abroad_country = forms.CharField(
+        max_length=100,
+        required=False,
+    )
     siblings_json = forms.CharField(
         required=False,
         widget=forms.HiddenInput(),
@@ -193,6 +197,17 @@ class AdmissionRegistrationForm(forms.Form):
                 if not sib.get(key, '').strip():
                     raise forms.ValidationError(f"Anh chị em #{idx+1}: thiếu thông tin '{key}'.")
         return siblings
+
+    def clean(self):
+        cleaned_data = super().clean()
+        country = (cleaned_data.get("study_abroad_country") or "").strip()
+        if cleaned_data.get("study_abroad_plan") == "true":
+            if not country:
+                self.add_error("study_abroad_country", "Vui lòng nhập quốc gia dự định du học.")
+        else:
+            country = ""
+        cleaned_data["study_abroad_country"] = country
+        return cleaned_data
 
 
 # ─── Form đăng ký tư vấn (Tab 2) ─────────────────────────────────────────

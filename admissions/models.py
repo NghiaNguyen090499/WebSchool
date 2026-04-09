@@ -219,6 +219,11 @@ class AdmissionRegistration(models.Model):
         default=False,
         verbose_name="Dự định du học"
     )
+    study_abroad_country = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Quốc gia dự định du học"
+    )
     favorite_subjects = models.TextField(
         blank=True,
         verbose_name="Các môn học yêu thích",

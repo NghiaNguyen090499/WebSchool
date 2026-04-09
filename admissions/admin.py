@@ -94,7 +94,7 @@ class AdmissionRegistrationAdmin(admin.ModelAdmin):
         }),
         ('3. Thông tin bổ sung', {
             'fields': (
-                'study_abroad_plan',
+                'study_abroad_plan', 'study_abroad_country',
                 'favorite_subjects', 'best_subject',
                 'achievements', 'talent_subjects',
             )

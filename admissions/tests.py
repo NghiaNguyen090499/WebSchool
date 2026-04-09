@@ -5,7 +5,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from django.urls import reverse
 
-from .models import AdmissionConsultation, AdmissionDocument, AdmissionInfo
+from .models import AdmissionConsultation, AdmissionDocument, AdmissionInfo, AdmissionRegistration
 
 
 class AdmissionDownloadTests(TestCase):
@@ -123,6 +123,7 @@ class AdmissionRegistrationValidationTests(TestCase):
             reverse("admissions:submit"),
             data=payload,
             HTTP_HOST="localhost",
+            REMOTE_ADDR="127.0.0.11",
         )
         self.assertEqual(response.status_code, 400)
         self.assertIn("Email không hợp lệ", response.json().get("message", ""))
@@ -148,9 +149,68 @@ class AdmissionRegistrationValidationTests(TestCase):
             reverse("admissions:submit"),
             data=payload,
             HTTP_HOST="localhost",
+            REMOTE_ADDR="127.0.0.12",
         )
         self.assertEqual(response.status_code, 400)
         self.assertIn("Giới tính không hợp lệ", response.json().get("message", ""))
+
+    def test_study_abroad_country_required_when_plan_is_true(self):
+        payload = {
+            "level": self.admission.level,
+            "parent_name": "Parent",
+            "parent_phone": "0912345678",
+            "parent_email": "parent@example.com",
+            "parent_email_confirm": "parent@example.com",
+            "contact_relationship": "me",
+            "student_name": "Student",
+            "student_dob": "2015-01-01",
+            "student_gender": "male",
+            "address": "Address",
+            "target_grade": "mam_non",
+            "training_program": "steam_chuan",
+            "registration_school_year": "2026-2027",
+            "admission_method": "xet_tuyen_thang",
+            "study_abroad_plan": "true",
+            "study_abroad_country": "",
+        }
+        response = self.client.post(
+            reverse("admissions:submit"),
+            data=payload,
+            HTTP_HOST="localhost",
+            REMOTE_ADDR="127.0.0.13",
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("Vui lòng nhập quốc gia dự định du học", response.json().get("message", ""))
+
+    def test_study_abroad_country_saved_when_plan_is_true(self):
+        payload = {
+            "level": self.admission.level,
+            "parent_name": "Parent",
+            "parent_phone": "0912345678",
+            "parent_email": "parent@example.com",
+            "parent_email_confirm": "parent@example.com",
+            "contact_relationship": "me",
+            "student_name": "Student",
+            "student_dob": "2015-01-01",
+            "student_gender": "male",
+            "address": "Address",
+            "target_grade": "mam_non",
+            "training_program": "steam_chuan",
+            "registration_school_year": "2026-2027",
+            "admission_method": "xet_tuyen_thang",
+            "study_abroad_plan": "true",
+            "study_abroad_country": "Singapore",
+        }
+        response = self.client.post(
+            reverse("admissions:submit"),
+            data=payload,
+            HTTP_HOST="localhost",
+            REMOTE_ADDR="127.0.0.14",
+        )
+        self.assertEqual(response.status_code, 200)
+        registration = AdmissionRegistration.objects.latest("id")
+        self.assertTrue(registration.study_abroad_plan)
+        self.assertEqual(registration.study_abroad_country, "Singapore")
 
 
 class AdmissionRegistrationPageTests(TestCase):
@@ -162,6 +222,8 @@ class AdmissionRegistrationPageTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '@submit.prevent="submitRegistration($event)"')
+        self.assertContains(response, "Học bạ - Phiếu điểm HK1, HK2")
+        self.assertContains(response, "Quốc gia dự định du học")
         self.assertNotContains(response, "nextStep()")
         self.assertNotContains(response, 'step === 1')
         self.assertNotContains(response, "step: 1")

@@ -10,7 +10,7 @@ def upsert_achievements():
         {
             "title": "Đầu ra ngoại ngữ",
             "stat_value": "50%",
-            "stat_label": "Học sinh K12 đạt IELTS 5.0-7.5 & HSK 3-6",
+            "stat_label": "Học sinh K12 đạt IELTS 8.0 & HSK 3-6",
             "description": "Thống kê đầu ra ngoại ngữ theo brochure 2026-2027.",
             "icon": "fas fa-language",
             "tags": "IELTS, HSK",
@@ -116,7 +116,7 @@ def upsert_achievements():
             "title": "Dấu ấn tri thức & hội nhập quốc tế",
             "stat_value": "",
             "stat_label": "",
-            "description": "Trên 50% học sinh K12 đạt IELTS 5.0-7.5 & HSK 3-6. 15 học sinh đạt học bổng du học cao.",
+            "description": "Trên 50% học sinh K12 đạt IELTS 8.0 & HSK 3-6. 15 học sinh đạt học bổng du học cao.",
             "icon": "fas fa-star",
             "tags": "IELTS, HSK, Scholarship",
             "category": "language",

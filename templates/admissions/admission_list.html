@@ -393,6 +393,7 @@
                         </div>
                         <div>
                             <label class="form-label">Minh chứng xét tuyển thẳng</label>
+                            <p class="mt-1 text-sm font-medium text-strong">Học bạ - Phiếu điểm HK1, HK2</p>
                             <div class="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center">
                                 <label class="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-red-700">
                                     <i class="fas fa-upload"></i>Chọn file
@@ -417,6 +418,10 @@
                                     <input type="radio" name="study_abroad_plan" value="true" x-model="regForm.study_abroad_plan" class="h-4 w-4 border-neutral-300 text-red-600 focus:ring-red-500">
                                     <span class="ml-2 text-sm">Có</span>
                                 </label>
+                            </div>
+                            <div x-show="regForm.study_abroad_plan === 'true'" x-transition class="mt-4">
+                                <label class="form-label" for="reg-study-abroad-country">Quốc gia dự định du học <span class="text-red-500">*</span></label>
+                                <input id="reg-study-abroad-country" x-model="regForm.study_abroad_country" type="text" class="form-input" :required="regForm.study_abroad_plan === 'true'" placeholder="VD: Singapore, Canada, Úc">
                             </div>
                         </div>
                         <div>
@@ -666,7 +671,7 @@ function registrationApp() {
             }
         },
         makeRegistrationForm() {
-            return { student_name: '', student_dob: '', student_gender: '', address: '', current_school: '', current_grade: '', target_grade: '', training_program: '', registration_school_year: '2026-2027', admission_method: '', study_abroad_plan: 'false', favorite_subjects: '', best_subject: '', achievements: '', talent_subjects: '', register_shuttle: false, register_dayboarding: false, register_boarding: false, parent_name: '', contact_relationship: '', parent_email: '', parent_email_confirm: '', parent_phone: '', referrer: '', note: '' };
+            return { student_name: '', student_dob: '', student_gender: '', address: '', current_school: '', current_grade: '', target_grade: '', training_program: '', registration_school_year: '2026-2027', admission_method: '', study_abroad_plan: 'false', study_abroad_country: '', favorite_subjects: '', best_subject: '', achievements: '', talent_subjects: '', register_shuttle: false, register_dayboarding: false, register_boarding: false, parent_name: '', contact_relationship: '', parent_email: '', parent_email_confirm: '', parent_phone: '', referrer: '', note: '' };
         },
         makeConsultationForm() {
             return {
@@ -728,6 +733,7 @@ function registrationApp() {
             this.regError = '';
             this.regSuccess = '';
             if (event?.target && !event.target.reportValidity()) return;
+            if (this.regForm.study_abroad_plan !== 'true') this.regForm.study_abroad_country = '';
             if (this.regForm.parent_email.toLowerCase() !== this.regForm.parent_email_confirm.toLowerCase()) {
                 this.regError = 'Email xác nhận không khớp. Vui lòng kiểm tra lại.';
                 return;
