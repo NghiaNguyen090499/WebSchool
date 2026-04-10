@@ -589,3 +589,207 @@ html {
         transform: translateX(-50%);
     }
 }
+
+/* ── Spotlight Pagination ── */
+.spotlight-pagination {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 4rem;
+}
+
+.spotlight-pagination__info {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--content-muted, #9ca3af);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Decorative lines beside page info */
+.spotlight-pagination__info::before,
+.spotlight-pagination__info::after {
+    content: "";
+    width: 2rem;
+    height: 1px;
+    background: #e5e7eb;
+    flex-shrink: 0;
+}
+
+.spotlight-pagination__info-bold {
+    font-weight: 700;
+    color: var(--content-strong, #1f2937);
+}
+
+.spotlight-pagination__dot {
+    margin: 0 0.25rem;
+    opacity: 0.5;
+}
+
+.spotlight-pagination__bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    background: #fff;
+    border-radius: 9999px;
+    box-shadow:
+        0 10px 25px -5px rgba(0, 0, 0, 0.06),
+        0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    border: 1px solid #f3f4f6;
+}
+
+.spotlight-pagination__divider {
+    width: 1px;
+    height: 1.5rem;
+    background: #e5e7eb;
+    margin: 0 0.125rem;
+}
+
+/* Arrow buttons (prev / next) */
+.spotlight-pagination__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    color: #6b7280;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.spotlight-pagination__arrow:hover {
+    background: rgba(220, 38, 38, 0.08);
+    color: var(--brand-primary-500, #dc2626);
+    transform: translateY(-1px);
+}
+
+.spotlight-pagination__arrow:active {
+    transform: scale(0.92);
+}
+
+.spotlight-pagination__arrow--disabled {
+    color: #d1d5db;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Page number buttons */
+.spotlight-pagination__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    padding: 0 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #4b5563;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    user-select: none;
+}
+
+.spotlight-pagination__num:hover {
+    background: #fef2f2;
+    color: var(--brand-primary-500, #dc2626);
+    transform: translateY(-1px);
+}
+
+/* Active page — gradient highlight */
+.spotlight-pagination__num--active {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+    cursor: default;
+    pointer-events: none;
+    transform: scale(1.05);
+}
+
+/* Ellipsis */
+.spotlight-pagination__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.15em;
+    color: #9ca3af;
+    user-select: none;
+}
+
+/* Dark mode */
+.dark .spotlight-pagination__info {
+    color: #9ca3af;
+}
+
+.dark .spotlight-pagination__info-bold {
+    color: #f9fafb;
+}
+
+.dark .spotlight-pagination__bar {
+    background: #1f2937;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.dark .spotlight-pagination__divider {
+    background: #374151;
+}
+
+.dark .spotlight-pagination__arrow {
+    color: #d1d5db;
+}
+
+.dark .spotlight-pagination__arrow:hover {
+    background: rgba(220, 38, 38, 0.15);
+    color: #fca5a5;
+}
+
+.dark .spotlight-pagination__arrow--disabled {
+    color: #4b5563;
+}
+
+.dark .spotlight-pagination__num {
+    color: #d1d5db;
+}
+
+.dark .spotlight-pagination__num:hover {
+    background: #374151;
+    color: #f9fafb;
+}
+
+.dark .spotlight-pagination__ellipsis {
+    color: #6b7280;
+}
+
+/* Responsive — compact on mobile */
+@media (max-width: 480px) {
+    .spotlight-pagination__bar {
+        gap: 0.25rem;
+        padding: 0.25rem;
+    }
+
+    .spotlight-pagination__arrow,
+    .spotlight-pagination__num,
+    .spotlight-pagination__ellipsis {
+        width: 2.25rem;
+        height: 2.25rem;
+        min-width: 2.25rem;
+    }
+
+    .spotlight-pagination__num {
+        padding: 0 0.5rem;
+        font-size: 0.8125rem;
+    }
+}
+

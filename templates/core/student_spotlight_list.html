@@ -90,43 +90,70 @@ bật trong học thuật, cuộc thi và hoạt động ngoại khóa.{% endblo
             {% endfor %}
         </div>
         {% if page_obj and page_obj.has_other_pages %}
-        <nav class="news-pagination mt-10">
-            {% if page_obj.has_previous %}
-            <a href="?page=1{% if querystring %}&{{ querystring }}{% endif %}" class="news-pagination-btn"
-                title="Trang đầu">
-                <i class="fas fa-angle-double-left"></i>
-            </a>
-            <a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}"
-                class="news-pagination-btn" title="Trang trước">
-                <i class="fas fa-angle-left"></i>
-            </a>
-            {% else %}
-            <span class="news-pagination-btn disabled"><i class="fas fa-angle-double-left"></i></span>
-            <span class="news-pagination-btn disabled"><i class="fas fa-angle-left"></i></span>
-            {% endif %}
+        <!-- Pagination -->
+        <nav class="spotlight-pagination" aria-label="Phân trang">
+            <!-- Page Info -->
+            <p class="spotlight-pagination__info">
+                Trang <span class="spotlight-pagination__info-bold">{{ page_obj.number }}</span>
+                / <span class="spotlight-pagination__info-bold">{{ page_obj.paginator.num_pages }}</span>
+                <span class="spotlight-pagination__dot">·</span>
+                <span class="spotlight-pagination__info-bold">{{ page_obj.paginator.count }}</span> học sinh
+            </p>
 
-            {% for num in page_obj.paginator.page_range %}
-            {% if page_obj.number == num %}
-            <span class="news-pagination-btn active">{{ num }}</span>
-            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-            <a href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}"
-                class="news-pagination-btn">{{ num }}</a>
-            {% endif %}
-            {% endfor %}
+            <!-- Navigation Buttons -->
+            <div class="spotlight-pagination__bar">
 
-            {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}"
-                class="news-pagination-btn" title="Trang sau">
-                <i class="fas fa-angle-right"></i>
-            </a>
-            <a href="?page={{ page_obj.paginator.num_pages }}{% if querystring %}&{{ querystring }}{% endif %}"
-                class="news-pagination-btn" title="Trang cuối">
-                <i class="fas fa-angle-double-right"></i>
-            </a>
-            {% else %}
-            <span class="news-pagination-btn disabled"><i class="fas fa-angle-right"></i></span>
-            <span class="news-pagination-btn disabled"><i class="fas fa-angle-double-right"></i></span>
-            {% endif %}
+                <!-- Previous Page -->
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}{% if querystring %}&{{ querystring }}{% endif %}"
+                    class="spotlight-pagination__arrow" title="Trang trước" aria-label="Trang trước">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                </a>
+                {% else %}
+                <span class="spotlight-pagination__arrow spotlight-pagination__arrow--disabled" aria-disabled="true">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                </span>
+                {% endif %}
+
+                <!-- Divider -->
+                <span class="spotlight-pagination__divider"></span>
+
+                <!-- Page Numbers -->
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <span class="spotlight-pagination__num spotlight-pagination__num--active" aria-current="page">
+                        {{ num }}
+                    </span>
+                    {% elif num == 1 or num == page_obj.paginator.num_pages %}
+                    <a href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}"
+                        class="spotlight-pagination__num">
+                        {{ num }}
+                    </a>
+                    {% elif num == page_obj.number|add:"-1" or num == page_obj.number|add:"1" %}
+                    <a href="?page={{ num }}{% if querystring %}&{{ querystring }}{% endif %}"
+                        class="spotlight-pagination__num">
+                        {{ num }}
+                    </a>
+                    {% elif num == page_obj.number|add:"-2" or num == page_obj.number|add:"2" %}
+                    <span class="spotlight-pagination__ellipsis">···</span>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Divider -->
+                <span class="spotlight-pagination__divider"></span>
+
+                <!-- Next Page -->
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}{% if querystring %}&{{ querystring }}{% endif %}"
+                    class="spotlight-pagination__arrow" title="Trang sau" aria-label="Trang sau">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                {% else %}
+                <span class="spotlight-pagination__arrow spotlight-pagination__arrow--disabled" aria-disabled="true">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </span>
+                {% endif %}
+            </div>
         </nav>
         {% endif %}
         {% else %}
